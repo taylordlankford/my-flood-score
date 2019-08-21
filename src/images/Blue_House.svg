@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="83.499313mm"
+   height="61.331707mm"
+   viewBox="0 0 83.499313 61.331707"
+   version="1.1"
+   id="svg8436"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="Blue_House.svg">
+  <defs
+     id="defs8430">
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient9330"
+       id="linearGradient9334"
+       x1="219.10829"
+       y1="249.48323"
+       x2="217.97284"
+       y2="222.69824"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.82054156,0,0,0.82054156,-60.824491,-54.877887)" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient9330">
+      <stop
+         style="stop-color:#5ab9f3;stop-opacity:1;"
+         offset="0"
+         id="stop9326" />
+      <stop
+         style="stop-color:#5ab9f3;stop-opacity:0;"
+         offset="1"
+         id="stop9328" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient9330"
+       id="linearGradient9434"
+       x1="275.84439"
+       y1="274.10028"
+       x2="273.52176"
+       y2="293.85828"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.82054156,0,0,0.82054156,-144.12654,-57.366705)" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect9378-1"
+       is_visible="true"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect9378"
+       is_visible="true"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="142.55845"
+     inkscape:cy="125.36917"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata8433">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-65.217606,-126.26557)">
+    <path
+       style="opacity:0.11799999;fill:#0bbaa3;fill-opacity:1;stroke:#000000;stroke-width:0.20742486px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 76.319489,156.15359 c 1.845786,-6.52897 -3.125551,-14.51959 1.682741,-20.53526 4.808293,-6.01567 19.395874,-10.05615 34.0559,-9.11228 14.66003,0.94387 29.39261,6.87202 34.44687,12.94909 5.05427,6.07708 0.43015,12.30347 -7.474,14.00165 -7.90416,1.69819 -19.0876,-1.13187 -28.22244,5.07807 -9.13485,6.20995 -16.220304,21.45948 -24.822646,25.34675 -8.602341,3.88726 -18.720388,-3.58858 -19.447853,-9.86031 -0.727465,-6.27174 7.935641,-11.33875 9.781428,-17.86771 z"
+       id="path9376"
+       inkscape:connector-curvature="0"
+       inkscape:path-effect="#path-effect9378"
+       inkscape:original-d="m 83.1368,157.61554 c -4.971264,-7.99108 -9.942614,-15.98169 -14.914285,-23.97229 14.587965,-4.04075 29.175545,-8.08123 43.762995,-12.1215 14.73276,5.9279 29.46534,11.85605 44.19764,17.78439 -4.62381,6.22613 -9.24793,12.45252 -13.87226,18.67905 -11.18399,-2.83044 -22.36743,-5.66049 -33.55147,-8.49047 -7.08562,15.25013 -14.17108,30.49966 -21.25721,45.75043 -10.118458,-7.47652 -20.236505,-14.95236 -30.355193,-22.4283 8.663544,-5.06735 17.326645,-10.13437 25.989783,-15.20131 z"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <path
+       style="opacity:0.11799999;fill:#0bbaec;fill-opacity:1;stroke:#000000;stroke-width:0.14076519px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 139.73815,167.7515 c -3.61669,6.86829 -7.10465,18.63428 -11.60895,19.69407 -4.5043,1.05978 -10.02542,-8.58621 -15.81053,-9.21673 -5.78511,-0.63052 -11.83369,7.75381 -14.919419,6.72694 -3.085726,-1.02687 -3.208483,-11.46535 1.807512,-15.37047 5.015997,-3.90512 15.170007,-1.27706 19.675767,-3.304 4.50576,-2.02693 3.36251,-8.70907 7.7483,-11.04159 4.38578,-2.33253 14.30017,-0.31526 17.38472,1.67882 3.08455,1.99409 -0.66071,3.96468 -4.2774,10.83296 z"
+       id="path9376-2"
+       inkscape:connector-curvature="0"
+       inkscape:path-effect="#path-effect9378-1"
+       inkscape:original-d="m 139.60938,162.85391 c -3.48805,11.76584 -6.976,23.53184 -10.46359,35.29702 -5.52115,-9.64543 -11.04227,-19.29142 -16.56316,-28.93761 -6.04897,8.38507 -12.09756,16.7694 -18.14635,25.15382 -0.12285,-10.43823 -0.24559,-20.87671 -0.36827,-31.3152 10.15467,2.62855 20.30868,5.25661 30.46352,7.88456 -1.14335,-6.6821 -2.28661,-13.36424 -3.42978,-20.04667 9.9148,2.01766 19.82919,4.03492 29.74406,6.05198 -3.7456,1.97102 -7.49086,3.94161 -11.23643,5.9121 z"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#231d24;fill-opacity:0.66666667;fill-rule:nonzero;stroke:none;stroke-width:0.06297433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:1.51138403, 0.06297432;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-8-6"
+       width="29.348293"
+       height="0.86836982"
+       x="147.57593"
+       y="-103.84889"
+       transform="rotate(90)"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:url(#linearGradient9434);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.24774218;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:29.94581261, 1.24774216;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-9-6"
+       width="31.264082"
+       height="31.264082"
+       x="71.716415"
+       y="145.66014"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#0069c1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.33200687;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:7.96816528, 0.33200687;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-1-1-7"
+       width="5.6771011"
+       height="12.19015"
+       x="89.167686"
+       y="164.74896"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <circle
+       style="opacity:0.87999998;fill:#ffffff;fill-opacity:0.98431373;fill-rule:nonzero;stroke:none;stroke-width:0.61841476;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.88235294;paint-order:stroke fill markers"
+       id="path8330-2-6"
+       cx="94.002861"
+       cy="171.59998"
+       r="0.32952923"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.41027078;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98431373;paint-order:fill markers stroke"
+       id="rect8198-1-9-2-9-7"
+       width="6.0425067"
+       height="7.6930451"
+       x="-158.82318"
+       y="92.11409"
+       transform="rotate(-90)"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.41027078;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98431373;paint-order:fill markers stroke"
+       id="rect8198-1-9-4-5"
+       width="6.0425067"
+       height="7.6930451"
+       x="-163.65811"
+       y="75.44381"
+       transform="rotate(-90)"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#231d24;fill-opacity:0.66666667;fill-rule:nonzero;stroke:none;stroke-width:0.02621633;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:0.62919198, 0.02621633;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-9-4"
+       width="7.6930385"
+       height="0.57412505"
+       x="75.44381"
+       y="163.084"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#231d24;fill-opacity:0.66666667;fill-rule:nonzero;stroke:none;stroke-width:0.02621633;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:0.629192, 0.02621633;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-9-2-3"
+       width="7.6930399"
+       height="0.57412511"
+       x="92.11409"
+       y="158.24905"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#231d24;fill-opacity:0.66666667;fill-rule:nonzero;stroke:none;stroke-width:0.02323442;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:0.557626, 0.02323442;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-9-1-43"
+       width="6.0425124"
+       height="0.57412511"
+       x="152.78067"
+       y="-99.807106"
+       transform="rotate(90)"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#231d24;fill-opacity:0.66666667;fill-rule:nonzero;stroke:none;stroke-width:0.02323442;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:0.55762603, 0.02323442;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-9-1-4-1"
+       width="6.0425124"
+       height="0.57412511"
+       x="157.61555"
+       y="-83.136856"
+       transform="rotate(90)"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:url(#linearGradient9334);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.47036004;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:35.28863944, 1.47035995;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-9-6-0"
+       width="31.264082"
+       height="43.415344"
+       x="103.84889"
+       y="133.50885"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#302e92;fill-opacity:0.98431373;fill-rule:nonzero;stroke:none;stroke-width:0.16082615;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:3.85982753, 0.16082613;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-81-5-5"
+       width="44.6609"
+       height="3.7217419"
+       x="96.910637"
+       y="131.8802"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#0069c1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.16082615;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:3.85982749, 0.16082613;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-2-6"
+       width="44.6609"
+       height="3.7217419"
+       x="96.910637"
+       y="130.14348"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.581415;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98431373;paint-order:fill markers stroke"
+       id="rect8198-1-9-2-9-7-3"
+       width="8.5631361"
+       height="10.902195"
+       x="-149.02261"
+       y="114.42025"
+       transform="rotate(-90)"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#231d24;fill-opacity:0.66666667;fill-rule:nonzero;stroke:none;stroke-width:0.03715247;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:0.8916592, 0.03715247;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-9-2-3-5"
+       width="10.902188"
+       height="0.81362116"
+       x="114.42025"
+       y="148.20901"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#231d24;fill-opacity:0.66666667;fill-rule:nonzero;stroke:none;stroke-width:0.03292665;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:0.79023949, 0.03292665;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-9-1-43-5"
+       width="8.5631447"
+       height="0.81362116"
+       x="140.45946"
+       y="-125.32247"
+       transform="rotate(90)"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#302e92;fill-opacity:0.98431373;fill-rule:nonzero;stroke:none;stroke-width:0.16082615;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:3.85982749, 0.16082613;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-81-5"
+       width="44.6609"
+       height="3.7217419"
+       x="65.441849"
+       y="147.02878"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#0069c1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.16082615;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:3.85982745, 0.16082613;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-2"
+       width="44.6609"
+       height="3.7217419"
+       x="65.441849"
+       y="145.29204"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#0069c1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.3963789;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:9.51309462, 0.39637893;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-9-6-0-6"
+       width="31.264082"
+       height="3.1551285"
+       x="103.84889"
+       y="173.76917"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#007fc1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.3963789;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:9.51309472, 0.39637895;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-9-6-0-6-9"
+       width="31.264082"
+       height="3.1551285"
+       x="103.84889"
+       y="170.72969"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#0b8dc5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.3963789;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:9.51309483, 0.39637895;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-9-6-0-6-9-1"
+       width="31.264082"
+       height="3.1551285"
+       x="103.84889"
+       y="168.00877"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#0b9fc5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.3963789;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:9.51309494, 0.39637895;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-9-6-0-6-9-1-9"
+       width="31.264082"
+       height="3.1551285"
+       x="103.84889"
+       y="165.28786"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#0bb7c5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.3963789;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:9.51309515, 0.39637895;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-9-6-0-6-9-1-9-9-26"
+       width="31.264082"
+       height="3.1551285"
+       x="103.84889"
+       y="159.84598"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#0babc5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.3963789;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:9.51309504, 0.39637895;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-9-6-0-6-9-1-9-9"
+       width="31.264082"
+       height="3.1551285"
+       x="103.84889"
+       y="162.56693"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#0bbac5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.3963789;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:9.51309515, 0.39637895;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-9-6-0-6-9-1-9-9-2"
+       width="31.264082"
+       height="3.1551285"
+       x="103.84889"
+       y="156.69081"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#0bbade;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.3963789;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:9.51309525, 0.39637895;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-9-6-0-6-9-1-9-9-2-6"
+       width="31.264082"
+       height="3.1551285"
+       x="103.84889"
+       y="153.96986"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.581415;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98431373;paint-order:fill markers stroke"
+       id="rect8198-1-9-2-9-7-3-4"
+       width="8.5631361"
+       height="10.902195"
+       x="-164.96744"
+       y="114.42025"
+       transform="rotate(-90)"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#231d24;fill-opacity:0.66666667;fill-rule:nonzero;stroke:none;stroke-width:0.03715247;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:0.89165922, 0.03715247;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-9-2-3-5-7"
+       width="10.902188"
+       height="0.81362116"
+       x="114.42025"
+       y="164.15382"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#231d24;fill-opacity:0.66666667;fill-rule:nonzero;stroke:none;stroke-width:0.03292665;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:0.7902395, 0.03292665;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-9-1-43-5-1"
+       width="8.5631447"
+       height="0.81362116"
+       x="156.4041"
+       y="-125.32247"
+       transform="rotate(90)"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#0bbaec;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.3963789;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:9.51309536, 0.39637895;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8198-9-6-0-6-9-1-9-9-2-6-2"
+       width="31.264082"
+       height="3.1551285"
+       x="103.84889"
+       y="150.8147"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+    <rect
+       style="opacity:1;fill:#302e92;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.09539328;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:2.28943933, 0.0953933;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke fill markers"
+       id="rect8326-1-81-7"
+       width="69.895348"
+       height="0.83665788"
+       x="65.217606"
+       y="176.08757"
+       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\blue_house.png"
+       inkscape:export-xdpi="400"
+       inkscape:export-ydpi="400" />
+  </g>
+</svg>

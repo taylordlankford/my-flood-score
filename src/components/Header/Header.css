@@ -1,0 +1,33 @@
+.Headercontainer{
+    width: 100%;
+    border-bottom: 2px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: solid;
+    border-color: #0d238e;
+    border-top: 10px;
+    border-width: 100%;
+}
+.MFS-Logo{
+    width: 240px;
+    height: 80px;
+}
+.header{
+    display: flex;  
+    align-items: center;
+    border-bottom: 20px;
+    padding-top: 10px;
+    padding-left: 150px;
+}
+.link{
+    margin: 18px;
+}
+.linkPosition{
+    padding-right: 150px;
+}
+.test{
+    background-color: black;
+    border-bottom: 20px;
+    border-color: black;
+}
+
