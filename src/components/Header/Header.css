@@ -16,12 +16,37 @@
     display: flex;  
     align-items: center;
     border-bottom: 20px;
-    padding-top: 10px;
+    padding-top: 1px;
     padding-left: 150px;
+}
+.cart{
+    fill: #666666;
+    height: 22px;
+    width: 22px;
 }
 .link{
     margin: 18px;
+    text-decoration: none;
+    color: #666666;
+    font-size: 18px;
+    
 }
+    a:link {
+        text-decoration: none;
+    }
+    
+    a:visited {
+        text-decoration: none;
+    }
+    
+    a:hover {
+        color: #55B96A;
+    }
+    
+    a:active {
+        text-decoration: underline;
+    }
+
 .linkPosition{
     padding-right: 150px;
 }
@@ -29,5 +54,28 @@
     background-color: black;
     border-bottom: 20px;
     border-color: black;
+}
+.links2{
+    color: #55B96A;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.links2logo{
+    width: 150px;
+    height: 50px;
+    margin-left: -60px;
+}
+.bottomBorder{
+    width: 100%;
+    border-bottom: 8px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: solid;
+    border-color: #0d238e;
+    border-top: 10px;
+    border-width: 100%;
 }
 
