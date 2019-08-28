@@ -6,7 +6,7 @@ import {
     Grid,
 } from '@material-ui/core'
 import {Image, Row, Col} from 'react-bootstrap'
-import backgroundImage from '/Users/Kulow/React/myflood-score/src/images/Background-Image.jpg'
+import backgroundImage from '../../assets/images/Background-Image.jpg'
 import ReactPlayer from 'react-player'
 
 function Home () {

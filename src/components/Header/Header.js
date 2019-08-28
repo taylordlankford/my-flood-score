@@ -1,18 +1,20 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import * as ROUTES from '../../constants/routes'
+
 import './Header.css'
-import MFS_Logo from '/Users/Kulow/React/myflood-score/src/images/MFS_Logo2_572019-2.png'
-import Compare from '/Users/Kulow/React/myflood-score/src/images/Compare.svg'
-import Examine from '/Users/Kulow/React/myflood-score/src/images/Examine.svg'
-import Certify from '/Users/Kulow/React/myflood-score/src/images/Certificate.svg'
-import Reduce_Eliminate from '/Users/Kulow/React/myflood-score/src/images/Reduce_Eliminate.svg'
-import Discover from '/Users/Kulow/React/myflood-score/src/images/Discover.svg'
+import MFS_Logo from '../../assets/images/MFS_Logo2_572019-2.png'
+import Compare from '../../assets/images/Compare.svg'
+import Examine from '../../assets/images/Examine.svg'
+import Certify from '../../assets/images/Certificate.svg'
+import Reduce_Eliminate from '../../assets/images/Reduce_Eliminate.svg'
+import Discover from '../../assets/images/Discover.svg'
 import NavBar from 'react-bootstrap/Navbar'
 import {Row, Col} from 'react-bootstrap'
-import shoppingCart from '/Users/Kulow/React/myflood-score/src/images/shopping-cart-solid.svg'
+import shoppingCart from '../../assets/images/shopping-cart-solid.svg'
 import {
     Container,
     Grid,
-    Link,
     makeStyles,
     Button,
 } from '@material-ui/core'
@@ -41,26 +43,22 @@ function Header () {
                         container justify="flex-end"
                         className={'linkPosition'}
                     >
-                        <a href="https://reactjs.org" className={'link'}>
-                            Home
-                        </a>
+                        <Link to={ROUTES.HOME}>Home</Link>
                 
-                        <a href="https://reactjs.org" className={'link'}>
+                        <a href="https://reactjs.org" className={'header-link'}>
                             About
                         </a>
                 
-                        <a href="https://reactjs.org" className={'link'}>
+                        <a href="https://reactjs.org" className={'header-link'}>
                             Get Your FREE Flood Score
                         </a>
                 
-                        <a href="https://reactjs.org" className={'link'}>
-                            Login
-                        </a>
+                        <Link to={ROUTES.SIGN_IN}>Login</Link>
 
-                        <a href="https://reactjs.org" className={'link'}>
+                        <a href="https://reactjs.org" className={'header-link'}>
                             Sign Up
                         </a>
-                        <a href="https://reactjs.org" className={'link'}>
+                        <a href="https://reactjs.org" className={'header-link'}>
                             <img src={shoppingCart} className={'cart'} alt={''}/>
                         </a>
                     </Grid>
