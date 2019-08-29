@@ -16,6 +16,7 @@ import Home from './containers/Home/Home'
 
 import * as ROUTES from './constants/routes'
 import { useFirestoreUser, useStateValue} from './hooks'
+import './App.css'
 
 
 const App = () => {
@@ -40,7 +41,7 @@ const App = () => {
 
         <Route
           render={({ location }) => (
-            <div style={{}}>
+            <div className="main">
               <div style={{}}>
                 <TransitionGroup>
                   {/* no different than other usage of

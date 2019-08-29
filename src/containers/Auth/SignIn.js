@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import useReactRouter from 'use-react-router'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 
+import './Auth.css'
 import { SignUpLink } from './SignUp'
 import { PasswordForgetLink } from './PasswordForget'
 import * as ROUTES from '../../constants/routes'
@@ -32,30 +35,39 @@ const SignInPage = () => {
 
   return (
   <div>
-    <h1>SignIn</h1>
-    <form onSubmit={onSubmit}>
-      <input
-        name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        type="text"
-        placeholder="Email Address"
-      />
-      <input
-        name="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        type="password"
-        placeholder="Password"
-      />
-      <button disabled={isInvalid} type="submit">
-        Sign In
-      </button>
+    <h1>Login</h1>
+      <Form className="greyBox">
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            placeholder="Enter email"
+          />
+        </Form.Group>
 
-      {error && <p>{error.message}</p>}
-    </form>
-    <SignUpLink />
-    <PasswordForgetLink />
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicCheckbox">
+          <Form.Check type="checkbox" label="Remember me" />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          LOG IN
+        </Button>
+        {error && <p>{error.message}</p>}
+      </Form>
+      <SignUpLink />
+      <PasswordForgetLink />
   </div>
   )
 }

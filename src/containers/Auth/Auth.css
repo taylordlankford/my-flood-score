@@ -1,0 +1,11 @@
+.greyBox {
+  padding: 3rem 3rem 2rem;
+  overflow: hidden;
+  border: 2px solid;
+  border-color: #c4c4c4;
+  box-sizing: border-box;
+  display: block;
+  max-width: 1000px;
+  min-width: 400px;
+  /* margin: 0 auto; */
+}
