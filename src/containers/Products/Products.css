@@ -24,20 +24,6 @@
   border: none;
   margin: 0;
 }
-.add-to-cart-button {
-  vertical-align: middle;
-  background-color: #55B96A;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 2.8;
-  padding: 0 1.8em;
-  letter-spacing: 0em;
-  border: none;
-}
-.add-to-cart-button:hover {
-  background-color: #66de80;
-}
 .screen-reader-text {
   position: absolute;
   overflow: hidden;

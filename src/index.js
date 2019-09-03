@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import WebFont from 'webfontloader';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -7,6 +8,12 @@ import * as serviceWorker from './serviceWorker';
 import StateReducer, { initialState } from './StateReducer'
 import Fire from './fire'
 import { FirebaseContext, StateProvider } from './hooks'
+
+WebFont.load({
+  google: {
+    families: ['Montserrat:400,700,800', 'sans-serif']
+  }
+});
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Fire()}>

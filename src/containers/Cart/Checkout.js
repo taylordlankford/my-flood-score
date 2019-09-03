@@ -12,7 +12,7 @@ import './Cart.css'
 import * as ROUTES from '../../constants/routes'
 import { useFirebase } from '../../hooks'
 
-const CheckoutForm = () => {
+const BillingDetails = () => {
   return (
     <Form>
       <Form.Row>
@@ -81,10 +81,20 @@ const CheckoutForm = () => {
         <Form.Control type="text" as="textarea" rows="4" placeholder="Notes about your order, e.g. special notes for delivery." />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
     </Form>
+  )
+}
+
+const Order = () => {
+  return (
+    <div className="order-details">
+      <p className="cart-item">Discover - Homeowner 	<span style={{ fontWeight: '700' }}>× 1</span> <span className="cart-amount">$0.00</span></p>
+      <p className="cart-Subtotal">Subtotal <span className="cart-amount">$0.00</span></p>
+      <p className="cart-total">Total <span className="cart-amount">$0.00</span></p>
+      <Button variant="primary" type="submit" className="place-order-button">
+        PLACE ORDER
+      </Button>
+    </div>
   )
 }
 
@@ -97,11 +107,12 @@ const CheckoutPage = () => {
     <Container style={{ 'marginTop': '64px' }}>
       <Row>
         <Col>
-          <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Billing Details</h3>
-          <CheckoutForm />
+          <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Billing details</h3>
+          <BillingDetails />
         </Col>
         <Col>
-          right
+          <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Your order</h3>
+          <Order />
         </Col>
       </Row>
     </Container>

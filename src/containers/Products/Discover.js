@@ -34,7 +34,7 @@ const ProductBox = (props) => {
             <label className="screen-reader-text">Discover - Homeowner quantity</label>
             <input type="number" className="input-text qty text" step="1" min="1" max="100" defaultValue="1" name="quantity" title="Qty" size="4" inputMode="numeric" />
           </div>
-          <Button onClick={handleAddToCart} type="submit" name="add-to-cart" value="191" className="add-to-cart-button">ADD TO CART</Button>
+          <Button onClick={handleAddToCart} variant="primary" type="submit" name="add-to-cart" value="191" className="add-to-cart-button">ADD TO CART</Button>
           <div className="product_meta">	
             <span>Category: <Link to={ROUTES.DISCOVER}>Homeowner</Link></span>	
           </div>
