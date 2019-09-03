@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 function Header () {
     const classes = useStyles();
     return (
-    <div>
+    <div style={{ width: '100%' }}>
     <div className={'Headercontainer'}>
         <Row >
             <NavBar expand='lg'>
@@ -48,10 +48,8 @@ function Header () {
                         <a href="https://reactjs.org" className={'header-link'}>
                             About
                         </a>
-                
-                        <a href="https://reactjs.org" className={'header-link'}>
-                            Get Your FREE Flood Score
-                        </a>
+
+                        <Link to={ROUTES.DISCOVER}>Get Your FREE Flood Score</Link>
                 
                         <Link to={ROUTES.SIGN_IN}>Login</Link>
 

@@ -13,6 +13,8 @@ import SignUpPage from './containers/Auth/SignUp'
 import SignInPage from './containers/Auth/SignIn'
 import PasswordForgetPage from './containers/Auth/PasswordForget'
 import Home from './containers/Home/Home'
+import DiscoverPage from './containers/Products/Discover'
+import CheckoutPage from './containers/Cart/Checkout'
 
 import * as ROUTES from './constants/routes'
 import { useFirestoreUser, useStateValue} from './hooks'
@@ -59,6 +61,8 @@ const App = () => {
                       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
                       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
                       <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+                      <Route path={ROUTES.DISCOVER} component={DiscoverPage} />
+                      <Route path={ROUTES.CHECKOUT} component={CheckoutPage} />
                       {/* Without this `Route`, we would get errors during
                       the initial transition from `/` to `/hsl/10/90/50`
                   */}
