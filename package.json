@@ -16,6 +16,7 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-stripe-elements": "^5.0.0",
     "react-transition-group": "^4.2.2",
     "use-react-router": "^1.0.7",
     "webfontloader": "^1.6.28"
