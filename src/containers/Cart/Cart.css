@@ -29,4 +29,5 @@
 
 .place-order-button {
   font-size: 1.1rem !important;
+  cursor: pointer;
 }
