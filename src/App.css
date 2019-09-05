@@ -63,3 +63,18 @@
 .form-control:-moz-placeholder { /* Firefox 18- */
   color: #acacac;
 }
+
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 55px;
+  align-self: flex-start; /* <-- this is the fix */
+  z-index: 99;
+}
+.error {
+  z-index: 999;
+  width: 90%;
+  top: 5px;
+  margin: 5px auto;
+}

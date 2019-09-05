@@ -1,7 +1,8 @@
 export const initialState = {
   production: true,
   theme: { primary: 'green' },
-  user: null
+  user: null,
+  error: null,
 }
 
 const StateReducer = (state, action) => {
@@ -15,6 +16,11 @@ const StateReducer = (state, action) => {
       return {
         ...state,
         user: action.newUser
+      }
+    case 'changeError':
+      return {
+        ...state,
+        error: action.newError
       }
       
     default:
