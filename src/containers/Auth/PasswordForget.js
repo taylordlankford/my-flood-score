@@ -30,7 +30,7 @@ const PasswordForgetForm = () => {
 
   return (
   <div>
-    <h1>Password Foget</h1>
+    <h1 className="authHeader">Password Foget</h1>
     <form onSubmit={onSubmit}>
       <input
         name="email"

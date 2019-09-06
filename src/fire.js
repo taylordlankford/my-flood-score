@@ -35,6 +35,18 @@ class Fire {
   doPasswordUpdate = password =>
     this.auth.currentUser.updatePassword(password)
 
+  doApplyActionCode = actionCode =>
+    this.auth.applyActionCode(actionCode)
+
+  doCheckActionCode = actionCode =>
+    this.auth.checkActionCode(actionCode)
+
+  doVerifyPasswordResetCode = actionCode =>
+    this.auth.verifyPasswordResetCode(actionCode)
+
+  doConfirmPasswordReset = (actionCode, newPassword) =>
+    this.auth.confirmPasswordReset(actionCode, newPassword)
+
   // *** User API ***
 
   doFirestoreSet = (collection, doc, setObj, callback) => {

@@ -35,7 +35,7 @@ const SignInPage = () => {
 
   return (
   <div>
-    <h1>Login</h1>
+    <h1 className="authHeader">Login</h1>
       <Form className="greyBox">
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>

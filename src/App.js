@@ -20,6 +20,7 @@ import DiscoverPage from './containers/Products/Discover'
 import CheckoutPage from './containers/Cart/Checkout'
 import CheckoutFreePage from './containers/Cart/CheckoutFree'
 import OrderReceivedPage from './containers/Cart/OrderReceived'
+import EmailActionPage from './containers/Auth/EmailAction'
 
 import * as ROUTES from './constants/routes'
 import { useFirestoreUser, useStateValue} from './hooks'
@@ -71,6 +72,7 @@ const App = () => {
                       <Route path={ROUTES.CHECKOUT} component={CheckoutPage} />
                       <Route path={ROUTES.CHECKOUT_FREE} component={CheckoutFreePage} />
                       <Route path={ROUTES.ORDER_RECEIVED} component={OrderReceivedPage} />
+                      <Route path={ROUTES.EMAIL_ACTION_HANDLER} component={EmailActionPage} />
                       {/* Without this `Route`, we would get errors during
                       the initial transition from `/` to `/hsl/10/90/50`
                   */}

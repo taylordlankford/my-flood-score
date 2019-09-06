@@ -53,7 +53,7 @@ const BillingDetails = () => {
       </Form.Group>
 
       <Form.Group controlId="billingAddress2">
-        <Form.Control name="streetAddress2" required placeholder="Apartment, suite, unit etc. (optional)" />
+        <Form.Control name="streetAddress2" placeholder="Apartment, suite, unit etc. (optional)" />
       </Form.Group>
 
       <Form.Group controlId="billingCity">

@@ -31,7 +31,7 @@ const PasswordChangeForm = () => {
 
   return (
   <div>
-    <h1>Password Change</h1>
+    <h1 className="authHeader">Password Change</h1>
     <form onSubmit={onSubmit}>
       <input
         name="passwordOne"

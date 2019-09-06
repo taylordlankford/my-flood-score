@@ -52,7 +52,7 @@ const SignUpPage = () => {
 
   return (
     <div>
-      <h1>SignUp</h1>
+      <h1 className="authHeader">SignUp</h1>
       <form onSubmit={onSubmit}>
         <input
           name="firstName"
