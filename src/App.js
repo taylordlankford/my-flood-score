@@ -20,7 +20,7 @@ import DiscoverPage from './containers/Products/Discover'
 import CheckoutPage from './containers/Cart/Checkout'
 import CheckoutFreePage from './containers/Cart/CheckoutFree'
 import OrderReceivedPage from './containers/Cart/OrderReceived'
-import EmailActionPage from './containers/Auth/EmailAction'
+import EmailActionPage from './containers/EmailActionHandler/EmailAction'
 
 import * as ROUTES from './constants/routes'
 import { useFirestoreUser, useStateValue} from './hooks'

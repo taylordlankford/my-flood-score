@@ -46,6 +46,7 @@ const BillingDetails = (props) => {
           const setObj = {
             uid: authUser.uid,
             ...order,
+            usedFreeCredit: false,
           }
           firebase.doFirestoreSet(collection, doc, setObj, () => history.push(ROUTES.ORDER_RECEIVED, order))
         })

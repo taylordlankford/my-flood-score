@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 import qs from 'qs'
 
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import ResetPassword from './ResetPassword'
+import DiscoverReport from './DiscoverReport' 
 
-import { useFirebase } from '../../hooks'
-import * as ROUTES from '../../constants/routes'
+import { useFirebase, useFirestoreUser } from '../../hooks'
 
 const EmailAction = ({ match, location, history }) => {
   const firebase = useFirebase()
+  const firestoreUser = useFirestoreUser()
 
   const [email, setEmail] = useState('')
-  const [newPassword, setNewPassword] = useState('')
   const [error, setError] = useState(null)
-  const [success, setSuccess] = useState(false)
   const [ran, setRan] = useState(false)
+  const [recoverEmailSuccess, setRecoverEmailSuccess] = useState(false)
+  const [displayReport, setDisplayReport] = useState(false)
 
 
   const params = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -56,7 +56,7 @@ const EmailAction = ({ match, location, history }) => {
     var accountEmail;
     // Verify the password reset code is valid.
     firebase.doVerifyPasswordResetCode(actionCode).then(function(email) {
-      var accountEmail = email;
+      accountEmail = email;
       setEmail(accountEmail)
   
       // TODO: Show the reset screen with the user's email and ask the user for
@@ -71,11 +71,11 @@ const EmailAction = ({ match, location, history }) => {
   function handleRecoverEmail(actionCode, lang) {
     // Localize the UI to the selected language as determined by the lang
     // parameter.
-    var restoredEmail = null;
+    // let restoredEmail = null;
     // Confirm the action code is valid.
     firebase.doCheckActionCode(actionCode).then(function(info) {
       // Get the restored email address.
-      restoredEmail = info['data']['email'];
+      // restoredEmail = info['data']['email'];
   
       // Revert to the old email.
       return firebase.doApplyActionCode(actionCode);
@@ -83,15 +83,15 @@ const EmailAction = ({ match, location, history }) => {
       // Account email reverted to restoredEmail
   
       // TODO: Display a confirmation message to the user.
-  
+      setRecoverEmailSuccess(true)
       // You might also want to give the user the option to reset their password
       // in case the account was compromised:
-      firebase.doPasswordReset(restoredEmail).then(function() {
-        console.log('Password reset confirmation sent. Ask user to check their email.')
-      }).catch(function(error) {
-        console.log('Error encountered while sending password reset code:', error)
-        setError(error.message)
-      });
+      // firebase.doPasswordReset(restoredEmail).then(function() {
+      //   console.log('Password reset confirmation sent. Ask user to check their email.')
+      // }).catch(function(error) {
+      //   console.log('Error encountered while sending password reset code:', error)
+      //   setError(error.message)
+      // });
     }).catch(function(error) {
       console.log('invalid code, error:', error)
       setError(error.message)
@@ -105,7 +105,9 @@ const EmailAction = ({ match, location, history }) => {
     firebase.doApplyActionCode(actionCode).then(function(resp) {
       console.log('resp', resp)
       console.log('email address has been verified')
-  
+      // Check if user has used free credit
+      setDisplayReport(true)
+
       // TODO: Display a confirmation message to the user.
       // You could also provide the user with a link back to the app.
   
@@ -117,78 +119,24 @@ const EmailAction = ({ match, location, history }) => {
       // again.
       console.log('doApplyActionCode error', error)
       setError(error.message)
+      setDisplayReport(true) // TODO: REMOVE
     });
   }
 
-  const handleConfirmPasswordReset = () => {
-    // Save the new password.
-    firebase.doConfirmPasswordReset(actionCode, newPassword).then(function(resp) {
-      console.log('Password reset has been confirmed and new password updated.')
-
-      // TODO: Display a link back to the app, or sign-in the user directly
-      // if the page belongs to the same domain as the app:
-      firebase.doSignInWithEmailAndPassword(email, newPassword);
-      setSuccess(true)
-
-      // TODO: If a continue URL is available, display a button which on
-      // click redirects the user back to the app via continueUrl with
-      // additional state determined from that URL's parameters.
-    }).catch(function(error) {
-      // Error occurred during confirmation. The code might have expired or the
-      // password is too weak.
-      console.log('Error occurred during confirmation. The code might have expired or the password is too weak.', error)
-      setError(error.message)
-    });
-  }
 
   // if (error !== null) {
-  //   return (
-  //     <h2>{error}</h2>
-  //   )
+  //   return <h2>{error}</h2>
   // }
   if (mode === 'resetPassword') {
-    if (success) {
-      return (
-        <div>
-          <h2>Success</h2>
-          <Button onClick={() => history.push(ROUTES.HOME)}>
-            Continue to Home Page
-          </Button>
-        </div>
-      )
-    }
+    return <ResetPassword history={history} email={email} setEmail={setEmail} actionCode={actionCode} />
+  }
+  if (mode === 'recoverEmail') {
     return (
-      <div>
-        <h1 className="authHeader">Reset Password</h1>
-        <Form className="greyBox" action="javascript:void(0);" onSubmit={handleConfirmPasswordReset}>
-          <Form.Group controlId="email">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              disabled
-            />
-          </Form.Group>
-
-          <Form.Group controlId="password">
-            <Form.Label>New Password</Form.Label>
-            <Form.Control
-              name="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              type="password"
-              placeholder="Enter new password"
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Reset Password
-          </Button>
-          {error && <p>{error.message}</p>}
-        </Form>
-      </div>
+      (recoverEmailSuccess) ? <h2>Email Recovered Successful</h2> : <h2>Problem with email recovery</h2>
     )
+  }
+  if (mode === 'verifyEmail') {
+    return (displayReport) ? <DiscoverReport /> : 'Verifying Email...'
   }
   return (
     <h1>

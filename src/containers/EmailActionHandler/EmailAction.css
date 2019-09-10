@@ -1,0 +1,29 @@
+.reportContainer {
+  margin: 0 auto;
+  width: 65%;
+}
+.reportHeader {
+  background-color: #D8E2F3;
+  box-shadow: 0px 1px 2px #989898, 0px 2px 5px #cccccc;
+  padding-left: 20px;
+}
+.reportHeader img {
+  position: relative;
+  width: 250px;
+}
+.learnMoreBox {
+
+}
+.learnMoreBox img {
+  position: relative;
+  width: 100%;
+}
+.reportSection {
+  background: #f2f2f2;
+  width: 95%;
+  margin: 15px auto;
+  box-shadow: 0px 2px 2px #bfbfbf;
+}
+.little-house {
+  position: relative;
+}

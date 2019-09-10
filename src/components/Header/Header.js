@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import * as ROUTES from '../../constants/routes'
 
 import './Header.css'
-import MFS_Logo from '../../assets/images/MFS_Logo2_572019-2.png'
+import MFS_Logo from '../../assets/images/MFS_Logo.png'
 import Compare from '../../assets/images/Compare.svg'
 import Examine from '../../assets/images/Examine.svg'
 import Certify from '../../assets/images/Certificate.svg'
