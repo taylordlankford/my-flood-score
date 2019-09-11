@@ -13,23 +13,10 @@ import NavBar from 'react-bootstrap/Navbar'
 import {Row, Col} from 'react-bootstrap'
 import shoppingCart from '../../assets/images/shopping-cart-solid.svg'
 import {
-    Container,
     Grid,
-    makeStyles,
-    Button,
 } from '@material-ui/core'
-const useStyles = makeStyles(theme => ({
-    button: {
-        margin: theme.spacing(1)
-    },
-    input: {
-        display: 'none',
-    },
-    fontFamily: '"Montserrat", sans-serif'
-}));
 
 function Header () {
-    const classes = useStyles();
     return (
     <div style={{ width: '100%' }}>
     <div className={'Headercontainer'}>
