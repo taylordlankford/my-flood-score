@@ -13,9 +13,22 @@ import './Cart.css'
 import * as ROUTES from '../../constants/routes'
 import { useFirebase, useStateValue } from '../../hooks'
 
+import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
+
+const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
+  document.getElementsByName("streetAddress1")[0].value = suggestion
+}
+
 const BillingDetails = (props) => {
   // const [error, setError] = useState(null)
   const [{ error }, dispatch] = useStateValue()
+  const { firebase, selected } = props
+  console.log('selected', selected)
+  try {
+    document.getElementsByName("streetAddress1")[0].value = selected
+  } catch (error) {
+    console.log(error)
+  }
 
   const handleOrderSubmit = () => {
     dispatch({
@@ -86,10 +99,23 @@ const BillingDetails = (props) => {
         <Form.Control name="country" disabled required defaultValue="United States (US)" />
       </Form.Group>
 
+      {/* <Form.Group controlId="billingAddress1">
+        <Form.Label>Street address *</Form.Label>
+        <Form.Control name="streetAddress" required placeholder="House number and street name" defaultValue={(selected) ? selected : ''} />
+      </Form.Group> */}
+
       <Form.Group controlId="billingAddress1">
         <Form.Label>Street address *</Form.Label>
-        <Form.Control name="streetAddress" required placeholder="House number and street name" />
+        <AutoSuggest
+          theme={autoSuggestTheme}
+          onSuggestionSelected={onSuggestionSelected}
+          inputProps={{ name: 'streetAddress1' }}
+          firebase={firebase}
+        />
       </Form.Group>
+      {/* <AutoSuggest theme={autoSuggestTheme} firebase={firebase} /> */}
+
+      
 
       <Form.Group controlId="billingAddress2">
         <Form.Control name="streetAddress2" placeholder="Apartment, suite, unit etc. (optional)" />
@@ -147,17 +173,18 @@ const Order = () => {
   )
 }
 
-const CheckoutFree = () => {
+const CheckoutFree = (props) => {
   const firebase = useFirebase()
   const { history } = useReactRouter()
-
+  const { state } = props.location
+  const { selected } = state
   return (
   <div>
     <Container style={{ 'marginTop': '64px' }}>
       <Row>
         <Col>
           <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Order details</h3>
-          <BillingDetails history={history} firebase={firebase} />
+          <BillingDetails history={history} firebase={firebase} selected={selected}/>
         </Col>
         <Col className="sticky">
           <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Your order</h3>
@@ -170,3 +197,42 @@ const CheckoutFree = () => {
 }
 
 export default CheckoutFree
+
+
+const autoSuggestTheme = {
+  container: {},
+  containerOpen: {},
+  input: {
+    backgroundColor: '#f2f2f2',
+    lineHeight: '2.8rem',
+    height: '2.8rem',
+    padding: '0 0.8rem',
+    display: 'block',
+    width: '100%',
+    fontSize: '1rem',
+    fontWeight: '400',
+    color: '#495057',
+    backgroundClip: 'padding-box',
+    borderStyle: 'solid',
+    borderColor: '#ced4da',
+    borderWidth: '1px',
+    borderRadius: '.25rem',
+    transition: 'border-color .15s',
+    outline: 'none',
+  },
+  inputOpen: {},
+  inputFocused: {
+    borderColor: '#55B96A',
+    borderWidth: '2px',
+    boxShadow: 'none',
+  },
+  suggestionsContainer: {},
+  suggestionsContainerOpen: {},
+  suggestionsList: {},
+  suggestion: {},
+  suggestionFirst: {},
+  suggestionHighlighted: {},
+  sectionContainer: {},
+  sectionContainerFirst: {},
+  sectionTitle: {},
+}

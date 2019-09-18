@@ -1,6 +1,6 @@
 .main {
-  padding-left: 6em;
-  padding-right: 6em;
+  /* padding-left: 6em;
+  padding-right: 6em; */
 }
 
 /* primary button  */
@@ -50,6 +50,10 @@
   border-color: #55B96A !important;
   border-width: 2px;
   box-shadow: none
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #acacac;
+  opacity: 1; /* Firefox */
 }
 .form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #acacac;

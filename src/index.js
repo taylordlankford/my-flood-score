@@ -9,6 +9,7 @@ import StateReducer, { initialState } from './StateReducer'
 import Fire from './fire'
 import { FirebaseContext, StateProvider } from './hooks'
 
+
 WebFont.load({
   google: {
     families: ['Montserrat:400,700,800', 'sans-serif']
@@ -17,7 +18,7 @@ WebFont.load({
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Fire()}>
-    <StateProvider initialState={initialState} reducer={StateReducer}  >
+    <StateProvider initialState={initialState} reducer={StateReducer} >
       <App />
     </StateProvider>
   </FirebaseContext.Provider>,

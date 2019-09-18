@@ -1,41 +1,60 @@
 import React from 'react'
 import './Home.css'
-import {
-    Button,
-    Grid,
-} from '@material-ui/core'
-import {Image, Row, Col} from 'react-bootstrap'
+import { Image, Row, Col, Button, Container } from 'react-bootstrap'
+
 import backgroundImage from '../../assets/images/Background-Image.jpg'
 import ReactPlayer from 'react-player'
+import { Parallax } from "react-parallax"
+import { useFirebase } from '../../hooks'
 
-function Home () {
+import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
+import CheckMarks from './CheckMarks'
+
+import * as ROUTES from '../../constants/routes'
+
+const insideStyles = {
+  background: "white",
+  padding: 20,
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%,-50%)"
+};
+
+function Home ({ history }) {
+  const firebase = useFirebase()
+
+  const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
+    console.log('selected', suggestion)
+    history.push(ROUTES.CHECKOUT_FREE, { selected: suggestion })
+  }
+
   return (
-    <div className={'container'}>
-      <Image
-        responsive
-        style={{ backgroundSize: 'cover' }}
+    <div>
+      {/* <Image
+        // style={{ backgroundSize: 'cover' }}
         src={backgroundImage}
         className="reframe"
-      />
-      <Row className={'fontStyle'} style={{ position: 'absolute' }}>
-        <h1 style={{paddingBottom: 10}}>Do You Know Your Flood Score?</h1>
-        <h2 className={'lineGap'}>The Most Accurate Flood Risk Assessment for</h2>
-        <h2>Home Owners</h2>
-        <div className="buttonStyle">
-          <Button 
-            variant="contained"
-            size="large"
-            style={{
-              backgroundColor: '#55B96A',
-              color: 'white',
-              fontFamily: 'Montserrat", sans-serif',
-              fontWeight: 'bold'
-            }}
-          >
-            See My Score
-          </Button>
+        fluid
+      /> */}
+      {/* <img
+        src={backgroundImage}
+        alt="background"
+      /> */}
+      <Parallax bgImage={backgroundImage} strength={500}>
+        <div style={{ height: '500px' }}>
+          <div className="headlineContainer">
+            <h1 className="headline">Do You Know Your Flood Score?</h1>
+            <h2 className="headline" style={{ fontSize: '30px', lineHeight: '1.4', marginBottom: '24px' }}>The Most Accurate Flood Risk Assessment for Home Owners</h2>
+          </div>
+          <AutoSuggest
+            theme={autoSuggestTheme}
+            onSuggestionSelected={onSuggestionSelected}
+            inputProps={{ id: 'homeAddressSuggest' }}
+            firebase={firebase}
+          />
         </div>
-      </Row>
+      </Parallax>
       <div className="container2" >
         <h1 style={{  color: "#0d238e" }}> Why You Should Know Your Flood Score</h1>
       </div>
@@ -46,18 +65,54 @@ function Home () {
           width="50%"
         />
       </div>
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-      >
-        <h2 style={{paddingRight: 40}}>LOWER PREMIUMS</h2>
-        <h2 style={{margin: 40}}>KNOW AND COMPARE</h2>
-        <h2 style={{margin: 40}}>EARLY INDICATIONS</h2>
-      </Grid>
+      <CheckMarks />
     </div>
   )
 }
 
 export default Home
+
+const autoSuggestTheme = {
+  container: {
+    width: '100%',
+    display: 'inline-grid',
+    position: 'relative',
+    padding: '17rem 0',
+  },
+  containerOpen: {},
+  input: {
+    width: '50%',
+    margin: '0 auto',
+    borderRadius: '24px',
+    /* border: 1px solid lightgray; */
+    border: '2px solid #55b96a',
+    padding: '8px 7px 8px 20px',
+    fontSize: '18px',
+    transition: '0.2s',
+    color: 'black !important',
+  },
+  inputOpen: {},
+  inputFocused: {
+    outline: 'none',
+    boxShadow: '0px 1px 4px grey',
+  },
+  suggestionsContainer: {
+    background: 'white',
+    margin: '0 auto',
+    width: '50%',
+    position: 'relative',
+  },
+  suggestionsContainerOpen: {},
+  suggestionsList: {},
+  suggestion: {},
+  suggestionFirst: {},
+  suggestionHighlighted: {},
+  sectionContainer: {
+    background: 'white',
+    margin: '0 auto',
+    width: '50%',
+    position: 'relative',
+  },
+  sectionContainerFirst: {},
+  sectionTitle: {},
+}

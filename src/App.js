@@ -37,15 +37,15 @@ const App = () => {
       newUser: firestoreUser,
     })
   }
-  if (loading) {
-    return <h1>Getting user...</h1>
-  }
+  // if (loading) {
+  //   return <h1>Getting user...</h1>
+  // } // TODO: Uncomment
   return (
     <Router>
       <div>
-        <Row>
+        {/* <Row className="test"> */}
           <Header/>
-        </Row>
+        {/* </Row> */}
         {error && <Alert className="sticky error" variant={'danger'}>{error}</Alert>}
 
         <Route

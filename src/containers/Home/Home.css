@@ -1,4 +1,5 @@
-.container{
+.container {
+    background-color: #f4f4f4;
     /* margin-left: 160px;
     margin-right: 160px;  */
     /* padding-top: 50px; */
@@ -12,17 +13,19 @@
 .lineGap{
     margin-bottom: -15px;
 }
-
-.fontStyle{
-    font-family: "Montserrat", sans-serif;
-    line-height: 1.4;
+.headline {
     color: #0d238e;
-    margin-left: 160px;
-    margin-right: 160px; 
-    padding-top: 40px;
+    font-size: 40px;
+    line-height: 1.8;
+    font-weight: 700;
+    letter-spacing: 0em;
 }
-.buttonStyle{
-    margin-top: 50px;
+.headlineContainer {
+    position: absolute;
+    flex-direction: column;
+    margin: 0 -1.6rem;
+    padding: 5rem 10rem;
+    width: 84%;
 }
 .container img{
     position: absolute;
@@ -37,9 +40,22 @@
     height: auto;
     width: 100%;
 }
+.parallax {
+  /* The image used */
+  background-image: url("../../assets/images/Background-Image.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .container2{
     display: flex;
-    padding-top: 480px;
+    padding-top: 50px;
     justify-content: center;
     background-color: #f4f4f4;
 }
@@ -47,7 +63,20 @@
     justify-content: center;
     background-color: #f4f4f4;
     display: flex;
+    margin-bottom: 40px;
 }
 .subheadings{
     
+}
+#homeAddressSuggest::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+color: #3b3b3b;
+}
+#homeAddressSuggest::-moz-placeholder { /* Firefox 19+ */
+color: #3b3b3b;
+}
+#homeAddressSuggest:-ms-input-placeholder { /* IE 10+ */
+color: #3b3b3b;
+}
+#homeAddressSuggest:-moz-placeholder { /* Firefox 18- */
+color: #3b3b3b;
 }

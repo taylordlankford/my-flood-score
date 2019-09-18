@@ -47,7 +47,7 @@ class Fire {
   doConfirmPasswordReset = (actionCode, newPassword) =>
     this.auth.confirmPasswordReset(actionCode, newPassword)
 
-  // *** User API ***
+  // *** Firestore API ***
 
   doFirestoreSet = (collection, doc, setObj, callback) => {
     this.db.collection(collection).doc(doc).set(setObj)
@@ -59,6 +59,51 @@ class Fire {
       console.error("Error writing document: ", error)
     })
   }
+
+  doFirestoreWhereGet = (collection, whereField, whereOperation, whereValue) => {
+    console.log('doing firestore where get')
+    const strlength = whereValue.length
+    const strFrontCode = whereValue.slice(0, strlength-1)
+    const strEndCode = whereValue.slice(strlength-1, whereValue.length)
+    
+    const startCode = whereValue
+    const endCode = strFrontCode + String.fromCharCode(strEndCode.charCodeAt(0) + 1)
+
+    console.log('startcode', startCode)
+    console.log('endCode', endCode)
+    const documents = []
+    this.db.collection(collection).where(whereField, whereOperation, startCode).where(whereField, '<', endCode)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            documents.push(doc.data())
+        });
+        return documents
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+  }
+
+  doFirestoreGet = (collection) => {
+    const documents = []
+    return this.db.collection(collection)
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            documents.push(doc.data())
+        });
+        return documents
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+  }
+
 
 }
 

@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.3.2",
     "bootstrap": "^4.3.1",
     "firebase": "^6.4.2",
     "qs": "^6.8.0",
@@ -11,6 +10,8 @@
     "react-autosuggest": "^9.4.3",
     "react-bootstrap": "^1.0.0-beta.10",
     "react-dom": "^16.8.6",
+    "react-icons": "^3.7.0",
+    "react-parallax": "^2.2.3",
     "react-player": "^1.11.2",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
@@ -40,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.14.3"
   }
 }

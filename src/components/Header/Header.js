@@ -12,103 +12,64 @@ import Discover from '../../assets/images/Discover.svg'
 import NavBar from 'react-bootstrap/Navbar'
 import {Row, Col} from 'react-bootstrap'
 import shoppingCart from '../../assets/images/shopping-cart-solid.svg'
-import {
-    Grid,
-} from '@material-ui/core'
 
 function Header () {
-    return (
-    <div style={{ width: '100%' }}>
-    <div className={'Headercontainer'}>
-        <Row >
-            <NavBar expand='lg'>
-                <span className={'header'}>
-                    <Col>
-                        <img src={MFS_Logo} className={'MFS-Logo'} alt={''}/>
-                    </Col>
-                    <Grid 
-                        container justify="flex-end"
-                        className={'linkPosition'}
-                    >
-                        <Link to={ROUTES.HOME}>Home</Link>
-                
-                        <a href="https://reactjs.org" className={'header-link'}>
-                            About
-                        </a>
-
-                        <Link to={ROUTES.DISCOVER}>Get Your FREE Flood Score</Link>
-                
-                        <Link to={ROUTES.SIGN_IN}>Login</Link>
-
-                        <a href="https://reactjs.org" className={'header-link'}>
-                            Sign Up
-                        </a>
-                        <a href="https://reactjs.org" className={'header-link'}>
-                            <img src={shoppingCart} className={'cart'} alt={''}/>
-                        </a>
-                    </Grid>
-                </span>
-            </NavBar>   
-        </Row>
+  // window.onscroll = function() { scrollFunction() }
+  // function scrollFunction() {
+  //   if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+  //     document.getElementById("navbar").style.padding = "30px 10px";
+  //     document.getElementById("logo").style.fontSize = "25px";
+  //   } else {
+  //     document.getElementById("navbar").style.padding = "80px 10px";
+  //     document.getElementById("logo").style.fontSize = "35px";
+  //   }
+  // }
+  
+  return (
+    <div style={{ height: 'auto' }}>
+      <div className="Headercontainer">
+          <NavBar>
+            <span className="header">
+              <Col>
+                <img src={MFS_Logo} className="MFS-Logo" id="logo" alt={''} />
+              </Col>
+                <div className="linkPosition" >
+                  <Link to={ROUTES.HOME} className="header-link">Home</Link>
+                  <Link to={ROUTES.HOME} className="header-link">About</Link>
+                  <Link to={ROUTES.DISCOVER} className="header-link">Get Your FREE Flood Score</Link>
+                  <Link to={ROUTES.SIGN_IN} className="header-link">Login</Link>
+                  <Link to={ROUTES.SIGN_UP} className="header-link">Sign Up</Link>
+                  <Link to={ROUTES.SIGN_UP} className="header-link">
+                    <img src={shoppingCart} className="cart" alt={''} />
+                  </Link>
+                </div>
+            </span>
+          </NavBar>
         </div>
-        <Row className='bottomBorder'>
-            <Grid 
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                    style={{paddingTop: 20, marginBottom: 10}}
-                >
-                <a
-                    className={'links2'}
-                    href="https://reactjs.org"
-                >
-                    Discover
-                </a>
-                <a href="https://reactjs.org">
-                    <img src={Discover} className={'links2logo'} alt={''}/>
-                </a>
-                <a
-                    className={'links2'}
-                    href="https://reactjs.org"
-                >
-                    Compare
-                </a>
-                <a href="https://reactjs.org">
-                    <img src={Compare} className={'links2logo'} style={{marginLeft: -40, width: 120, height: 40}} alt={''}/>
-                </a>
-                <a
-                    className={'links2'}
-                    href="https://reactjs.org"
-                >
-                    Examine
-                </a>
-                <a href="https://reactjs.org">
-                    <img src={Examine} className={'links2logo'} alt={''}/>
-                </a>
-                <a
-                    className={'links2'}
-                    href="https://reactjs.org"
-                >
-                    Certify
-                </a>
-                <a href="https://reactjs.org">
-                    <img src={Certify} className={'links2logo'} alt={''}/>
-                </a>
-                <a
-                    className={'links2'}
-                    href="https://reactjs.org"
-                >
-                    Reduce or Eliminate
-                </a>
-                <a href="https://reactjs.org">
-                    <img src={Reduce_Eliminate} className={'links2logo'} alt={''}/>
-                </a>
-            </Grid>
-        </Row>
-        
+        <div className='headerBottom'>
+          <a className="links2" href="https://reactjs.org" >
+              Discover
+              <img src={Discover} className={'links2logo'} alt={''} />
+          </a>
+          <a className="links2" href="https://reactjs.org" >
+            Compare
+            <img src={Compare} className={'links2logo'} alt={''} />
+          </a>
+          <a className="links2" href="https://reactjs.org" >
+            Examine
+            <img src={Examine} className={'links2logo'} alt={''} />
+          </a>
+          <a className="links2" href="https://reactjs.org" >
+            Certify
+            <img src={Certify} className={'links2logo'} alt={''} />
+          </a>
+          <a className="links2" href="https://reactjs.org" >
+            Reduce or Eliminate
+            <img src={Reduce_Eliminate} className={'links2logo'} alt={''} />
+          </a>
+        </div>
     </div>
-    )
+  )
 }
 
 export default Header
