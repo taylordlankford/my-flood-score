@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  withRouter,
 } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
@@ -42,52 +43,63 @@ const App = () => {
   // } // TODO: Uncomment
   return (
     <Router>
-      <div>
-        {/* <Row className="test"> */}
+      <ScrollToTopWithRouter>
+        <div>
           <Header/>
-        {/* </Row> */}
-        {error && <Alert className="sticky error" variant={'danger'}>{error}</Alert>}
+          {error && <Alert className="sticky error" variant={'danger'}>{error}</Alert>}
 
-        <Route
-          render={({ location }) => (
-            <div className="main">
-              <div style={{}}>
-                <TransitionGroup>
-                  {/* no different than other usage of
-                  CSSTransition, just make sure to pass
-                  `location` to `Switch` so it can match
-                  the old location as it animates out
-              */}
-                  <CSSTransition
-                    key={location.key}
-                    classNames="fade"
-                    timeout={0}
-                  >
-                    <Switch location={location}>
-                      <Route exact path={ROUTES.HOME} component={Home} />
-                      <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-                      <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-                      <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
-                      <Route path={ROUTES.DISCOVER} component={DiscoverPage} />
-                      <Route path={ROUTES.CHECKOUT} component={CheckoutPage} />
-                      <Route path={ROUTES.CHECKOUT_FREE} component={CheckoutFreePage} />
-                      <Route path={ROUTES.ORDER_RECEIVED} component={OrderReceivedPage} />
-                      <Route path={ROUTES.EMAIL_ACTION_HANDLER} component={EmailActionPage} />
-                      {/* Without this `Route`, we would get errors during
-                      the initial transition from `/` to `/hsl/10/90/50`
-                  */}
-                      <Route render={() => <div>Not Found</div>} />
-                    </Switch>
-                  </CSSTransition>
-                </TransitionGroup>
+          <Route
+            render={({ location }) => (
+              <div className="main">
+                <div style={{}}>
+                  <TransitionGroup>
+                    {/* no different than other usage of
+                    CSSTransition, just make sure to pass
+                    `location` to `Switch` so it can match
+                    the old location as it animates out */}
+                    <CSSTransition
+                      key={location.key}
+                      classNames="fade"
+                      timeout={0}
+                    >
+                      <Switch location={location}>
+                        <Route exact path={ROUTES.HOME} component={Home} />
+                        <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+                        <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+                        <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+                        <Route path={ROUTES.DISCOVER} component={DiscoverPage} />
+                        <Route path={ROUTES.CHECKOUT} component={CheckoutPage} />
+                        <Route path={ROUTES.CHECKOUT_FREE} component={CheckoutFreePage} />
+                        <Route path={ROUTES.ORDER_RECEIVED} component={OrderReceivedPage} />
+                        <Route path={ROUTES.EMAIL_ACTION_HANDLER} component={EmailActionPage} />
+
+                        <Route render={() => <div>Not Found</div>} />
+                      </Switch>
+                    </CSSTransition>
+                  </TransitionGroup>
+                </div>
               </div>
-            </div>
-          )}
-        />
+            )}
+          />
 
-      </div>
+        </div>
+      </ScrollToTopWithRouter>
     </Router>
   )
 }
 
 export default App
+
+class ScrollToTop extends React.Component {
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      window.scrollTo(0, 0)
+    }
+  }
+
+  render() {
+    return this.props.children
+  }
+}
+
+const ScrollToTopWithRouter = withRouter(ScrollToTop)
