@@ -52,7 +52,7 @@ class AutoSuggest extends React.Component {
     // Suggestions also need to be provided to the Autosuggest,
     // and they are initially empty because the Autosuggest is closed.
     this.state = {
-      value: '',
+      value: props.startingValue ? props.startingValue : '',
       suggestions: [],
       addresses: [],
       addInputClass: false,

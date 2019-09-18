@@ -15,9 +15,9 @@ import { useFirebase, useStateValue } from '../../hooks'
 
 import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 
-const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
-  document.getElementsByName("streetAddress1")[0].value = suggestion
-}
+// const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
+//   document.getElementsByName("streetAddress1")[0].value = suggestion
+// }
 
 const BillingDetails = (props) => {
   // const [error, setError] = useState(null)
@@ -108,7 +108,8 @@ const BillingDetails = (props) => {
         <Form.Label>Street address *</Form.Label>
         <AutoSuggest
           theme={autoSuggestTheme}
-          onSuggestionSelected={onSuggestionSelected}
+          // onSuggestionSelected={onSuggestionSelected}
+          startingValue={selected}
           inputProps={{ name: 'streetAddress1' }}
           firebase={firebase}
         />
