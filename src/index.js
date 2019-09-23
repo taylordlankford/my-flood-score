@@ -12,7 +12,10 @@ import { FirebaseContext, StateProvider } from './hooks'
 
 WebFont.load({
   google: {
-    families: ['Montserrat:400,700,800', 'sans-serif']
+    families: [
+      'Montserrat:400,700,800', 'sans-serif',
+      'Montserrat+Alternates:400,700', 'sans-serif',
+    ]
   }
 });
 

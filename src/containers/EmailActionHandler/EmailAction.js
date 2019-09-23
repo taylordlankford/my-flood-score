@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import qs from 'qs'
 
 import ResetPassword from './ResetPassword'
-import DiscoverReport from './DiscoverReport' 
+import DiscoverReport from '../Reports/DiscoverReport'
 
 import { useFirebase, useFirestoreUser } from '../../hooks'
 
@@ -14,8 +14,7 @@ const EmailAction = ({ match, location, history }) => {
   const [error, setError] = useState(null)
   const [ran, setRan] = useState(false)
   const [recoverEmailSuccess, setRecoverEmailSuccess] = useState(false)
-  const [displayReport, setDisplayReport] = useState(false)
-
+  const [property, setProperty] = useState(false)
 
   const params = qs.parse(location.search, { ignoreQueryPrefix: true });
   console.log('params', params)
@@ -106,7 +105,6 @@ const EmailAction = ({ match, location, history }) => {
       console.log('resp', resp)
       console.log('email address has been verified')
       // Check if user has used free credit
-      setDisplayReport(true)
 
       // TODO: Display a confirmation message to the user.
       // You could also provide the user with a link back to the app.
@@ -119,14 +117,27 @@ const EmailAction = ({ match, location, history }) => {
       // again.
       console.log('doApplyActionCode error', error)
       setError(error.message)
-      setDisplayReport(true) // TODO: REMOVE
     });
   }
 
 
   // if (error !== null) {
   //   return <h2>{error}</h2>
-  // }
+  // }  // TODO: Uncomment
+  if (!property && !firestoreUser.loading) {
+    firestoreUser.firestoreUser.propertyRef.get().then(function(doc) {
+      if (doc.exists) {
+          console.log("property Document data:", doc.data());
+          setProperty(doc.data())
+      } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+      }
+    }).catch(function(error) {
+        console.log("Error getting document:", error)
+        setError(error.messsage)
+    })
+  }
   if (mode === 'resetPassword') {
     return <ResetPassword history={history} email={email} setEmail={setEmail} actionCode={actionCode} />
   }
@@ -135,9 +146,12 @@ const EmailAction = ({ match, location, history }) => {
       (recoverEmailSuccess) ? <h2>Email Recovered Successful</h2> : <h2>Problem with email recovery</h2>
     )
   }
-  if (mode === 'verifyEmail') {
-    return (displayReport) ? <DiscoverReport /> : 'Verifying Email...'
-  }
+
+  if (mode === 'verifyEmail' && property) {
+    return <DiscoverReport {...property} />
+  } else if (mode === 'verifyEmail') {
+    return 'verifying email.'
+  } 
   return (
     <h1>
       Email Action Page

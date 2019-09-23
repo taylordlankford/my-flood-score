@@ -1,0 +1,75 @@
+.reportContainer {
+  margin: 0 auto;
+  width: 62%;
+}
+.reportHeader {
+  background-color: #D8E2F3;
+  box-shadow: 0px 1px 2px #989898, 0px 2px 5px #cccccc;
+  padding-left: 20px;
+}
+.reportHeader img {
+  position: relative;
+  width: 250px;
+}
+.learnMoreBox {
+  padding: 10px;
+}
+.learnMoreBox img {
+  position: relative;
+  height: 45%;
+  margin: 0 auto;
+}
+.learnMoreBox a {
+  display: inline-table;
+  width: 150px;
+  margin: 0 auto;
+}
+.reportSection {
+  background: #f2f2f2;
+  width: 95%;
+  margin: 15px auto;
+  box-shadow: 0px 2px 2px #bfbfbf;
+  padding: 5px;
+}
+.little-house {
+  position: relative;
+}
+
+.warningMessage h4 {
+  font-size: 19px;
+}
+.warningMessage {
+  padding: 2px 100px 2px 27px;
+}
+.reportSection p {
+  color: #595959;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+.reportSection h2 {
+  color: #595959;
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-weight: bold;
+}
+.reportSection h3 {
+  font-size: 16px;
+  color: #595959;
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-weight: bold;
+}
+.reportSection h4 {
+  color: #595959;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+.LOMACat span {
+  color: black;
+  font-weight: bold;
+  font-style: normal;
+  padding: 3px 30px;
+  margin: 0 3px;
+  font-size: 13px;
+}
+.LOMASelect {
+  font-size: 21px !important;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  /* border: 1px solid #ffffff; */
+}

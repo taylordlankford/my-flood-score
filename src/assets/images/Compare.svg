@@ -10,15 +10,15 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="215.17662mm"
-   height="114.96011mm"
-   viewBox="0 0 215.17662 114.96011"
+   width="136.5576mm"
+   height="72.957153mm"
+   viewBox="0 0 136.5576 72.957153"
    version="1.1"
-   id="svg6030"
+   id="svg10115"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="Compare.svg">
+   sodipodi:docname="Compare_Update.svg">
   <defs
-     id="defs6024">
+     id="defs10109">
     <inkscape:path-effect
        effect="bspline"
        id="path-effect6981-9-7-4-3-0"
@@ -140,9 +140,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="455.81986"
-     inkscape:cy="194.17076"
+     inkscape:zoom="1.4"
+     inkscape:cx="246.76216"
+     inkscape:cy="123.67254"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -152,7 +152,7 @@
      inkscape:window-y="-9"
      inkscape:window-maximized="1" />
   <metadata
-     id="metadata6027">
+     id="metadata10112">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -167,21 +167,21 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-1.268838,-100.25953)">
+     transform="translate(-50.405722,-156.95595)">
     <rect
-       style="opacity:1;fill:#0069c1;fill-opacity:1;fill-rule:nonzero;stroke:#0069c1;stroke-width:1.55469561;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       style="opacity:1;fill:#0069c1;fill-opacity:1;fill-rule:nonzero;stroke:#0069c1;stroke-width:0.98665679;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
        id="rect10264"
-       width="172.13782"
-       height="3.1403701"
-       x="-54.045807"
-       y="212.26259"
+       width="109.24386"
+       height="1.9929738"
+       x="-20.841911"
+       y="237.31573"
        transform="matrix(0.98106328,-0.19368749,0.35473182,0.93496809,0,0)"
        inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:#2f2e91;fill-opacity:1;stroke:none;stroke-width:1.16228485;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 97.740827,198.91964 c -0.64721,-2.16829 5.618513,-14.45157 8.607923,-14.29119 2.98941,0.1605 8.14078,11.92515 8.19835,14.18059 0.0575,2.25541 -3.04566,1.76975 -8.44733,1.79742 -5.40168,0.0277 -7.711733,0.48148 -8.358943,-1.68682 z"
+       style="fill:#2f2e91;fill-opacity:1;stroke:none;stroke-width:0.73762107;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 111.62977,219.56864 c -0.41074,-1.37606 3.56568,-9.1714 5.46285,-9.06962 1.89717,0.10186 5.16638,7.56806 5.20292,8.99943 0.0365,1.43135 -1.93287,1.12314 -5.36093,1.1407 -3.42807,0.0176 -4.8941,0.30556 -5.30484,-1.07051 z"
        id="path10259"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="zzzzz"
@@ -189,17 +189,17 @@
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <circle
-       cy="194.15347"
-       cx="106.28613"
+       cy="216.54388"
+       cx="117.05287"
        id="path9738-5-9"
-       style="opacity:1;fill:#59b8f1;fill-opacity:0.95686275;fill-rule:nonzero;stroke:none;stroke-width:1.03803992;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
-       r="2.146816"
+       style="opacity:1;fill:#59b8f1;fill-opacity:0.95686275;fill-rule:nonzero;stroke:none;stroke-width:0.65877151;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.70000005;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       r="1.3624343"
        inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:#0069c1;fill-opacity:1;stroke:#0069c1;stroke-width:0.50979459px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 96.725677,208.98758 c 3.23619,-0.63482 5.953133,-0.99697 9.658373,-0.99682 3.70523,1.5e-4 7.0849,0.55006 11.18812,1.69425 3.30255,0.92093 7.10668,1.32742 7.19581,0.0424 0.0892,-1.28489 -3.48719,-5.64783 -6.70529,-7.2033 -3.21809,-1.55549 -7.04418,-1.75212 -11.02848,-1.8063 -3.98432,-0.0542 -7.923013,-0.12479 -11.749383,1.48432 -3.82639,1.60916 -7.86586,6.07804 -7.6733,7.41729 0.19253,1.33924 5.87799,0.003 9.11415,-0.63192 z"
+       style="fill:#0069c1;fill-opacity:1;stroke:#0069c1;stroke-width:0.32353106px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 110.98553,225.95806 c 2.05378,-0.40288 3.77803,-0.63271 6.12949,-0.63261 2.35145,9e-5 4.49629,0.34908 7.10032,1.07522 2.0959,0.58445 4.51011,0.84242 4.56668,0.0269 0.0566,-0.81543 -2.21308,-3.58428 -4.25538,-4.57143 -2.0423,-0.98716 -4.47045,-1.11195 -6.99901,-1.14633 -2.52857,-0.0344 -5.02818,-0.0792 -7.45651,0.94199 -2.42834,1.02122 -4.99191,3.85731 -4.86971,4.70724 0.12219,0.84992 3.73035,0.002 5.78412,-0.40104 z"
        id="path10343"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="czsczczszc"
@@ -207,28 +207,28 @@
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <rect
-       style="opacity:1;fill:#2f2e91;fill-opacity:1;fill-rule:nonzero;stroke:#2f2e91;stroke-width:1.55657911;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       style="opacity:1;fill:#2f2e91;fill-opacity:1;fill-rule:nonzero;stroke:#2f2e91;stroke-width:0.9878521;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
        id="rect10296-3"
-       width="11.75075"
-       height="3.861856"
-       x="117.5539"
-       y="210.57948"
+       width="7.4573803"
+       height="2.4508505"
+       x="124.20374"
+       y="226.96832"
        inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <rect
-       style="opacity:1;fill:#2f2e91;fill-opacity:1;fill-rule:nonzero;stroke:#2f2e91;stroke-width:1.55657911;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
+       style="opacity:1;fill:#2f2e91;fill-opacity:1;fill-rule:nonzero;stroke:#2f2e91;stroke-width:0.9878521;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
        id="rect10296-3-5"
-       width="11.75075"
-       height="3.861856"
-       x="83.570976"
-       y="210.57939"
+       width="7.4573803"
+       height="2.4508505"
+       x="102.63716"
+       y="226.96828"
        inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <g
        id="g9468-79"
-       transform="matrix(0.77074773,0,0,0.77074773,-59.369073,-62.186293)"
+       transform="matrix(0.48913979,0,0,0.48913979,11.923086,53.862928)"
        inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400">
@@ -475,40 +475,37 @@
        rx="14.141603"
        ry="9.0194483"
        clip-path="url(#clipPath10352-3)"
-       transform="matrix(-1.9267829,0,0,-1.9267829,-21.150845,1153.9994)"
+       transform="matrix(-1.2227946,0,0,-1.2227946,36.177528,825.69109)"
        inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:#ffffff;fill-opacity:1;stroke:#221c24;stroke-width:0.61818564;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1.70000005;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.88235294;paint-order:stroke fill markers"
-       d="m 156.28404,128.70794 c 0.002,-1.38343 0.005,-4.14826 0.009,-6.9141 2.34298,-3.3056 4.68706,-6.61275 4.34294,-10.1857 -0.34411,-3.57294 -3.3736,-7.41399 -6.35683,-9.34161 -2.98322,-1.92762 -5.92159,-1.94269 -8.49421,-1.37644 -2.57262,0.56626 -4.78013,1.71447 -6.50604,4.48744 -1.72592,2.77297 -2.96949,7.17184 -1.64953,10.74951 1.31995,3.57767 5.20437,6.33255 8.09913,7.16919 2.89476,0.83664 4.79709,-0.24389 6.39087,0.56846 1.59378,0.81234 2.87852,3.51905 3.521,4.87264 0.64248,1.35359 0.64167,1.35404 0.6435,-0.0294 z"
+       style="fill:#ffffff;fill-opacity:1;stroke:#221c24;stroke-width:0.39231929;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1.70000005;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.88235294;paint-order:stroke fill markers"
+       d="m 148.78307,175.01018 c 0.001,-0.87797 0.004,-2.63261 0.006,-4.3879 1.48693,-2.09784 2.97455,-4.19665 2.75616,-6.46415 -0.21838,-2.2675 -2.14099,-4.70515 -4.03423,-5.92848 -1.89325,-1.22332 -3.75803,-1.23289 -5.39069,-0.87353 -1.63266,0.35936 -3.03361,1.08805 -4.12893,2.84786 -1.09532,1.75981 -1.88452,4.55147 -1.04684,6.82196 0.83768,2.2705 3.30285,4.01883 5.13995,4.54979 1.83711,0.53096 3.04438,-0.15478 4.05585,0.36076 1.01146,0.51554 1.82679,2.2333 2.23452,3.09232 0.40774,0.85903 0.40721,0.85933 0.40838,-0.0186 z"
        id="path6979-5-4-6-6"
        inkscape:connector-curvature="0"
        inkscape:path-effect="#path-effect6981-9-7-4-3"
-       inkscape:original-d="m 156.28221,130.09137 c 0.003,-2.76686 0.011,-8.29753 0.011,-8.29753 0,0 4.68662,-6.61306 7.02894,-9.91681 -3.02883,-3.84284 -6.0583,-7.68391 -9.08841,-11.52306 -2.93763,-0.0173 -5.876,-0.0318 -8.81496,-0.0452 -2.20681,1.14657 -4.41416,2.2951 -6.62256,3.44465 -1.2429,4.39713 -2.48651,8.79599 -3.73074,13.19671 3.8851,2.75305 7.7695,5.50795 11.65326,8.26462 1.90415,-1.08283 3.80782,-2.161 5.7103,-3.24348 1.28464,2.70559 2.56918,5.4124 3.85398,8.11965 z"
+       inkscape:original-d="m 148.7819,175.88814 c 0.002,-1.75593 0.007,-5.26586 0.007,-5.26586 0,0 2.97427,-4.19685 4.46078,-6.29351 -1.92219,-2.43878 -3.84478,-4.87644 -5.76778,-7.31288 -1.86431,-0.011 -3.72909,-0.0202 -5.59424,-0.0287 -1.40051,0.72765 -2.80136,1.45654 -4.20288,2.18608 -0.78878,2.79055 -1.57801,5.5822 -2.36764,8.37503 2.4656,1.74717 4.93076,3.49551 7.39551,5.24498 1.20843,-0.6872 2.41656,-1.37144 3.62393,-2.05841 0.81527,1.71705 1.63048,3.43487 2.44585,5.15297 z"
        sodipodi:nodetypes="ccssaassccc"
        inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot8458-4-1-9"
+    <g
+       aria-label="24"
+       transform="matrix(0.22878839,-3.6965467e-4,3.6965467e-4,0.22878839,91.409166,57.542174)"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'Montserrat Alternates';-inkscape-font-specification:'Montserrat Alternates, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffc90e;fill-opacity:1;stroke:#000000;stroke-opacity:1"
-       transform="matrix(0.36050662,-5.8247255e-4,5.8247255e-4,0.36050662,65.878787,-56.388829)"
-       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
-       inkscape:export-xdpi="400"
-       inkscape:export-ydpi="400"><flowRegion
-         id="flowRegion8460-5-9-2"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;font-family:'Montserrat Alternates';-inkscape-font-specification:'Montserrat Alternates, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffc90e;fill-opacity:1;stroke:#000000;stroke-opacity:1"><rect
-           id="rect8462-1-1-2"
-           width="74.285713"
-           height="75.714287"
-           x="204.28572"
-           y="446.09113"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;font-family:'Montserrat Alternates';-inkscape-font-specification:'Montserrat Alternates, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffc90e;fill-opacity:1;stroke:#000000;stroke-opacity:1" /></flowRegion><flowPara
-         id="flowPara8464-6-2-0"
-         style="fill:#ffc90e;fill-opacity:1;stroke:#000000;stroke-opacity:1">24</flowPara></flowRoot>    <g
-       transform="matrix(1.2374528,0,0,1.2374528,-426.52867,-162.90032)"
+       id="flowRoot8458-4-1-9">
+      <path
+         d="m 226.76516,477.57554 v 5.28 h -21.16 v -4.2 l 10.8,-10.2 q 1.72,-1.64 2.32,-2.8 0.6,-1.2 0.6,-2.36 0,-1.68 -1.16,-2.56 -1.12,-0.92 -3.32,-0.92 -1.84,0 -3.32,0.72 -1.48,0.68 -2.48,2.08 l -4.72,-3.04 q 1.64,-2.44 4.52,-3.8 2.88,-1.4 6.6,-1.4 3.12,0 5.44,1.04 2.36,1 3.64,2.88 1.32,1.84 1.32,4.36 0,2.28 -0.96,4.28 -0.96,2 -3.72,4.56 l -6.44,6.08 z"
+         style="fill:#ffc90e;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+         id="path10846" />
+      <path
+         d="m 254.68828,476.97554 h -4.56 v 5.88 h -6.32 v -5.88 h -15.08 v -4.36 l 13.2,-17.76 h 6.8 l -12.24,16.84 h 7.52 v -5.24 h 6.12 v 5.24 h 4.56 z"
+         style="fill:#ffc90e;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+         id="path10848" />
+    </g>
+    <g
+       transform="matrix(0.7853249,0,0,0.7853249,-221.08749,-10.053232)"
        id="g10779-5"
        inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
        inkscape:export-xdpi="400"
@@ -668,37 +665,34 @@
        rx="14.141603"
        ry="9.0194483"
        clip-path="url(#clipPath10352)"
-       transform="matrix(-1.9267829,0,0,-1.9267829,-159.13415,1182.1639)"
+       transform="matrix(-1.2227946,0,0,-1.2227946,-51.390846,843.5651)"
        inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
     <path
-       style="fill:#ffffff;fill-opacity:1;stroke:#221c24;stroke-width:0.6181857;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1.70000005;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.88235294;paint-order:stroke fill markers"
-       d="m 32.838264,151.72174 c 0.0018,-1.38343 0.0055,-4.14826 0.0092,-6.9141 2.342987,-3.30559 4.687079,-6.61274 4.342966,-10.18568 -0.344112,-3.57294 -3.373604,-7.41399 -6.356832,-9.34162 -2.983228,-1.92763 -5.921583,-1.9427 -8.494203,-1.37645 -2.572621,0.56626 -4.780138,1.71447 -6.506052,4.48744 -1.725913,2.77297 -2.96948,7.17184 -1.649519,10.74951 1.31996,3.57768 5.204383,6.33255 8.099135,7.16919 2.894753,0.83664 4.797093,-0.24389 6.390874,0.56846 1.593781,0.81236 2.878517,3.51906 3.520992,4.87264 0.642475,1.35358 0.641609,1.35403 0.643448,-0.0294 z"
+       style="fill:#ffffff;fill-opacity:1;stroke:#221c24;stroke-width:0.39231932;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:1.70000005;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.88235294;paint-order:stroke fill markers"
+       d="m 70.440647,189.61543 c 0.0012,-0.87797 0.0035,-2.63261 0.0058,-4.3879 1.48693,-2.09783 2.974559,-4.19665 2.756176,-6.46414 -0.218382,-2.26749 -2.140988,-4.70514 -4.034236,-5.92848 -1.893247,-1.22333 -3.758015,-1.2329 -5.390677,-0.87354 -1.632662,0.35936 -3.033621,1.08805 -4.128938,2.84786 -1.095317,1.75981 -1.884522,4.55147 -1.046835,6.82196 0.837687,2.2705 3.302858,4.01883 5.139956,4.54979 1.837097,0.53095 3.044381,-0.15479 4.055842,0.36076 1.011461,0.51554 1.826794,2.2333 2.234528,3.09232 0.407734,0.85902 0.407184,0.85933 0.408351,-0.0186 z"
        id="path6979-5-4-6-6-1"
        inkscape:connector-curvature="0"
        inkscape:path-effect="#path-effect6981-9-7-4-3-0"
-       inkscape:original-d="m 32.836425,153.10516 c 0.0032,-2.76685 0.01103,-8.29752 0.01103,-8.29752 0,0 4.686619,-6.61307 7.028962,-9.91678 -3.028837,-3.84284 -6.058287,-7.68393 -9.088413,-11.52309 -2.937632,-0.0173 -5.875989,-0.0318 -8.814945,-0.0452 -2.206813,1.14658 -4.414161,2.29512 -6.622581,3.44466 -1.242881,4.39712 -2.486487,8.79598 -3.730724,13.1967 3.885097,2.75307 7.769501,5.50797 11.653259,8.26461 1.904148,-1.08282 3.807824,-2.161 5.710302,-3.24346 1.284622,2.70561 2.569181,5.4124 3.853976,8.11963 z"
+       inkscape:original-d="m 70.43948,190.49339 c 0.002,-1.75593 0.007,-5.26586 0.007,-5.26586 0,0 2.97427,-4.19685 4.46079,-6.29349 -1.92219,-2.43878 -3.84477,-4.87645 -5.76778,-7.3129 -1.86431,-0.011 -3.72908,-0.0202 -5.59423,-0.0287 -1.40051,0.72765 -2.80136,1.45655 -4.20289,2.18608 -0.78877,2.79055 -1.578,5.5822 -2.36763,8.37503 2.4656,1.74718 4.93076,3.49552 7.39551,5.24497 1.20843,-0.68719 2.41656,-1.37144 3.62393,-2.0584 0.81526,1.71706 1.63048,3.43487 2.44585,5.15296 z"
        sodipodi:nodetypes="ccssaassccc"
        inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
        inkscape:export-xdpi="400"
        inkscape:export-ydpi="400" />
-    <flowRoot
-       xml:space="preserve"
-       id="flowRoot8458-4-1-9-7"
+    <g
+       aria-label="67"
+       transform="matrix(0.22878839,-3.6965467e-4,3.6965467e-4,0.22878839,13.054195,72.534682)"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;line-height:1.25;font-family:'Montserrat Alternates';-inkscape-font-specification:'Montserrat Alternates, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#0069c1;fill-opacity:1;stroke:#000000;stroke-opacity:1"
-       transform="matrix(0.36050662,-5.8247255e-4,5.8247255e-4,0.36050662,-57.586761,-32.764823)"
-       inkscape:export-filename="C:\NoFloodFL\Website\MyFloodScore_Logos\LogoUpdate_05022019\MFS_Website_05052019\compare.png"
-       inkscape:export-xdpi="400"
-       inkscape:export-ydpi="400"><flowRegion
-         id="flowRegion8460-5-9-2-4"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;font-family:'Montserrat Alternates';-inkscape-font-specification:'Montserrat Alternates, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#0069c1;fill-opacity:1;stroke:#000000;stroke-opacity:1"><rect
-           id="rect8462-1-1-2-0"
-           width="74.285713"
-           height="75.714287"
-           x="204.28572"
-           y="446.09113"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:40px;font-family:'Montserrat Alternates';-inkscape-font-specification:'Montserrat Alternates, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#0069c1;fill-opacity:1;stroke:#000000;stroke-opacity:1" /></flowRegion><flowPara
-         id="flowPara8464-6-2-0-5"
-         style="fill:#ff9400;fill-opacity:1;stroke:#000000;stroke-opacity:1">67</flowPara></flowRoot>  </g>
+       id="flowRoot8458-4-1-9-7">
+      <path
+         d="m 219.32516,465.29554 q 2.68,0 4.88,1.08 2.2,1.08 3.48,3.08 1.28,1.96 1.28,4.56 0,2.8 -1.4,4.92 -1.4,2.12 -3.84,3.28 -2.4,1.12 -5.36,1.12 -5.88,0 -9.2,-3.6 -3.32,-3.6 -3.32,-10.28 0,-4.76 1.8,-8.16 1.8,-3.4 5,-5.16 3.24,-1.76 7.48,-1.76 2.24,0 4.28,0.52 2.08,0.48 3.52,1.4 l -2.4,4.76 q -2.08,-1.4 -5.24,-1.4 -3.56,0 -5.64,2.08 -2.08,2.08 -2.24,6.04 2.48,-2.48 6.92,-2.48 z m -1.32,13.2 q 2.08,0 3.36,-1.12 1.32,-1.12 1.32,-3.04 0,-1.92 -1.32,-3.04 -1.28,-1.16 -3.44,-1.16 -2.12,0 -3.48,1.2 -1.36,1.16 -1.36,3 0,1.84 1.32,3 1.32,1.16 3.6,1.16 z"
+         style="fill:#ff9400;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+         id="path10841" />
+      <path
+         d="m 253.07766,454.85554 v 4.2 l -10.4,23.8 h -7.04 l 10.04,-22.72 h -9.28 v 4.56 h -5.76 v -9.84 z"
+         style="fill:#ff9400;fill-opacity:1;stroke:#000000;stroke-opacity:1"
+         id="path10843" />
+    </g>
+  </g>
 </svg>

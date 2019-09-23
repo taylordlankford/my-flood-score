@@ -69,6 +69,15 @@ class AutoSuggest extends React.Component {
       })
   }
 
+  validateValue = () => {
+    const { value, addresses } = this.state
+    if (addresses.includes(value)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   onChange = (event, { newValue }) => {
     this.setState({
       value: newValue
