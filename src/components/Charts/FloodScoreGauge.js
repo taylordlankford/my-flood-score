@@ -14,7 +14,10 @@ class FloodScoreGauge extends React.Component {
         chart: {
           id: 'apexchart-example',
           type: 'radialBar',
-          offsetY: -20
+          offsetY: -20,
+          animations: {
+            enabled: false,
+          }
         },
         plotOptions: {
           radialBar: {
@@ -97,7 +100,8 @@ class FloodScoreGauge extends React.Component {
         },
         labels: ['Average Results'],
       }, // end options
-      series: [props.MFS],
+      // series: [props.MFS],
+      series: [59],
       markers: {
         size: [4, 7]
       },
@@ -123,9 +127,32 @@ class FloodScoreGauge extends React.Component {
   componentDidMount() {
     const series = document.getElementsByClassName('apexcharts-series')[0]
     const path = series.querySelector("path");
-    var d = document.createElement("IMG");
-    d.setAttribute('src', Droplet)
-    path.append(d)
+    const pathOrig = path.getAttributeNode("d").nodeValue
+    var containerDiv = path.closest("div[class='col']")
+
+    const svg = path.closest("svg")
+    console.log('svg', svg)
+    var firstG = svg.firstChild
+    console.log('firstG', firstG)
+    // var transform = firstG.getAttributeNode("transform")
+    // var transform = window
+    //   .getComputedStyle(firstG)
+    //   .getPropertyValue('transform');
+    const transformStyle = firstG.style.transform
+    const translateX = transformStyle.replace(/[^\d.]/g, '');
+    console.log('translateX', translateX)
+
+    const pathOrigs = pathOrig.split(" ");
+    console.log('pathOrigs', pathOrigs)
+    const top = parseInt(pathOrigs[1]) + parseInt(pathOrigs[9])
+    const left = parseInt(pathOrigs[2]) + parseInt(pathOrigs[10])
+    var droplet = document.createElement("IMG");
+    droplet.setAttribute('class', 'droplet')
+    droplet.setAttribute('style', `top: ${top}px; left: ${left}px;`)
+    droplet.setAttribute('src', Droplet)
+
+    console.log('containerDiv', containerDiv)
+    containerDiv.append(droplet)
     // console.log('path', path)
   }
 

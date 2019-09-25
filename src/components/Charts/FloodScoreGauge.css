@@ -5,3 +5,8 @@
 /* path {
   stroke: black;
 } */
+
+.droplet {
+  width: 8px;
+  /* margin-left: 58px; */
+}
