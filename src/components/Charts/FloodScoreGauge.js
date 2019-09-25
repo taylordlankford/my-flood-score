@@ -5,6 +5,28 @@ import './FloodScoreGauge.css'
 import MFS_Graphic from '../../assets/images/MFS_Graphic.svg'
 import Droplet from '../../assets/images/Droplet.svg'
 
+
+const adjustForGraphic = (mfs) => {
+  if (mfs <= 10) {
+    return mfs - 9
+  }
+  if (mfs <= 20) {
+    return mfs - 5
+  }
+  if (mfs <= 30) {
+    return mfs
+  }
+  if (mfs <= 50) {
+    return mfs + 4
+  }
+  if (mfs <= 70) {
+    return mfs + 6
+  }
+  if (mfs <= 100) {
+    return mfs + 6
+  }
+}
+
 class FloodScoreGauge extends React.Component {
   constructor(props) {
     super(props);
@@ -47,13 +69,13 @@ class FloodScoreGauge extends React.Component {
                   }
               },
               track: {
-                  show: true,
+                  show: false,
                   startAngle: undefined,
                   endAngle: undefined,
                   background: '#f2f2f2',
                   strokeWidth: '97%',
                   opacity: 1,
-                  margin: 30, 
+                  margin: 30,
                   dropShadow: {
                       enabled: false,
                       top: 0,
@@ -79,7 +101,7 @@ class FloodScoreGauge extends React.Component {
                       fontWeight: 'bold',
                       offsetY: -10,
                       formatter: function (val) {
-                        return val
+                        return props.MFS
                       }
                     },
                     total: {
@@ -96,31 +118,18 @@ class FloodScoreGauge extends React.Component {
           }
       },
         fill: {
-          colors: ['#1A73E8']
+          colors: ['#f2f2f2'],
+          // colors: ['#FF0000'],
+          opacity: 0,
         },
         labels: ['Average Results'],
       }, // end options
       // series: [props.MFS],
-      series: [59],
+      series: [adjustForGraphic(props.MFS)],
       markers: {
         size: [4, 7]
       },
     }
-
-  // this.state = {
-  //   options: {
-  //     chart: {
-  //       id: 'apexchart-example'
-  //     },
-  //     xaxis: {
-  //       categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-  //     }
-  //   },
-  //   series: [{
-  //     name: 'series-1',
-  //     data: [30, 40, 45, 50, 49, 60, 70, 91]
-  //   }]
-  // }
 
 }
 
@@ -131,29 +140,22 @@ class FloodScoreGauge extends React.Component {
     var containerDiv = path.closest("div[class='col']")
 
     const svg = path.closest("svg")
-    console.log('svg', svg)
     var firstG = svg.firstChild
-    console.log('firstG', firstG)
-    // var transform = firstG.getAttributeNode("transform")
-    // var transform = window
-    //   .getComputedStyle(firstG)
-    //   .getPropertyValue('transform');
-    const transformStyle = firstG.style.transform
-    const translateX = transformStyle.replace(/[^\d.]/g, '');
-    console.log('translateX', translateX)
+    var transform = window
+      .getComputedStyle(firstG)
+      .getPropertyValue('transform');
+    transform = transform.replace("matrix", '').replace(')', '').replace('(', '');
+    transform = transform.split(', ')
+    const translateX = transform[4]
+    const margLeft = parseInt(translateX) + 10
 
     const pathOrigs = pathOrig.split(" ");
-    console.log('pathOrigs', pathOrigs)
-    const top = parseInt(pathOrigs[1]) + parseInt(pathOrigs[9])
-    const left = parseInt(pathOrigs[2]) + parseInt(pathOrigs[10])
     var droplet = document.createElement("IMG");
     droplet.setAttribute('class', 'droplet')
-    droplet.setAttribute('style', `top: ${top}px; left: ${left}px;`)
+    droplet.setAttribute('style', `top: ${pathOrigs[10]}px; left: ${pathOrigs[9]}px; margin-left: ${margLeft}px; display: block`)
     droplet.setAttribute('src', Droplet)
 
-    console.log('containerDiv', containerDiv)
     containerDiv.append(droplet)
-    // console.log('path', path)
   }
 
   render() {
@@ -164,7 +166,7 @@ class FloodScoreGauge extends React.Component {
     return (
       <div>
         <Chart options={options} series={series} type="radialBar" width={500} height={320} />
-        <img style={{ display: 'none', position: 'absolute', top: '3px', left: '131px' }} src={MFS_Graphic} width={250} height={160} />
+        <img style={{ opacity: '1', position: 'absolute', top: '3px', left: '131px', width: '240px' }} src={MFS_Graphic} width={250} height={160} />
       </div>
     )
   }

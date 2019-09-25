@@ -95,7 +95,7 @@ const DiscoverReport = (props) => {
   } = props
   return (
     <div>
-      <h3 className="authHeader" style={{ textAlign: 'center' }}>Discover Report</h3>
+      <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>Your FREE Discover Report</h3>
       <div className="reportContainer" >
         <div className="reportHeader">
           <img src={MFS_Logo} alt="logo" />
