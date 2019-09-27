@@ -24,6 +24,10 @@ import Button from 'react-bootstrap/Button'
 
 const range = [
   {
+    under: 0,
+    result: 'Very Good'
+  },
+  {
     under: 20,
     result: 'Very Good',
   },
@@ -94,9 +98,9 @@ const DiscoverReport = (props) => {
     FEMA_BFE,
   } = props
   return (
-    <div>
+    <div id="reportContainer">
       <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>Your FREE Discover Report</h3>
-      <div className="reportContainer" >
+      <div className="reportContainer">
         <div className="reportHeader">
           <img src={MFS_Logo} alt="logo" />
         </div>

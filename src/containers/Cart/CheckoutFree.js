@@ -22,6 +22,7 @@ import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 const BillingDetails = (props) => {
   // const [error, setError] = useState(null)
   const [{ error }, dispatch] = useStateValue()
+  const [orderLoading, setOrderLoading] = useState(false)
   const { firebase, selected } = props
   console.log('selected', selected)
   const autoSuggestRef = React.createRef()
@@ -39,6 +40,7 @@ const BillingDetails = (props) => {
       })
       return null
     }
+    setOrderLoading(true)
     dispatch({
       type: 'changeError',
       newError: null,
@@ -61,15 +63,18 @@ const BillingDetails = (props) => {
           // send verification email and update firestore
           authUser.sendEmailVerification()
           console.log('authUser after sing in', authUser)
-          const collection = 'users'
-          const doc = authUser.uid
-          delete order.password;
-          const setObj = {
-            uid: authUser.uid,
-            ...order,
-            usedFreeCredit: false,
-          }
-          firebase.doFirestoreSet(collection, doc, setObj, () => history.push(ROUTES.ORDER_RECEIVED, order))
+          delete order.password
+          var addUser = firebase.doAddUser()
+          addUser({ userDetails: order }).then(function(result) {
+            // Read result of the Cloud Function.
+            const res = result
+            console.log('addUser result:', res)
+            setOrderLoading(false)
+          }).catch(function(error) {
+            // Getting the Error details.
+            console.log('addUser error:', error)
+          })
+          // firebase.doFirestoreSet(collection, doc, setObj, () => history.push(ROUTES.ORDER_RECEIVED, order))
         })
         .catch(err => {
           console.log('error:', err)
@@ -131,12 +136,12 @@ const BillingDetails = (props) => {
         <Form.Control name="streetAddress2" placeholder="Apartment, suite, unit etc. (optional)" />
       </Form.Group>
 
-      <Form.Group controlId="billingCity">
+      {/* <Form.Group controlId="billingCity">
         <Form.Label>City / Town *</Form.Label>
         <Form.Control name="city" type="text" required />
-      </Form.Group>
+      </Form.Group> */}
 
-      <Form.Group controlId="billingState">
+      {/* <Form.Group controlId="billingState">
         <Form.Label>State *</Form.Label>
         <Form.Control name="state" required as="select">
           <option value="AL">Alabama</option>
@@ -191,12 +196,12 @@ const BillingDetails = (props) => {
           <option value="WI">Wisconsin</option>
           <option value="WY">Wyoming</option>
         </Form.Control >
-      </Form.Group>
+      </Form.Group> */}
 
-      <Form.Group controlId="billingZip">
+      {/* <Form.Group controlId="billingZip">
         <Form.Label>Zip *</Form.Label>
         <Form.Control name="zip" type="text" required />
-      </Form.Group>
+      </Form.Group> */}
 
       <Form.Group controlId="billingPhone">
         <Form.Label>Phone *</Form.Label>

@@ -1,9 +1,13 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
+import * as jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
+
 import './FloodScoreGauge.css'
 
 import MFS_Graphic from '../../assets/images/MFS_Graphic.svg'
 import Droplet from '../../assets/images/Droplet.svg'
+
 
 
 const adjustForGraphic = (mfs) => {
@@ -156,7 +160,47 @@ class FloodScoreGauge extends React.Component {
     droplet.setAttribute('src', Droplet)
 
     containerDiv.append(droplet)
-  }
+
+
+    //reportContainer
+    setTimeout(() => {
+      var reportHtml = document.getElementById('reportContainer')
+      html2canvas(reportHtml)
+        .then((canvas) => {
+          const imgData = canvas.toDataURL('image/png');
+          console.log('imgData', imgData)
+          const pdf = new jsPDF();
+          pdf.addImage(imgData, 'PNG', 0, 0);
+          pdf.save("download.pdf");
+        })
+    }, 300);
+
+    //reportContainer
+    // var reportHtml = document.getElementById('reportContainer').innerHTML
+    // var doc = new jsPDF();   
+
+    // doc.html(document.getElementById('reportContainer').innerHTML, {
+    //   callback: function (doc) {
+    //     doc.save();
+    //   }
+    // });
+
+    // var doc = new jsPDF();          
+    // var elementHandler = {
+    //   '#ignorePDF': function (element, renderer) {
+    //     return true;
+    //   }
+    // };
+    // var source = window.document.getElementById("reportContainer");
+    // doc.fromHTML(
+    //     source,
+    //     15,
+    //     15,
+    //     {
+    //       'width': 180,'elementHandlers': elementHandler
+    //     });
+    // doc.save();
+  } // did mount
 
   render() {
     const {

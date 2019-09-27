@@ -41,6 +41,7 @@ function charge(req, res) {
     });
 }
 
+
 function send(res, code, body) {
     res.send({
         statusCode: code,
@@ -63,4 +64,46 @@ app.post('/', (req, res) => {
     }
 });
 
-exports.charge = functions.https.onRequest(app);
+const addUser = (data, context) => {
+  const { uid } = context.auth
+  const { userDetails } = data
+  userDetails.uid = uid
+  userAddress = userDetails.streetAddress1.split(', ')
+  userAddress[3] = Number(userAddress[3])
+  console.log('userAddress', userAddress)
+
+  var propertiesRef = admin.firestore().collection("properties")
+  const properties = propertiesRef.where("PROP_ADD", "==", userAddress[0])
+  return properties.get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const key = doc.id
+        const data = doc.data()
+        
+        if (data.PROP_ADD === userAddress[0]
+          && data.PROP_CITY === userAddress[1]
+          && data.PROP_STATE === userAddress[2]
+          && data.PROP_ZIP === userAddress[3]) {
+            userDetails.propertyRef = propertiesRef.doc(key)
+        } else {
+          console.log('nope not a match')
+        }
+      })
+      // eslint-disable-next-line promise/no-nesting
+      return admin.firestore().collection("users").doc(uid).set(
+        userDetails
+      ).then(() => {
+        console.log('New Message written', userDetails)
+        return userDetails
+      }).catch((error) => {
+        console.log('error', error);
+      })
+    })
+    .catch((error) => {
+      console.log('error:', error)
+      return 'fail'
+    })
+}
+
+exports.charge = functions.https.onRequest(app)
+exports.addUser = functions.https.onCall(addUser)

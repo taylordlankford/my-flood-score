@@ -9,6 +9,7 @@ import { useFirebase, useFirestoreUser } from '../../hooks'
 const EmailAction = ({ match, location, history }) => {
   const firebase = useFirebase()
   const firestoreUser = useFirestoreUser()
+  console.log('firestoreUSer', firestoreUser)
 
   const [email, setEmail] = useState('')
   const [error, setError] = useState(null)

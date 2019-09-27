@@ -1,6 +1,7 @@
 import app from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import 'firebase/functions'
 
 var firebaseConfig = {
   apiKey: "AIzaSyC0Lc2gdq7LQHdSoRXVLUizVZUmNLOjDxM",
@@ -18,6 +19,7 @@ class Fire {
 
     this.auth = app.auth()
     this.db = app.firestore()
+    this.functions = app.functions()
   }
 
   // *** Auth API ***
@@ -103,6 +105,11 @@ class Fire {
         console.log("Error getting documents: ", error);
     });
   }
+
+
+  // *** Functions API ***
+
+  doAddUser = () => this.functions.httpsCallable('addUser')
 
 
 }
