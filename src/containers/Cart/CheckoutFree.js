@@ -22,8 +22,7 @@ import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 const BillingDetails = (props) => {
   // const [error, setError] = useState(null)
   const [{ error }, dispatch] = useStateValue()
-  const [orderLoading, setOrderLoading] = useState(false)
-  const { firebase, selected } = props
+  const { firebase, selected, setOrderLoading, setOrderComplete } = props
   console.log('selected', selected)
   const autoSuggestRef = React.createRef()
   try {
@@ -60,30 +59,33 @@ const BillingDetails = (props) => {
         firebase.doSignInWithEmailAndPassword(order.email, order.password)
         .then(data => {
           const authUser = data.user
-          // send verification email and update firestore
-          authUser.sendEmailVerification()
-          console.log('authUser after sing in', authUser)
           delete order.password
           var addUser = firebase.doAddUser()
           addUser({ userDetails: order }).then(function(result) {
             // Read result of the Cloud Function.
             const res = result
             console.log('addUser result:', res)
-            setOrderLoading(false)
           }).catch(function(error) {
             // Getting the Error details.
             console.log('addUser error:', error)
+          })
+          // send verification email
+          authUser.sendEmailVerification().then(() => {
+            setOrderLoading(false)
+            setOrderComplete(true)
           })
           // firebase.doFirestoreSet(collection, doc, setObj, () => history.push(ROUTES.ORDER_RECEIVED, order))
         })
         .catch(err => {
           console.log('error:', err)
           dispatch({ type: 'changeError', newError: err.message })
+          setOrderLoading(false)
         })
       })
       .catch(err => {
         console.log('error:', err)
         dispatch({ type: 'changeError', newError: err.message })
+        setOrderLoading(false)
       })
   }
   return (
@@ -226,18 +228,27 @@ BillingDetails.propTypes = {
   firebase: Object,
   selected: String,
   history: Object,
+  setOrderLoading: Object,
+  setOrderComplete: Object,
 }
 
-const Order = () => {
+const Order = (props) => {
   return (
-    <div className="order-details">
-      <p className="cart-item">Discover - Homeowner 	<span style={{ fontWeight: '700' }}>× 1</span> <span className="cart-amount">$0.00</span></p>
-      <p className="cart-Subtotal">Subtotal <span className="cart-amount">$0.00</span></p>
-      <p className="cart-total">Total <span className="cart-amount">$0.00</span></p>
-      <label htmlFor="submit-form" tabIndex="0" className="place-order-button add-to-cart-button btn btn-primary">
-        PLACE ORDER
-      </label>
-      {/* <Button variant="primary" type="submit" className="place-order-button">PLACE ORDER</Button> */}
+    <div>
+      <div className="order-details">
+        <p className="cart-item">Discover - Homeowner 	<span style={{ fontWeight: '700' }}>× 1</span> <span className="cart-amount">$0.00</span></p>
+        <p className="cart-Subtotal">Subtotal <span className="cart-amount">$0.00</span></p>
+        <p className="cart-total">Total <span className="cart-amount">$0.00</span></p>
+        <label htmlFor="submit-form" tabIndex="0" className={"place-order-button add-to-cart-button btn btn-primary btn-primary"} >
+          {props.orderLoading ? 'Loading...' : 'PLACE ORDER'}
+        </label>
+        {/* <Button variant="primary" type="submit" className="place-order-button">PLACE ORDER</Button> */}
+      </div>
+      {props.orderComplete && (
+        <h2 className="order-complete">
+          <p style={{ color: 'green', fontWeight: 'bold' }}>Order Completed!</p>Please check your email for a verification link. Your FREE Flood Score will be waiting for you.
+        </h2>
+      )}
     </div>
   )
 }
@@ -247,17 +258,28 @@ const CheckoutFree = (props) => {
   const { history } = useReactRouter()
   const { state } = props.location
   const { selected } = state
+  const [orderLoading, setOrderLoading] = useState(false)
+  const [orderComplete, setOrderComplete] = useState(false)
   return (
   <div>
     <Container style={{ 'marginTop': '64px' }}>
       <Row>
         <Col>
           <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Order details</h3>
-          <BillingDetails history={history} firebase={firebase} selected={selected}/>
+          <BillingDetails
+            history={history}
+            firebase={firebase}
+            selected={selected}
+            setOrderLoading={setOrderLoading}
+            setOrderComplete={setOrderComplete}
+          />
         </Col>
         <Col className="sticky">
           <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Your order</h3>
-          <Order />
+          <Order
+            orderLoading={orderLoading}
+            orderComplete={orderComplete}
+          />
         </Col>
       </Row>
     </Container>

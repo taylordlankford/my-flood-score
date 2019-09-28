@@ -113,7 +113,8 @@ class AutoSuggest extends React.Component {
     const inputProps = {
       placeholder: 'Enter your address',
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
+      autocomplete: "new-password",
     };
 
     // Finally, render it!
