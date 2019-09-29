@@ -12,6 +12,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import Header from './components/Header/Header'
+import Footer from './containers/Footer/Footer'
+import FloatingLink from './components/FloatingLink/FloatingLink'
 
 import SignUpPage from './containers/Auth/SignUp'
 import SignInPage from './containers/Auth/SignIn'
@@ -22,6 +24,7 @@ import CheckoutPage from './containers/Cart/Checkout'
 import CheckoutFreePage from './containers/Cart/CheckoutFree'
 import OrderReceivedPage from './containers/Cart/OrderReceived'
 import EmailActionPage from './containers/EmailActionHandler/EmailAction'
+import OptionsPage from './containers/Products/Options'
 
 import * as ROUTES from './constants/routes'
 import { useFirestoreUser, useStateValue} from './hooks'
@@ -72,6 +75,7 @@ const App = () => {
                         <Route path={ROUTES.CHECKOUT_FREE} component={CheckoutFreePage} />
                         <Route path={ROUTES.ORDER_RECEIVED} component={OrderReceivedPage} />
                         <Route path={ROUTES.EMAIL_ACTION_HANDLER} component={EmailActionPage} />
+                        <Route path={ROUTES.OPTIONS} component={OptionsPage} />
 
                         <Route render={() => <div>Not Found</div>} />
                       </Switch>
@@ -81,7 +85,8 @@ const App = () => {
               </div>
             )}
           />
-
+          <FloatingLink />
+          <Footer />
         </div>
       </ScrollToTopWithRouter>
     </Router>
