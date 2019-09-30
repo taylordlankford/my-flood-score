@@ -36,7 +36,7 @@ function Header () {
                 <div className="linkPosition" >
                   <Link to={ROUTES.HOME} className="header-link">Home</Link>
                   <Link to={ROUTES.HOME} className="header-link">About</Link>
-                  <Link to={ROUTES.DISCOVER} className="header-link">Get Your FREE Flood Score</Link>
+                  <Link to={ROUTES.DISCOVER_HOMEOWNER} className="header-link">Get Your FREE Flood Score</Link>
                   <Link to={ROUTES.SIGN_IN} className="header-link">Login</Link>
                   <Link to={ROUTES.SIGN_UP} className="header-link">Sign Up</Link>
                   <Link to={ROUTES.SIGN_UP} className="header-link">

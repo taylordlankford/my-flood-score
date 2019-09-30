@@ -8,8 +8,6 @@ import {
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import Alert from 'react-bootstrap/Alert'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 import Header from './components/Header/Header'
 import Footer from './containers/Footer/Footer'
@@ -19,12 +17,22 @@ import SignUpPage from './containers/Auth/SignUp'
 import SignInPage from './containers/Auth/SignIn'
 import PasswordForgetPage from './containers/Auth/PasswordForget'
 import Home from './containers/Home/Home'
-import DiscoverPage from './containers/Products/Discover'
 import CheckoutPage from './containers/Cart/Checkout'
 import CheckoutFreePage from './containers/Cart/CheckoutFree'
 import OrderReceivedPage from './containers/Cart/OrderReceived'
 import EmailActionPage from './containers/EmailActionHandler/EmailAction'
-import OptionsPage from './containers/Products/Options'
+import OptionsPage from './containers/Options/Options'
+import DiscoverHomeowner from './containers/Products/Discover/DiscoverHomeowner'
+import DiscoverHomeownerPlus from './containers/Products/Discover/DiscoverHomeownerPlus'
+import DiscoverBusiness from './containers/Products/Discover/DiscoverBusiness'
+import CompareHomeowner from './containers/Products/Compare/CompareHomeowner'
+import CompareHomeownerPlus from './containers/Products/Compare/CompareHomeownerPlus'
+import CompareBusiness from './containers/Products/Compare/CompareBusiness'
+import ExamineHomeowner from './containers/Products/Examine/ExamineHomeowner'
+import ExamineBusiness from './containers/Products/Examine/ExamineBusiness'
+import CertifyHomeowner from './containers/Products/Certify/CertifyHomeowner'
+import CertifyBusiness from './containers/Products/Certify/CertifyBusiness'
+import ReduceHomeowner from './containers/Products/Reduce/ReduceHomeowner'
 
 import * as ROUTES from './constants/routes'
 import { useFirestoreUser, useStateValue} from './hooks'
@@ -70,12 +78,22 @@ const App = () => {
                         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
                         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
                         <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
-                        <Route path={ROUTES.DISCOVER} component={DiscoverPage} />
                         <Route path={ROUTES.CHECKOUT} component={CheckoutPage} />
                         <Route path={ROUTES.CHECKOUT_FREE} component={CheckoutFreePage} />
                         <Route path={ROUTES.ORDER_RECEIVED} component={OrderReceivedPage} />
                         <Route path={ROUTES.EMAIL_ACTION_HANDLER} component={EmailActionPage} />
                         <Route path={ROUTES.OPTIONS} component={OptionsPage} />
+                        <Route path={ROUTES.DISCOVER_HOMEOWNER} component={DiscoverHomeowner} />
+                        <Route path={ROUTES.DISCOVER_HOMEOWNER_PLUS} component={DiscoverHomeownerPlus} />
+                        <Route path={ROUTES.DISCOVER_BUSINESS} component={DiscoverBusiness} />
+                        <Route path={ROUTES.COMPARE_HOMEOWNER} component={CompareHomeowner} />
+                        <Route path={ROUTES.COMPARE_HOMEOWNER_PLUS} component={CompareHomeownerPlus} />
+                        <Route path={ROUTES.COMPARE_BUSINESS} component={CompareBusiness} />
+                        <Route path={ROUTES.EXAMINE_HOMEOWNER} component={ExamineHomeowner} />
+                        <Route path={ROUTES.EXAMINE_BUSINESS} component={ExamineBusiness} />
+                        <Route path={ROUTES.CERTIFY_HOMEOWNER} component={CertifyHomeowner} />
+                        <Route path={ROUTES.CERTIFY_BUSINESS} component={CertifyBusiness} />
+                        <Route path={ROUTES.REDUCE_HOMEOWNER} component={ReduceHomeowner} />
 
                         <Route render={() => <div>Not Found</div>} />
                       </Switch>
