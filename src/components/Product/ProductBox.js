@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+import './Product.css'
+
 import BreadCrumb from './BreadCrumb'
 import DiscoverImg from '../../assets/images/Discover.svg'
 
