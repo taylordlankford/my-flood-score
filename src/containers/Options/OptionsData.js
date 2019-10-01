@@ -1,3 +1,4 @@
+import * as ROUTES from '../../constants/routes'
 export const detailsList1 = [
 	'Flood Score',
 	'Latest and Best Available Flood modeling',
@@ -15,7 +16,8 @@ export const styles1 = {
 	premium: false,
 	title: 'Homeowner',
 	price: '0',
-	subTitle: ''
+	subTitle: '',
+	link: ROUTES.DISCOVER_HOMEOWNER
 };
 export const detailsList2 = [
 	'Up to 10 Properties',
@@ -35,7 +37,8 @@ export const styles2 = {
 	premium: false,
 	title: 'Homeowner+',
 	price: '5',
-	subTitle: ''
+	subTitle: '',
+	link: ROUTES.DISCOVER_HOMEOWNER_PLUS
 };
 
 export const detailsList3 = [
@@ -56,7 +59,8 @@ export const styles3 = {
 	premium: true,
 	title: 'Business Account',
 	price: '10',
-	subTitle: 'per month'
+	subTitle: 'per month',
+	link: ROUTES.DISCOVER_BUSINESS
 };
 
 //section two
@@ -83,7 +87,8 @@ export const styles4 = {
 	premium: false,
 	title: 'Homeowner',
 	price: '5',
-	subTitle: ''
+	subTitle: '',
+	link: ROUTES.COMPARE_HOMEOWNER
 };
 export const detailsList5 = [
 	'Up to 10 Properties',
@@ -108,7 +113,8 @@ export const styles5 = {
 	premium: false,
 	title: 'Homeowner+',
 	price: '10',
-	subTitle: ''
+	subTitle: '',
+	link: ROUTES.COMPARE_HOMEOWNER_PLUS
 };
 
 export const detailsList6 = [
@@ -134,7 +140,8 @@ export const styles6 = {
 	premium: true,
 	title: 'Business Account',
 	price: '20-$60',
-	subTitle: 'per month'
+	subTitle: 'per month',
+	link: ROUTES.COMPARE_BUSINESS
 };
 // Section Three
 
@@ -161,7 +168,8 @@ export const styles7 = {
 	premium: false,
 	title: 'Homeowner',
 	price: '25',
-	subTitle: ''
+	subTitle: '',
+	link: ROUTES.EXAMINE_HOMEOWNER
 };
 export const detailsList8 = [
 	'Flood Score',
@@ -186,7 +194,8 @@ export const styles8 = {
 	premium: true,
 	title: 'Business Account',
 	price: '25',
-	subTitle: ''
+	subTitle: '',
+	link: ROUTES.EXAMINE_BUSINESS
 };
 
 // Section 4
@@ -206,7 +215,8 @@ export const styles9 = {
 	premium: false,
 	title: 'Homeowner',
 	price: '10',
-	subTitle: ''
+	subTitle: '',
+	link: ROUTES.CERTIFY_HOMEOWNER
 };
 export const detailsList10 = [
 	'Flood Score',
@@ -223,7 +233,8 @@ export const styles10 = {
 	premium: true,
 	title: 'Business Account',
 	price: '10',
-	subTitle: ''
+	subTitle: '',
+	link: ROUTES.CERTIFY_BUSINESS
 };
 
 //Section 5
@@ -253,5 +264,6 @@ export const styles11 = {
 	premium: false,
 	title: 'Business Account',
 	price: '395',
-	subTitle: ''
+	subTitle: '',
+	link: ROUTES.REDUCE_HOMEOWNER
 };

@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link, withRouter } from 'react-router-dom'
 
-const Card = ({ detailsList, styles }) => {
+const Card = ({ detailsList, styles, history }) => {
 	const makeList = () => {
 		const arr = [];
 		detailsList.forEach((item, index) => {
@@ -14,8 +15,9 @@ const Card = ({ detailsList, styles }) => {
 		&,
 		&:link,
 		&:visited {
-			color: ${styles.premium ? 'white' : '#666666'};
-			background-color: ${styles.premium ? '#66de80' : '#C4C4C4'};
+			color: ${styles.premium ? 'white !important' : '#666666 !important'};
+			cursor: pointer;
+			background-color: ${styles.premium ? '#55B96A' : '#C4C4C4'};
 			background-image: linear-gradient(90deg, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.2) 50%);
 			font-size: 0.94rem;
 			font-weight: 700;
@@ -108,7 +110,9 @@ const Card = ({ detailsList, styles }) => {
 					paddingBottom: '2.2rem'
 				}}
 			>
-				<Button href="#">SIGN IN</Button>
+				<Button onClick={() => history.push(styles.link)} variant="primary">SIGN UP</Button>
+				{/* <Link to={styles.link}>SIGN UP</Link> */}
+				
 			</div>
 		</div>
 	);
@@ -122,4 +126,4 @@ const Li = styled.li`
 	}
 `;
 
-export default Card
+export default withRouter(Card)
