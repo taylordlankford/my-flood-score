@@ -1,25 +1,16 @@
 import React from 'react'
 import './Home.css'
-import { Image, Row, Col, Button, Container } from 'react-bootstrap'
 
 import backgroundImage from '../../assets/images/Background-Image.jpg'
 import ReactPlayer from 'react-player'
 import { Parallax } from "react-parallax"
 import { useFirebase } from '../../hooks'
 
+import SecondRow from '../Header/SecondRow'
 import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 import CheckMarks from './CheckMarks'
 
 import * as ROUTES from '../../constants/routes'
-
-const insideStyles = {
-  background: "white",
-  padding: 20,
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%,-50%)"
-};
 
 function Home ({ history }) {
   const firebase = useFirebase()
@@ -30,17 +21,8 @@ function Home ({ history }) {
   }
 
   return (
-    <div>
-      {/* <Image
-        // style={{ backgroundSize: 'cover' }}
-        src={backgroundImage}
-        className="reframe"
-        fluid
-      /> */}
-      {/* <img
-        src={backgroundImage}
-        alt="background"
-      /> */}
+    <>
+      <SecondRow />
       <Parallax bgImage={backgroundImage} strength={500}>
         <div style={{ height: '500px' }}>
           <div className="headlineContainer">
@@ -66,7 +48,7 @@ function Home ({ history }) {
         />
       </div>
       <CheckMarks />
-    </div>
+    </>
   )
 }
 

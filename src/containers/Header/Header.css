@@ -1,8 +1,5 @@
-element.style {
-    
-}
-.MuiGrid-justify-xs-center {
-    
+.navbar {
+    padding: 0;
 }
 .grid {
     width: 100%;
@@ -97,7 +94,7 @@ element.style {
     border-style: solid;
     border-color: #0d238e;
     border-top: 10px;
-    padding: 10px 100px;
+    padding: 6px 100px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;

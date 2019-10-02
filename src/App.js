@@ -9,7 +9,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import Alert from 'react-bootstrap/Alert'
 
-import Header from './components/Header/Header'
+import Header from './containers/Header/Header'
 import Footer from './containers/Footer/Footer'
 import FloatingLink from './components/FloatingLink/FloatingLink'
 
@@ -22,6 +22,12 @@ import CheckoutFreePage from './containers/Cart/CheckoutFree'
 import OrderReceivedPage from './containers/Cart/OrderReceived'
 import EmailActionPage from './containers/EmailActionHandler/EmailAction'
 import OptionsPage from './containers/Options/Options'
+
+import Discover from './containers/Products/Discover/Discover'
+import Compare from './containers/Products/Compare/Compare'
+import Examine from './containers/Products/Examine/Examine'
+import Certify from './containers/Products/Certify/Certify'
+import Reduce from './containers/Products/Reduce/Reduce'
 import DiscoverHomeowner from './containers/Products/Discover/DiscoverHomeowner'
 import DiscoverHomeownerPlus from './containers/Products/Discover/DiscoverHomeownerPlus'
 import DiscoverBusiness from './containers/Products/Discover/DiscoverBusiness'
@@ -83,6 +89,12 @@ const App = () => {
                         <Route path={ROUTES.ORDER_RECEIVED} component={OrderReceivedPage} />
                         <Route path={ROUTES.EMAIL_ACTION_HANDLER} component={EmailActionPage} />
                         <Route path={ROUTES.OPTIONS} component={OptionsPage} />
+
+                        <Route path={ROUTES.DISCOVER} component={Discover} />
+                        <Route path={ROUTES.COMPARE} component={Compare} />
+                        <Route path={ROUTES.EXAMINE} component={Examine} />
+                        <Route path={ROUTES.CERTIFY} component={Certify} />
+                        <Route path={ROUTES.REDUCE} component={Reduce} />
                         <Route path={ROUTES.DISCOVER_HOMEOWNER} component={DiscoverHomeowner} />
                         <Route path={ROUTES.DISCOVER_HOMEOWNER_PLUS} component={DiscoverHomeownerPlus} />
                         <Route path={ROUTES.DISCOVER_BUSINESS} component={DiscoverBusiness} />
