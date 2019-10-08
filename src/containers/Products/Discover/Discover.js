@@ -1,16 +1,21 @@
 import React from 'react'
-import styled from 'styled-components'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 
 import '../Products.css'
+import { Button, TopSection } from '../StyledComponents'
+import MyVerticallyCenteredModal from '../MyVerticallyCenteredModal'
 
+import sampleDiscoverPDF from '../../../assets/pdfs/sample-discovery.pdf'
+import sampleDiscover from '../../../assets/images/sample-discover.jpg'
 import SecondRow from '../../Header/SecondRow'
-import Card from '../../../components/Options/Card'
-import * as data from '../../Options/OptionsData'
+import * as ROUTES from '../../../constants/routes'
 
-const Discover = () => {
+import DiscoverOptions from '../../Options/DiscoverOptions'
+
+const Discover = ({ history }) => {
+  const [modalShow, setModalShow] = React.useState(false)
   return (
     <>
       <SecondRow />
@@ -25,92 +30,23 @@ const Discover = () => {
             <p>Take a closer look at the example to the right.</p>
           </Col>
           <Col sm={3}>
-            Download sample copy
+            <img onClick={() => setModalShow(true)} src={sampleDiscover} style={{ cursor: 'pointer', position: 'relative', margin: '60px auto' }} />
+
+            <MyVerticallyCenteredModal
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              samplePDF={sampleDiscoverPDF}
+            />
           </Col>
         </Row>
       </Container>
-      <div style={{ backgroundColor: '#f4f4f4' }}>
-        <Section2 id="a">
-          <Div>
-            <H2>
-              <strong>DISCOVER</strong> - My Flood Score
-            </H2>
-            <hr />
-            <Container style={{ marginTop: '2.8rem' }}>
-              <Row>
-                <Col
-                  style={{
-                    padding: '0'
-                  }}
-                >
-                  <Card detailsList={data.detailsList1} styles={data.styles1} />
-                </Col>
-                <Col
-                  style={{
-                    padding: '0'
-                  }}
-                >
-                  <Card detailsList={data.detailsList2} styles={data.styles2} />
-                </Col>
-                <Col
-                  style={{
-                    padding: '0'
-                  }}
-                >
-                  <Card detailsList={data.detailsList3} styles={data.styles3} />
-                </Col>
-              </Row>
-            </Container>
-          </Div>
-        </Section2>
+
+      <div style={{ backgroundColor: '#f4f4f4', marginTop: '30px', textAlign: 'center' }}>
+        <DiscoverOptions />
+        <Button onClick={() => history.push(ROUTES.OPTIONS)} variant="primary">CHECK ALL REPORTS AND ACCOUNT OPTIONS</Button>
       </div>
     </>
   )
 }
-
-const TopSection = styled.div`
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #ebebeb;
-  background-color: #0d238e;
-  text-align: center;
-  padding: 2rem;
-`;
-
-const Section2 = styled.section`
-	text-align: center;
-	padding: 4rem 0;
-
-	@media (max-width: 1030px) {
-		padding: 2.5rem 0;
-	}
-
-	@media (max-width: 600px) {
-		padding: 1.5rem 0;
-	}
-`;
-
-const Div = styled.div`
-	/* style={{ width: '75%', display: 'inline-block' }} */
-	width: 75%;
-	display: inline-block;
-
-	@media (max-width: 600px) {
-		width: 85%;
-	}
-`;
-
-const H2 = styled.h2`
-	color: #0d238e;
-	font-size: 2.1rem;
-	line-height: 1.4;
-	font-weight: 700;
-	letter-spacing: 0em;
-	margin-bottom: 1.6rem;
-
-	@media (max-width: 770px) {
-		font-size: 1.6rem;
-	}
-`;
 
 export default Discover
