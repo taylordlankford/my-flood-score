@@ -11,9 +11,13 @@ import '../Products.css'
 import ProductBox from '../../../components/Product/ProductBox' 
 import Details from '../../../components/Product/Details'
 import * as ROUTES from '../../../constants/routes'
+import { useFirestoreUser } from '../../../hooks'
 
 const DiscoverHomeownerPlus = () => {
   const { history } = useReactRouter()
+  const userData = useFirestoreUser()
+  const { firestoreUser, loading } = userData
+  console.log('firestoreUser', firestoreUser)
   const data = {
     title: "Discover – Homeowner+",
     price: {

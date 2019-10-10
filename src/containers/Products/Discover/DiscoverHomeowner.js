@@ -55,7 +55,7 @@ const DiscoverHomeowner = () => {
       <Row>
         <Col sm={8}>
           <ProductBox
-            handleAddToCart={() => history.push(ROUTES.CHECKOUT)}
+            handleAddToCart={() => history.push(ROUTES.CHECKOUT_FREE)}
             title={data.title}
             category={data.category}
             breadcrumb={data.breadcrumb}

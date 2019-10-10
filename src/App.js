@@ -40,6 +40,8 @@ import CertifyHomeowner from './containers/Products/Certify/CertifyHomeowner'
 import CertifyBusiness from './containers/Products/Certify/CertifyBusiness'
 import ReduceHomeowner from './containers/Products/Reduce/ReduceHomeowner'
 
+import Account from './containers/Account/Account'
+
 import * as ROUTES from './constants/routes'
 import { useFirestoreUser, useStateValue} from './hooks'
 import './App.css'
@@ -62,23 +64,23 @@ const App = () => {
     <Router>
       <ScrollToTopWithRouter>
         <div>
-          <Header/>
+          <Header firestoreUser={firestoreUser} />
           {error && <Alert className="sticky error" variant={'danger'}>{error}</Alert>}
 
           <Route
             render={({ location }) => (
               <div className="main">
                 <div style={{}}>
-                  <TransitionGroup>
+                  {/* <TransitionGroup> */}
                     {/* no different than other usage of
                     CSSTransition, just make sure to pass
                     `location` to `Switch` so it can match
                     the old location as it animates out */}
-                    <CSSTransition
+                    {/* <CSSTransition
                       key={location.key}
                       classNames="fade"
                       timeout={0}
-                    >
+                    > */}
                       <Switch location={location}>
                         <Route exact path={ROUTES.HOME} component={Home} />
                         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
@@ -107,10 +109,12 @@ const App = () => {
                         <Route path={ROUTES.CERTIFY_BUSINESS} component={CertifyBusiness} />
                         <Route path={ROUTES.REDUCE_HOMEOWNER} component={ReduceHomeowner} />
 
+                        <Route path={ROUTES.ACCOUNT} component={Account} />
+
                         <Route render={() => <div>Not Found</div>} />
                       </Switch>
-                    </CSSTransition>
-                  </TransitionGroup>
+                    {/* </CSSTransition> */}
+                  {/* </TransitionGroup> */}
                 </div>
               </div>
             )}

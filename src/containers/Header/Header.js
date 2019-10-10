@@ -8,7 +8,7 @@ import NavBar from 'react-bootstrap/Navbar'
 import Col from 'react-bootstrap/Col'
 import shoppingCart from '../../assets/images/shopping-cart-solid.svg'
 
-function Header () {
+function Header ({ firestoreUser }) {
   // window.onscroll = function() { scrollFunction() }
   // function scrollFunction() {
   //   if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -31,11 +31,18 @@ function Header () {
               <Link to={ROUTES.HOME} className="header-link">Home</Link>
               <Link to={ROUTES.HOME} className="header-link">About</Link>
               <Link to={ROUTES.DISCOVER_HOMEOWNER} className="header-link">Get Your FREE Flood Score</Link>
-              <Link to={ROUTES.SIGN_IN} className="header-link">Login</Link>
-              <Link to={ROUTES.SIGN_UP} className="header-link">Sign Up</Link>
-              <Link to={ROUTES.SIGN_UP} className="header-link">
-                <img src={shoppingCart} className="cart" alt={''} />
-              </Link>
+              {(firestoreUser)
+                ? <Link to={ROUTES.ACCOUNT} className="header-link">Hi, {firestoreUser.firstName}</Link>
+                : (
+                  <>
+                  <Link to={ROUTES.SIGN_IN} className="header-link">Login</Link>
+                  <Link to={ROUTES.CHECKOUT_FREE} className="header-link">Sign Up</Link>
+                  </>
+                )
+              }
+              {/* <Link to={ROUTES.SIGN_UP} className="header-link">
+                <img src={shoppingCart} className="cart" alt="" />
+              </Link> */}
             </div>
           </span>
         </NavBar>

@@ -257,7 +257,10 @@ const CheckoutFree = (props) => {
   const firebase = useFirebase()
   const { history } = useReactRouter()
   const { state } = props.location
-  const { selected } = state
+  let selected = ''
+  if (state !== undefined) {
+    selected = state.selected
+  }
   const [orderLoading, setOrderLoading] = useState(false)
   const [orderComplete, setOrderComplete] = useState(false)
   return (
@@ -265,7 +268,7 @@ const CheckoutFree = (props) => {
     <Container style={{ 'marginTop': '64px' }}>
       <Row>
         <Col>
-          <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Order details</h3>
+          <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Sign Up</h3>
           <BillingDetails
             history={history}
             firebase={firebase}
@@ -275,7 +278,7 @@ const CheckoutFree = (props) => {
           />
         </Col>
         <Col className="sticky">
-          <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Your order</h3>
+          <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Your FREE Flood Score</h3>
           <Order
             orderLoading={orderLoading}
             orderComplete={orderComplete}

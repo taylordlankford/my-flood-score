@@ -101,7 +101,7 @@ const SignUpPage = () => {
 
 const SignUpLink = () => (
   <p>
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+    Don't have an account? <Link to={ROUTES.CHECKOUT_FREE}>Sign Up</Link>
   </p>
 )
 export default SignUpPage
