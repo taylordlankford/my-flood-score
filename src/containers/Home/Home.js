@@ -73,7 +73,9 @@ const autoSuggestTheme = {
     transition: '0.2s',
     color: 'black !important',
   },
-  inputOpen: {},
+  inputOpen: {
+    borderRadius: '24px',
+  },
   inputFocused: {
     outline: 'none',
     boxShadow: '0px 1px 4px grey',
@@ -84,8 +86,15 @@ const autoSuggestTheme = {
     width: '50%',
     position: 'relative',
   },
-  suggestionsContainerOpen: {},
-  suggestionsList: {},
+  suggestionsContainerOpen: {
+    boxShadow: '0px 1px 4px grey',
+    marginTop: '4px',
+    borderRadius: '24px',
+    border: '2px solid #55b96a',
+  },
+  suggestionsList: {
+    listStyle: 'none',
+  },
   suggestion: {},
   suggestionFirst: {},
   suggestionHighlighted: {},
