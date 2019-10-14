@@ -60,21 +60,24 @@ const autoSuggestTheme = {
     display: 'inline-grid',
     position: 'relative',
     padding: '17rem 0',
+    borderRadius: '24px',
   },
   containerOpen: {},
   input: {
     width: '50%',
     margin: '0 auto',
-    borderRadius: '24px',
-    /* border: 1px solid lightgray; */
-    border: '2px solid #55b96a',
     padding: '8px 7px 8px 20px',
     fontSize: '18px',
-    transition: '0.2s',
     color: 'black !important',
+    borderRadius: '24px',
+    border: '2px solid #55b96a',
+    borderBottomRightRadius: 'inherit',
+    borderBottomLeftRadius: 'inherit',
+    boxShadow: '0px 1px 4px grey',
   },
   inputOpen: {
-    borderRadius: '24px',
+    borderBottomRightRadius: '0',
+    borderBottomLeftRadius: '0',
   },
   inputFocused: {
     outline: 'none',
@@ -88,16 +91,24 @@ const autoSuggestTheme = {
   },
   suggestionsContainerOpen: {
     boxShadow: '0px 1px 4px grey',
-    marginTop: '4px',
-    borderRadius: '24px',
     border: '2px solid #55b96a',
+    borderTop: '0',
+    borderBottomLeftRadius: '24px',
+    borderBottomRightRadius: '24px',
   },
   suggestionsList: {
     listStyle: 'none',
+    padding: '2px 0 2px 0',
   },
-  suggestion: {},
+  suggestion: {
+    padding: '2px 20px 2px 20px',
+    margin: '0 1px 0 1px',
+    cursor: 'pointer',
+  },
   suggestionFirst: {},
-  suggestionHighlighted: {},
+  suggestionHighlighted: {
+    backgroundColor: '#eeeeee',
+  },
   sectionContainer: {
     background: 'white',
     margin: '0 auto',
