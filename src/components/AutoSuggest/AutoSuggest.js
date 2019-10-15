@@ -122,7 +122,7 @@ class AutoSuggest extends React.Component {
     return (
       <Autosuggest
         {...this.props}
-        suggestions={suggestions}
+        suggestions={suggestions.slice(0,10)}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
         getSuggestionValue={getSuggestionValue}
