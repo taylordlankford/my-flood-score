@@ -29,7 +29,7 @@
 }
 .container img{
     position: absolute;
-    
+
 }
 .reframe{
     height: 60%;
@@ -66,7 +66,7 @@
     margin-bottom: 40px;
 }
 .subheadings{
-    
+
 }
 #homeAddressSuggest::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 color: #3b3b3b;
