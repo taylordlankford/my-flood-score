@@ -53,8 +53,8 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-.container2{
-    display: flex;
+.container2 {
+    /* display: flex; */
     padding-top: 50px;
     justify-content: center;
     background-color: #f4f4f4;
@@ -64,6 +64,7 @@
     background-color: #f4f4f4;
     display: flex;
     margin-bottom: 40px;
+    padding-top: 15px;
 }
 .subheadings{
 
