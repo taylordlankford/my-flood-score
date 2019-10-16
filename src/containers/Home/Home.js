@@ -29,16 +29,22 @@ function Home ({ history }) {
             <h1 className="headline">Do You Know Your Flood Score?</h1>
             <h2 className="headline" style={{ fontSize: '30px', lineHeight: '1.4', marginBottom: '24px' }}>The Most Accurate Flood Risk Assessment for Home Owners</h2>
           </div>
-          <AutoSuggest
+          {/* <AutoSuggest
             theme={autoSuggestTheme}
             onSuggestionSelected={onSuggestionSelected}
             inputProps={{ id: 'homeAddressSuggest' }}
             firebase={firebase}
-          />
+          /> */}
         </div>
       </Parallax>
       <div className="container2" >
-        <h1 style={{  color: "#0d238e" }}> Why You Should Know Your Flood Score</h1>
+        <AutoSuggest
+          theme={autoSuggestTheme}
+          onSuggestionSelected={onSuggestionSelected}
+          inputProps={{ id: 'homeAddressSuggest' }}
+          firebase={firebase}
+        />
+        <h1 style={{  color: "#0d238e", textAlign: 'center', margin: 0 }}> Why You Should Know Your Flood Score</h1>
       </div>
       <div className="video">
         <ReactPlayer
@@ -60,8 +66,10 @@ const autoSuggestTheme = {
     width: '100%',
     display: 'inline-grid',
     position: 'relative',
-    padding: '17rem 0',
+    padding: '0rem 0',
     borderRadius: '24px',
+    top: '-260px',
+    marginBottom: '-260px',
   },
   containerOpen: {
     zIndex: '5000',
@@ -103,6 +111,7 @@ const autoSuggestTheme = {
     borderTop: '0',
     borderBottomLeftRadius: '24px',
     borderBottomRightRadius: '24px',
+    // marginBottom: '-200px',
   },
   suggestionsList: {
     zIndex: '5000',
