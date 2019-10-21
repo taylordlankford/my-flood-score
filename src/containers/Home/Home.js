@@ -23,22 +23,28 @@ function Home ({ history }) {
   return (
     <>
       <SecondRow />
-      <Parallax bgImage={backgroundImage} strength={500} style={{ zIndex: '0' }}>
+      <Parallax bgImage={backgroundImage} strength={500}>
         <div style={{ height: '500px' }}>
           <div className="headlineContainer">
             <h1 className="headline">Do You Know Your Flood Score?</h1>
             <h2 className="headline" style={{ fontSize: '30px', lineHeight: '1.4', marginBottom: '24px' }}>The Most Accurate Flood Risk Assessment for Home Owners</h2>
           </div>
-          <AutoSuggest
+          {/* <AutoSuggest
             theme={autoSuggestTheme}
             onSuggestionSelected={onSuggestionSelected}
             inputProps={{ id: 'homeAddressSuggest' }}
             firebase={firebase}
-          />
+          /> */}
         </div>
       </Parallax>
       <div className="container2" >
-        <h1 style={{  color: "#0d238e" }}> Why You Should Know Your Flood Score</h1>
+        <AutoSuggest
+          theme={autoSuggestTheme}
+          onSuggestionSelected={onSuggestionSelected}
+          inputProps={{ id: 'homeAddressSuggest' }}
+          firebase={firebase}
+        />
+        <h1 style={{  color: "#0d238e", textAlign: 'center', margin: 0 }}> Why You Should Know Your Flood Score</h1>
       </div>
       <div className="video">
         <ReactPlayer
@@ -56,18 +62,17 @@ export default Home
 
 const autoSuggestTheme = {
   container: {
-    zIndex: '5000',
     width: '100%',
     display: 'inline-grid',
     position: 'relative',
-    padding: '17rem 0',
+    padding: '0rem 0',
     borderRadius: '24px',
+    zIndex: '999',
+    top: '-260px',
+    marginBottom: '-260px',
   },
-  containerOpen: {
-    zIndex: '5000',
-  },
+  containerOpen: {},
   input: {
-    zIndex: '5000',
     width: '50%',
     margin: '0 auto',
     padding: '8px 7px 8px 20px',
@@ -80,37 +85,32 @@ const autoSuggestTheme = {
     boxShadow: '0px 1px 4px grey',
   },
   inputOpen: {
-    zIndex: '5000',
     borderBottomRightRadius: '0',
     borderBottomLeftRadius: '0',
   },
   inputFocused: {
-    zIndex: '5000',
     outline: 'none',
     boxShadow: '0px 1px 4px grey',
   },
   suggestionsContainer: {
-    zIndex: '5000',
     background: 'white',
     margin: '0 auto',
     width: '50%',
     position: 'relative',
   },
   suggestionsContainerOpen: {
-    zIndex: '5000',
     boxShadow: '0px 1px 4px grey',
     border: '2px solid #55b96a',
     borderTop: '0',
     borderBottomLeftRadius: '24px',
     borderBottomRightRadius: '24px',
+    // marginBottom: '-200px',
   },
   suggestionsList: {
-    zIndex: '5000',
     listStyle: 'none',
     padding: '2px 0 2px 0',
   },
   suggestion: {
-    zIndex: '5000',
     padding: '4px 20px 4px 20px',
     margin: '0 1px 0 1px',
     cursor: 'pointer',
@@ -120,7 +120,6 @@ const autoSuggestTheme = {
     backgroundColor: '#E6F5E9',
   },
   sectionContainer: {
-    zIndex: '5000',
     background: 'white',
     margin: '0 auto',
     width: '50%',

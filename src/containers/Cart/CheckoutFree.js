@@ -313,6 +313,8 @@ const autoSuggestTheme = {
     borderRadius: '.25rem',
     transition: 'border-color .15s',
     outline: 'none',
+    borderBottomRightRadius: 'inherit',
+    borderBottomLeftRadius: 'inherit',
   },
   inputOpen: {},
   inputFocused: {
@@ -320,12 +322,28 @@ const autoSuggestTheme = {
     borderWidth: '2px',
     boxShadow: 'none',
   },
-  suggestionsContainer: {},
-  suggestionsContainerOpen: {},
-  suggestionsList: {},
-  suggestion: {},
+  suggestionsContainer: {
+    background: 'white',
+    margin: '0 auto',
+    position: 'relative',
+  },
+  suggestionsContainerOpen: {
+    border: '2px solid #55b96a',
+    borderTop: '0',
+  },
+  suggestionsList: {
+    listStyle: 'none',
+    padding: '2px 0 2px 0',
+  },
+  suggestion: {
+    padding: '4px 10px 4px 10px',
+    margin: '0 1px 0 1px',
+    cursor: 'pointer',
+  },
   suggestionFirst: {},
-  suggestionHighlighted: {},
+  suggestionHighlighted: {
+    backgroundColor: '#E6F5E9',
+  },
   sectionContainer: {},
   sectionContainerFirst: {},
   sectionTitle: {},
