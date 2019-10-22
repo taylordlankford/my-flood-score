@@ -14,6 +14,8 @@ import * as ROUTES from '../../../constants/routes'
 
 import ReduceOptions from '../../Options/ReduceOptions'
 
+import Faq from './Faq'
+
 const Reduce = ({ history }) => {
   return (
     <>
@@ -49,7 +51,8 @@ const Reduce = ({ history }) => {
             <Col sm={3} style={{ marginTop: '150px' }}>
               <p style={{ color: '#0d238e', fontSize: '2.1rem', lineHeight: '1.4', fontWeight: '700' }}>FAQ</p>
               <hr />
-              <Accordion />
+              <Faq />
+              {/* <Accordion />  */}
               {/* <Accordion defaultActiveKey="0" >
                 <Card>
                   <Accordion.Toggle as={Card.Header} eventKey="0">
