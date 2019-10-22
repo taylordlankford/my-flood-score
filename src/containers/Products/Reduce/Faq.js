@@ -33,8 +33,6 @@ export default class Faq extends Component {
   }
 
   handleClick(id) {
-    let isOpen = null
-
     switch (id) {
       case 0:
         this.setState({
@@ -94,7 +92,6 @@ export default class Faq extends Component {
         })
         break;
     }
-    console.log(this.state.faq_one.open)
   }
 
   render() {
@@ -121,11 +118,11 @@ export default class Faq extends Component {
                   <p style={{textAlign: 'left'}}>
                     We are all for helping its clients save money. Going through the LOMA process
                     will allow FEMA and ultimately flood insurance companies to have a better
-                    understanding of the flood risk your property faces. If you decide to keep
+                    understanding of the flood risk your property faces. <b>If you decide to keep
                     flood insurance, you can expect a significant reduction in your premium. Your
-                    mortgage lender may also drop your flood insurance requirement all together.
+                    mortgage lender may also drop your flood insurance requirement all together.</b>
                     However, you should learn more about your flood risk before making such
-                    decision. We will guide you by providing a FREE Flood Analysis Memo with your
+                    decision. We will guide you by providing a <b>FREE Flood Analysis Memo</b> with your
                     LOMA order.</p>
               }
             </Card.Body>
