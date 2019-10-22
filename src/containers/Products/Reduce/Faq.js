@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Accordion from 'react-bootstrap/Accordion'
@@ -19,19 +18,16 @@ export default class Faq extends Component {
         open: true,
         id: 0,
         title: 'Can I terminate my Flood Insurance Policy?',
-        paragraph: "We are all for helping its clients save money. Going through the LOMA process will allow FEMA and ultimately flood insurance companies to have a better understanding of the flood risk your property faces. If you decide to keep flood insurance, you can expect a significant reduction in your premium. Your mortgage lender may also drop your flood insurance requirement all together. However, you should learn more about your flood risk before making such decision. We will guide you by providing a FREE Flood Analysis Memo with your LOMA order."
       },
       faq_two: {
         open: true,
         id: 1,
         title: 'How long will the process take?',
-        paragraph: "How Once you submit a request for us to handle your LOMA process, we will contact you to coordinate a time for a surveyor to come and survey your property. We then use the Elevation Certificate from the Surveyor to submit your LOMA application to FEMA and provide you with FEMA’s reply. Depending on the situation, this entire process may take as little as 1 week or as long as 60 days. When you submit your request, No Flood Florida will give you your expected time and keep you updated along the way."
       },
       faq_three: {
         open: true,
         id: 2,
         title: 'Is it Possible that FEMA will reject my LOMA request?',
-        paragraph: "We screen every request prior to beginning the process. Each property is ranked as either having a low, medium, or high likelihood of receiving a LOMA from FEMA. We will recommend the medium and high likelihood properties to move forward. We will also work with clients who received a low likelihood designation to submit their request. If through our screening process we find that you are almost certainly not going to be able to get a LOMA, we will notify you. But you can rest assured because our service has a money back guarantee!"
       },
     }
   }
@@ -46,7 +42,6 @@ export default class Faq extends Component {
             open: !this.state.faq_one.open,
             id: 0,
             title: 'Can I terminate my Flood Insurance Policy?',
-            paragraph: "We are all for helping its clients save money. Going through the LOMA process will allow FEMA and ultimately flood insurance companies to have a better understanding of the flood risk your property faces. If you decide to keep flood insurance, you can expect a significant reduction in your premium. Your mortgage lender may also drop your flood insurance requirement all together. However, you should learn more about your flood risk before making such decision. We will guide you by providing a FREE Flood Analysis Memo with your LOMA order."
           },
           faq_two: {
             open: true,
@@ -71,7 +66,6 @@ export default class Faq extends Component {
             open: !this.state.faq_two.open,
             id: 1,
             title: 'How long will the process take?',
-            paragraph: "How Once you submit a request for us to handle your LOMA process, we will contact you to coordinate a time for a surveyor to come and survey your property. We then use the Elevation Certificate from the Surveyor to submit your LOMA application to FEMA and provide you with FEMA’s reply. Depending on the situation, this entire process may take as little as 1 week or as long as 60 days. When you submit your request, No Flood Florida will give you your expected time and keep you updated along the way."
           },
           faq_three: {
             open: true,
@@ -96,7 +90,6 @@ export default class Faq extends Component {
             open: !this.state.faq_three.open,
             id: 2,
             title: 'Is it Possible that FEMA will reject my LOMA request?',
-            paragraph: "We screen every request prior to beginning the process. Each property is ranked as either having a low, medium, or high likelihood of receiving a LOMA from FEMA. We will recommend the medium and high likelihood properties to move forward. We will also work with clients who received a low likelihood designation to submit their request. If through our screening process we find that you are almost certainly not going to be able to get a LOMA, we will notify you. But you can rest assured because our service has a money back guarantee!"
           }
         })
         break;
@@ -107,45 +100,78 @@ export default class Faq extends Component {
   render() {
     return (
       <div>
-        <Accordion style={{maxWidth: '100%'}}>
+        <Accordion style={{width: '100%'}}>
           <Accordion.Toggle as={Card.Header} eventKey="0" onClick={e => { this.handleClick(0) }}>
             <Row>
-              <Col xs={12} md={8}>
+              <Col>
                 <p style={{fontWeight: 'bold'}}>{this.state.faq_one.title}</p>
               </Col>
-              <Col xs={6} md={4}>
+              <Col lg={2} style={{padding: '0'}}>
                 {this.state.faq_one.open ? <FaChevronDown /> : <FaChevronUp />}
               </Col>
             </Row>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="0">
-            <Card.Body>{this.state.faq_one.paragraph}</Card.Body>
+            <Card.Body>
+              {/*{this.state.faq_one.paragraph} */}
+              {
+                this.state.faq_one.open ?
+                  <p></p>
+                  :
+                  <p style={{textAlign: 'left'}}>
+                    We are all for helping its clients save money. Going through the LOMA process
+                    will allow FEMA and ultimately flood insurance companies to have a better
+                    understanding of the flood risk your property faces. If you decide to keep
+                    flood insurance, you can expect a significant reduction in your premium. Your
+                    mortgage lender may also drop your flood insurance requirement all together.
+                    However, you should learn more about your flood risk before making such
+                    decision. We will guide you by providing a FREE Flood Analysis Memo with your
+                    LOMA order.</p>
+              }
+            </Card.Body>
           </Accordion.Collapse>
           <Accordion.Toggle as={Card.Header} eventKey="1" onClick={e => { this.handleClick(1) }}>
             <Row>
-              <Col xs={12} md={8}>
+              <Col>
                 <p style={{fontWeight: 'bold'}}>{this.state.faq_two.title}</p>
               </Col>
-              <Col xs={6} md={4}>
+              <Col lg={2} style={{padding: '0'}}>
                 {this.state.faq_two.open ? <FaChevronDown /> : <FaChevronUp />}
               </Col>
             </Row>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="1">
-            <Card.Body>{this.state.faq_two.paragraph}</Card.Body>
+            <Card.Body>
+              {/* {this.state.faq_two.paragraph} */}
+              {
+                this.state.faq_two.open ?
+                  <p></p>
+                  :
+                  <p style={{textAlign: 'left'}}>
+                    How Once you submit a request for us to handle your LOMA process, we will contact you to coordinate a time for a surveyor to come and survey your property. We then use the Elevation Certificate from the Surveyor to submit your LOMA application to FEMA and provide you with FEMA’s reply. Depending on the situation, this entire process may take as little as 1 week or as long as 60 days. When you submit your request, No Flood Florida will give you your expected time and keep you updated along the way. </p>
+              }
+            </Card.Body>
           </Accordion.Collapse>
           <Accordion.Toggle as={Card.Header} eventKey="2" onClick={e => { this.handleClick(2) }}>
             <Row>
-              <Col xs={12} md={8}>
+              <Col>
                 <p style={{fontWeight: 'bold'}}>{this.state.faq_three.title}</p>
               </Col>
-              <Col xs={6} md={4}>
+              <Col lg={2} style={{padding: '0'}}>
                 {this.state.faq_three.open ? <FaChevronDown /> : <FaChevronUp />}
               </Col>
             </Row>
           </Accordion.Toggle>
           <Accordion.Collapse eventKey="2">
-            <Card.Body>{this.state.faq_three.paragraph}</Card.Body>
+            <Card.Body>
+              {/*{this.state.faq_three.paragraph}*/}
+              {
+                this.state.faq_three.open ?
+                  <p></p>
+                  :
+                  <p style={{textAlign: 'left'}}>We screen every request prior to beginning the process. Each property is ranked as either having a low, medium, or high likelihood of receiving a LOMA from FEMA. We will recommend the medium and high likelihood properties to move forward. We will also work with clients who received a low likelihood designation to submit their request. If through our screening process we find that you are almost certainly not going to be able to get a LOMA, we will notify you. But you can rest assured because our service has a money back guarantee!</p>
+              }
+            </Card.Body>
           </Accordion.Collapse>
         </Accordion>
       </div>
