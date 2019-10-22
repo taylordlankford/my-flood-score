@@ -47,7 +47,7 @@ const Reduce = ({ history }) => {
               <ReduceOptions />
               <Button onClick={() => history.push(ROUTES.OPTIONS)} variant="primary">CHECK ALL REPORTS AND ACCOUNT OPTIONS</Button>
             </Col>
-            <Col sm={4} style={{ marginTop: '150px' }}>
+            <Col sm={4} style={{ marginTop: '120px' }}>
               <p style={{ color: '#0d238e', fontSize: '2.1rem', lineHeight: '1.4', fontWeight: '700' }}>FAQ</p>
               <hr />
               <Faq />

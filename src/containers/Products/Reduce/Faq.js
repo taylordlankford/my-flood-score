@@ -92,7 +92,7 @@ export default class Faq extends Component {
 
   render() {
     return (
-      <div>
+      <div className="faq-container">
         <Accordion>
           <Accordion.Toggle as={Card.Header} eventKey="0" onClick={() => { this.handleClick(0) }}>
             <Row>
