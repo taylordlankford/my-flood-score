@@ -101,37 +101,41 @@ export default function Faq() {
   }
 
   return (
-    faqlist.map((element, key) => {
-      return (
-        <Accordion key={key}>
-          <Accordion.Toggle as={Card.Header} eventKey={key} onClick={() => { handleClick(key) }}>
-            { /* Change font color based on if accordion is expanded or collapsed */
-              element.expanded ?
-                <Row>
-                  <Col style={{ color: '#55B96A' }} className="faq-title">
-                    {element.title}
-                  </Col>
-                  <Col lg={2} style={{ color: '#55B96A' }} className="faq-body">
-                    <FaChevronUp />
-                  </Col>
-                </Row>
-              :
-                <Row>
-                  <Col style={{ color: '#666666' }} className="faq-title">
-                    {element.title}
-                  </Col>
-                  <Col lg={2} style={{ color: '#666666' }} className="faq-body">
-                    <FaChevronDown />
-                  </Col>
-                </Row>
-            }
-          </Accordion.Toggle>
-          {
-            element.expanded ?
-              <Card.Body style={{ textAlign: 'left' }}>{element.content}</Card.Body> : <div style={{ display: 'none' }} />
-          }
-        </Accordion>
-      );
-    })
+    <div style={{ paddingTop: '30px' }}>
+      {
+        faqlist.map((element, key) => {
+          return (
+            <Accordion key={key}>
+              <Accordion.Toggle as={Card.Header} eventKey={key} onClick={() => { handleClick(key) }}>
+                { /* Change font color based on if accordion is expanded or collapsed */
+                  element.expanded ?
+                    <Row>
+                      <Col style={{ color: '#55B96A' }} className="faq-title">
+                        {element.title}
+                      </Col>
+                      <Col lg={2} style={{ color: '#55B96A' }} className="faq-body">
+                        <FaChevronUp />
+                      </Col>
+                    </Row>
+                    :
+                    <Row>
+                      <Col style={{ color: '#666666' }} className="faq-title">
+                        {element.title}
+                      </Col>
+                      <Col lg={2} style={{ color: '#666666' }} className="faq-body">
+                        <FaChevronDown />
+                      </Col>
+                    </Row>
+                }
+              </Accordion.Toggle>
+              {
+                element.expanded ?
+                  <Card.Body style={{ textAlign: 'left' }}>{element.content}</Card.Body> : <div style={{ display: 'none' }} />
+              }
+            </Accordion>
+          );
+        })
+      }
+    </div>
   )
 }
