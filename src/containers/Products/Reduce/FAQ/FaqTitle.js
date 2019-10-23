@@ -12,7 +12,7 @@ export default function FaqTitle(props) {
         {props.faqTitle}
       </Col>
       <Col lg={2} style={props.style} className="faq-body">
-        {props.faqOpen ? <FaChevronDown /> : <FaChevronUp />}
+        { props.faqExpanded ? <FaChevronUp /> : <FaChevronDown /> }
       </Col>
     </Row>
   )
