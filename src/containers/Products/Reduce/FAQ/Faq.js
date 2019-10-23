@@ -8,17 +8,17 @@ import * as FAQ_DATA from './FaqData'
 export default function Faq() {
   const [faqlist, setFaqlist] = useState([
     {
-      open: true,
+      open: false,
       title: 'Can I terminate my Flood Insurance Policy?',
       content: FAQ_DATA.data_one
     },
     {
-      open: true,
+      open: false,
       title: 'How long will the process take?',
       content: FAQ_DATA.data_two
     },
     {
-      open: true,
+      open: false,
       title: 'Is it Possible that FEMA will reject my LOMA request?',
       content: FAQ_DATA.data_three
     },
@@ -40,17 +40,17 @@ export default function Faq() {
        case 0:
          setFaqlist([
            {
-             open: !faqlist[0].open,
+             open: !faqlist[id].open,
              title: 'Can I terminate my Flood Insurance Policy?',
              content: FAQ_DATA.data_one
            },
            {
-             open: true,
+             open: false,
              title: 'How long will the process take?',
              content: FAQ_DATA.data_two
            },
            {
-             open: true,
+             open: false,
              title: 'Is it Possible that FEMA will reject my LOMA request?',
              content: FAQ_DATA.data_three
            }
@@ -59,17 +59,17 @@ export default function Faq() {
        case 1:
          setFaqlist([
            {
-             open: true,
+             open: false,
              title: 'Can I terminate my Flood Insurance Policy?',
              content: FAQ_DATA.data_one
            },
            {
-             open: !faqlist[1].open,
+             open: !faqlist[id].open,
              title: 'How long will the process take?',
              content: FAQ_DATA.data_two
            },
            {
-             open: true,
+             open: false,
              title: 'Is it Possible that FEMA will reject my LOMA request?',
              content: FAQ_DATA.data_three
            }
@@ -78,17 +78,17 @@ export default function Faq() {
        case 2:
          setFaqlist([
            {
-             open: true,
+             open: false,
              title: 'Can I terminate my Flood Insurance Policy?',
              content: FAQ_DATA.data_one
            },
            {
-             open: true,
+             open: false,
              title: 'How long will the process take?',
              content: FAQ_DATA.data_two
            },
            {
-             open: !faqlist[2].open,
+             open: !faqlist[id].open,
              title: 'Is it Possible that FEMA will reject my LOMA request?',
              content: FAQ_DATA.data_three
            }
@@ -100,33 +100,33 @@ export default function Faq() {
   return (
     <div className="faq-container">
       {
-        faqlist.map((index, key) => {
+        faqlist.map((element, key) => {
           return (
             <div key={key}>
               <Accordion>
                 <Accordion.Toggle as={Card.Header} eventKey={key} onClick={() => { handleClick(key) }}>
                   { /* Change font color based on if accordion is expanded or collapsed */
-                    index.open ?
+                    element.open ?
                       <FaqTitle
-                        style={{ color: '#666666' }}
-                        faqTitle={index.title}
-                        faqOpen={index.open}
+                        style={{ color: '#55B96A' }}
+                        faqTitle={element.title}
+                        faqOpen={element.open}
                       />
                       :
                       <FaqTitle
-                        style={{ color: '#55B96A' }}
-                        faqTitle={index.title}
-                        faqOpen={index.open}
+                        style={{ color: '#666666' }}
+                        faqTitle={element.title}
+                        faqOpen={element.open}
                       />
+
                   }
                 </Accordion.Toggle>
-                <Accordion.Collapse eventKey={key}>
-                  <Card.Body>
-                    {
-                      index.open ? <p></p> : <p style={{ textAlign: 'left' }}>{index.content}</p>
-                    }
-                  </Card.Body>
-                </Accordion.Collapse>
+                {
+                  element.open ?
+                    <Card.Body style={{ textAlign: 'left' }}>{element.content}</Card.Body>
+                    :
+                      <Card.Body style={{ display: 'none' }}>{element.content}</Card.Body>
+                }
               </Accordion>
             </div>
           )
