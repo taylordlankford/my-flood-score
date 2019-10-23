@@ -99,94 +99,39 @@ export default function Faq() {
 
   return (
     <div className="faq-container">
-      <Accordion>
-        <Accordion.Toggle as={Card.Header} eventKey="0" onClick={() => { handleClick(0) }}>
-          {
-            faqlist[0].open ?
-              <FaqTitle
-                style={{ color: '#666666' }}
-                faqTitle={faqlist[0].title}
-                faqOpen={faqlist[0].open}
-              />
-            :
-              <FaqTitle
-                style={{ color: '#55B96A' }}
-                faqTitle={faqlist[0].title}
-                faqOpen={faqlist[0].open}
-              />
-          }
-        </Accordion.Toggle>
-        <Accordion.Collapse eventKey="0">
-          <Card.Body>
-            {
-              faqlist[0].open ?
-                <p></p>
-                :
-                  <p style={{textAlign: 'left'}}>
-                    {faqlist[0].content}
-                </p>
-            }
-          </Card.Body>
-        </Accordion.Collapse>
-        <Accordion.Toggle as={Card.Header} eventKey="1" onClick={() => { handleClick(1) }}>
-          {
-            faqlist[1].open ?
-              <FaqTitle
-                style={{ color: '#666666' }}
-                faqTitle={faqlist[1].title}
-                faqOpen={faqlist[1].open}
-              />
-            :
-              <FaqTitle
-                style={{ color: '#55B96A' }}
-                faqTitle={faqlist[1].title}
-                faqOpen={faqlist[1].open}
-              />
-          }
-        </Accordion.Toggle>
-        <Accordion.Collapse eventKey="1">
-          <Card.Body>
-            {
-              faqlist[1].open ?
-                <p></p>
-                :
-                  <p style={{textAlign: 'left'}}>
-                    {faqlist[1].content}
-                  </p>
-            }
-          </Card.Body>
-        </Accordion.Collapse>
-        <Accordion.Toggle as={Card.Header} eventKey="2" onClick={() => { handleClick(2) }}>
-          {
-            faqlist[2].open ?
-              <FaqTitle
-                style={{ color: '#666666' }}
-                faqTitle={faqlist[2].title}
-                faqOpen={faqlist[2].open}
-              />
-            :
-              <FaqTitle
-                style={{ color: '#55B96A' }}
-                faqTitle={faqlist[2].title}
-                faqOpen={faqlist[2].open}
-              />
-          }
-        </Accordion.Toggle>
-        <Accordion.Collapse eventKey="2">
-          <Card.Body>
-            {
-              faqlist[2].open ?
-                <p></p>
-                :
-                  <p style={{textAlign: 'left'}}>
-                    {faqlist[2].content}
-                  </p>
-            }
-          </Card.Body>
-        </Accordion.Collapse>
-      </Accordion>
+      {
+        faqlist.map((index, key) => {
+          return (
+            <div key={key}>
+              <Accordion>
+                <Accordion.Toggle as={Card.Header} eventKey={key} onClick={() => { handleClick(key) }}>
+                  {
+                    index.open ?
+                      <FaqTitle
+                        style={{ color: '#666666' }}
+                        faqTitle={index.title}
+                        faqOpen={index.open}
+                      />
+                      :
+                      <FaqTitle
+                        style={{ color: '#55B96A' }}
+                        faqTitle={index.title}
+                        faqOpen={index.open}
+                      />
+                  }
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey={key}>
+                  <Card.Body>
+                    {
+                      index.open ? <p></p> : <p style={{ textAlign: 'left' }}>{index.content}</p>
+                    }
+                  </Card.Body>
+                </Accordion.Collapse>
+              </Accordion>
+            </div>
+          )
+        })
+      }
     </div>
     )
 }
-
-
