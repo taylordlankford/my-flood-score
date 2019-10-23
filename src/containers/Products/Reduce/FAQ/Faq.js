@@ -27,77 +27,66 @@ export default function Faq() {
     },
   ])
 
-  const handleClick = (id) => {
-    // faqlist.map((idx, key) => {
-    //   if (id === key) {
-    //     console.log(faqlist[id].expanded)
-    //     setFaqlist([
-    //       {
-    //         expanded: !faqlist[id].expanded
-    //       }
-    //     ])
-    //   }
-    // })
-
-     switch (id) {
-       case 0:
-         setFaqlist([
-           {
-             expanded: !faqlist[id].expanded,
-             title: 'Can I terminate my Flood Insurance Policy?',
-             content: FAQ_DATA.data_one
-           },
-           {
-             expanded: false,
-             title: 'How long will the process take?',
-             content: FAQ_DATA.data_two
-           },
-           {
-             expanded: false,
-             title: 'Is it Possible that FEMA will reject my LOMA request?',
-             content: FAQ_DATA.data_three
-           }
-         ])
-         break;
-       case 1:
-         setFaqlist([
-           {
-             expanded: false,
-             title: 'Can I terminate my Flood Insurance Policy?',
-             content: FAQ_DATA.data_one
-           },
-           {
-             expanded: !faqlist[id].expanded,
-             title: 'How long will the process take?',
-             content: FAQ_DATA.data_two
-           },
-           {
-             expanded: false,
-             title: 'Is it Possible that FEMA will reject my LOMA request?',
-             content: FAQ_DATA.data_three
-           }
-         ])
-         break;
-       case 2:
-         setFaqlist([
-           {
-             expanded: false,
-             title: 'Can I terminate my Flood Insurance Policy?',
-             content: FAQ_DATA.data_one
-           },
-           {
-             expanded: false,
-             title: 'How long will the process take?',
-             content: FAQ_DATA.data_two
-           },
-           {
-             expanded: !faqlist[id].expanded,
-             title: 'Is it Possible that FEMA will reject my LOMA request?',
-             content: FAQ_DATA.data_three
-           }
-         ])
-         break;
-     }
+  const handleClick = id => {
+    switch (id) {
+      case 0:
+        setFaqlist([
+          {
+            expanded: !faqlist[id].expanded,
+            title: 'Can I terminate my Flood Insurance Policy?',
+            content: FAQ_DATA.data_one
+          },
+          {
+            expanded: false,
+            title: 'How long will the process take?',
+            content: FAQ_DATA.data_two
+          },
+          {
+            expanded: false,
+            title: 'Is it Possible that FEMA will reject my LOMA request?',
+            content: FAQ_DATA.data_three
+          }
+        ])
+        break;
+      case 1:
+        setFaqlist([
+          {
+            expanded: false,
+            title: 'Can I terminate my Flood Insurance Policy?',
+            content: FAQ_DATA.data_one
+          },
+          {
+            expanded: !faqlist[id].expanded,
+            title: 'How long will the process take?',
+            content: FAQ_DATA.data_two
+          },
+          {
+            expanded: false,
+            title: 'Is it Possible that FEMA will reject my LOMA request?',
+            content: FAQ_DATA.data_three
+          }
+        ])
+        break;
+      case 2:
+        setFaqlist([
+          {
+            expanded: false,
+            title: 'Can I terminate my Flood Insurance Policy?',
+            content: FAQ_DATA.data_one
+          },
+          {
+            expanded: false,
+            title: 'How long will the process take?',
+            content: FAQ_DATA.data_two
+          },
+          {
+            expanded: !faqlist[id].expanded,
+            title: 'Is it Possible that FEMA will reject my LOMA request?',
+            content: FAQ_DATA.data_three
+          }
+        ])
+        break;
+    }
   }
 
   return (
