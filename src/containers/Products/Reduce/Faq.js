@@ -10,14 +10,17 @@ export default function Faq() {
     {
       open: true,
       title: 'Can I terminate my Flood Insurance Policy?',
+      content: FAQ_DATA.data_one
     },
     {
       open: true,
       title: 'How long will the process take?',
+      content: FAQ_DATA.data_two
     },
     {
       open: true,
       title: 'Is it Possible that FEMA will reject my LOMA request?',
+      content: FAQ_DATA.data_three
     },
   ])
 
@@ -33,56 +36,65 @@ export default function Faq() {
     //   }
     // })
 
-    switch (id) {
-      case 0:
-        setFaqlist([
-          {
-            open: !faqlist[0].open,
-            title: 'Can I terminate my Flood Insurance Policy?',
-          },
-          {
-            open: true,
-            title: 'How long will the process take?',
-          },
-          {
-            open: true,
-            title: 'Is it Possible that FEMA will reject my LOMA request?',
-          }
-        ])
-        break;
-      case 1:
-        setFaqlist([
-          {
-            open: true,
-            title: 'Can I terminate my Flood Insurance Policy?',
-          },
-          {
-            open: !faqlist[1].open,
-            title: 'How long will the process take?',
-          },
-          {
-            open: true,
-            title: 'Is it Possible that FEMA will reject my LOMA request?',
-          }
-        ])
-        break;
-      case 2:
-        setFaqlist([
-          {
-            open: true,
-            title: 'Can I terminate my Flood Insurance Policy?',
-          },
-          {
-            open: true,
-            title: 'How long will the process take?',
-          },
-          {
-            open: !faqlist[2].open,
-            title: 'Is it Possible that FEMA will reject my LOMA request?',
-          }
-        ])
-        break;
-    }
+     switch (id) {
+       case 0:
+         setFaqlist([
+           {
+             open: !faqlist[0].open,
+             title: 'Can I terminate my Flood Insurance Policy?',
+             content: FAQ_DATA.data_one
+           },
+           {
+             open: true,
+             title: 'How long will the process take?',
+             content: FAQ_DATA.data_two
+           },
+           {
+             open: true,
+             title: 'Is it Possible that FEMA will reject my LOMA request?',
+             content: FAQ_DATA.data_three
+           }
+         ])
+         break;
+       case 1:
+         setFaqlist([
+           {
+             open: true,
+             title: 'Can I terminate my Flood Insurance Policy?',
+             content: FAQ_DATA.data_one
+           },
+           {
+             open: !faqlist[1].open,
+             title: 'How long will the process take?',
+             content: FAQ_DATA.data_two
+           },
+           {
+             open: true,
+             title: 'Is it Possible that FEMA will reject my LOMA request?',
+             content: FAQ_DATA.data_three
+           }
+         ])
+         break;
+       case 2:
+         setFaqlist([
+           {
+             open: true,
+             title: 'Can I terminate my Flood Insurance Policy?',
+             content: FAQ_DATA.data_one
+           },
+           {
+             open: true,
+             title: 'How long will the process take?',
+             content: FAQ_DATA.data_two
+           },
+           {
+             open: !faqlist[2].open,
+             title: 'Is it Possible that FEMA will reject my LOMA request?',
+             content: FAQ_DATA.data_three
+           }
+         ])
+         break;
+     }
   }
 
   return (
@@ -111,7 +123,7 @@ export default function Faq() {
                 <p></p>
                 :
                   <p style={{textAlign: 'left'}}>
-                    {FAQ_DATA.data_one}
+                    {faqlist[0].content}
                 </p>
             }
           </Card.Body>
@@ -139,7 +151,7 @@ export default function Faq() {
                 <p></p>
                 :
                   <p style={{textAlign: 'left'}}>
-                    {FAQ_DATA.data_two}
+                    {faqlist[1].content}
                   </p>
             }
           </Card.Body>
@@ -167,7 +179,7 @@ export default function Faq() {
                 <p></p>
                 :
                   <p style={{textAlign: 'left'}}>
-                    {FAQ_DATA.data_three}
+                    {faqlist[2].content}
                   </p>
             }
           </Card.Body>
