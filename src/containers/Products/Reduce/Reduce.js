@@ -13,7 +13,7 @@ import SecondRow from '../../Header/SecondRow'
 import * as ROUTES from '../../../constants/routes'
 
 import ReduceOptions from '../../Options/ReduceOptions'
-import Faq from './Faq'
+import Faq from './FAQ/Faq'
 
 const Reduce = ({ history }) => {
   return (

@@ -105,7 +105,7 @@ export default function Faq() {
             <div key={key}>
               <Accordion>
                 <Accordion.Toggle as={Card.Header} eventKey={key} onClick={() => { handleClick(key) }}>
-                  {
+                  { /* Change font color based on if accordion is expanded or collapsed */
                     index.open ?
                       <FaqTitle
                         style={{ color: '#666666' }}
