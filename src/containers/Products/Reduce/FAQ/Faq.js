@@ -1,29 +1,27 @@
 import React, { useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
-import { FaChevronUp } from 'react-icons/fa';
-import { FaChevronDown } from 'react-icons/fa';
 import './FaqStyles.css'
 import * as FAQ_DATA from './FaqData'
+import FaqTitle from './FaqTitle'
+import FaqBody from './FaqBody'
 
 export default function Faq() {
   const [faqlist, setFaqlist] = useState([
     {
       expanded: false,
-      title: 'Can I terminate my Flood Insurance Policy?',
-      content: FAQ_DATA.data_one
+      title: FAQ_DATA.title_one,
+      content: FAQ_DATA.content_body_one
     },
     {
       expanded: false,
-      title: 'How long will the process take?',
-      content: FAQ_DATA.data_two
+      title: FAQ_DATA.title_two,
+      content: FAQ_DATA.content_body_two
     },
     {
       expanded: false,
-      title: 'Is it Possible that FEMA will reject my LOMA request?',
-      content: FAQ_DATA.data_three
+      title: FAQ_DATA.title_three,
+      content: FAQ_DATA.content_body_three
     },
   ])
 
@@ -33,18 +31,18 @@ export default function Faq() {
         setFaqlist([
           {
             expanded: !faqlist[id].expanded,
-            title: 'Can I terminate my Flood Insurance Policy?',
-            content: FAQ_DATA.data_one
+            title: FAQ_DATA.title_one,
+            content: FAQ_DATA.content_body_one
           },
           {
             expanded: false,
-            title: 'How long will the process take?',
-            content: FAQ_DATA.data_two
+            title: FAQ_DATA.title_two,
+            content: FAQ_DATA.content_body_two
           },
           {
             expanded: false,
-            title: 'Is it Possible that FEMA will reject my LOMA request?',
-            content: FAQ_DATA.data_three
+            title: FAQ_DATA.title_three,
+            content: FAQ_DATA.content_body_three
           }
         ])
         break;
@@ -52,18 +50,18 @@ export default function Faq() {
         setFaqlist([
           {
             expanded: false,
-            title: 'Can I terminate my Flood Insurance Policy?',
-            content: FAQ_DATA.data_one
+            title: FAQ_DATA.title_one,
+            content: FAQ_DATA.content_body_one
           },
           {
             expanded: !faqlist[id].expanded,
-            title: 'How long will the process take?',
-            content: FAQ_DATA.data_two
+            title: FAQ_DATA.title_two,
+            content: FAQ_DATA.content_body_two
           },
           {
             expanded: false,
-            title: 'Is it Possible that FEMA will reject my LOMA request?',
-            content: FAQ_DATA.data_three
+            title: FAQ_DATA.title_three,
+            content: FAQ_DATA.content_body_three
           }
         ])
         break;
@@ -71,18 +69,18 @@ export default function Faq() {
         setFaqlist([
           {
             expanded: false,
-            title: 'Can I terminate my Flood Insurance Policy?',
-            content: FAQ_DATA.data_one
+            title: FAQ_DATA.title_one,
+            content: FAQ_DATA.content_body_one
           },
           {
             expanded: false,
-            title: 'How long will the process take?',
-            content: FAQ_DATA.data_two
+            title: FAQ_DATA.title_two,
+            content: FAQ_DATA.content_body_two
           },
           {
             expanded: !faqlist[id].expanded,
-            title: 'Is it Possible that FEMA will reject my LOMA request?',
-            content: FAQ_DATA.data_three
+            title: FAQ_DATA.title_three,
+            content: FAQ_DATA.content_body_three
           }
         ])
         break;
@@ -90,37 +88,22 @@ export default function Faq() {
   }
 
   return (
-    <div style={{ paddingTop: '30px' }}>
+    <div className="faq-container">
       {
         faqlist.map((element, key) => {
           return (
-            <Accordion key={key}>
-              <Accordion.Toggle as={Card.Header} eventKey={key} onClick={() => { handleClick(key) }}>
-                { /* Change font color based on if accordion is expanded or collapsed */
-                  element.expanded ?
-                    <Row>
-                      <Col style={{ color: '#55B96A' }} className="faq-title">
-                        {element.title}
-                      </Col>
-                      <Col lg={2} style={{ color: '#55B96A' }} className="faq-body">
-                        <FaChevronUp />
-                      </Col>
-                    </Row>
-                    :
-                    <Row>
-                      <Col style={{ color: '#666666' }} className="faq-title">
-                        {element.title}
-                      </Col>
-                      <Col lg={2} style={{ color: '#666666' }} className="faq-body">
-                        <FaChevronDown />
-                      </Col>
-                    </Row>
-                }
+            <Accordion key={key} >
+              <Accordion.Toggle
+                as={Card.Header}
+                eventKey={key}
+                onClick={() => { handleClick(key) }}>
+                <FaqTitle
+                  faqTitle={element.title}
+                  isFaqExpanded={element.expanded} />
               </Accordion.Toggle>
-              {
-                element.expanded ?
-                  <Card.Body style={{ textAlign: 'left' }}>{element.content}</Card.Body> : <div style={{ display: 'none' }} />
-              }
+              <FaqBody
+                isFaqExpanded={element.expanded}
+                faqContent={element.content} />
             </Accordion>
           );
         })

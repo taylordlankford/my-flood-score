@@ -1,4 +1,5 @@
-export const data_one = `
+export const title_one = 'Can I terminate my Flood Insurance Policy?'
+export const content_body_one = `
 We are all for helping its clients save money. Going through the LOMA process
 will allow FEMA and ultimately flood insurance companies to have a better
 understanding of the flood risk your property faces. If you decide to keep
@@ -8,7 +9,8 @@ However, you should learn more about your flood risk before making such
 decision. We will guide you by providing a FREE Flood Analysis Memo with your
 LOMA order.`
 
-export const data_two = `
+export const title_two = 'How long will the process take?'
+export const content_body_two = `
 How Once you submit a request for us to handle your LOMA
 process, we will contact you to coordinate a time for a
 surveyor to come and survey your property. We then use the
@@ -19,7 +21,8 @@ little as 1 week or as long as 60 days. When you submit
 your request, No Flood Florida will give you your expected
 time and keep you updated along the way.`
 
-export const data_three = `
+export const title_three = 'Is it Possible that FEMA will reject my LOMA request?'
+export const content_body_three = `
 We screen every request prior
 to beginning the process. Each property is ranked as either
 having a low, medium, or high likelihood of receiving a

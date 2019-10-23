@@ -7,13 +7,27 @@ import './FaqStyles.css'
 
 export default function FaqTitle(props) {
   return(
-    <Row>
-      <Col style={props.style} className="faq-title">
-        {props.faqTitle}
-      </Col>
-      <Col lg={2} style={props.style} className="faq-body">
-        { props.faqExpanded ? <FaChevronUp /> : <FaChevronDown /> }
-      </Col>
-    </Row>
+    <div>
+      { /* Change font color based on if accordion is expanded or collapsed */
+        props.isFaqExpanded ?
+          <Row>
+            <Col style={{ color: '#55B96A' }} className="faq-title">
+              {props.faqTitle}
+            </Col>
+            <Col lg={2} style={{ color: '#55B96A' }} className="faq-body">
+              <FaChevronUp />
+            </Col>
+          </Row>
+          :
+          <Row>
+            <Col style={{ color: '#666666' }} className="faq-title">
+              {props.faqTitle}
+            </Col>
+            <Col lg={2} style={{ color: '#666666' }} className="faq-body">
+              <FaChevronDown />
+            </Col>
+          </Row>
+      }
+    </div>
   )
 }
