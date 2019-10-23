@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
 import Accordion from 'react-bootstrap/Accordion'
 import Card from 'react-bootstrap/Card'
-import { FaChevronUp } from 'react-icons/fa';
-import { FaChevronDown } from 'react-icons/fa';
+import FaqTitle from './FaqTitle'
 import './FaqStyles.css'
 
 export default function Faq() {
@@ -24,6 +21,17 @@ export default function Faq() {
   ])
 
   const handleClick = (id) => {
+    // faqlist.map((idx, key) => {
+    //   if (id === key) {
+    //     console.log(faqlist[id].open)
+    //     setFaqlist([
+    //       {
+    //         open: !faqlist[id].open
+    //       }
+    //     ])
+    //   }
+    // })
+
     switch (id) {
       case 0:
         setFaqlist([
@@ -80,14 +88,20 @@ export default function Faq() {
     <div className="faq-container">
       <Accordion>
         <Accordion.Toggle as={Card.Header} eventKey="0" onClick={() => { handleClick(0) }}>
-          <Row>
-            <Col className="faq-title">
-              {faqlist[0].title}
-            </Col>
-            <Col lg={2} className="faq-body">
-              {faqlist[0].open ? <FaChevronDown /> : <FaChevronUp />}
-            </Col>
-          </Row>
+          {
+            faqlist[0].open ?
+              <FaqTitle
+                style={{ color: '#666666' }}
+                faqTitle={faqlist[0].title}
+                faqOpen={faqlist[0].open}
+              />
+            :
+              <FaqTitle
+                style={{ color: '#55B96A' }}
+                faqTitle={faqlist[0].title}
+                faqOpen={faqlist[0].open}
+              />
+          }
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="0">
           <Card.Body>
@@ -108,14 +122,20 @@ export default function Faq() {
           </Card.Body>
         </Accordion.Collapse>
         <Accordion.Toggle as={Card.Header} eventKey="1" onClick={() => { handleClick(1) }}>
-          <Row>
-            <Col className="faq-title">
-              {faqlist[1].title}
-            </Col>
-            <Col lg={2} className="faq-body">
-              {faqlist[1].open ? <FaChevronDown /> : <FaChevronUp />}
-            </Col>
-          </Row>
+          {
+            faqlist[1].open ?
+              <FaqTitle
+                style={{ color: '#666666' }}
+                faqTitle={faqlist[1].title}
+                faqOpen={faqlist[1].open}
+              />
+            :
+              <FaqTitle
+                style={{ color: '#55B96A' }}
+                faqTitle={faqlist[1].title}
+                faqOpen={faqlist[1].open}
+              />
+          }
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="1">
           <Card.Body>
@@ -137,14 +157,20 @@ export default function Faq() {
           </Card.Body>
         </Accordion.Collapse>
         <Accordion.Toggle as={Card.Header} eventKey="2" onClick={() => { handleClick(2) }}>
-          <Row>
-            <Col className="faq-title">
-              {faqlist[2].title}
-            </Col>
-            <Col lg={2} className="faq-body">
-              {faqlist[2].open ? <FaChevronDown /> : <FaChevronUp />}
-            </Col>
-          </Row>
+          {
+            faqlist[2].open ?
+              <FaqTitle
+                style={{ color: '#666666' }}
+                faqTitle={faqlist[2].title}
+                faqOpen={faqlist[2].open}
+              />
+            :
+              <FaqTitle
+                style={{ color: '#55B96A' }}
+                faqTitle={faqlist[2].title}
+                faqOpen={faqlist[2].open}
+              />
+          }
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="2">
           <Card.Body>

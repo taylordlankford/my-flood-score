@@ -6,7 +6,6 @@
   text-align: left;
   font-weight: 600;
   font-size: 16px;
-  color: #666666;
 }
 
 .faq-title:hover {
@@ -19,5 +18,5 @@
 }
 
 .faq-body svg {
-  color: #666666;
+  /*color: #666666; */
 }
