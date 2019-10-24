@@ -26,65 +26,69 @@ export default function Faq() {
   ])
 
   const handleClick = id => {
-    switch (id) {
-      case 0:
-        setFaqlist([
-          {
-            expanded: !faqlist[id].expanded,
-            title: FAQ_DATA.title_one,
-            content: FAQ_DATA.content_body_one
-          },
-          {
-            expanded: false,
-            title: FAQ_DATA.title_two,
-            content: FAQ_DATA.content_body_two
-          },
-          {
-            expanded: false,
-            title: FAQ_DATA.title_three,
-            content: FAQ_DATA.content_body_three
-          }
-        ])
-        break;
-      case 1:
-        setFaqlist([
-          {
-            expanded: false,
-            title: FAQ_DATA.title_one,
-            content: FAQ_DATA.content_body_one
-          },
-          {
-            expanded: !faqlist[id].expanded,
-            title: FAQ_DATA.title_two,
-            content: FAQ_DATA.content_body_two
-          },
-          {
-            expanded: false,
-            title: FAQ_DATA.title_three,
-            content: FAQ_DATA.content_body_three
-          }
-        ])
-        break;
-      case 2:
-        setFaqlist([
-          {
-            expanded: false,
-            title: FAQ_DATA.title_one,
-            content: FAQ_DATA.content_body_one
-          },
-          {
-            expanded: false,
-            title: FAQ_DATA.title_two,
-            content: FAQ_DATA.content_body_two
-          },
-          {
-            expanded: !faqlist[id].expanded,
-            title: FAQ_DATA.title_three,
-            content: FAQ_DATA.content_body_three
-          }
-        ])
-        break;
-    }
+    const prevFaqlist = faqlist
+    prevFaqlist[id].expanded = !prevFaqlist[id].expanded
+    setFaqlist([ ...prevFaqlist ])
+
+    // switch (id) {
+    //   case 0:
+    //     setFaqlist([
+    //       {
+    //         expanded: !faqlist[id].expanded,
+    //         title: FAQ_DATA.title_one,
+    //         content: FAQ_DATA.content_body_one
+    //       },
+    //       {
+    //         expanded: false,
+    //         title: FAQ_DATA.title_two,
+    //         content: FAQ_DATA.content_body_two
+    //       },
+    //       {
+    //         expanded: false,
+    //         title: FAQ_DATA.title_three,
+    //         content: FAQ_DATA.content_body_three
+    //       }
+    //     ])
+    //     break;
+    //   case 1:
+    //     setFaqlist([
+    //       {
+    //         expanded: false,
+    //         title: FAQ_DATA.title_one,
+    //         content: FAQ_DATA.content_body_one
+    //       },
+    //       {
+    //         expanded: !faqlist[id].expanded,
+    //         title: FAQ_DATA.title_two,
+    //         content: FAQ_DATA.content_body_two
+    //       },
+    //       {
+    //         expanded: false,
+    //         title: FAQ_DATA.title_three,
+    //         content: FAQ_DATA.content_body_three
+    //       }
+    //     ])
+    //     break;
+    //   case 2:
+    //     setFaqlist([
+    //       {
+    //         expanded: false,
+    //         title: FAQ_DATA.title_one,
+    //         content: FAQ_DATA.content_body_one
+    //       },
+    //       {
+    //         expanded: false,
+    //         title: FAQ_DATA.title_two,
+    //         content: FAQ_DATA.content_body_two
+    //       },
+    //       {
+    //         expanded: !faqlist[id].expanded,
+    //         title: FAQ_DATA.title_three,
+    //         content: FAQ_DATA.content_body_three
+    //       }
+    //     ])
+    //     break;
+    // }
   }
 
   return (
