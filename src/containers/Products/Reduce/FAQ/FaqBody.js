@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 export default function FaqBody(props) {
   return (
     props.isFaqExpanded ?
-      <Card.Body style={{ textAlign: 'left' }}>
+      <Card.Body className="faq-body">
         {props.faqContent}
       </Card.Body>
       :

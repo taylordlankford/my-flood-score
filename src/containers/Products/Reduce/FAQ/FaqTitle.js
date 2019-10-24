@@ -14,7 +14,7 @@ export default function FaqTitle(props) {
             <Col style={{ color: '#55B96A' }} className="faq-title">
               {props.faqTitle}
             </Col>
-            <Col lg={2} style={{ color: '#55B96A' }} className="faq-body">
+            <Col lg={2} style={{ color: '#55B96A' }} className="faq-svg">
               <FaChevronUp />
             </Col>
           </Row>
@@ -23,7 +23,7 @@ export default function FaqTitle(props) {
             <Col style={{ color: '#666666' }} className="faq-title">
               {props.faqTitle}
             </Col>
-            <Col lg={2} style={{ color: '#666666' }} className="faq-body">
+            <Col lg={2} style={{ color: '#666666' }} className="faq-svg">
               <FaChevronDown />
             </Col>
           </Row>
