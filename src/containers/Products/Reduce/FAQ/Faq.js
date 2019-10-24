@@ -24,7 +24,6 @@ export default function Faq() {
       prevFaqlist.map((element, key) => {
         element.expanded = false
       })
-
       setFaqlist([...prevFaqlist])
     }
   }
