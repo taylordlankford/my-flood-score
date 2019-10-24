@@ -11,8 +11,22 @@ export default function Faq() {
 
   const handleClick = id => {
     const prevFaqlist = faqlist
-    prevFaqlist[id].expanded = !prevFaqlist[id].expanded
-    setFaqlist([...prevFaqlist])
+
+    if (faqlist[id].expanded === false) {
+      /* Clicking on differnet accordion expands it, while hides the rest */
+      prevFaqlist.map((element, key) => {
+        element.expanded = false
+      })
+      prevFaqlist[id].expanded = !prevFaqlist[id].expanded
+      setFaqlist([...prevFaqlist])
+    } else {
+      /* Clicking on same accordion sets everything back to its false aka collapsed. */
+      prevFaqlist.map((element, key) => {
+        element.expanded = false
+      })
+
+      setFaqlist([...prevFaqlist])
+    }
   }
 
   return (
