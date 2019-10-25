@@ -9,7 +9,7 @@ import { useFirebase } from '../../hooks'
 import SecondRow from '../Header/SecondRow'
 import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 import CheckMarks from './CheckMarks'
-import Testimonials from './Testimonials'
+import Testimonials from './Testimonials/Testimonials'
 
 import * as ROUTES from '../../constants/routes'
 
