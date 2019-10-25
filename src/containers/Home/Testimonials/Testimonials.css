@@ -8,18 +8,12 @@
 }
 
 .carousel {
-  /* background: linear-gradient(0deg,rgba(73, 73, 73, 0.91),rgba(73, 73, 73, 0.91)); */
-  /* background-image: url("http://myfloodscore.wpengine.com/wp-content/uploads/2019/04/testimonial-image.jpg"); */
-  /* background: linear-gradient(0deg,rgba(73, 73, 73, 0.91),rgba(73, 73, 73, 0.91)),url(http://myfloodscore.wpengine.com/wp-content/uploads/2019/04/testimonial-image.jpg); */
-  /* background-position: 50% -4.1375px; */
-  background-size: cover;
   border-color: #55B96A;
   color: #55B96A;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  opacity: 0.5s;
 }
 
 .carousel-control-prev {
@@ -29,16 +23,18 @@
 }
 
 .carousel-item {
-  height: 500px;
+  height: 40vh;
 }
 
+/*
 .carousel-caption {
   top: 0;
   margin: 0 auto;
-  padding: 60px 0 0 0;
 }
+*/
 
 .carousel-caption-header {
+  padding-top: 50px;
   color: #ebebeb;
   font-size: 34px;
   line-height: 1.4em;
@@ -47,8 +43,13 @@
   text-align: center;
 }
 
+hr {
+  width: 980px;
+  border: 1px solid rgb(85, 185, 106);
+}
+
 .carousel-caption-body {
-  padding: 40px 0 0 0;
+  padding: 10px 0 0 0;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -56,9 +57,10 @@
 
 .carousel-caption-footer {
   padding: 20px 0 20px 0;
-  font-size: 1.2rem;
+  font-size: 16px;
 }
 
 .testimonial-author {
   font-weight: 700;
+  font-size: 16px;
 }
