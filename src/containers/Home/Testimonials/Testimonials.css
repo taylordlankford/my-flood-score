@@ -1,32 +1,48 @@
 .carousel {
-  background-color: #506361;
+  background-image: url("http://myfloodscore.wpengine.com/wp-content/uploads/2019/04/testimonial-image.jpg");
+  background: linear-gradient(0deg,rgba(73, 73, 73, 0.91),rgba(73, 73, 73, 0.91)),url(http://myfloodscore.wpengine.com/wp-content/uploads/2019/04/testimonial-image.jpg);
+  background-position: 50% -4.1375px;
+  background-size: cover;
+  border-color: #55B96A;
+  color: #55B96A;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.5s;
+}
+
+.carousel-control-next-icon {
+}
+
+.carousel-control-prev-icon {
 }
 
 .carousel-item {
-  height: 768px;
+  height: 540px;
 }
 
 .carousel-caption {
   top: 0;
   margin: 0 auto;
-  max-width: 1310px;
-  padding: 100px 0 100px 0;
+  max-width: 1120px;
+  padding: 60px 0 0 0;
 }
 
 .carousel-caption-header {
-  font-size: 2.5rem;
+  font-size: 2.0rem;
   font-weight: 700;
   text-align: center;
 }
 
 .carousel-caption-body {
   padding: 40px 0 0 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .carousel-caption-footer {
   padding: 40px 0 0 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .testimonial-author {
