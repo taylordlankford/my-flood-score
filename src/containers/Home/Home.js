@@ -9,6 +9,7 @@ import { useFirebase } from '../../hooks'
 import SecondRow from '../Header/SecondRow'
 import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 import CheckMarks from './CheckMarks'
+import Testimonials from './Testimonials'
 
 import * as ROUTES from '../../constants/routes'
 
@@ -54,6 +55,7 @@ function Home ({ history }) {
         />
       </div>
       <CheckMarks />
+      <Testimonials />
     </>
   )
 }
