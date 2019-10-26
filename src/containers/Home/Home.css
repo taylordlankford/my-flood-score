@@ -24,6 +24,13 @@
   letter-spacing: 0em;
 }
 
+.subtitle {
+  font-size: 30px;
+  line-height: 1.4;
+  margin-bottom: 24px;
+  width: 80%;
+}
+
 .headlineWrapper {
   margin: 0 auto;
   max-width: 1120px;

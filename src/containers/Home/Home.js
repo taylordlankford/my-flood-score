@@ -27,8 +27,12 @@ function Home ({ history }) {
       <Parallax bgImage={backgroundImage} strength={500}>
         <div className="headlineWrapper" style={{ height: '500px' }}>
           <div className="headlineContainer">
-            <h1 className="headline">Do You Know Your Flood Score?</h1>
-            <h2 className="headline" style={{ fontSize: '30px', lineHeight: '1.4', marginBottom: '24px' }}>The Most Accurate Flood Risk Assessment for Home Owners</h2>
+            <h1 className="headline">
+              Do You Know Your Flood Score?
+            </h1>
+            <h2 className="headline subtitle">
+              The Most Accurate Flood Risk Assessment for Home Owners
+            </h2>
           </div>
           {/* <AutoSuggest
             theme={autoSuggestTheme}

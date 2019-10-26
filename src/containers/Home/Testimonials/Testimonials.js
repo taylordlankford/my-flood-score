@@ -35,7 +35,7 @@ export default function Testimonials() {
     <Parallax
       contentClassName="parallax-content"
       bgImage={TestimonialImage}
-      bgImageAlt=""
+      bgImageAlt="testimonial-image"
       strength={1000}
     >
       <div className="carousel-wrapper">
@@ -43,12 +43,12 @@ export default function Testimonials() {
           <div>{testimonialTitle}</div>
           <hr className="testimonial-separator" />
         </div>
-        <Carousel className="carousel" nextIcon={nextIcon} prevIcon={prevIcon}>
+        <Carousel className="carousel-container" nextIcon={nextIcon} prevIcon={prevIcon}>
           {
             testimonialList.map((element, key) => {
               return (
                 <CarouselItem key={key}>
-                  <CarouselCaption>
+                  <div className="carousel-item-container">
                     <div className="carousel-caption-body">
                       {element.body}
                     </div>
@@ -58,7 +58,7 @@ export default function Testimonials() {
                       </div>
                       {element.location}
                     </div>
-                  </CarouselCaption>
+                  </div>
                 </CarouselItem>
               )
             })
