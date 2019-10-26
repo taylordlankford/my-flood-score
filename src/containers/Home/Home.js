@@ -25,7 +25,7 @@ function Home ({ history }) {
     <>
       <SecondRow />
       <Parallax bgImage={backgroundImage} strength={500}>
-        <div style={{ height: '500px' }}>
+        <div className="headlineWrapper" style={{ height: '500px' }}>
           <div className="headlineContainer">
             <h1 className="headline">Do You Know Your Flood Score?</h1>
             <h2 className="headline" style={{ fontSize: '30px', lineHeight: '1.4', marginBottom: '24px' }}>The Most Accurate Flood Risk Assessment for Home Owners</h2>
@@ -38,13 +38,15 @@ function Home ({ history }) {
           /> */}
         </div>
       </Parallax>
-      <div className="container2" >
-        <AutoSuggest
-          theme={autoSuggestTheme}
-          onSuggestionSelected={onSuggestionSelected}
-          inputProps={{ id: 'homeAddressSuggest' }}
-          firebase={firebase}
-        />
+      <div className="container2">
+        <div className="autosuggestWrapper">
+          <AutoSuggest
+            theme={autoSuggestTheme}
+            onSuggestionSelected={onSuggestionSelected}
+            inputProps={{ id: 'homeAddressSuggest' }}
+            firebase={firebase}
+          />
+        </div>
         <h1 style={{  color: "#0d238e", textAlign: 'center', margin: 0 }}> Why You Should Know Your Flood Score</h1>
       </div>
       <div className="video">
