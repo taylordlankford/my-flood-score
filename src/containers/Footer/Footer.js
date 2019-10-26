@@ -115,7 +115,7 @@ const Footer = () => {
                   </ul>
                 </FlexItem>
               </Flex>
-              <hr style={{ backgroundColor: '#0d238e' }} />
+              <hr style={{ width: '100%', backgroundColor: '#0d238e' }} />
               <Flex>
                 <FlexItem2></FlexItem2>
                 <FlexItem2></FlexItem2>

@@ -47,7 +47,7 @@ export default function Testimonials() {
           {
             testimonialList.map((element, key) => {
               return (
-                <CarouselItem key={key} className="carousel-item">
+                <CarouselItem key={key}>
                   <CarouselCaption>
                     <div className="carousel-caption-body">
                       {element.body}

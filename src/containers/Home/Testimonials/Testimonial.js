@@ -3,7 +3,7 @@ import CarouselItem from 'react-bootstrap/CarouselItem'
 import CarouselCaption from 'react-bootstrap/CarouselCaption'
 import './Testimonials.css'
 
-export default function Testimonial(props) {
+export default function Testimonial() {
   return (
     <CarouselItem className="carousel-item">
       <CarouselCaption className="carousel-caption">
