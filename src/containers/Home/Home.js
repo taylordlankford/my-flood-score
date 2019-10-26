@@ -39,7 +39,7 @@ function Home ({ history }) {
         </div>
       </Parallax>
       <div className="container2">
-        <div className="headlineWrapper">
+        <div className="autosuggestWrapper">
           <AutoSuggest
             theme={autoSuggestTheme}
             onSuggestionSelected={onSuggestionSelected}
