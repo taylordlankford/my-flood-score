@@ -39,7 +39,7 @@ function Home ({ history }) {
         </div>
       </Parallax>
       <div className="container2">
-        <div className="autosuggestWrapper">
+        <div className="headlineWrapper">
           <AutoSuggest
             theme={autoSuggestTheme}
             onSuggestionSelected={onSuggestionSelected}
@@ -77,8 +77,7 @@ const autoSuggestTheme = {
   },
   containerOpen: {},
   input: {
-    width: '50%',
-    margin: '0 auto',
+    width: '100%',
     padding: '8px 7px 8px 20px',
     fontSize: '18px',
     color: 'black !important',
@@ -99,7 +98,7 @@ const autoSuggestTheme = {
   suggestionsContainer: {
     background: 'white',
     margin: '0 auto',
-    width: '50%',
+    width: '100%',
     position: 'relative',
   },
   suggestionsContainerOpen: {
