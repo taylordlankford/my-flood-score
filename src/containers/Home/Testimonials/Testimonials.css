@@ -19,10 +19,16 @@
   bottom: 0;
 }
 
+.carousel-indicators li {
+  background-color: #55B96A !important;
+}
+
 .carousel-control-prev {
+  color: #55B96A !important;
 }
 
 .carousel-control-next {
+  color: #55B96A !important;
 }
 
 .carousel-item {
