@@ -8,10 +8,13 @@ import Col from 'react-bootstrap/Col'
 import './Testimonials.css'
 import TestimonialImage from '../../../../src/assets/images/testimonial-image.jpg'
 import Testimonial from './Testimonial'
+import { FaChevronRight } from 'react-icons/fa'
+import { FaChevronLeft } from 'react-icons/fa'
 
 export default function Testimonials() {
-  const [nextIcon, setNextIcon] = useState(<span aria-hidden="true" className="carousel-control-next-icon" />)
-  const [prevIcon, setPrevIcon] = useState(<span aria-hidden="true" className="carousel-control-prev-icon" />)
+  // const [nextIcon, setNextIcon] = useState(<span aria-hidden="true" className="carousel-control-next-icon" />)
+  const [prevIcon, setPrevIcon] = useState(<FaChevronLeft />)
+  const [nextIcon, setNextIcon] = useState(<FaChevronRight />)
   const [testimonialTitle] = useState('What people say about our flood risk intelligence.')
   const [testimonialList] = useState([
     {

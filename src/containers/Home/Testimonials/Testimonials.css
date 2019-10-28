@@ -11,12 +11,14 @@
 }
 
 .carousel-container {
+  padding-top: 30px;
   border-color: #55B96A;
   color: #ffffff;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  height: 300px;
 }
 
 .carousel-indicators li {
@@ -24,16 +26,16 @@
 }
 
 .carousel-control-prev {
-  color: #55B96A !important;
+ color: #55B96A !important;
 }
 
 .carousel-control-next {
-  color: #55B96A !important;
+ color: #55B96A !important;
 }
 
 .carousel-item {
   text-align: center;
-  height: 260px;
+
 }
 
 .carousel-item-container {
@@ -67,14 +69,9 @@ hr {
   flex-direction: column;
 }
 
-/*
-.carousel-caption-body {
+.carousel-inner {
   padding: 0;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
 }
-*/
 
 .carousel-caption-footer {
   text-align: center;
