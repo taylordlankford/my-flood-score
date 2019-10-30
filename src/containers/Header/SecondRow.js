@@ -13,6 +13,7 @@ const secondRowStyle = {
   textAlign: 'center',
   paddingTop: '10px',
   paddingBottom: '10px',
+  borderBottom: '10px solid #0D238E'
 }
 
 const SecondRow = () => (
