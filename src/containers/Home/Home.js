@@ -11,6 +11,8 @@ import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 import CheckMarks from './CheckMarks'
 import Testimonials from './Testimonials/Testimonials'
 
+// Data
+import { TESTIMONIAL_TITLE, TESTIMONIAL_LIST } from './Testimonials/TestimonialData'
 import * as ROUTES from '../../constants/routes'
 
 function Home ({ history }) {
@@ -61,7 +63,10 @@ function Home ({ history }) {
         />
       </div>
       <CheckMarks />
-      <Testimonials />
+      <Testimonials
+        testimonialTitle={TESTIMONIAL_TITLE}
+        testimonialList={TESTIMONIAL_LIST}
+      />
     </>
   )
 }

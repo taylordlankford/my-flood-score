@@ -13,14 +13,10 @@ import { FaChevronLeft } from 'react-icons/fa'
 import TestimonialTitle from './TestimonialTitle'
 import TestimonialCaption from './TestimonialCaption'
 
-// Data
-import { TESTIMONIAL_TITLE, TESTIMONIAL_LIST } from './TestimonialData'
-
-export default function Testimonials() {
+export default function Testimonials(props) {
+  const { testimonialTitle, testimonialList } = props
   const [prevIcon]         = useState(<FaChevronLeft />)
   const [nextIcon]         = useState(<FaChevronRight />)
-  const [testimonialTitle] = useState(TESTIMONIAL_TITLE)
-  const [testimonialList]  = useState(TESTIMONIAL_LIST)
 
   return (
     <Parallax
