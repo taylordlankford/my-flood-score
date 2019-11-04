@@ -9,23 +9,34 @@ import Col from 'react-bootstrap/Col'
 import shoppingCart from '../../assets/images/shopping-cart-solid.svg'
 
 function Header ({ firestoreUser }) {
-  // window.onscroll = function() { scrollFunction() }
-  // function scrollFunction() {
-  //   if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-  //     document.getElementById("navbar").style.padding = "30px 10px";
-  //     document.getElementById("logo").style.fontSize = "25px";
-  //   } else {
-  //     document.getElementById("navbar").style.padding = "80px 10px";
-  //     document.getElementById("logo").style.fontSize = "35px";
-  //   }
-  // }
+  window.onscroll = function() { scrollFunction() }
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById("navbar").style.position = "fixed";
+      document.getElementById("navbar").style.background = "#fff";
+      document.getElementById("navbar").style.width = "100%";
+      document.getElementById("navbar").style.zIndex = "999";
+      document.getElementById("navbar").style.height = "48px";
+      document.getElementById("navbar").style.borderBottom = "1px solid #d3d3d3";
+      document.getElementById("navbar").style.transition = "all 1s ease 0s;";
+      document.getElementById("logo").style.width = "190px";
+      document.getElementById("logo").style.height = "auto";
+      document.getElementById("logo").style.transition = "width 0.5s";
+      document.getElementById("logo").style.transitionTimingFunction = "ease";
+    } else {
+      document.getElementById("navbar").style.position = "relative";
+      document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.height = "80px";
+      document.getElementById("logo").style.width = "240px";
+    }
+  }
   
   return (
     <div className="Headercontainer">
-      <NavBar>
+      <NavBar id="navbar">
         <span className="header">
           <Col>
-            <img src={MFS_Logo} className="MFS-Logo" id="logo" alt={''} />
+            <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="" />
           </Col>
             <div className="linkPosition" >
               <Link to={ROUTES.HOME} className="header-link">Home</Link>
