@@ -80,7 +80,6 @@ const autoSuggestTheme = {
     position: 'relative',
     padding: '0rem 0',
     borderRadius: '24px',
-    zIndex: '999',
     top: '-260px',
     marginBottom: '-260px',
   },
