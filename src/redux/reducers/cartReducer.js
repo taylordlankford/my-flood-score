@@ -2,7 +2,7 @@ import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING } from '
 import { cartInitState } from '../cartInitState'
 
 
-const cartReducer= (state = cartInitState, action)=>{
+const cartReducer = (state = cartInitState, action) => {
    
     //INSIDE HOME COMPONENT
     if (action.type === ADD_TO_CART) {

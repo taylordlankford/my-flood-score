@@ -1,4 +1,4 @@
-export const initState = {
+export const cartInitState = {
   items: [
     {
       id: 1,
@@ -13,7 +13,7 @@ export const initState = {
       price: 80,
     },
     {
-      id:3,
+      id: 3,
       title:'Vans',
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 120,

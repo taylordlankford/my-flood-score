@@ -25,6 +25,7 @@
     "react-stripe-elements": "^5.0.0",
     "react-transition-group": "^4.2.2",
     "redux": "^4.0.4",
+    "redux-persist": "^6.0.0",
     "styled-components": "^4.4.0",
     "use-react-router": "^1.0.7",
     "webfontloader": "^1.6.28"
