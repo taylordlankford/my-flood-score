@@ -9,7 +9,10 @@ import { useFirebase } from '../../hooks'
 import SecondRow from '../Header/SecondRow'
 import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 import CheckMarks from './CheckMarks'
+import Testimonials from './Testimonials/Testimonials'
 
+// Data
+import { TESTIMONIAL_TITLE, TESTIMONIAL_LIST } from './Testimonials/TestimonialData'
 import * as ROUTES from '../../constants/routes'
 
 function Home ({ history }) {
@@ -24,11 +27,25 @@ function Home ({ history }) {
     <>
       <SecondRow />
       <Parallax bgImage={backgroundImage} strength={500}>
-        <div style={{ height: '500px' }}>
+        <div className="headlineWrapper" style={{ height: '500px' }}>
           <div className="headlineContainer">
-            <h1 className="headline">Do You Know Your Flood Score?</h1>
-            <h2 className="headline" style={{ fontSize: '30px', lineHeight: '1.4', marginBottom: '24px' }}>The Most Accurate Flood Risk Assessment for Home Owners</h2>
+            <h1 className="headline">
+              Do You Know Your Flood Score?
+            </h1>
+            <h2 className="headline subtitle">
+              The Most Accurate Flood Risk Assessment for Home Owners
+            </h2>
           </div>
+          {/* <AutoSuggest
+            theme={autoSuggestTheme}
+            onSuggestionSelected={onSuggestionSelected}
+            inputProps={{ id: 'homeAddressSuggest' }}
+            firebase={firebase}
+          /> */}
+        </div>
+      </Parallax>
+      <div className="container2">
+        <div className="autosuggestWrapper">
           <AutoSuggest
             theme={autoSuggestTheme}
             onSuggestionSelected={onSuggestionSelected}
@@ -36,9 +53,7 @@ function Home ({ history }) {
             firebase={firebase}
           />
         </div>
-      </Parallax>
-      <div className="container2" >
-        <h1 style={{  color: "#0d238e" }}> Why You Should Know Your Flood Score</h1>
+        <h1 style={{  color: "#0d238e", textAlign: 'center', margin: 0 }}> Why You Should Know Your Flood Score</h1>
       </div>
       <div className="video">
         <ReactPlayer
@@ -48,6 +63,10 @@ function Home ({ history }) {
         />
       </div>
       <CheckMarks />
+      <Testimonials
+        testimonialTitle={TESTIMONIAL_TITLE}
+        testimonialList={TESTIMONIAL_LIST}
+      />
     </>
   )
 }
@@ -59,21 +78,28 @@ const autoSuggestTheme = {
     width: '100%',
     display: 'inline-grid',
     position: 'relative',
-    padding: '17rem 0',
+    padding: '0rem 0',
+    borderRadius: '24px',
+    zIndex: '999',
+    top: '-260px',
+    marginBottom: '-260px',
   },
   containerOpen: {},
   input: {
-    width: '50%',
-    margin: '0 auto',
-    borderRadius: '24px',
-    /* border: 1px solid lightgray; */
-    border: '2px solid #55b96a',
+    width: '100%',
     padding: '8px 7px 8px 20px',
     fontSize: '18px',
-    transition: '0.2s',
     color: 'black !important',
+    borderRadius: '24px',
+    border: '2px solid #55b96a',
+    borderBottomRightRadius: 'inherit',
+    borderBottomLeftRadius: 'inherit',
+    boxShadow: '0px 1px 4px grey',
   },
-  inputOpen: {},
+  inputOpen: {
+    borderBottomRightRadius: '0',
+    borderBottomLeftRadius: '0',
+  },
   inputFocused: {
     outline: 'none',
     boxShadow: '0px 1px 4px grey',
@@ -81,14 +107,30 @@ const autoSuggestTheme = {
   suggestionsContainer: {
     background: 'white',
     margin: '0 auto',
-    width: '50%',
+    width: '100%',
     position: 'relative',
   },
-  suggestionsContainerOpen: {},
-  suggestionsList: {},
-  suggestion: {},
+  suggestionsContainerOpen: {
+    boxShadow: '0px 1px 4px grey',
+    border: '2px solid #55b96a',
+    borderTop: '0',
+    borderBottomLeftRadius: '24px',
+    borderBottomRightRadius: '24px',
+    // marginBottom: '-200px',
+  },
+  suggestionsList: {
+    listStyle: 'none',
+    padding: '2px 0 2px 0',
+  },
+  suggestion: {
+    padding: '4px 20px 4px 20px',
+    margin: '0 1px 0 1px',
+    cursor: 'pointer',
+  },
   suggestionFirst: {},
-  suggestionHighlighted: {},
+  suggestionHighlighted: {
+    backgroundColor: '#E6F5E9',
+  },
   sectionContainer: {
     background: 'white',
     margin: '0 auto',

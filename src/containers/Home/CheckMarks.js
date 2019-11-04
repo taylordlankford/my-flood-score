@@ -16,7 +16,7 @@ const Column = ({title, description}) => (
 
 const CheckMarks = () => {
   return (
-    <Container style={{ width: '70%' }}>
+    <Container style={{ width: '70%', padding: '80px 0 80px 0' }}>
       <Row>
         <Column
           title="LOWER PREMIUMS"

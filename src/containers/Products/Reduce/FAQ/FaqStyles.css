@@ -1,0 +1,36 @@
+.accordion-toggle {
+  background-color: rgb(244, 244, 244);
+}
+
+.accordion-toggle:hover {
+  transition: 0.2s;
+  cursor: pointer;
+  background-color: rgba(0,0,0,.03);
+}
+
+.faq-container {
+  padding-top: 30px;
+}
+
+.faq-title {
+  text-align: left;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.faq-svg {
+  font-size: 18px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.faq-body {
+  padding: 20px 20px 30px 20px;
+  line-height: 1.6em;
+  font-size: 18px;
+  text-align: left;
+}
+
+.faq-body svg {
+  /*color: #666666; */
+}

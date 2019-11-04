@@ -16,6 +16,8 @@ import insta_gray from '../../assets/images/social/insta_gray.svg'
 import insta_white from '../../assets/images/social/insta_white.svg'
 import insta_background from '../../assets/images/social/instagram-background.jpg'
 
+import Container from 'react-bootstrap/Container'
+
 const Footer = () => {
   return (
     <>
@@ -113,7 +115,7 @@ const Footer = () => {
                   </ul>
                 </FlexItem>
               </Flex>
-              <hr style={{ backgroundColor: '#0d238e' }} />
+              <hr style={{ width: '100%', backgroundColor: '#0d238e' }} />
               <Flex>
                 <FlexItem2></FlexItem2>
                 <FlexItem2></FlexItem2>
@@ -192,7 +194,8 @@ const Div4 = styled.div`
 
 const Div3 = styled.div`
 	text-align: left;
-	padding: 1.9rem;
+  /* padding: 1.9rem; */
+  padding: 0 1.9rem 1.9rem 1.9rem;
 
 	@media (max-width: 900px) {
 		padding: 1.9rem;
@@ -225,7 +228,9 @@ const FlexItem2 = styled.div`
 `;
 
 const Section2 = styled.section`
-	text-align: center;
+  margin: 0 auto;
+  max-width: 1120px;
+  text-align: center;
 	padding: 4rem 0;
 
 	@media (max-width: 1030px) {
