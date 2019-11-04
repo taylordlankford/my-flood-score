@@ -1,6 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import WebFont from 'webfontloader';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import WebFont from 'webfontloader'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
 import './index.css';
 import App from './App';
@@ -20,11 +22,15 @@ WebFont.load({
   }
 });
 
+const store = createStore(cartReducer)
+
 ReactDOM.render(
   <FirebaseContext.Provider value={new Fire()}>
-    <StateProvider initialState={initialState} reducer={StateReducer} >
-      <App />
-    </StateProvider>
+    <Provider store={store}>
+      <StateProvider initialState={initialState} reducer={StateReducer} >
+        <App />
+      </StateProvider>
+    </Provider>
   </FirebaseContext.Provider>,
   document.getElementById('root'),
 )
