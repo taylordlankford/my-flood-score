@@ -105,4 +105,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DiscoverHomeowner)
-// export default DiscoverHomeowner

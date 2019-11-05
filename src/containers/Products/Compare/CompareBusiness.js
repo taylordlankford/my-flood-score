@@ -112,5 +112,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// export default CompareBusiness
 export default connect(mapStateToProps, mapDispatchToProps)(CompareBusiness)
