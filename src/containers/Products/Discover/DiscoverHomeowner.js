@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { connect } from 'react-redux'
 
 import '../Products.css'
 
@@ -12,7 +13,10 @@ import ProductBox from '../../../components/Product/ProductBox'
 import Details from '../../../components/Product/Details'
 import * as ROUTES from '../../../constants/routes'
 
-const DiscoverHomeowner = () => {
+import { addToCart } from '../../../redux/actions/cartActions'
+
+const DiscoverHomeowner = (props) => {
+  const { addToCart } = props
   const { history } = useReactRouter()
   const data = {
     title: "Discover – Homeowner",
@@ -49,13 +53,20 @@ const DiscoverHomeowner = () => {
       }
     }
   ] // end Tab Data
+
+  const handleAddToCart = () => {
+    addToCart(3)
+    history.push(ROUTES.CART)
+  }
+
   return (
   <div>
     <Container style={{ 'marginTop': '64px' }}>
       <Row>
         <Col sm={8}>
           <ProductBox
-            handleAddToCart={() => history.push(ROUTES.CHECKOUT_FREE)}
+            // handleAddToCart={() => history.push(ROUTES.CHECKOUT_FREE)}
+            handleAddToCart={handleAddToCart}
             title={data.title}
             category={data.category}
             breadcrumb={data.breadcrumb}
@@ -83,4 +94,15 @@ const LI = styled.li`
   margin-left: 16px;
 `;
 
-export default DiscoverHomeowner
+const mapStateToProps = (/* state */) => {
+  return null
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (id) => { dispatch(addToCart(id)) }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DiscoverHomeowner)
+// export default DiscoverHomeowner
