@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { connect } from 'react-redux'
 
 import '../Products.css'
 
@@ -13,6 +12,7 @@ import ProductBox from '../../../components/Product/ProductBox'
 import Details from '../../../components/Product/Details'
 import * as ROUTES from '../../../constants/routes'
 
+import { connect } from 'react-redux'
 import { addToCart } from '../../../redux/actions/cartActions'
 
 const DiscoverHomeowner = (props) => {

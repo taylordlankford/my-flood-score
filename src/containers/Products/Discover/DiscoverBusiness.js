@@ -12,7 +12,11 @@ import ProductBox from '../../../components/Product/ProductBox'
 import Details from '../../../components/Product/Details'
 import * as ROUTES from '../../../constants/routes'
 
-const DiscoverBusiness = () => {
+import { connect } from 'react-redux'
+import { addToCart } from '../../../redux/actions/cartActions'
+
+const DiscoverBusiness = (props) => {
+  const { addToCart } = props
   const { history } = useReactRouter()
   const data = {
     title: "Discover – Business",
@@ -50,13 +54,20 @@ const DiscoverBusiness = () => {
       }
     }
   ] // end Tab Data
+
+  const handleAddToCart = () => {
+    addToCart(4)
+    history.push(ROUTES.CART)
+  }
+
   return (
   <div>
     <Container style={{ 'marginTop': '64px' }}>
       <Row>
         <Col sm={8}>
           <ProductBox
-            handleAddToCart={() => history.push(ROUTES.CHECKOUT)}
+            // handleAddToCart={() => history.push(ROUTES.CHECKOUT)}
+            handleAddToCart={handleAddToCart}
             title={data.title}
             category={data.category}
             breadcrumb={data.breadcrumb}
@@ -84,4 +95,15 @@ const LI = styled.li`
   margin-left: 16px;
 `;
 
-export default DiscoverBusiness
+const mapStateToProps = (/* state */) => {
+  return null
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (id) => { dispatch(addToCart(id)) }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DiscoverBusiness)
+// export default DiscoverBusiness
