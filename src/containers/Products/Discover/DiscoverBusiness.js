@@ -56,7 +56,7 @@ const DiscoverBusiness = (props) => {
   ] // end Tab Data
 
   const handleAddToCart = () => {
-    addToCart(4)
+    addToCart(2)
     history.push(ROUTES.CART)
   }
 

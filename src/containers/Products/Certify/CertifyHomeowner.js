@@ -54,7 +54,7 @@ const CertifyHomeowner = (props) => {
   ] // end Tab Data
 
   const handleAddToCart = () => {
-    addToCart(3)
+    addToCart(8)
     history.push(ROUTES.CART)
   }
 

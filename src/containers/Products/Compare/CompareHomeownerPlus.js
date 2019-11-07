@@ -62,7 +62,7 @@ const CompareHomeownerPlus = (props) => {
   ] // end Tab Data
 
   const handleAddToCart = () => {
-    addToCart(2)
+    addToCart(4)
     history.push(ROUTES.CART)
   }
 

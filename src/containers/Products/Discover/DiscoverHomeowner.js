@@ -55,8 +55,8 @@ const DiscoverHomeowner = (props) => {
   ] // end Tab Data
 
   const handleAddToCart = () => {
-    addToCart(3)
-    history.push(ROUTES.CART)
+    // addToCart(3)
+    history.push(ROUTES.CHECKOUT_FREE)
   }
 
   return (

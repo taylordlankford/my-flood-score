@@ -61,7 +61,7 @@ const CompareHomeowner = (props) => {
   ] // end Tab Data
 
   const handleAddToCart = () => {
-    addToCart(1)
+    addToCart(3)
     history.push(ROUTES.CART)
   }
 
