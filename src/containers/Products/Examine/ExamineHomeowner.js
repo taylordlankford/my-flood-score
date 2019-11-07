@@ -62,7 +62,7 @@ const ExamineHomeowner = (props) => {
   ] // end Tab Data
 
   const handleAddToCart = () => {
-    addToCart(5)
+    addToCart(6)
     history.push(ROUTES.CART)
   }
 

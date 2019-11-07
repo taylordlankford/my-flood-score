@@ -54,7 +54,7 @@ const CertifyBusiness = (props) => {
   ] // end Tab Data
 
   const handleAddToCart = () => {
-    addToCart(2)
+    addToCart(9)
     history.push(ROUTES.CART)
   }
 

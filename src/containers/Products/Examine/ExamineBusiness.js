@@ -62,7 +62,7 @@ const ExamineBusiness = (props) => {
   ] // end Tab Data
 
   const handleAddToCart = () => {
-    addToCart(3)
+    addToCart(7)
     history.push(ROUTES.CART)
   }
 

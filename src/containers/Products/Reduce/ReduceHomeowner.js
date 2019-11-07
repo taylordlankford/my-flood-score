@@ -64,7 +64,7 @@ const ReduceHomeowner = (props) => {
   ] // end Tab Data
 
   const handleAddToCart = () => {
-    addToCart(4)
+    addToCart(10)
     history.push(ROUTES.CART)
   }
 
