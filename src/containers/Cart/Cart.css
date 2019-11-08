@@ -144,5 +144,28 @@
   color: #666666;
 }
 .react-numeric-input {
-  height: 100%;
+  min-height: 80%;
+  margin-top: 10px;
+}
+
+/* React-Numeric-Input overrides */
+.react-numeric-input input {
+  min-height: 80%;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.react-numeric-input b {
+  height: 50%;
+  background-color: #f2f2f2 !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.react-numeric-input b:hover {
+}
+
+.react-numeric-input i:hover {
+  color: #55b96a !important;
 }

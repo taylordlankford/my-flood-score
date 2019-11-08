@@ -37,8 +37,17 @@ const Cart = (props) => {
             <Col sm={4}><h1 className="product-title">{product.title}</h1></Col>
             <Col sm={2}><p className="price" >${product.price / 100}</p></Col>
             {/* <Col sm={2} className="product-title"></Col> */}
-                {/* <input type="number" className="input-text qty text" step="1" min="0" max="100" value={product.quantity} name="quantity" title="Qty" size="4" inputMode="numeric" /> */}
-                <NumericInput className="input-text qty text" select={(event) => event.preventDefault()} min={0} max={10} value={product.quantity} onChange={(value) => handleQtyChange(value, product, addQuantity, subtractQuantity )} />
+            {/* <input type="number" className="input-text qty text" step="1" min="0" max="100" value={product.quantity} name="quantity" title="Qty" size="4" inputMode="numeric" /> */}
+            <Col sm={2}>
+                <NumericInput
+                    className="input-text qty text"
+                    select={(event) => event.preventDefault()}
+                    min={0}
+                    max={10}
+                    value={product.quantity}
+                    onChange={(value) => handleQtyChange(value, product, addQuantity, subtractQuantity)}
+                />
+            </Col>
             <Col sm={2} className="price">${product.price / 100 * product.quantity}</Col>
         </Row>
     ))
