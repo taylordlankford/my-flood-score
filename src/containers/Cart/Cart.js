@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import DiscoverImg from '../../assets/images/Discover.svg'
 import { removeItem, addQuantity, subtractQuantity } from '../../redux/actions/cartActions'
+import { MdClose } from 'react-icons/md'
 
 const handleQtyChange = (newValue, product, addQuantity, subtractQuantity) => {
     console.log('old value', product)
@@ -27,28 +28,52 @@ const Cart = (props) => {
         total,
         addQuantity,
         subtractQuantity,
+        removeItem
     } = props
     console.log('props in cart.js', props)
+
+    const handleRemoveItem = (product) => {
+        removeItem(product.id)
+    }
     
     let DPRODUCTS = items.map((product, index) => (
         <Row key={index} className="cartItemsCSS">
             {/* <span> {total = total + product.price}</span> */}
-            <Col sm={2} className="cartImages"><img src={product.img ? product.img : DiscoverImg} className="productImg" id="sPImg" /></Col>
-            <Col sm={4}><h1 className="product-title">{product.title}</h1></Col>
-            <Col sm={2}><p className="price" >${product.price / 100}</p></Col>
+            <Col className="cartImages">
+              <img src={product.img ? product.img : DiscoverImg} className="productImg" id="sPImg" />
+            </Col>
+            <Col sm={4}>
+              <h1 className="product-title">
+                {product.title}
+              </h1>
+            </Col>
+            <Col>
+              <p className="price">
+                ${product.price / 100}
+              </p>
+            </Col>
             {/* <Col sm={2} className="product-title"></Col> */}
             {/* <input type="number" className="input-text qty text" step="1" min="0" max="100" value={product.quantity} name="quantity" title="Qty" size="4" inputMode="numeric" /> */}
-            <Col sm={2}>
-                <NumericInput
-                    className="input-text qty text"
-                    select={(event) => event.preventDefault()}
-                    min={0}
-                    max={10}
-                    value={product.quantity}
-                    onChange={(value) => handleQtyChange(value, product, addQuantity, subtractQuantity)}
-                />
+            <Col>
+              <div className="numeric-container">
+                  <NumericInput
+                      className="input-text qty text"
+                      select={(event) => event.preventDefault()}
+                      min={0}
+                      max={10}
+                      value={product.quantity}
+                      onChange={(value) => handleQtyChange(value, product, addQuantity, subtractQuantity)}
+                  />
+              </div>
             </Col>
-            <Col sm={2} className="price">${product.price / 100 * product.quantity}</Col>
+            <Col className="price">
+                ${product.price / 100 * product.quantity}
+            </Col>
+            <Col className="actions">
+                <div onClick={() => handleRemoveItem(product)}>
+                  <MdClose></MdClose>
+                </div>
+            </Col>
         </Row>
     ))
 
@@ -64,33 +89,28 @@ const Cart = (props) => {
     return (
         <div>
             <Container className="mt-5">
-            <div className="cartFlexBox">
-            <div className="FlexItems">
-              “Discover – Homeowner” has been added to your cart.
-            </div>
-            <div className="FlexItems flexButton">
-                <Button variant="primary" onClick={gotoShop}>CONTINUE SHOPPING</Button>
-            </div>
-        </div>
+                <div className="cartFlexBox">
+                    <div className="FlexItems">
+                    “Discover – Homeowner” has been added to your cart.
+                    </div>
+                    <div className="FlexItems flexButton">
+                        <Button variant="primary" onClick={gotoShop}>CONTINUE SHOPPING</Button>
+                    </div>
+                </div>
             </Container>
-            <Container className="mt-5">
+            <div className="cart-container mt-5">
                 <Row>
                     <Col sm={8}>
-                        <div>
-
-                            <Row>
-                                <Col sm={2}></Col>
+                            <Row className="cart-header">
+                                <Col></Col>
                                 <Col sm={4}>Product</Col>
-                                <Col sm={2}>Price</Col>
-                                <Col sm={2}>Qunatity</Col>
-                                <Col sm={2}>Total</Col>
+                                <Col>Price</Col>
+                                <Col>Quantity</Col>
+                                <Col>Total</Col>
+                                <Col></Col>
                             </Row>
                             <hr />
-
                             {DPRODUCTS}
-
-
-                        </div>
                     </Col>
 
                     <Col sm={4}>
@@ -110,7 +130,7 @@ const Cart = (props) => {
                         </div>
                     </Col>
                 </Row>
-            </Container>
+            </div>
         </div>
 
     )
