@@ -100,7 +100,7 @@
 }
 
 .price {
-  padding-top: 12px;
+  padding-top: 10px;
 }
 
 .cartItemsCSS .price {
@@ -149,19 +149,18 @@
   color: #666666;
 }
 
-.cart-container {
-  margin: 0 auto;
-  max-width: 1080px;
-}
-
 .actions {
   text-align: left;
-  padding-top: 12px;
+  padding-top: 10px;
+}
+
+.actions svg {
+  font-size: 24px;
   color: #e57373;
 }
 
-.actions:hover {
-  color: #ef5350;
+.actions svg:hover {
+  color: red;
   cursor: pointer;
 }
 
