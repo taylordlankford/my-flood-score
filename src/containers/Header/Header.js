@@ -6,7 +6,11 @@ import './Header.css'
 import MFS_Logo from '../../assets/images/MFS_Logo.png'
 import NavBar from 'react-bootstrap/Navbar'
 import Col from 'react-bootstrap/Col'
-import shoppingCart from '../../assets/images/shopping-cart-solid.svg'
+// import shoppingCart from '../../assets/images/shopping-cart-solid.svg'
+import CustomCartDropdown from './CustomCartDropdown/CustomCartDropdown'
+import CustomCartDropdownMenu from './CustomCartDropdown/CustomCartDropdownMenu'
+import Dropdown from 'react-bootstrap/Dropdown'
+import { FaShoppingCart } from 'react-icons/fa'
 
 function Header ({ firestoreUser }) {
   window.onscroll = function() { scrollFunction() }
@@ -36,7 +40,9 @@ function Header ({ firestoreUser }) {
       <NavBar id="navbar">
         <span className="header">
           <Col>
-            <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="" />
+            <Link to={ROUTES.HOME} className="header-link">
+              <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="" />
+            </Link>
           </Col>
             <div className="linkPosition" >
               <Link to={ROUTES.HOME} className="header-link">Home</Link>
@@ -48,6 +54,20 @@ function Header ({ firestoreUser }) {
                   <>
                   <Link to={ROUTES.SIGN_IN} className="header-link">Login</Link>
                   <Link to={ROUTES.CHECKOUT_FREE} className="header-link">Sign Up</Link>
+                  <Dropdown className="cart-custom-dropdown" alignRight={true}>
+                    <Dropdown.Toggle as={CustomCartDropdown} id="dropdown-custom-components">
+                      <FaShoppingCart className="cart" />
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu as={CustomCartDropdownMenu}>
+                      <Dropdown.Item eventKey="1">Red</Dropdown.Item>
+                      <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
+                      <Dropdown.Item eventKey="3" active>
+                        Orange
+                      </Dropdown.Item>
+                      <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                   </>
                 )
               }
