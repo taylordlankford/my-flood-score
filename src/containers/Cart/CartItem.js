@@ -7,10 +7,15 @@ import DiscoverImg from '../../assets/images/Discover.svg'
 import { MdClose } from 'react-icons/md'
 
 const CartItem = (props) => {
-  return(
+  return (
     <Row key={props.index} className="cartItemsCSS">
       {/* <span> {total = total + product.price}</span> */}
-      <Col className="cartImages">
+      <Col sm={1} className="actions">
+        <div onClick={() => props.handleRemoveItem(props.product)}>
+          <MdClose />
+        </div>
+      </Col>
+      <Col sm={2} className="cartImages">
         <img src={props.product.img ? props.product.img : DiscoverImg} className="productImg" id="sPImg" />
       </Col>
       <Col sm={4}>
@@ -26,7 +31,7 @@ const CartItem = (props) => {
       {/* <Col sm={2} className="product-title"></Col> */}
       {/* <input type="number" className="input-text qty text" step="1" min="0" max="100" value={product.quantity} name="quantity" title="Qty" size="4" inputMode="numeric" /> */}
       <Col>
-        <div className="numeric-container">
+        <div className="quantity-container">
           <NumericInput
             className="input-text qty text"
             select={(event) => event.preventDefault()}
@@ -39,11 +44,6 @@ const CartItem = (props) => {
       </Col>
       <Col className="price">
         ${props.product.price / 100 * props.product.quantity}
-      </Col>
-      <Col className="actions">
-        <div onClick={() => props.handleRemoveItem(props.product)}>
-          <MdClose />
-        </div>
       </Col>
     </Row>
   )

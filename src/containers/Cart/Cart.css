@@ -3,6 +3,11 @@
   padding: 28px 32px 32px 32px;
 }
 
+.cart-container {
+  min-height: 100vh;
+  height: 640px;
+}
+
 .cart-header {
   text-align: left;
 }
@@ -75,12 +80,13 @@
 }
 
 .cartImages > #sPImg {
-  width: 65px;
+  /* width: 65px; */
 }
 
 .cartItemsCSS {
-  padding: 10px 0 10px 0;
+  padding: 20px 0 20px 0;
   text-align: left;
+  border-bottom: 1px solid #d4d4d4;
 }
 
 .cartItemsCSS > span {
@@ -100,7 +106,7 @@
 }
 
 .price {
-  padding-top: 10px;
+  padding-top: 24px;
 }
 
 .cartItemsCSS .price {
@@ -151,21 +157,20 @@
 
 .actions {
   text-align: left;
-  padding-top: 10px;
+  padding-top: 14px;
 }
 
 .actions svg {
-  font-size: 24px;
-  color: #e57373;
+  fill: #d4d4d4;
 }
 
 .actions svg:hover {
-  color: red;
+  fill: #666666;
   cursor: pointer;
 }
 
-.numeric-container {
-  padding-top: 4px;
+.quantity-container {
+  padding-top: 16px;
 }
 
 .react-numeric-input {

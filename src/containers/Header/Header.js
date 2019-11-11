@@ -56,7 +56,9 @@ function Header ({ firestoreUser }) {
                   <Link to={ROUTES.CHECKOUT_FREE} className="header-link">Sign Up</Link>
                   <Dropdown className="cart-custom-dropdown" alignRight={true}>
                     <Dropdown.Toggle as={CustomCartDropdown} id="dropdown-custom-components">
-                      <FaShoppingCart className="cart" />
+                      <Link to={ROUTES.CART}>
+                        <FaShoppingCart className="cart" />
+                      </Link>
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu as={CustomCartDropdownMenu}>

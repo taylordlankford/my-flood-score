@@ -1,14 +1,18 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
+import * as ROUTES from '../../constants/routes'
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { withRouter } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
+
 import { connect } from 'react-redux'
 import { removeItem, addQuantity, subtractQuantity } from '../../redux/actions/cartActions'
+
 import CartItem from './CartItem'
 import OrderDetails from './OrderDetails'
 import CartNotifcation from './CartNotification'
-import { CHECKOUT, SHOP } from '../../constants/routes'
 
 const handleQtyChange = (newValue, product, addQuantity, subtractQuantity) => {
   console.log('old value', product)
@@ -34,18 +38,18 @@ const Cart = (props) => {
   console.log('props in cart.js', props)
 
   const gotoShop = () => {
-    props.history.push(SHOP)
+    props.history.push(ROUTES.SHOP)
   }
 
   const gotoCheckout = () => {
-    props.history.push(CHECKOUT)
+    props.history.push(ROUTES.CHECKOUT)
   }
 
   const handleRemoveItem = (product) => {
     removeItem(product.id)
   }
 
-  let DPRODUCTS = items.map((product, index) => (
+  const DPRODUCTS = items.map((product, index) => (
     <CartItem
       product={product}
       key={index}
@@ -57,34 +61,43 @@ const Cart = (props) => {
   ))
 
   return (
-    <div>
+    <Container className="cart-container">
       <CartNotifcation
         items={items}
         gotoShop={gotoShop} />
 
-      <Container className="mt-5">
-        <Row>
-          <Col sm={8}>
-            <Row className="cart-header">
-              <Col></Col>
-              <Col sm={4}>Product</Col>
-              <Col>Price</Col>
-              <Col>Quantity</Col>
-              <Col>Total</Col>
-              <Col></Col>
+      {
+        items.length === 0 ?
+          <Container>
+            <p>Your cart is currently empty.</p>
+            <Button onClick={gotoShop}>
+              RETURN TO SHOP
+            </Button>
+          </Container>
+          :
+          <Container className="mt-5">
+            <Row>
+              <Col sm={8}>
+                <Row className="cart-header">
+                  <Col sm={1}></Col>
+                  <Col sm={2}></Col>
+                  <Col sm={4}>Product</Col>
+                  <Col>Price</Col>
+                  <Col>Quantity</Col>
+                  <Col>Total</Col>
+                </Row>
+                <hr />
+                {DPRODUCTS}
+              </Col>
+
+              <OrderDetails
+                gotoCheckout={gotoCheckout}
+                total={total} />
+
             </Row>
-            <hr />
-            {DPRODUCTS}
-          </Col>
-
-          <OrderDetails
-            gotoCheckout={gotoCheckout}
-            total={total} />
-
-        </Row>
-      </Container >
-    </div>
-
+          </Container >
+      }
+    </Container>
   )
 }
 
