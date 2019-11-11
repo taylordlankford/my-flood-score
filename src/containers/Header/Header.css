@@ -53,6 +53,7 @@
 
 .cart-custom-dropdown:hover {
   fill: #0D238E !important;
+  cursor: pointer;
 }
 
 .cart {
@@ -132,7 +133,7 @@ a:active {
     color: rgb(0, 0, 139);
 }
 
-.cartBadge{
+.cartBadge {
     color: #fff;
     border-radius: 100px;
     background-color: rgb(0, 0, 139);
@@ -140,4 +141,21 @@ a:active {
     position: relative;
     left: -10px;
     top: -10px;
+}
+
+.cart-popover-menu {
+    margin-top: 26px;
+    padding: 20px;
+    border: 1px solid #ffffff;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-btn {
+    background-color: #c4c4c4;
+    color: #ffffff;
+}
+
+.secondary-btn:hover {
+    background-color: #666666;
+    color: #ffffff;
 }

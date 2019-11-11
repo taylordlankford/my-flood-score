@@ -6,11 +6,8 @@ import './Header.css'
 import MFS_Logo from '../../assets/images/MFS_Logo.png'
 import NavBar from 'react-bootstrap/Navbar'
 import Col from 'react-bootstrap/Col'
-// import shoppingCart from '../../assets/images/shopping-cart-solid.svg'
-import CustomCartDropdown from './CustomCartDropdown/CustomCartDropdown'
-import CustomCartDropdownMenu from './CustomCartDropdown/CustomCartDropdownMenu'
-import Dropdown from 'react-bootstrap/Dropdown'
-import { FaShoppingCart } from 'react-icons/fa'
+
+import CartDropdown from './CartDropdown'
 
 function Header ({ firestoreUser }) {
   window.onscroll = function() { scrollFunction() }
@@ -34,7 +31,7 @@ function Header ({ firestoreUser }) {
       document.getElementById("logo").style.width = "240px";
     }
   }
-  
+
   return (
     <div className="Headercontainer">
       <NavBar id="navbar">
@@ -54,22 +51,7 @@ function Header ({ firestoreUser }) {
                   <>
                   <Link to={ROUTES.SIGN_IN} className="header-link">Login</Link>
                   <Link to={ROUTES.CHECKOUT_FREE} className="header-link">Sign Up</Link>
-                  <Dropdown className="cart-custom-dropdown" alignRight={true}>
-                    <Dropdown.Toggle as={CustomCartDropdown} id="dropdown-custom-components">
-                      <Link to={ROUTES.CART}>
-                        <FaShoppingCart className="cart" />
-                      </Link>
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu as={CustomCartDropdownMenu}>
-                      <Dropdown.Item eventKey="1">Red</Dropdown.Item>
-                      <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
-                      <Dropdown.Item eventKey="3" active>
-                        Orange
-                      </Dropdown.Item>
-                      <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                  <CartDropdown />
                   </>
                 )
               }
