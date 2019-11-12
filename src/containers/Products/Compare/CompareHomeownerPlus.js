@@ -1,5 +1,4 @@
 import React from 'react'
-import useReactRouter from 'use-react-router'
 import styled from 'styled-components'
 
 import Container from 'react-bootstrap/Container'
@@ -16,10 +15,9 @@ import * as ROUTES from '../../../constants/routes'
 import { connect } from 'react-redux'
 import { addToCart }  from '../../../redux/actions/cartActions'
 
-const CompareHomeownerPlus = (props) => {
-  const { addToCart } = props
-  const { history } = useReactRouter()
+const CompareHomeownerPlus = () => {
   const data = {
+    id: 4,
     title: "Compare – Homeowner+",
     price: {
       type: 'once',
@@ -61,19 +59,13 @@ const CompareHomeownerPlus = (props) => {
     }
   ] // end Tab Data
 
-  const handleAddToCart = () => {
-    addToCart(4)
-    history.push(ROUTES.CART)
-  }
-
   return (
   <div>
     <Container style={{ 'marginTop': '64px' }}>
       <Row>
         <Col sm={8}>
           <ProductBox
-            // handleAddToCart={() => history.push(ROUTES.CHECKOUT)}
-            handleAddToCart={handleAddToCart}
+            id={data.id}
             title={data.title}
             category={data.category}
             breadcrumb={data.breadcrumb}

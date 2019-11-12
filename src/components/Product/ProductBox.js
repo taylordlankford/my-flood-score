@@ -8,12 +8,13 @@ import Col from 'react-bootstrap/Col'
 
 import './Product.css'
 
+import AddToCartButton from './AddToCartButton'
 import BreadCrumb from './BreadCrumb'
 import DiscoverImg from '../../assets/images/Discover.svg'
 
 const ProductBox = (props) => {
   const {
-    handleAddToCart,
+    id,
     title,
     category,
     breadcrumb,
@@ -35,14 +36,7 @@ const ProductBox = (props) => {
             <label className="screen-reader-text">{title} quantity</label>
             <input type="number" className="input-text qty text" step="1" min="1" max="1" defaultValue="1" name="quantity" title="Qty" size="4" inputMode="numeric" />
           </div>
-          <Button
-            onClick={handleAddToCart}
-            variant="primary"
-            type="submit"
-            name="add-to-cart"
-            className="add-to-cart-button">
-              ADD TO CART
-            </Button>
+          <AddToCartButton id={id} />
           <div className="product_meta">	
             <span>Category: <Link to={category.link}>{category.name}</Link></span>	
           </div>

@@ -1,5 +1,4 @@
 import React from 'react'
-import useReactRouter from 'use-react-router'
 import styled from 'styled-components'
 
 import Container from 'react-bootstrap/Container'
@@ -15,13 +14,12 @@ import * as ROUTES from '../../../constants/routes'
 import { useFirestoreUser } from '../../../hooks'
 import { addToCart } from '../../../redux/actions/cartActions'
 
-const DiscoverHomeownerPlus = (props) => {
-  const { addToCart } = props
-  const { history } = useReactRouter()
+const DiscoverHomeownerPlus = () => {
   const userData = useFirestoreUser()
   const { firestoreUser, loading } = userData
   console.log('firestoreUser', firestoreUser)
   const data = {
+    id: 1,
     title: "Discover – Homeowner+",
     price: {
       type: 'once',
@@ -58,18 +56,13 @@ const DiscoverHomeownerPlus = (props) => {
     }
   ] // end Tab Data
 
- const handleAddToCart = () => {
-  addToCart(1) // TODO: replace 1 with the actual id of this product
-  history.push(ROUTES.CART)
- }
-
   return (
   <div>
     <Container style={{ 'marginTop': '64px' }}>
       <Row>
         <Col sm={8}>
           <ProductBox
-            handleAddToCart={handleAddToCart}
+            id={data.id}
             title={data.title}
             category={data.category}
             breadcrumb={data.breadcrumb}
