@@ -2,27 +2,37 @@
   background-color: #f2f2f2;
   padding: 28px 32px 32px 32px;
 }
+
+.cart-container {
+  min-height: 100vh;
+  height: 640px;
+}
+
+.cart-header {
+  text-align: left;
+}
+
 .cart-item {
-  font-family: "Montserrat", sans-serif;
   color: #666666;
   font-weight: 400;
   font-size: 1rem;
   line-height: 24px;
 }
+
 .cart-Subtotal {
-  font-family: "Montserrat", sans-serif;
   color: #666666;
   font-weight: 700;
   font-size: 1rem;
   line-height: 24px; 
 }
+
 .cart-total {
-  font-family: "Montserrat", sans-serif;
   color: #666666;
   font-weight: 700;
   font-size: 1.4rem;
   line-height: 24px; 
 }
+
 .cart-amount {
   float: right;
 }
@@ -41,7 +51,6 @@
 .emptyCartTxt.container {
   margin-top: 60px;
   font-size: 18px;
-  font-family: "Montserrat", sans-serif;
   color: #666666;
 }
 
@@ -71,11 +80,13 @@
 }
 
 .cartImages > #sPImg {
-  width: 65px;
+  /* width: 65px; */
 }
 
 .cartItemsCSS {
-  min-height: 70px;
+  padding: 20px 0 20px 0;
+  text-align: left;
+  border-bottom: 1px solid #d4d4d4;
 }
 
 .cartItemsCSS > span {
@@ -86,7 +97,6 @@
   align-self: center;
 }
 
-
 .cartItemsCSS .product-title {
   color: #55B96A;
   line-height: 1.4;
@@ -95,6 +105,9 @@
   margin-bottom: 0;
 }
 
+.price {
+  padding-top: 24px;
+}
 
 .cartItemsCSS .price {
   color: #666666;
@@ -102,7 +115,6 @@
   font-size: 18px;
   margin-bottom: 0 !important;
 }
-
 
 .cartSubTotalAmount {
   font-family: "Montserrat", sans-serif;
@@ -112,7 +124,6 @@
   line-height: 24px;
   margin-top: 20px;
 }
-
 
 .cartTotalAmount {
   font-family: "Montserrat", sans-serif;
@@ -143,20 +154,36 @@
   background: #fff;
   color: #666666;
 }
+
+.actions {
+  text-align: left;
+  padding-top: 14px;
+}
+
+.actions svg {
+  fill: #d4d4d4;
+}
+
+.actions svg:hover {
+  fill: #666666;
+  cursor: pointer;
+}
+
+.quantity-container {
+  padding-top: 16px;
+}
+
 .react-numeric-input {
-  min-height: 80%;
-  margin-top: 10px;
 }
 
 /* React-Numeric-Input overrides */
 .react-numeric-input input {
-  min-height: 80%;
+  /* min-height: 80%; */
   border: none !important;
   box-shadow: none !important;
 }
 
 .react-numeric-input b {
-  height: 50%;
   background-color: #f2f2f2 !important;
   cursor: pointer !important;
   box-shadow: none !important;
@@ -164,6 +191,7 @@
 }
 
 .react-numeric-input b:hover {
+  background-color: #d4d4d4 !important;
 }
 
 .react-numeric-input i:hover {

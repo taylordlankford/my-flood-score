@@ -6,7 +6,8 @@ import './Header.css'
 import MFS_Logo from '../../assets/images/MFS_Logo.png'
 import NavBar from 'react-bootstrap/Navbar'
 import Col from 'react-bootstrap/Col'
-import shoppingCart from '../../assets/images/shopping-cart-solid.svg'
+
+import CartDropdown from './CartDropdown/CartDropdown'
 
 function Header ({ firestoreUser }) {
   window.onscroll = function() { scrollFunction() }
@@ -30,13 +31,15 @@ function Header ({ firestoreUser }) {
       document.getElementById("logo").style.width = "240px";
     }
   }
-  
+
   return (
     <div className="Headercontainer">
       <NavBar id="navbar">
         <span className="header">
           <Col>
-            <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="" />
+            <Link to={ROUTES.HOME} className="header-link">
+              <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="" />
+            </Link>
           </Col>
             <div className="linkPosition" >
               <Link to={ROUTES.HOME} className="header-link">Home</Link>
@@ -48,6 +51,7 @@ function Header ({ firestoreUser }) {
                   <>
                   <Link to={ROUTES.SIGN_IN} className="header-link">Login</Link>
                   <Link to={ROUTES.CHECKOUT_FREE} className="header-link">Sign Up</Link>
+                  <CartDropdown />
                   </>
                 )
               }
