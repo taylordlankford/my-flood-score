@@ -148,7 +148,7 @@ a:active {
 .cart-popover-menu {
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
-    max-width: 20rem;
+    width: 20rem !important;
     margin-top: 11px;
     padding: 20px;
     border: none !important;

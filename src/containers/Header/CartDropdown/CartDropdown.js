@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { withRouter } from 'react-router-dom'
 import * as ROUTES from '../../../constants/routes'
 
-import { removeItem, addQuantity, subtractQuantity } from '../../../redux/actions/cartActions'
+import { removeItem } from '../../../redux/actions/cartActions'
 import { connect } from 'react-redux'
 
 import Popover from 'react-bootstrap/Popover'
@@ -15,8 +15,6 @@ function CartDropdown (props) {
   const {
     items,
     removeItem,
-    addQuantity,
-    subtractQuantity
   } = props
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
@@ -31,12 +29,6 @@ function CartDropdown (props) {
     setShow(!show);
     setTarget(event.target);
   }
-
-  // const handleOnMouseLeave = (event) => {
-  //   const show = false;
-  //   setShow(show);
-  //   setTarget(event.target);
-  // }
 
   return (
     <ButtonToolbar ref={ref} style={{ display: 'inline' }}>
@@ -76,8 +68,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     removeItem: (id) => { dispatch(removeItem(id)) },
-    addQuantity: (id) => { dispatch(addQuantity(id)) },
-    subtractQuantity: (id) => { dispatch(subtractQuantity(id)) }
   }
 }
 
