@@ -77,7 +77,9 @@ a:visited {
 }
 
 a:hover {
-    color: #55B96A;
+    transition: 0.5s !important;
+    color: #66de80 !important;
+    cursor: pointer !important;
 }
 
 a:active {
@@ -144,10 +146,36 @@ a:active {
 }
 
 .cart-popover-menu {
+    font-family: "Montserrat", sans-serif;
+    max-width: 20rem;
     margin-top: 26px;
     padding: 20px;
     border: 1px solid #ffffff;
     box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item-img {
+    height: 42px;
+    width: 42px;
+}
+
+.cart-item-title {
+  color: #55B96A !important;
+  font-size: 16px;
+}
+
+.cart-item-title:hover {
+  color: #66de80 !important;
+  cursor: pointer !important;
+}
+
+.cart-item-close-action {
+  fill: #d4d4d4;
+}
+
+.cart-item-close-action:hover {
+  fill: #666666;
+  cursor: pointer !important;
 }
 
 .secondary-btn {
