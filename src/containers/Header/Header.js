@@ -7,7 +7,7 @@ import MFS_Logo from '../../assets/images/MFS_Logo.png'
 import NavBar from 'react-bootstrap/Navbar'
 import Col from 'react-bootstrap/Col'
 
-import CartDropdown from './CartDropdown'
+import CartDropdown from './CartDropdown/CartDropdown'
 
 function Header ({ firestoreUser }) {
   window.onscroll = function() { scrollFunction() }
