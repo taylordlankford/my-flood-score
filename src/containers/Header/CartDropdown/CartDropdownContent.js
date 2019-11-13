@@ -1,14 +1,21 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import Popover from 'react-bootstrap/Popover'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import DiscoverImg from '../../../assets/images/Discover.svg'
 import { MdClose } from 'react-icons/md'
+import { convertToProductPathName } from '../../../routes/helpers/RouteHelper'
 
-export default function CartDropdownContent(props) {
+function CartDropdownContent(props) {
   const handleCloseOnClick = (cartItem) => {
     props.removeItem(cartItem.id)
+  }
+
+  const handleOnClickTitle = (cartItemTitle) => {
+    const productPathName = convertToProductPathName(cartItemTitle)
+    props.history.push(`/product/${productPathName}`)
   }
 
   return (
@@ -23,8 +30,10 @@ export default function CartDropdownContent(props) {
                     <Col sm={3}>
                       <img src={cartItem.img ? cartItem.img : DiscoverImg} className="cart-item-img" />
                     </Col>
-                    <Col md={7}>
-                      <p className="cart-item-title">{cartItem.title}</p>
+                      <Col md={7}>
+                      <p className="cart-item-title" onClick={() => handleOnClickTitle(cartItem.title)}>
+                        {cartItem.title}
+                      </p>
                     </Col>
                     <Col sm={2}>
                       <MdClose className="cart-item-close-action" onClick={() => handleCloseOnClick(cartItem)} />
@@ -35,7 +44,7 @@ export default function CartDropdownContent(props) {
             }
             <div>
               <div style={{ color: '#666666', padding: '14px 0 14px 0', textAlign: 'center' }}>
-                <h5><b>Subtotal: $0.00</b></h5>
+                <h5><b>Subtotal: ${props.total / 100}</b></h5>
               </div>
               <Button className="secondary-btn" style={{ backgroundColor: '#c4c4c4', width: '100%', marginBottom: '5px' }}>View Cart</Button>
               <Button style={{ width: '100%' }}>Checkout</Button>
@@ -51,3 +60,5 @@ export default function CartDropdownContent(props) {
     </Popover.Content>
   )
 }
+
+export default withRouter(CartDropdownContent)

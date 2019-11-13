@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { withRouter } from 'react-router-dom'
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../routes/constants/routes'
 
 import { removeItem } from '../../../redux/actions/cartActions'
 import { connect } from 'react-redux'
@@ -15,6 +15,7 @@ import CartCounter from './CartCounter'
 function CartDropdown (props) {
   const {
     items,
+    total,
     removeItem,
   } = props
   const [show, setShow] = useState(false);
@@ -62,6 +63,7 @@ function CartDropdown (props) {
 
               <CartDropdownContent
                 items={items}
+                total={total}
                 removeItem={removeItem} />
             </Popover>
           </Overlay>
@@ -72,7 +74,8 @@ function CartDropdown (props) {
 
 const mapStateToProps = (state) => {
   return {
-    items: state.addedItems
+    items: state.addedItems,
+    total: state.total
   }
 }
 

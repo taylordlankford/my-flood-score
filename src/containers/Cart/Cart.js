@@ -1,6 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -115,5 +115,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// export default withRouter(Cart)
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Cart))

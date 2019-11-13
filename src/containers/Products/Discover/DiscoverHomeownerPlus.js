@@ -10,7 +10,8 @@ import '../Products.css'
 
 import ProductBox from '../../../components/Product/ProductBox' 
 import Details from '../../../components/Product/Details'
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../routes/constants/routes'
+// import * as ROUTES from '../../../constants/routes'
 import { useFirestoreUser } from '../../../hooks'
 import { addToCart } from '../../../redux/actions/cartActions'
 

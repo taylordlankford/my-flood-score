@@ -1,4 +1,6 @@
 import React from 'react'
+import { withRouter } from 'react-router'
+
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
@@ -6,7 +8,14 @@ import NumericInput from 'react-numeric-input';
 import DiscoverImg from '../../assets/images/Discover.svg'
 import { MdClose } from 'react-icons/md'
 
+import { convertToProductPathName }  from '../../routes/helpers/RouteHelper'
+
 const CartItem = (props) => {
+  const handleOnClickTitle = (cartItemTitle) => {
+    const productPathName = convertToProductPathName(cartItemTitle)
+    props.history.push(`/product/${productPathName}`)
+  }
+
   return (
     <Row key={props.index} className="cartItemsCSS">
       {/* <span> {total = total + product.price}</span> */}
@@ -16,10 +25,15 @@ const CartItem = (props) => {
         </div>
       </Col>
       <Col sm={2} className="cartImages">
-        <img src={props.product.img ? props.product.img : DiscoverImg} className="productImg" id="sPImg" />
+        <img 
+          src={props.product.img ? props.product.img : DiscoverImg}
+          className="productImg"
+          id="sPImg" />
       </Col>
       <Col sm={4}>
-        <h1 className="product-title">
+        <h1 
+          className="product-title"
+          onClick={() => handleOnClickTitle(props.product.title)}>
           {props.product.title}
         </h1>
       </Col>
@@ -49,4 +63,4 @@ const CartItem = (props) => {
   )
 }
 
-export default CartItem
+export default withRouter(CartItem)

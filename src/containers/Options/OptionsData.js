@@ -1,4 +1,5 @@
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 export const detailsList1 = [
   'Flood Score',
   'Latest and Best Available Flood modeling',

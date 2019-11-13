@@ -6,7 +6,8 @@ import { FaLeaf } from 'react-icons/fa'
 
 import theme from './theme.css.js'
 
-import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
+// import * as ROUTES from '../../constants/routes'
 
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
