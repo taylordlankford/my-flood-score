@@ -115,5 +115,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// export default withRouter(Cart)
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Cart))
