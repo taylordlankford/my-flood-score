@@ -19,7 +19,8 @@ import Red_House from '../../assets/images/Red_House.svg'
 import MFS_Text_Logo from '../../assets/images/MFS_Text_Logo.svg'
 
 
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 import Button from 'react-bootstrap/Button'
 
 const range = [

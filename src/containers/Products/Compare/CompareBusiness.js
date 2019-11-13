@@ -11,7 +11,8 @@ import Compare from '../../../assets/images/Compare.svg'
 
 import ProductBox from '../../../components/Product/ProductBox' 
 import Details from '../../../components/Product/Details'
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../routes/constants/routes'
+// import * as ROUTES from '../../../constants/routes'
 
 import { connect } from 'react-redux'
 import { addToCart } from '../../../redux/actions/cartActions'

@@ -43,7 +43,8 @@ import ReduceHomeowner from './containers/Products/Reduce/ReduceHomeowner'
 
 import Account from './containers/Account/Account'
 
-import * as ROUTES from './constants/routes'
+// import * as ROUTES from './constants/routes'
+import * as ROUTES from './routes/constants/routes'
 import { useFirestoreUser, useStateValue} from './hooks'
 import './App.css'
 

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { withRouter } from 'react-router-dom'
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../routes/constants/routes'
 
 import { removeItem } from '../../../redux/actions/cartActions'
 import { connect } from 'react-redux'

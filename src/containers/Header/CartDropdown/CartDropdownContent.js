@@ -6,16 +6,11 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import DiscoverImg from '../../../assets/images/Discover.svg'
 import { MdClose } from 'react-icons/md'
+import { convertToProductPathName } from '../../../routes/helpers/RouteHelper'
 
 function CartDropdownContent(props) {
   const handleCloseOnClick = (cartItem) => {
     props.removeItem(cartItem.id)
-  }
-
-  const convertToProductPathName = (cartItemTitle) => {
-    let productPathName = cartItemTitle.replace(/\s+/g, '-')
-    productPathName = productPathName.replace(/\+/g, '-plus').toLowerCase()
-    return productPathName
   }
 
   const handleOnClickTitle = (cartItemTitle) => {
@@ -35,7 +30,7 @@ function CartDropdownContent(props) {
                     <Col sm={3}>
                       <img src={cartItem.img ? cartItem.img : DiscoverImg} className="cart-item-img" />
                     </Col>
-                    <Col md={7}>
+                      <Col md={7}>
                       <p className="cart-item-title" onClick={() => handleOnClickTitle(cartItem.title)}>
                         {cartItem.title}
                       </p>

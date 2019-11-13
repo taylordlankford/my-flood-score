@@ -13,7 +13,8 @@ import Testimonials from './Testimonials/Testimonials'
 
 // Data
 import { TESTIMONIAL_TITLE, TESTIMONIAL_LIST } from './Testimonials/TestimonialData'
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 
 function Home ({ history }) {
   const firebase = useFirebase()

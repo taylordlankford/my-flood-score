@@ -8,14 +8,9 @@ import NumericInput from 'react-numeric-input';
 import DiscoverImg from '../../assets/images/Discover.svg'
 import { MdClose } from 'react-icons/md'
 
+import { convertToProductPathName }  from '../../routes/helpers/RouteHelper'
+
 const CartItem = (props) => {
-
-  const convertToProductPathName = (cartItemTitle) => {
-    let productPathName = cartItemTitle.replace(/\s+/g, '-')
-    productPathName = productPathName.replace(/\+/g, '-plus').toLowerCase()
-    return productPathName
-  }
-
   const handleOnClickTitle = (cartItemTitle) => {
     const productPathName = convertToProductPathName(cartItemTitle)
     props.history.push(`/product/${productPathName}`)

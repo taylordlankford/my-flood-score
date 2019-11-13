@@ -10,7 +10,8 @@ import MyVerticallyCenteredModal from '../MyVerticallyCenteredModal'
 import sampleCertifyPDF from '../../../assets/pdfs/sample-certificate.pdf'
 import sampleCertify from '../../../assets/images/sample-certificate.jpg'
 import SecondRow from '../../Header/SecondRow'
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../routes/constants/routes'
+// import * as ROUTES from '../../../constants/routes'
 
 import CertifyOptions from '../../Options/CertifyOptions'
 

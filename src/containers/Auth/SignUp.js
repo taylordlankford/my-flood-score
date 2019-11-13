@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import useReactRouter from 'use-react-router'
 import { Link } from 'react-router-dom'
 
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 import { useFirebase } from '../../hooks'
 
 
