@@ -63,6 +63,7 @@
   transition: 0.3s !important;
   color: #66de80 !important;
   cursor: pointer !important;
+  text-decoration: none !important;
 }
 
 .cart-link-wrapper {
@@ -105,60 +106,61 @@
 }
 
 a:link {
- text-decoration: none;
+  text-decoration: none;
 }
 
 a:visited {
- text-decoration: none;
+  text-decoration: none;
 }
 
 a:hover {
   transition: 0.5s !important;
   cursor: pointer !important;
+  text-decoration: none !important;
 }
 
 a:active {
- text-decoration: underline;
+  text-decoration: underline;
 }
 
 .linkPosition {
- padding-right: 100px;
+  padding-right: 100px;
 }
 
 .test {
- background-color: black;
- border-bottom: 20px;
- border-color: black;
+  background-color: black;
+  border-bottom: 20px;
+  border-color: black;
 }
 
 .links2 {
- color: #55B96A;
- font-weight: bold;
- font-size: 20px;
- text-decoration: none;
- margin-right: 20px;
- margin-left: 20px;
+  color: #55B96A;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .links2logo {
- /* width: 150px; */
- width: 50px;
- margin-left: 12px;
+  /* width: 150px; */
+  width: 50px;
+  margin-left: 12px;
 }
 
 .headerBottom {
- width: 100%;
- border-bottom: 8px;
- border-left: 0px;
- border-right: 0px;
- border-style: solid;
- border-color: #0d238e;
- border-top: 10px;
- padding: 6px 75px;
- display: flex;
- flex-wrap: wrap;
- align-items: center;
- justify-content: space-around;
+  width: 100%;
+  border-bottom: 8px;
+  border-left: 0px;
+  border-right: 0px;
+  border-style: solid;
+  border-color: #0d238e;
+  border-top: 10px;
+  padding: 6px 75px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .cartBadge {
@@ -172,21 +174,22 @@ a:active {
 }
 
 .cart-popover-menu {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 400;
-    width: 20rem !important;
-    margin-top: 11px;
-    padding: 20px;
-    border: none !important;
-    border-radius: 0;
-    box-shadow: 0 8px 15px rgba(0,0,0,.1);
-    transform: 0.3s;
-    opacity: 0.3s;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  width: 20rem !important;
+  z-index: 99;
+  margin-top: 9px;
+  padding: 20px;
+  border: none !important;
+  border-radius: 0;
+  box-shadow: 0 8px 15px rgba(0,0,0,.1);
+  transform: 0.3s;
+  opacity: 0.3s;
 }
 
 .cart-item-img {
-    height: 42px;
-    width: 42px;
+  height: 42px;
+  width: 42px;
 }
 
 .cart-item-title {

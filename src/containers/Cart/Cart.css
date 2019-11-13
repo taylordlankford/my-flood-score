@@ -101,8 +101,14 @@
   color: #55B96A;
   line-height: 1.4;
   font-size: 16px;
-  font-weight: 100;
-  margin-bottom: 0;
+  font-weight: 500;
+  padding-top: 18px;
+}
+
+.cartItemsCSS .product-title:hover {
+  cursor: pointer !important;
+  color: #66DE80 !important;
+  transition: 0.3s;
 }
 
 .price {
@@ -174,16 +180,30 @@
 }
 
 .react-numeric-input {
+  border-radius: 0.3rem !important;
 }
 
 /* React-Numeric-Input overrides */
 .react-numeric-input input {
   /* min-height: 80%; */
   border: none !important;
-  box-shadow: none !important;
+  border-radius: 0.3rem !important;
+  box-shadow: 0 0 0 2px transparent, 0 1px 0 rgba(0,0,0,0.08) inset !important;
+  box-sizing: border-box;
+  width: 4rem;
+  height: 2.8rem;
+  line-height: 2.8rem;
+  padding: 0 0.8rem;
+}
+
+.react-numeric-input input:focus {
+  border: 2px solid #55b96a !important;
+  transition: 0.1s !important;
 }
 
 .react-numeric-input b {
+  margin-top: 2px !important;
+  height: 1.0rem !important;
   background-color: #f2f2f2 !important;
   cursor: pointer !important;
   box-shadow: none !important;
