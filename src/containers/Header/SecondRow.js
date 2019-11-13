@@ -8,16 +8,8 @@ import Certify from '../../assets/images/Certificate.svg'
 import Reduce_Eliminate from '../../assets/images/Reduce_Eliminate.svg'
 import Discover from '../../assets/images/Discover.svg'
 
-const secondRowStyle = {
-  margin: 'auto 0',
-  textAlign: 'center',
-  paddingTop: '10px',
-  paddingBottom: '10px',
-  borderBottom: '10px solid #0D238E'
-}
-
 const SecondRow = () => (
-  <div style={secondRowStyle}>
+  <div className="secondrow">
     <Link to={ROUTES.DISCOVER} className="links2">
       Discover
       <img src={Discover} className={'links2logo'} alt="" />
