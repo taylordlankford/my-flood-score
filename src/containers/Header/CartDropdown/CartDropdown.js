@@ -38,7 +38,12 @@ function CartDropdown (props) {
         onClick={handleOnClick}>
 
         <FaShoppingCart className="cart-icon" />
-        <CartCounter cartCount={items.length} />
+        {
+          (items.length > 0) ?
+            <CartCounter cartCount={items.length} />
+            :
+            <span style={{ display: 'none' }}></span>
+        }
       </span>
       {
         (window.location.pathname === ROUTES.CART) ?
