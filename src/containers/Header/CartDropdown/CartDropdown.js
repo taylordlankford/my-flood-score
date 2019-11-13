@@ -8,8 +8,9 @@ import { connect } from 'react-redux'
 import Popover from 'react-bootstrap/Popover'
 import { FaShoppingCart } from 'react-icons/fa'
 import Overlay from  'react-bootstrap/Overlay'
-import ButtonToolbar from  'react-bootstrap/ButtonToolbar'
+
 import CartDropdownContent from './CartDropdownContent'
+import CartCounter from './CartCounter'
 
 function CartDropdown (props) {
   const {
@@ -20,9 +21,8 @@ function CartDropdown (props) {
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
-  const handleClick = () => {
-    // setShow(!show);
-    // setTarget(event.target);
+  const handleOnClick = () => {
+    props.history.push(ROUTES.CART)
   }
 
   const handleOnMouseEnter = (event) => {
@@ -31,12 +31,15 @@ function CartDropdown (props) {
   }
 
   return (
-    <ButtonToolbar ref={ref} style={{ display: 'inline' }}>
-      <FaShoppingCart
+    <div className="cart-link-wrapper"> 
+      <span 
         className="cart-custom-dropdown"
         onMouseEnter={handleOnMouseEnter}
-        onClick={handleClick} 
-      />
+        onClick={handleOnClick}>
+
+        <FaShoppingCart className="cart-icon" />
+        <CartCounter cartCount={items.length} />
+      </span>
       {
         (window.location.pathname === ROUTES.CART) ?
           <div style={{ display: 'inline' }}></div>
@@ -46,16 +49,19 @@ function CartDropdown (props) {
             target={target}
             placement="bottom-end"
             container={ref.current}
-            transition={true}> 
+            transition={true}>
 
-            <Popover className="cart-popover-menu" id="popover-contained">
+            <Popover
+              className="cart-popover-menu"
+              id="popover-contained">
+
               <CartDropdownContent
                 items={items}
                 removeItem={removeItem} />
             </Popover>
           </Overlay>
       } 
-    </ButtonToolbar>
+    </div>
   );
 }
 
