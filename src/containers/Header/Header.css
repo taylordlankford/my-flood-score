@@ -105,6 +105,10 @@
   font-size: 18px;
 }
 
+.Headercontainer a {
+  color: #666666;
+}
+
 a:link {
   text-decoration: none;
 }
