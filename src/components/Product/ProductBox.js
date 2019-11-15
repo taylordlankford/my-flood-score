@@ -1,39 +1,25 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import useReactRouter from 'use-react-router'
 import { Link, withRouter } from 'react-router-dom'
-
-import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import './Product.css'
-
 import AddToCartButton from './AddToCartButton'
 import BreadCrumb from './BreadCrumb'
 import DiscoverImg from '../../assets/images/Discover.svg'
-import * as ROUTES from '../../routes/constants/routes'
-import { addToCart } from '../../redux/actions/cartActions'
-
 import NumericInput from 'react-numeric-input'
 
 const ProductBox = (props) => {
   const {
     category,
-    breadcrumb,
-    addToCart
+    breadcrumb
   } = props
 
   const [quantity, setQuantity] = useState(1)
-  const { history } = useReactRouter()
 
   const handleQtyChange = (value) => {
     setQuantity(value)
-  }
-
-  const handleAddToCart = (itemId) => {
-    addToCart(itemId, quantity)
-    history.push(ROUTES.CART)
   }
 
   return (
@@ -66,7 +52,9 @@ const ProductBox = (props) => {
               value={quantity}
               onChange={(value) => handleQtyChange(value)} />
           </div>
-          <AddToCartButton id={props.item.id} />
+          <AddToCartButton
+            quantity={quantity}
+            id={props.item.id} />
           <div className="product_meta">	
             <span>Category: <Link to={category.link}>{category.name}</Link></span>	
           </div>
@@ -78,8 +66,4 @@ const ProductBox = (props) => {
 
 const mapStateToProps = (/* state */) => ({})
 
-const mapDispatchToProps = (dispatch) => ({
-  addToCart: (id, quantity) => { dispatch(addToCart(id, quantity)) }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductBox))
+export default connect(mapStateToProps)(withRouter(ProductBox))

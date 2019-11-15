@@ -10,12 +10,12 @@ import './Product.css'
 import * as ROUTES from '../../routes/constants/routes'
 import { addToCart } from '../../redux/actions/cartActions'
 
-const handleAddToCart = ({ addToCart, id, history }) => {
+const handleAddToCart = ({ addToCart, id, history, quantity }) => {
   if (id == 0) {
     history.push(ROUTES.ACCOUNT)
     return
   }
-  addToCart(id)
+  addToCart(id, quantity)
   history.push(ROUTES.CART)
  }
 
@@ -36,14 +36,10 @@ const AddToCartButton = (props) => {
   )
 }
 
-const mapStateToProps = (/* state */) => {
-  return null
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addToCart: (id) => { dispatch(addToCart(id)) },
-  }
-}
+const mapStateToProps = (/* state */) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: (id, quantity) => { dispatch(addToCart(id, quantity)) }
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddToCartButton))
-
