@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import '../Products.css'
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -39,7 +40,7 @@ const CertifyBusiness = (props) => {
         ]
       }
     }
-  ]
+  ] // end Tab Data
 
   return (
     <Container style={{ 'marginTop': '64px' }}>

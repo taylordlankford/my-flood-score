@@ -43,7 +43,7 @@ const DiscoverHomeowner = (props) => {
         ]
       }
     }
-  ]
+  ] // end Tab Data
 
   return (
     <Container style={{ 'marginTop': '64px' }}>

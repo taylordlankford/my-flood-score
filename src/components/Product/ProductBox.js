@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import './Product.css'
 
+import AddToCartButton from './AddToCartButton'
 import BreadCrumb from './BreadCrumb'
 import DiscoverImg from '../../assets/images/Discover.svg'
 import * as ROUTES from '../../routes/constants/routes'
@@ -65,18 +66,9 @@ const ProductBox = (props) => {
               value={quantity}
               onChange={(value) => handleQtyChange(value)} />
           </div>
-          <Button
-            variant="primary"
-            type="submit"
-            name="add-to-cart"
-            className="add-to-cart-button"
-            onClick={() => handleAddToCart(props.item.id)}>
-            ADD TO CART
-          </Button>
-          <div className="product_meta">
-            <span>
-              Category: <Link to={category.link}>{category.name}</Link>
-            </span>
+          <AddToCartButton id={props.item.id} />
+          <div className="product_meta">	
+            <span>Category: <Link to={category.link}>{category.name}</Link></span>	
           </div>
         </Col>
       </Row>
