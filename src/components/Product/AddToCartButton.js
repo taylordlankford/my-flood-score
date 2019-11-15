@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button'
 import { useFirestoreUser } from '../../hooks'
 
 import './Product.css'
-import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 import { addToCart } from '../../redux/actions/cartActions'
 
 const handleAddToCart = ({ addToCart, id, history }) => {
