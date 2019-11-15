@@ -10,8 +10,8 @@ import Col from 'react-bootstrap/Col'
 
 import CartDropdown from './CartDropdown/CartDropdown'
 
-function Header ({ firestoreUser }) {
-  window.onscroll = function() { scrollFunction() }
+function Header({ firestoreUser }) {
+  window.onscroll = function () { scrollFunction() }
   function scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
       document.getElementById("navbar").style.position = "fixed";
@@ -42,27 +42,31 @@ function Header ({ firestoreUser }) {
               <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="" />
             </Link>
           </Col>
-            <div className="linkPosition" >
-              <Link to={ROUTES.HOME} className="header-link">Home</Link>
-              <Link to={ROUTES.HOME} className="header-link">About</Link>
-              <Link to={ROUTES.DISCOVER_HOMEOWNER} className="header-link">Get Your FREE Flood Score</Link>
-              {(firestoreUser)
-                ? <Link to={ROUTES.ACCOUNT} className="header-link">Hi, {firestoreUser.firstName}</Link>
-                : (
-                  <>
+          <div className="linkPosition" >
+            <Link to={ROUTES.HOME} className="header-link">Home</Link>
+            <Link to={ROUTES.HOME} className="header-link">About</Link>
+            <Link to={ROUTES.DISCOVER_HOMEOWNER} className="header-link">Get Your FREE Flood Score</Link>
+            {(firestoreUser) ?
+              <span>
+                <Link to={ROUTES.ACCOUNT} className="header-link">Hi, {firestoreUser.firstName}</Link>
+                <CartDropdown />
+              </span>
+              :
+              (
+                <>
                   <Link to={ROUTES.SIGN_IN} className="header-link">Login</Link>
                   <Link to={ROUTES.CHECKOUT_FREE} className="header-link">Sign Up</Link>
                   <CartDropdown />
-                  </>
-                )
-              }
-              {/* <Link to={ROUTES.SIGN_UP} className="header-link">
+                </>
+              )
+            }
+            {/* <Link to={ROUTES.SIGN_UP} className="header-link">
                 <img src={shoppingCart} className="cart" alt="" />
               </Link> */}
-            </div>
-          </span>
-        </NavBar>
-      </div>
+          </div>
+        </span>
+      </NavBar>
+    </div>
   )
 }
 
