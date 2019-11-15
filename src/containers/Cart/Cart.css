@@ -185,15 +185,14 @@
 
 /* React-Numeric-Input overrides */
 .react-numeric-input input {
-  /* min-height: 80%; */
-  border: none !important;
+  border: 2px solid #fff !important;
   border-radius: 0.3rem !important;
   box-shadow: 0 0 0 2px transparent, 0 1px 0 rgba(0,0,0,0.08) inset !important;
-  box-sizing: border-box;
-  width: 4rem;
-  height: 2.8rem;
-  line-height: 2.8rem;
-  padding: 0 0.8rem;
+  box-sizing: border-box !important;
+  width: 4rem !important;
+  height: 2.8rem !important;
+  line-height: 2.8rem !important;
+  padding: 0 0.8rem !important;
 }
 
 .react-numeric-input input:focus {

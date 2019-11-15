@@ -1,22 +1,19 @@
 import React, { useState, useRef } from 'react'
 import { withRouter } from 'react-router-dom'
 import * as ROUTES from '../../../routes/constants/routes'
-
 import { removeItem } from '../../../redux/actions/cartActions'
 import { connect } from 'react-redux'
-
 import Popover from 'react-bootstrap/Popover'
 import { FaShoppingCart } from 'react-icons/fa'
 import Overlay from  'react-bootstrap/Overlay'
-
 import CartDropdownContent from './CartDropdownContent'
 import CartCounter from './CartCounter'
 
 function CartDropdown (props) {
   const {
-    items,
+    addedItems,
     total,
-    removeItem,
+    removeItem
   } = props
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
@@ -31,6 +28,14 @@ function CartDropdown (props) {
     setTarget(event.target);
   }
 
+  const getCartQuantity = () => {
+    let cartCounter = 0
+    addedItems.map((item) => {
+      cartCounter += item.quantity
+    })
+    return cartCounter
+  }
+
   return (
     <div className="cart-link-wrapper"> 
       <span 
@@ -40,12 +45,13 @@ function CartDropdown (props) {
 
         <FaShoppingCart className="cart-icon" />
         {
-          (items.length > 0) ?
-            <CartCounter cartCount={items.length} />
+          (addedItems.length > 0) ?
+            <CartCounter cartCount={getCartQuantity()} />
             :
             <span style={{ display: 'none' }}></span>
         }
       </span>
+      {console.log(addedItems.length)}
       {
         (window.location.pathname === ROUTES.CART) ?
           <div style={{ display: 'inline' }}></div>
@@ -62,7 +68,7 @@ function CartDropdown (props) {
               id="popover-contained">
 
               <CartDropdownContent
-                items={items}
+                addedItems={addedItems}
                 total={total}
                 removeItem={removeItem} />
             </Popover>
@@ -74,7 +80,7 @@ function CartDropdown (props) {
 
 const mapStateToProps = (state) => {
   return {
-    items: state.addedItems,
+    addedItems: state.addedItems,
     total: state.total
   }
 }

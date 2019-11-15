@@ -1,24 +1,22 @@
-import { ADD_TO_CART,REMOVE_ITEM,SUB_QUANTITY,ADD_QUANTITY,ADD_SHIPPING } from '../actions/action-types/cart-actions'
+import { ADD_TO_CART, REMOVE_ITEM, SUB_QUANTITY, ADD_QUANTITY, ADD_SHIPPING } from '../actions/action-types/cart-actions'
 import { cartInitState } from '../cartInitState'
 
-
 const cartReducer = (state = cartInitState, action) => {
-   
-    //INSIDE HOME COMPONENT
     if (action.type === ADD_TO_CART) {
-      let addedItem = state.items.find(item=> item.id === action.id)
+      let addedItem = state.items.find(item => item.id === action.id)
       // check if the action id exists in the addedItems
-      let existed_item= state.addedItems.find(item=> action.id === item.id)
+      let existed_item = state.addedItems.find(item => action.id === item.id)
+
       if (existed_item) {
-        addedItem.quantity += 1 
+        addedItem.quantity += action.quantity
         return {
           ...state,
-          total: state.total + addedItem.price 
+          total: state.total + (addedItem.price * action.quantity)
         }
       } else { // item did not exist
-        addedItem.quantity = 1;
+        addedItem.quantity = action.quantity;
         // calculating the total
-        let newTotal = state.total + addedItem.price 
+        let newTotal = state.total + (addedItem.price * action.quantity)
         return {
           ...state,
           addedItems: [...state.addedItems, addedItem],
@@ -26,6 +24,30 @@ const cartReducer = (state = cartInitState, action) => {
         }
       }
     }
+   
+    //INSIDE HOME COMPONENT
+    // if (action.type === ADD_TO_CART) {
+    //   let addedItem = state.items.find(item=> item.id === action.id)
+    //   // check if the action id exists in the addedItems
+    //   let existed_item= state.addedItems.find(item=> action.id === item.id)
+    //   if (existed_item) {
+    //     addedItem.quantity += 1 
+    //     return {
+    //       ...state,
+    //       total: state.total + addedItem.price 
+    //     }
+    //   } else { // item did not exist
+    //     addedItem.quantity = 1;
+    //     // calculating the total
+    //     let newTotal = state.total + addedItem.price 
+    //     return {
+    //       ...state,
+    //       addedItems: [...state.addedItems, addedItem],
+    //       total : newTotal
+    //     }
+    //   }
+    // }
+
     if (action.type === REMOVE_ITEM) {
       let itemToRemove= state.addedItems.find(item=> action.id === item.id)
       let new_items = state.addedItems.filter(item=> action.id !== item.id)

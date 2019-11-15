@@ -4,7 +4,6 @@ import ExamineImg from '../assets/images/Examine.svg'
 import certifyImg from '../assets/images/Certificate.svg'
 import ReduceImg from '../assets/images/Reduce_Eliminate.svg'
 
-
 export const cartInitState = {
   items: [
     {

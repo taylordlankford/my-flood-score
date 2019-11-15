@@ -42,8 +42,6 @@ const CartItem = (props) => {
           ${props.product.price / 100}
         </p>
       </Col>
-      {/* <Col sm={2} className="product-title"></Col> */}
-      {/* <input type="number" className="input-text qty text" step="1" min="0" max="100" value={product.quantity} name="quantity" title="Qty" size="4" inputMode="numeric" /> */}
       <Col>
         <div className="quantity-container">
           <NumericInput
