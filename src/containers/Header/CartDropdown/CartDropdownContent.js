@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import DiscoverImg from '../../../assets/images/Discover.svg'
 import { MdClose } from 'react-icons/md'
+import { IoIosClose } from 'react-icons/io'
 import { convertToProductPathName } from '../../../routes/helpers/RouteHelper'
 
 function CartDropdownContent(props) {
@@ -21,10 +22,10 @@ function CartDropdownContent(props) {
   return (
     <Popover.Content>
       {
-        (props.items.length > 0) ?
+        (props.addedItems.length > 0) ?
           <div>
             {
-              props.items.map((cartItem, index) => {
+              props.addedItems.map((cartItem, index) => {
                 return (
                   <Row key={index}>
                     <Col sm={3}>
@@ -32,7 +33,12 @@ function CartDropdownContent(props) {
                     </Col>
                       <Col md={7}>
                       <p className="cart-item-title" onClick={() => handleOnClickTitle(cartItem.title)}>
-                        {cartItem.title}
+                        <span>{cartItem.title}</span>
+                        <div style={{ padding: '4px 0 4px 0', lineHeight: '1.4rem', fontWeight: '500', color: '#666666' }}>
+                          <span>{cartItem.quantity}</span>
+                          <IoIosClose />
+                          <span>${(cartItem.price / 100).toFixed(2)}</span>
+                        </div>
                       </p>
                     </Col>
                     <Col sm={2}>
