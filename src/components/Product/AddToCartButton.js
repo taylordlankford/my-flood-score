@@ -11,7 +11,7 @@ import * as ROUTES from '../../routes/constants/routes'
 import { addToCart } from '../../redux/actions/cartActions'
 
 const handleAddToCart = ({ addToCart, id, history, quantity }) => {
-  if (id == 0) {
+  if (id === 0) {
     history.push(ROUTES.ACCOUNT)
     return
   }

@@ -6,6 +6,7 @@ import { createStore } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import { PersistGate } from 'redux-persist/integration/react'
+import { StripeProvider } from 'react-stripe-elements'
 
 import './index.css'
 import App from './App'
@@ -40,7 +41,9 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <StateProvider initialState={initialState} reducer={StateReducer} >
-          <App />
+          <StripeProvider apiKey="pk_test_gr69jFk1pQjupS7Kd2TO9eIB">
+            <App />
+          </StripeProvider>
         </StateProvider>
       </PersistGate>
     </Provider>
