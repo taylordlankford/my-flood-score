@@ -9,8 +9,12 @@ import { useFirebase } from '../../hooks'
 import SecondRow from '../Header/SecondRow'
 import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 import CheckMarks from './CheckMarks'
+import Testimonials from './Testimonials/Testimonials'
 
-import * as ROUTES from '../../constants/routes'
+// Data
+import { TESTIMONIAL_TITLE, TESTIMONIAL_LIST } from './Testimonials/TestimonialData'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 
 function Home ({ history }) {
   const firebase = useFirebase()
@@ -24,10 +28,14 @@ function Home ({ history }) {
     <>
       <SecondRow />
       <Parallax bgImage={backgroundImage} strength={500}>
-        <div style={{ height: '500px' }}>
+        <div className="headlineWrapper" style={{ height: '500px' }}>
           <div className="headlineContainer">
-            <h1 className="headline">Do You Know Your Flood Score?</h1>
-            <h2 className="headline" style={{ fontSize: '30px', lineHeight: '1.4', marginBottom: '24px' }}>The Most Accurate Flood Risk Assessment for Home Owners</h2>
+            <h1 className="headline">
+              Do You Know Your Flood Score?
+            </h1>
+            <h2 className="headline subtitle">
+              The Most Accurate Flood Risk Assessment for Home Owners
+            </h2>
           </div>
           {/* <AutoSuggest
             theme={autoSuggestTheme}
@@ -37,13 +45,15 @@ function Home ({ history }) {
           /> */}
         </div>
       </Parallax>
-      <div className="container2" >
-        <AutoSuggest
-          theme={autoSuggestTheme}
-          onSuggestionSelected={onSuggestionSelected}
-          inputProps={{ id: 'homeAddressSuggest' }}
-          firebase={firebase}
-        />
+      <div className="container2">
+        <div className="autosuggestWrapper">
+          <AutoSuggest
+            theme={autoSuggestTheme}
+            onSuggestionSelected={onSuggestionSelected}
+            inputProps={{ id: 'homeAddressSuggest' }}
+            firebase={firebase}
+          />
+        </div>
         <h1 style={{  color: "#0d238e", textAlign: 'center', margin: 0 }}> Why You Should Know Your Flood Score</h1>
       </div>
       <div className="video">
@@ -54,6 +64,10 @@ function Home ({ history }) {
         />
       </div>
       <CheckMarks />
+      <Testimonials
+        testimonialTitle={TESTIMONIAL_TITLE}
+        testimonialList={TESTIMONIAL_LIST}
+      />
     </>
   )
 }
@@ -67,14 +81,12 @@ const autoSuggestTheme = {
     position: 'relative',
     padding: '0rem 0',
     borderRadius: '24px',
-    zIndex: '999',
     top: '-260px',
     marginBottom: '-260px',
   },
   containerOpen: {},
   input: {
-    width: '50%',
-    margin: '0 auto',
+    width: '100%',
     padding: '8px 7px 8px 20px',
     fontSize: '18px',
     color: 'black !important',
@@ -95,7 +107,7 @@ const autoSuggestTheme = {
   suggestionsContainer: {
     background: 'white',
     margin: '0 auto',
-    width: '50%',
+    width: '100%',
     position: 'relative',
   },
   suggestionsContainerOpen: {

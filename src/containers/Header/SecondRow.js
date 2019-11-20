@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 
 import Compare from '../../assets/images/Compare.svg'
 import Examine from '../../assets/images/Examine.svg'
@@ -9,10 +10,10 @@ import Reduce_Eliminate from '../../assets/images/Reduce_Eliminate.svg'
 import Discover from '../../assets/images/Discover.svg'
 
 const SecondRow = () => (
-  <div className='headerBottom'>
+  <div className="secondrow">
     <Link to={ROUTES.DISCOVER} className="links2">
-        Discover
-        <img src={Discover} className={'links2logo'} alt="" />
+      Discover
+      <img src={Discover} className={'links2logo'} alt="" />
     </Link>
     <Link to={ROUTES.COMPARE} className="links2">
       Compare

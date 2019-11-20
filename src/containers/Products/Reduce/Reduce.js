@@ -10,9 +10,11 @@ import '../Products.css'
 import { Button, TopSection } from '../StyledComponents'
 import sampleReduce from '../../../assets/images/Reduce_Eliminate.svg'
 import SecondRow from '../../Header/SecondRow'
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../routes/constants/routes'
+// import * as ROUTES from '../../../constants/routes'
 
 import ReduceOptions from '../../Options/ReduceOptions'
+import Faq from './FAQ/Faq'
 
 const Reduce = ({ history }) => {
   return (
@@ -42,14 +44,14 @@ const Reduce = ({ history }) => {
       <div style={{ backgroundColor: '#f4f4f4', marginTop: '30px', textAlign: 'center' }}>
         <Container>
           <Row>
-            <Col sm={9}>
+            <Col sm={8}>
               <ReduceOptions />
               <Button onClick={() => history.push(ROUTES.OPTIONS)} variant="primary">CHECK ALL REPORTS AND ACCOUNT OPTIONS</Button>
             </Col>
-            <Col sm={3} style={{ marginTop: '150px' }}>
+            <Col sm={4} style={{ marginTop: '120px' }}>
               <p style={{ color: '#0d238e', fontSize: '2.1rem', lineHeight: '1.4', fontWeight: '700' }}>FAQ</p>
               <hr />
-              <Accordion />
+              <Faq />
               {/* <Accordion defaultActiveKey="0" >
                 <Card>
                   <Accordion.Toggle as={Card.Header} eventKey="0">

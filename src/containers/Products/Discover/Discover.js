@@ -10,7 +10,8 @@ import MyVerticallyCenteredModal from '../MyVerticallyCenteredModal'
 import sampleDiscoverPDF from '../../../assets/pdfs/sample-discovery.pdf'
 import sampleDiscover from '../../../assets/images/sample-discover.jpg'
 import SecondRow from '../../Header/SecondRow'
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../routes/constants/routes'
+// import * as ROUTES from '../../../constants/routes'
 
 import DiscoverOptions from '../../Options/DiscoverOptions'
 

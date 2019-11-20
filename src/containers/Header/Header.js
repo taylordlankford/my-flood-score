@@ -1,52 +1,72 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 
 import './Header.css'
 import MFS_Logo from '../../assets/images/MFS_Logo.png'
 import NavBar from 'react-bootstrap/Navbar'
 import Col from 'react-bootstrap/Col'
-import shoppingCart from '../../assets/images/shopping-cart-solid.svg'
 
-function Header ({ firestoreUser }) {
-  // window.onscroll = function() { scrollFunction() }
-  // function scrollFunction() {
-  //   if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-  //     document.getElementById("navbar").style.padding = "30px 10px";
-  //     document.getElementById("logo").style.fontSize = "25px";
-  //   } else {
-  //     document.getElementById("navbar").style.padding = "80px 10px";
-  //     document.getElementById("logo").style.fontSize = "35px";
-  //   }
-  // }
-  
+import CartDropdown from './CartDropdown/CartDropdown'
+
+function Header({ firestoreUser }) {
+  window.onscroll = function () { scrollFunction() }
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById("navbar").style.position = "fixed";
+      document.getElementById("navbar").style.background = "#fff";
+      document.getElementById("navbar").style.width = "100%";
+      document.getElementById("navbar").style.zIndex = "999";
+      document.getElementById("navbar").style.height = "48px";
+      document.getElementById("navbar").style.borderBottom = "1px solid #d3d3d3";
+      document.getElementById("navbar").style.transition = "all 1s ease 0s;";
+      document.getElementById("logo").style.width = "190px";
+      document.getElementById("logo").style.height = "auto";
+      document.getElementById("logo").style.transition = "width 0.5s";
+      document.getElementById("logo").style.transitionTimingFunction = "ease";
+    } else {
+      document.getElementById("navbar").style.position = "relative";
+      document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.height = "80px";
+      document.getElementById("logo").style.width = "240px";
+    }
+  }
+
   return (
     <div className="Headercontainer">
-      <NavBar>
+      <NavBar id="navbar">
         <span className="header">
           <Col>
-            <img src={MFS_Logo} className="MFS-Logo" id="logo" alt={''} />
+            <Link to={ROUTES.HOME} className="header-link">
+              <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="" />
+            </Link>
           </Col>
-            <div className="linkPosition" >
-              <Link to={ROUTES.HOME} className="header-link">Home</Link>
-              <Link to={ROUTES.HOME} className="header-link">About</Link>
-              <Link to={ROUTES.DISCOVER_HOMEOWNER} className="header-link">Get Your FREE Flood Score</Link>
-              {(firestoreUser)
-                ? <Link to={ROUTES.ACCOUNT} className="header-link">Hi, {firestoreUser.firstName}</Link>
-                : (
-                  <>
+          <div className="linkPosition" >
+            <Link to={ROUTES.HOME} className="header-link">Home</Link>
+            <Link to={ROUTES.HOME} className="header-link">About</Link>
+            <Link to={ROUTES.DISCOVER_HOMEOWNER} className="header-link">Get Your FREE Flood Score</Link>
+            {(firestoreUser) ?
+              <span>
+                <Link to={ROUTES.ACCOUNT} className="header-link">Hi, {firestoreUser.firstName}</Link>
+                <CartDropdown />
+              </span>
+              :
+              (
+                <>
                   <Link to={ROUTES.SIGN_IN} className="header-link">Login</Link>
                   <Link to={ROUTES.CHECKOUT_FREE} className="header-link">Sign Up</Link>
-                  </>
-                )
-              }
-              {/* <Link to={ROUTES.SIGN_UP} className="header-link">
+                  <CartDropdown />
+                </>
+              )
+            }
+            {/* <Link to={ROUTES.SIGN_UP} className="header-link">
                 <img src={shoppingCart} className="cart" alt="" />
               </Link> */}
-            </div>
-          </span>
-        </NavBar>
-      </div>
+          </div>
+        </span>
+      </NavBar>
+    </div>
   )
 }
 
