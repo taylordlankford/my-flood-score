@@ -1,15 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 
 import './Header.css'
 import MFS_Logo from '../../assets/images/MFS_Logo.png'
 import NavBar from 'react-bootstrap/Navbar'
 import Col from 'react-bootstrap/Col'
-import shoppingCart from '../../assets/images/shopping-cart-solid.svg'
 
-function Header ({ firestoreUser }) {
-  window.onscroll = function() { scrollFunction() }
+import CartDropdown from './CartDropdown/CartDropdown'
+
+function Header({ firestoreUser }) {
+  window.onscroll = function () { scrollFunction() }
   function scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
       document.getElementById("navbar").style.position = "fixed";
@@ -30,34 +32,41 @@ function Header ({ firestoreUser }) {
       document.getElementById("logo").style.width = "240px";
     }
   }
-  
+
   return (
     <div className="Headercontainer">
       <NavBar id="navbar">
         <span className="header">
           <Col>
-            <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="" />
+            <Link to={ROUTES.HOME} className="header-link">
+              <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="" />
+            </Link>
           </Col>
-            <div className="linkPosition" >
-              <Link to={ROUTES.HOME} className="header-link">Home</Link>
-              <Link to={ROUTES.HOME} className="header-link">About</Link>
-              <Link to={ROUTES.DISCOVER_HOMEOWNER} className="header-link">Get Your FREE Flood Score</Link>
-              {(firestoreUser)
-                ? <Link to={ROUTES.ACCOUNT} className="header-link">Hi, {firestoreUser.firstName}</Link>
-                : (
-                  <>
+          <div className="linkPosition" >
+            <Link to={ROUTES.HOME} className="header-link">Home</Link>
+            <Link to={ROUTES.HOME} className="header-link">About</Link>
+            <Link to={ROUTES.DISCOVER_HOMEOWNER} className="header-link">Get Your FREE Flood Score</Link>
+            {(firestoreUser) ?
+              <span>
+                <Link to={ROUTES.ACCOUNT} className="header-link">Hi, {firestoreUser.firstName}</Link>
+                <CartDropdown />
+              </span>
+              :
+              (
+                <>
                   <Link to={ROUTES.SIGN_IN} className="header-link">Login</Link>
                   <Link to={ROUTES.CHECKOUT_FREE} className="header-link">Sign Up</Link>
-                  </>
-                )
-              }
-              {/* <Link to={ROUTES.SIGN_UP} className="header-link">
+                  <CartDropdown />
+                </>
+              )
+            }
+            {/* <Link to={ROUTES.SIGN_UP} className="header-link">
                 <img src={shoppingCart} className="cart" alt="" />
               </Link> */}
-            </div>
-          </span>
-        </NavBar>
-      </div>
+          </div>
+        </span>
+      </NavBar>
+    </div>
   )
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 
 import Compare from '../../assets/images/Compare.svg'
 import Examine from '../../assets/images/Examine.svg'
@@ -8,16 +9,8 @@ import Certify from '../../assets/images/Certificate.svg'
 import Reduce_Eliminate from '../../assets/images/Reduce_Eliminate.svg'
 import Discover from '../../assets/images/Discover.svg'
 
-const secondRowStyle = {
-  margin: 'auto 0',
-  textAlign: 'center',
-  paddingTop: '10px',
-  paddingBottom: '10px',
-  borderBottom: '10px solid #0D238E'
-}
-
 const SecondRow = () => (
-  <div style={secondRowStyle}>
+  <div className="secondrow">
     <Link to={ROUTES.DISCOVER} className="links2">
       Discover
       <img src={Discover} className={'links2logo'} alt="" />

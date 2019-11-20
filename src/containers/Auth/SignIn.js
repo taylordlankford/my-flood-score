@@ -6,7 +6,8 @@ import Form from 'react-bootstrap/Form'
 import './Auth.css'
 import { SignUpLink } from './SignUp'
 import { PasswordForgetLink } from './PasswordForget'
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 import { useFirebase } from '../../hooks'
 
 const SignInPage = () => {

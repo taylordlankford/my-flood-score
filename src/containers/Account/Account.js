@@ -1,7 +1,8 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 import { useFirestoreUser, useFirebase } from '../../hooks'
 
 const Account = ({ history }) => {

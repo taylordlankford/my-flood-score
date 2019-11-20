@@ -10,7 +10,8 @@ import MyVerticallyCenteredModal from '../MyVerticallyCenteredModal'
 import sampleExaminePDF from '../../../assets/pdfs/sample-Analysis.pdf'
 import sampleExamine from '../../../assets/images/sample-analysis.jpg'
 import SecondRow from '../../Header/SecondRow'
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../routes/constants/routes'
+// import * as ROUTES from '../../../constants/routes'
 
 import ExamineOptions from '../../Options/ExamineOptions'
 

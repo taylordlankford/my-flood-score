@@ -108,8 +108,12 @@ class Fire {
 
 
   // *** Functions API ***
-
   doAddUser = () => this.functions.httpsCallable('addUser')
+  doPaymentIntent = async (intent) => {
+    const paymentIntent = this.functions.httpsCallable('paymentIntent')
+    const res = await paymentIntent({intent})
+    return res
+  }
 
 
 }

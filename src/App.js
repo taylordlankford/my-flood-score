@@ -22,6 +22,7 @@ import CheckoutFreePage from './containers/Cart/CheckoutFree'
 import OrderReceivedPage from './containers/Cart/OrderReceived'
 import EmailActionPage from './containers/EmailActionHandler/EmailAction'
 import OptionsPage from './containers/Options/Options'
+import Cart from './containers/Cart/Cart'
 
 import Discover from './containers/Products/Discover/Discover'
 import Compare from './containers/Products/Compare/Compare'
@@ -42,7 +43,8 @@ import ReduceHomeowner from './containers/Products/Reduce/ReduceHomeowner'
 
 import Account from './containers/Account/Account'
 
-import * as ROUTES from './constants/routes'
+// import * as ROUTES from './constants/routes'
+import * as ROUTES from './routes/constants/routes'
 import { useFirestoreUser, useStateValue} from './hooks'
 import './App.css'
 
@@ -91,6 +93,7 @@ const App = () => {
                         <Route path={ROUTES.ORDER_RECEIVED} component={OrderReceivedPage} />
                         <Route path={ROUTES.EMAIL_ACTION_HANDLER} component={EmailActionPage} />
                         <Route path={ROUTES.OPTIONS} component={OptionsPage} />
+                        <Route path={ROUTES.CART} component={Cart} />
 
                         <Route path={ROUTES.DISCOVER} component={Discover} />
                         <Route path={ROUTES.COMPARE} component={Compare} />

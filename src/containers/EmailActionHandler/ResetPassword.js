@@ -3,7 +3,8 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useFirebase } from '../../hooks'
 
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 
 const ResetPassword = ({ history, email, setEmail, actionCode }) => {
   const firebase = useFirebase()
