@@ -1,34 +1,26 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import * as ROUTES from '../../../routes/constants/routes'
 import { removeItem } from '../../../redux/actions/cartActions'
 import { connect } from 'react-redux'
-import Popover from 'react-bootstrap/Popover'
 import { FaShoppingCart } from 'react-icons/fa'
-import Overlay from  'react-bootstrap/Overlay'
 import CartDropdownContent from './CartDropdownContent'
 import CartCounter from './CartCounter'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-function CartDropdown (props) {
+function CartDropdown(props) {
   const {
     addedItems,
     total,
-    removeItem
+    removeItem 
   } = props
-  const [show, setShow] = useState(false);
-  const [target, setTarget] = useState(null);
-  const ref = useRef(null);
 
-  const handleOnClick = () => {
-    props.history.push(ROUTES.CART)
-  }
+  const [
+    dropdownVisible,
+    setDropdownVisible
+  ] = useState(false)
 
-  const handleOnMouseEnter = (event) => {
-    setShow(!show);
-    setTarget(event.target);
-  }
-
-  const getCartQuantity = () => {
+  const cartQuantity = () => {
     let cartCounter = 0
     addedItems.map((item) => {
       cartCounter += item.quantity
@@ -37,58 +29,47 @@ function CartDropdown (props) {
   }
 
   return (
-    <div className="cart-link-wrapper"> 
-      <span 
-        className="cart-custom-dropdown"
-        onMouseEnter={handleOnMouseEnter}
-        onClick={handleOnClick}>
+    <TransitionGroup
+      style={{ display: 'inline' }}
+      className="popover-container"
+      onMouseLeave={() => setDropdownVisible(false)}>
 
-        <FaShoppingCart className="cart-icon" />
+
+      <span onMouseEnter={() => setDropdownVisible(true)}>
+        <FaShoppingCart
+          onClick={() => props.history.push(ROUTES.CART)}
+          className="cart-icon" />
         {
-          (addedItems.length > 0) ?
-            <CartCounter cartCount={getCartQuantity()} />
+          (props.addedItems.length > 0) ?
+            <CartCounter cartCount={cartQuantity()} />
             :
             <span style={{ display: 'none' }}></span>
         }
       </span>
-      {console.log(addedItems.length)}
-      {
-        (window.location.pathname === ROUTES.CART) ?
-          <div style={{ display: 'inline' }}></div>
-          :
-          <Overlay
-            show={show}
-            target={target}
-            placement="bottom-end"
-            container={ref.current}
-            transition={true}>
-
-            <Popover
-              className="cart-popover-menu"
-              id="popover-contained">
-
-              <CartDropdownContent
-                addedItems={addedItems}
-                total={total}
-                removeItem={removeItem} />
-            </Popover>
-          </Overlay>
-      } 
-    </div>
-  );
+      {/* Don't show cart dropdown menu on /cart */}
+      {(window.location.pathname === ROUTES.CART) ?
+        <div style={{ display: 'none' }}></div>
+        :
+        dropdownVisible && (
+          <CSSTransition in={dropdownVisible} classNames="cartdropdown-menu">
+            <CartDropdownContent
+              addedItems={addedItems}
+              total={total}
+              removeItem={removeItem} />
+          </CSSTransition>
+        )}
+    </TransitionGroup>
+  )
 }
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) => ({
     addedItems: state.addedItems,
     total: state.total
-  }
-}
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    removeItem: (id) => { dispatch(removeItem(id)) },
-  }
-}
+
+const mapDispatchToProps = (dispatch) => ({
+  removeItem: (id) => { dispatch(removeItem(id)) }
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CartDropdown))
