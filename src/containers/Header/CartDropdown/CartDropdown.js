@@ -7,6 +7,7 @@ import { FaShoppingCart } from 'react-icons/fa'
 import CartDropdownContent from './CartDropdownContent'
 import CartCounter from './CartCounter'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import './CartDropdown.css'
 
 function CartDropdown(props) {
   const {
@@ -33,7 +34,6 @@ function CartDropdown(props) {
       style={{ display: 'inline' }}
       className="popover-container"
       onMouseLeave={() => setDropdownVisible(false)}>
-
 
       <span onMouseEnter={() => setDropdownVisible(true)}>
         <FaShoppingCart
