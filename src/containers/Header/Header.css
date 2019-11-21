@@ -178,17 +178,18 @@ a:active {
 }
 
 .cart-popover-menu {
+  position: absolute;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  max-width: 22rem !important;
+  min-width: 22rem !important;
   z-index: 999 !important;
-  margin-top: 9px;
-  padding: 20px;
+  right: 0;
+  padding: 30px;
   border: none !important;
   border-radius: 0;
   box-shadow: 0 8px 15px rgba(0,0,0,.1);
-  transform: 0.3s;
-  opacity: 0.3s;
+  background: #fff;
+  transition: all 0.3s ease-in !important;
 }
 
 .cart-item-img {
@@ -227,18 +228,57 @@ a:active {
 }
 
 .cart-counter {
+  font-size: 11px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
   min-width: 20px;
   text-align: center;
   line-height: 20px;
   position: absolute;
   border-radius: 2rem;
-  transition: transform 0.3s;
   border: 1px solid #0D238E;
   background-color: #0D238E;
   color: #ffffff;
   box-sizing: border-box;
-  z-index: 99;
-  font-size: 11px;
-  font-weight: 600;
-  font-family: "Montserrat", sans-serif;
+  z-index: 99 !important;
+  position: absolute;
+  bottom: 40px !important;
+  left: 26px !important;
 }
+
+.popover-container {
+  border: none !important;
+  padding: 30px 12px 30px 12px !important;
+  vertical-align: top;
+  border-top: none !important;
+  position: relative;
+  display: inline;
+}
+
+.popover-container:hover {
+  cursor: pointer;
+}
+
+/* 
+ * Begin CSS classes for ReactCSSTransition Library
+ * Depends on having react-transition-group library in CartDropdown.js
+ * These give the cartdropdown menu it's transition effects.
+*/
+.cartdropdown-menu-enter {
+  opacity: 0;
+}
+
+.cartdropdown-menu-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+.cartdropdown-menu-exit {
+  opacity: 1;
+}
+
+.cartdropdown-menu-exit-active {
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+/* EOF classes for ReactCSSTransition Library */
