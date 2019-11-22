@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import * as ROUTES from '../../../routes/constants/routes'
-import { removeItem } from '../../../redux/actions/cartActions'
 import { connect } from 'react-redux'
 import { FaShoppingCart } from 'react-icons/fa'
 import CartDropdownContent from './CartDropdownContent'
 import CartCounter from './CartCounter'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import './CartDropdown.css'
 
-function CartDropdown(props) {
+const CartDropdown = (props) => {
   const {
     addedItems,
-    total,
-    removeItem 
+    total
   } = props
 
   const [
@@ -34,7 +33,6 @@ function CartDropdown(props) {
       className="popover-container"
       onMouseLeave={() => setDropdownVisible(false)}>
 
-
       <span onMouseEnter={() => setDropdownVisible(true)}>
         <FaShoppingCart
           onClick={() => props.history.push(ROUTES.CART)}
@@ -55,7 +53,7 @@ function CartDropdown(props) {
             <CartDropdownContent
               addedItems={addedItems}
               total={total}
-              removeItem={removeItem} />
+            />
           </CSSTransition>
         )}
     </TransitionGroup>
@@ -67,9 +65,6 @@ const mapStateToProps = (state) => ({
     total: state.total
 })
 
-
-const mapDispatchToProps = (dispatch) => ({
-  removeItem: (id) => { dispatch(removeItem(id)) }
-})
+const mapDispatchToProps = (/* dispatch */) => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CartDropdown))

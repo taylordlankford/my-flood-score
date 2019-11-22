@@ -1,17 +1,29 @@
 import React from 'react'
+import * as ROUTES from '../../../routes/constants/routes'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import DiscoverImg from '../../../assets/images/Discover.svg'
-import { MdClose } from 'react-icons/md'
-import { IoIosClose } from 'react-icons/io'
 import { convertToProductPathName } from '../../../routes/helpers/RouteHelper'
+import CartDropdownItem from './CartDropdownItem'
+import { removeItem } from '../../../redux/actions/cartActions'
 
-function CartDropdownContent(props) {
+const CartDropdownContent = (props) => {
+  const { removeItem } = props
+
   const handleOnClickTitle = (cartItemTitle) => {
     const productPathName = convertToProductPathName(cartItemTitle)
     props.history.push(`/product/${productPathName}`)
+  }
+
+  const redirectToCart = () => {
+    props.history.push(ROUTES.CART)
+  }
+
+  const redirectToCheckout = () => {
+    props.history.push(ROUTES.CHECKOUT)
   }
 
   return (
@@ -22,39 +34,43 @@ function CartDropdownContent(props) {
             {
               props.addedItems.map((cartItem, index) => {
                 return (
-                  <Row key={index} style={{ paddingBottom: '20px' }}>
-                    <Col md={3}>
-                      <img src={cartItem.img ? cartItem.img : DiscoverImg} className="cart-item-img" />
-                    </Col>
-                      <Col md={7}>
-                      <div className="cart-item-title" onClick={() => handleOnClickTitle(cartItem.title)}>
-                        <span>{cartItem.title}</span>
-                        <div style={{ padding: '4px 0 4px 0', lineHeight: '1.4rem', fontWeight: '500', color: '#666666' }}>
-                          <span>{cartItem.quantity}</span>
-                          <IoIosClose />
-                          <span>${(cartItem.price / 100).toFixed(2)}</span>
-                        </div>
-                      </div>
-                    </Col>
-                    <Col md={2}>
-                      <MdClose className="cart-item-close-action" onClick={() => props.removeItem(cartItem.id)} />
-                    </Col>
-                  </Row>
+                  <CartDropdownItem
+                    key={index}
+                    cartItem={cartItem}
+                    discoverImg={DiscoverImg}
+                    handleOnClickTitle={handleOnClickTitle}
+                    removeItem={removeItem}
+                  />
                 )
               })
             }
             <div>
               <div style={{ color: '#666666', padding: '14px 0 14px 0', textAlign: 'center' }}>
-                <h5><b>Subtotal: ${props.total / 100}</b></h5>
+                <h5>
+                  <b>Subtotal: ${(props.total / 100).toFixed(2)}</b>
+                </h5>
               </div>
-              <Button className="secondary-btn" style={{ backgroundColor: '#c4c4c4', width: '100%', marginBottom: '5px' }}>View Cart</Button>
-              <Button style={{ width: '100%' }}>Checkout</Button>
+              <Button
+                onClick={redirectToCart}
+                className="secondary-btn view-cart-btn"
+                style={{ backgroundColor: '#c4c4c4', width: '100%', marginBottom: '5px' }}
+              >
+                View Cart
+              </Button>
+              <Button
+                onClick={redirectToCheckout}
+                style={{ width: '100%' }}
+              >
+                Checkout
+              </Button>
             </div>
           </div>
         :
           <Row>
             <Col sm={12}>
-              <p style={{ color: '#666666', fontSize: '16px' }}>No Products in the cart.</p>
+              <p style={{ color: '#666666', fontSize: '16px' }}>
+                No Products in the cart.
+              </p>
             </Col>
           </Row>
       }
@@ -62,4 +78,10 @@ function CartDropdownContent(props) {
   )
 }
 
-export default withRouter(CartDropdownContent)
+const mapStateToProps = (/* state */) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+  removeItem: (id) => { dispatch(removeItem(id)) }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CartDropdownContent))

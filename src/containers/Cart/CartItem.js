@@ -39,7 +39,7 @@ const CartItem = (props) => {
       </Col>
       <Col>
         <p className="price">
-          ${props.product.price / 100}
+          ${(props.product.price / 100).toFixed(2)}
         </p>
       </Col>
       <Col>
@@ -54,8 +54,8 @@ const CartItem = (props) => {
           />
         </div>
       </Col>
-      <Col className="price">
-        ${props.product.price / 100 * props.product.quantity}
+      <Col className="price" style={{ fontWeight: '600' }}>
+        ${(props.product.price / 100 * props.product.quantity).toFixed(2)}
       </Col>
     </Row>
   )
