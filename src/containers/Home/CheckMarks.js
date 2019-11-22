@@ -16,22 +16,24 @@ const Column = ({title, description}) => (
 
 const CheckMarks = () => {
   return (
-    <Container style={{ width: '70%', padding: '80px 0 80px 0' }}>
-      <Row>
-        <Column
-          title="LOWER PREMIUMS"
-          description="For 1000’s of homeowners our Flood Score could help to reduce or even eliminate flood premiums."
-        />
-        <Column
-          title="KNOW AND COMPARE"
-          description="Compare your property to understand the risk relative to other properties around you and get advice on reducing your risk."
-        />
-        <Column
-          title="EARLY INDICATIONS"
-          description="Our Flood Score intelligence provides early indications of flood zone changes, which may affect your premium."
-        />
-      </Row>
-    </Container>
+    <div style={{ backgroundColor: '#f4f4f4' }}>
+      <Container style={{ maxWidth: '748px', padding: '40px 0 40px 0' }}>
+        <Row>
+          <Column
+            title="LOWER PREMIUMS"
+            description="For 1000’s of homeowners our Flood Score could help to reduce or even eliminate flood premiums."
+          />
+          <Column
+            title="KNOW AND COMPARE"
+            description="Compare your property to understand the risk relative to other properties around you and get advice on reducing your risk."
+          />
+          <Column
+            title="EARLY INDICATIONS"
+            description="Our Flood Score intelligence provides early indications of flood zone changes, which may affect your premium."
+          />
+        </Row>
+      </Container>
+    </div>
   )
 }
 
