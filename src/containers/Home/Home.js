@@ -9,6 +9,7 @@ import { useFirebase } from '../../hooks'
 import SecondRow from '../Header/SecondRow'
 import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 import CheckMarks from './CheckMarks'
+import Products from './Products/Products'
 import Testimonials from './Testimonials/Testimonials'
 
 // Data
@@ -54,16 +55,18 @@ function Home ({ history }) {
             firebase={firebase}
           />
         </div>
-        <h1 style={{  color: "#0d238e", textAlign: 'center', margin: 0 }}> Why You Should Know Your Flood Score</h1>
+        <h1 className="video-title">
+          Why You Should Know Your Flood Score
+        </h1>
       </div>
       <div className="video">
         <ReactPlayer
           url="https://www.youtube.com/watch?v=Dvr7wFUX1wU"
-          className="react-player"
-          width="50%"
+          width="748px"
         />
       </div>
       <CheckMarks />
+      <Products />
       <Testimonials
         testimonialTitle={TESTIMONIAL_TITLE}
         testimonialList={TESTIMONIAL_LIST}
