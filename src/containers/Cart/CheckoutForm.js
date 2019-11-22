@@ -61,10 +61,11 @@ const CheckoutForm = (props) => {
         },
       })
       console.log('customer', customer)
-      customerId = customer.id
+      customerId = customer.data.id
     } else { console.log('customer already exists') }
 
     // now lets create subscription
+    console.log('creating sub with customer id:', customerId)
     const subscription = await firebase.doCreateSubscription({
       customer: customerId,
       items: [
