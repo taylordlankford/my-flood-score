@@ -2,16 +2,24 @@ import React from 'react'
 import Col from 'react-bootstrap/Col'
 
 const OrderDetails = (props) => {
-  return(
+  return (
     <Col sm={4}>
       <div className="order-details">
         <div className="cartSubTotalAmount">
-          <span>Subtotal</span>
-          <span className="cart-amount">$ {props.total / 100}</span>
+          <span>
+            Subtotal
+          </span>
+          <span className="cart-amount">
+            ${(props.total / 100).toFixed(2)}
+          </span>
         </div>
         <div className="cartTotalAmount">
-          <span>Total</span>
-          <span className="cart-amount">$ {props.total / 100}</span>
+          <span>
+            Total
+          </span>
+          <span className="cart-amount">
+            ${(props.total / 100).toFixed(2)}
+          </span>
         </div>
         <br />
         <label
@@ -19,7 +27,8 @@ const OrderDetails = (props) => {
           htmlFor="submit-form"
           tabIndex="0"
           id="cartPlaceOrderBtn"
-          className="place-order-button add-to-cart-button btn btn-primary btn-primary">
+          className="place-order-button add-to-cart-button btn btn-primary btn-primary"
+        >
           Proceed to checkout
         </label>
       </div>
