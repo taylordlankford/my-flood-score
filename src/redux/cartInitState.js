@@ -29,6 +29,7 @@ export const cartInitState = {
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 1000,
       type: 'monthly',
+      plan: 'plan_GD4tFIrEfqOPLx',
     },
     {
       id: 3,
@@ -53,6 +54,7 @@ export const cartInitState = {
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 6000,
       type: 'monthly',
+      plan: 'plan_GEq0gCG3Scmg4l',
     },
     {
       id: 6,
@@ -69,6 +71,7 @@ export const cartInitState = {
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 2500,
       type: 'monthly',
+      plan: 'plan_GEq1bYW1biDgvH',
     },
     {
       id: 8,
@@ -85,6 +88,7 @@ export const cartInitState = {
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 1000,
       type: 'monthly',
+      plan: 'plan_GEq24H2bM9Qofb',
     },
     {
       id: 10,

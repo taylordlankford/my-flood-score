@@ -10,6 +10,7 @@ const CheckoutForm = (props) => {
   const firebase = useFirebase()
   const userData = useFirestoreUser()
   const { firestoreUser } = userData
+  const { items, total } = props
   const handleSubmit = async (ev) => {
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault()
@@ -64,22 +65,69 @@ const CheckoutForm = (props) => {
       customerId = customer.data.id
     } else { console.log('customer already exists') }
 
-    // now lets create subscription
-    console.log('creating sub with customer id:', customerId)
-    const subscription = await firebase.doCreateSubscription({
-      customer: customerId,
-      items: [
-        {
-          plan: 'plan_GD4tFIrEfqOPLx',
+    let subItems = []
+    let intentAmount = 0
+    items.forEach(item => {
+      console.log('item:', item)
+      if (item.type === 'monthly') {
+        subItems.push({ plan: item.plan })
+      } else {
+        intentAmount += item.price
+      }
+    });
+
+    // Create subscription if necessary
+    if (subItems.length > 0) {
+      console.log('creating sub for items:', subItems)
+      const subscription = await firebase.doCreateSubscription({
+        customer: customerId,
+        items: subItems,
+        expand: ['latest_invoice.payment_intent'],
+        metadata: {
+          email,
+          uid,
         },
-      ],
-      expand: ['latest_invoice.payment_intent'],
-      metadata: {
-        email,
-        uid,
-      },
-    })
-    console.log('subscription', subscription)
+      })
+      console.log('subscription', subscription) 
+    }
+
+    // Create Payment intent if necessary
+    if (intentAmount > 0) {
+      console.log('creating intent for amount of:', intentAmount)
+      const intent = await firebase.doCreatePaymentIntent({
+        amount: intentAmount,
+        currency: 'usd',
+        setup_future_usage: 'off_session',
+        receipt_email: email,
+        description: "My Flood Score",
+        metadata: {
+          email,
+          uid,
+        },
+      })
+      const client_secret = intent.data
+      // Use client_secret to confirm card payment
+      console.log('confirming card payment with CS:', client_secret)
+      props.stripe.confirmCardPayment(client_secret, {
+        payment_method: {card: cardElement},
+        // setup_future_usage: 'off_session'
+      }).then(function(result) {
+        if (result.error) {
+          // Show error to your customer
+          console.log('confirmCardPayment', result.error.message);
+        } else {
+          if (result.paymentIntent.status === 'succeeded') {
+            console.log('confirmCardPayment success, result:', result)
+            // Show a success message to your customer
+            // There's a risk of the customer closing the window before callback execution
+            // Set up a webhook or plugin to listen for the payment_intent.succeeded event
+            // to save the card to a Customer
+      
+            // The PaymentMethod ID can be found on result.paymentIntent.payment_method
+          }
+        }
+      })
+    }
 
     // You can also use confirmCardPayment with the PaymentIntents API automatic confirmation flow.
     // See our confirmCardPayment documentation for more:
