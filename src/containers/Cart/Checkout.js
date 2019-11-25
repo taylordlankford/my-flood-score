@@ -39,16 +39,20 @@ const BillingDetails = () => {
   )
 }
 
-const Order = () => {
+const Order = ({ paymentProcessing }) => {
   return (
     <div className="order-details">
       <p className="cart-item">Discover - Homeowner 	<span style={{ fontWeight: '700' }}>× 1</span> <span className="cart-amount">$0.00</span></p>
       <p className="cart-Subtotal">Subtotal <span className="cart-amount">$0.00</span></p>
       <p className="cart-total">Total <span className="cart-amount">$0.00</span></p>
-      <label htmlFor="submit-form" tabIndex="0" className="place-order-button add-to-cart-button btn btn-primary">
-        PLACE ORDER
-      </label>
-      {/* <Button variant="primary" type="submit" className="place-order-button">PLACE ORDER</Button> */}
+      {paymentProcessing
+        ? <Button variant="primary" type="submit" className="place-order-button">Processing...</Button>
+        : (
+          <label htmlFor="submit-form" tabIndex="0" className="place-order-button add-to-cart-button btn btn-primary">
+            PLACE ORDER
+          </label>
+        )
+      }
     </div>
   )
 }
@@ -58,8 +62,9 @@ class CheckoutPage extends React.Component {
   // const { history } = useReactRouter()
 
   render() {
-    const { items, total } = this.props
+    const { items, total, history, paymentProcessing } = this.props
     console.log('items', items)
+    console.log('paymentProcessing:', paymentProcessing)
     return (
       <div>
         <Elements>
@@ -67,12 +72,12 @@ class CheckoutPage extends React.Component {
             <Row>
               <Col>
                 <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Billing details</h3>
-                <InjectedCheckoutForm items={items} total={total} />
+                <InjectedCheckoutForm items={items} total={total} history={history} />
                 {/* <BillingDetails /> */}
               </Col>
               <Col>
                 <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Your order</h3>
-                <Order />
+                <Order paymentProcessing={paymentProcessing} />
               </Col>
             </Row>
           </Container>
@@ -85,7 +90,8 @@ class CheckoutPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     items: state.addedItems,
-    total: state.total
+    total: state.total,
+    paymentProcessing: state.paymentProcessing,
   }
 }
 const mapDispatchToProps = (/* dispatch */) => {

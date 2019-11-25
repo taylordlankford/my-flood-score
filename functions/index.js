@@ -1,5 +1,7 @@
 /* eslint-disable promise/no-nesting */
 const functions = require('firebase-functions');
+const stripe = require('stripe')('sk_test_M0Jraaox3nxaCBqlPMEwC4pk')
+const endpointSecret = 'whsec_t52NtsSu7255jYT9BnQVnui6qnkLPzMt'
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -106,9 +108,7 @@ const addUser = (data, context) => {
     })
 }
 
-const paymentIntent = (data, context) => {
-  // const stripe = require('stripe')(functions.config().stripe.testkey)
-  const stripe = require('stripe')('sk_test_M0Jraaox3nxaCBqlPMEwC4pk') // TODO: Make env variables also see if move to top
+const createPaymentIntent = (data, context) => {
   const { intent } = data
 
   return (async () => {
@@ -119,8 +119,6 @@ const paymentIntent = (data, context) => {
 }
 
 const paymentIntentSucceeded = (request, response) => {
-  const stripe = require('stripe')('sk_test_M0Jraaox3nxaCBqlPMEwC4pk')
-  const endpointSecret = 'whsec_t52NtsSu7255jYT9BnQVnui6qnkLPzMt'
   let sig = request.headers["stripe-signature"]
   let event = null
   try {
@@ -152,6 +150,9 @@ const paymentIntentSucceeded = (request, response) => {
             console.log('creating customer')
             const customer = await stripe.customers.create({
               payment_method: paymentIntent.payment_method,
+              invoice_settings: {
+                default_payment_method: paymentMethod.id,
+              },
               email: paymentIntent.metadata.email,
               metadata: paymentIntent.metadata,
             });
@@ -184,6 +185,38 @@ const paymentIntentSucceeded = (request, response) => {
   // response.json({received: true})
 }
 
-exports.paymentIntent = functions.https.onCall(paymentIntent)
-exports.paymentIntentSucceeded = functions.https.onRequest(paymentIntentSucceeded)
+const createCustomer = (data, context) => {
+  const { customer } = data
+  return (async () => {
+    const cus = await stripe.customers.create(customer)
+    console.log('createdCustomer', cus)
+    // Add customer to database
+    const userRef = admin.firestore().collection("users").doc(cus.metadata.uid)
+    await userRef.set({
+      customerId: cus.id,
+    }, { merge: true })
+    .catch((error) => { console.log('error:', error) })
+    return cus
+  })()
+}
+
+const createSubscription = (data, context) => {
+  const { subscription } = data
+  return (async () => {
+    const sub = await stripe.subscriptions.create(subscription)
+    console.log('createSubscription', sub)
+    // Add subscription to database
+    const userRef = admin.firestore().collection("users").doc(sub.metadata.uid)
+    await userRef.update({
+      subscriptions: admin.firestore.FieldValue.arrayUnion(sub.id),
+    })
+    .catch((error) => { console.log('error:', error) })
+    return sub
+  })()
+}
+
 exports.addUser = functions.https.onCall(addUser)
+exports.createPaymentIntent = functions.https.onCall(createPaymentIntent)
+exports.createSubscription = functions.https.onCall(createSubscription)
+exports.createCustomer = functions.https.onCall(createCustomer)
+exports.paymentIntentSucceeded = functions.https.onRequest(paymentIntentSucceeded)

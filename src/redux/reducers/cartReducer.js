@@ -1,4 +1,11 @@
-import { ADD_TO_CART, REMOVE_ITEM, SUB_QUANTITY, ADD_QUANTITY, ADD_SHIPPING } from '../actions/action-types/cart-actions'
+import {
+  ADD_TO_CART,
+  REMOVE_ITEM,
+  SUB_QUANTITY,
+  ADD_QUANTITY,
+  ADD_SHIPPING,
+  SET_PAYMENT_PROCESSING_STATE,
+} from '../actions/action-types/cart-actions'
 import { cartInitState } from '../cartInitState'
 
 const cartReducer = (state = cartInitState, action) => {
@@ -101,7 +108,14 @@ const cartReducer = (state = cartInitState, action) => {
         ...state,
         total: state.total - 6
       }
-  } else {
+  }
+  if (action.type === SET_PAYMENT_PROCESSING_STATE) {
+    return {
+      ...state,
+      paymentProcessing: action.value
+    }
+  }
+  else {
     return state
   }
 }
