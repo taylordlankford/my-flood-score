@@ -14,6 +14,11 @@
   cursor: pointer;
 }
 
+#logout-link:hover {
+  color: #66de80;
+  cursor: pointer;
+}
+
 b {
   color: #666666;
 }
@@ -37,7 +42,6 @@ a:visited {
 }
 
 svg {
-  fill: #c4c4c4;
   vertical-align: center;
   margin-right: 10px;
 }
