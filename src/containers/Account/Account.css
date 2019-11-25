@@ -1,0 +1,8 @@
+.acct-container {
+  min-height: 100vh;
+  padding: 64px 0;
+}
+
+.acct-main {
+  border: 1px solid #eeeeee;
+}

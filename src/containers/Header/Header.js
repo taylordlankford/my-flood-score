@@ -48,7 +48,7 @@ function Header({ firestoreUser }) {
             <Link to={ROUTES.DISCOVER_HOMEOWNER} className="header-link">Get Your FREE Flood Score</Link>
             {(firestoreUser) ?
               <span>
-                <Link to={ROUTES.ACCOUNT} className="header-link">Hi, {firestoreUser.firstName}</Link>
+                <Link to={ROUTES.ACCOUNT_DASHBOARD} className="header-link">Hi, {firestoreUser.firstName}</Link>
                 <CartDropdown />
               </span>
               :

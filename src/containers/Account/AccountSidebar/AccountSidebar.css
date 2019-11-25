@@ -1,0 +1,47 @@
+.acct-sidebar {
+  border: 1px solid #eeeeee;
+  line-height: 24px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#logout-link {
+  color: #55B96A;
+}
+
+#logout-link:hover {
+  color: #66de80;
+  cursor: pointer;
+}
+
+b {
+  color: #666666;
+}
+
+.list-group-item {
+  padding: 0 1.25rem 0.75rem 0;
+  border: 0;
+}
+
+a {
+  color: #55B96A;
+}
+
+a:hover {
+  color: #66de80;
+  cursor: pointer;
+}
+
+a:visited {
+  color: #666666;
+}
+
+svg {
+  fill: #c4c4c4;
+  vertical-align: center;
+  margin-right: 10px;
+}
+
+svg:hover {
+  fill: #666666;
+}
