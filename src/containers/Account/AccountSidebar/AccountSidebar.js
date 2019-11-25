@@ -91,8 +91,10 @@ const AccountSidebar = () => {
           ))
         }
         <ListGroupItem>
-          <span><FaSignOutAlt /></span>
-          <span id="logout-link"onClick={() => handleSignOut(firebase)}>
+          <span>
+            <FaSignOutAlt style={{ fill: '#c4c4c4' }} />
+          </span>
+          <span id="logout-link" onClick={() => handleSignOut(firebase)}>
             Logout
           </span>
         </ListGroupItem>
