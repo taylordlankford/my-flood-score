@@ -24,6 +24,8 @@ import {
   FaSignOutAlt
 } from 'react-icons/fa'
 
+import SidebarItem from './SidebarItem'
+
 const AccountSidebar = () => {
   const firebase = useFirebase()
   const userData = useFirestoreUser()
@@ -41,17 +43,19 @@ const AccountSidebar = () => {
     <Col sm={3}>
       <ListGroup>
         <ListGroupItem>
-          <Link to={ROUTES.ACCOUNT_DASHBOARD}>
-            <span><FaTachometerAlt /></span>
-            <span>Dashboard</span>
-          </Link>
+          <SidebarItem
+            routePath={ROUTES.ACCOUNT_DASHBOARD}
+            sidebarIcon={<FaTachometerAlt />}
+            sidebarLink="Dashboard" />
         </ListGroupItem>
+
         <ListGroupItem>
           <Link to={ROUTES.ACCOUNT_ORDERS}>
             <span><FaShoppingBasket /></span>
             <span>Orders</span>
           </Link>
         </ListGroupItem>
+
         <ListGroupItem>
           <Link to={ROUTES.ACCOUNT_DOWNLOADS}>
             <span><FaDownload /></span>
