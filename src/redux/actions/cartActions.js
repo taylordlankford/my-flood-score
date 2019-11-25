@@ -1,4 +1,11 @@
-import { ADD_TO_CART, REMOVE_ITEM, SUB_QUANTITY, ADD_QUANTITY, ADD_SHIPPING } from './action-types/cart-actions'
+import {
+    ADD_TO_CART,
+    REMOVE_ITEM,
+    SUB_QUANTITY,
+    ADD_QUANTITY,
+    ADD_SHIPPING,
+    SET_PAYMENT_PROCESSING_STATE,
+} from './action-types/cart-actions'
 
 // add cart action with quantity
 export const addToCart = (id, quantity = 1) => ({
@@ -38,4 +45,10 @@ export const addQuantity = (id) => ({
 export const addShipping = (id) => ({
     type: ADD_SHIPPING,
     id
+})
+
+// set payment processing action
+export const setPaymentProcessing = (value) => ({
+    type: SET_PAYMENT_PROCESSING_STATE,
+    value,
 })

@@ -101,4 +101,5 @@ export const cartInitState = {
   ],
   addedItems:[],
   total: 0,
+  paymentProcessing: false,
 }
