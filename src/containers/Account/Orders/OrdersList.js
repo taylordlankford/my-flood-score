@@ -17,7 +17,7 @@ const OrdersList = (props) => {
               <td>{order.orderDate}</td>
               <td id="order-status">{order.orderStatus}</td>
               <td>${order.orderTotal} for {order.orderQuantity} items</td>
-              <td><Button variant="btn btn-primary">View</Button></td>
+              <td><Button variant="btn btn-primary" className="order-action">View</Button></td>
             </tr>
           )
         })
