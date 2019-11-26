@@ -5,8 +5,9 @@ import * as ROUTES from '../../routes/constants/routes'
 
 import './Header.css'
 import MFS_Logo from '../../assets/images/MFS_Logo.png'
-import NavBar from 'react-bootstrap/Navbar'
-import Col from 'react-bootstrap/Col'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Container from 'react-bootstrap/Container'
 
 import CartDropdown from './CartDropdown/CartDropdown'
 
@@ -22,35 +23,39 @@ function Header({ firestoreUser }) {
       document.getElementById("navbar").style.borderBottom = "1px solid #d3d3d3";
       document.getElementById("navbar").style.transition = "all 1s ease 0s;";
       document.getElementById("logo").style.width = "190px";
-      document.getElementById("logo").style.height = "auto";
+      document.getElementById("logo").style.top = "-10px";
+      // document.getElementById("logo").style.height = "auto";
       document.getElementById("logo").style.transition = "width 0.5s";
       document.getElementById("logo").style.transitionTimingFunction = "ease";
     } else {
       document.getElementById("navbar").style.position = "relative";
-      document.getElementById("logo").style.fontSize = "35px";
+      // document.getElementById("logo").style.fontSize = "35px";
       document.getElementById("navbar").style.height = "80px";
       document.getElementById("logo").style.width = "240px";
+      document.getElementById("logo").style.top = "0px";
+      document.getElementById("navbar").style.borderBottom = "2px solid #0d238e";
     }
   }
 
   return (
-    <div className="Headercontainer">
-      <NavBar id="navbar">
-        <span className="header">
-          <Col>
-            <Link to={ROUTES.HOME} className="header-link">
-              <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="" />
-            </Link>
-          </Col>
-          <div className="linkPosition" >
+    <Navbar className="navbar" id="navbar" expand="lg">
+      <Container className="navbar-wrapper">
+        <Navbar.Brand>
+          <Link to={ROUTES.HOME}>
+            <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="" />
+          </Link>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ml-auto">
             <Link to={ROUTES.HOME} className="header-link">Home</Link>
             <Link to={ROUTES.HOME} className="header-link">About</Link>
             <Link to={ROUTES.DISCOVER_HOMEOWNER} className="header-link">Get Your FREE Flood Score</Link>
             {(firestoreUser) ?
-              <span>
+              <>
                 <Link to={ROUTES.ACCOUNT_DASHBOARD} className="header-link">Hi, {firestoreUser.firstName}</Link>
                 <CartDropdown />
-              </span>
+              </>
               :
               (
                 <>
@@ -60,13 +65,10 @@ function Header({ firestoreUser }) {
                 </>
               )
             }
-            {/* <Link to={ROUTES.SIGN_UP} className="header-link">
-                <img src={shoppingCart} className="cart" alt="" />
-              </Link> */}
-          </div>
-        </span>
-      </NavBar>
-    </div>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   )
 }
 

@@ -1,5 +1,10 @@
 .navbar {
   padding: 0;
+  border-bottom: 2px solid #0d238e;
+}
+
+.navbar-wrapper {
+  padding: 0 !important;
 }
 
 .grid {
@@ -36,7 +41,8 @@
 
 .MFS-Logo {
   width: 240px;
-  height: 80px;
+  top: 0px;
+  /* height: 80px; */
 }
 
 .header {
@@ -47,7 +53,7 @@
   align-items: center;
   border-bottom: 20px;
   padding-top: 1px;
-  padding-left: 100px;
+  /* padding-left: 100px; */
   width: 100%;
 }
 
@@ -57,6 +63,7 @@
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 10px solid #0D238E;
+  height: 80px;
 }
 
 .secondrow a:hover {
@@ -67,6 +74,7 @@
 }
 
 .header-link {
+  padding-top: 10px;
   margin: 18px;
   text-decoration: none;
   color: #666666;
@@ -96,7 +104,7 @@ a:active {
 }
 
 .linkPosition {
-  padding-right: 100px;
+  /* padding-right: 100px; */
 }
 
 .test {
@@ -108,7 +116,7 @@ a:active {
 .links2 {
   color: #55B96A;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   text-decoration: none;
   margin-right: 20px;
   margin-left: 20px;
