@@ -21,11 +21,11 @@ function Header({ firestoreUser }) {
       document.getElementById("navbar").style.zIndex = "999";
       document.getElementById("navbar").style.height = "48px";
       document.getElementById("navbar").style.borderBottom = "1px solid #d3d3d3";
-      document.getElementById("navbar").style.transition = "all 1s ease 0s;";
+      document.getElementById("navbar").style.transition = "all 0.5s ease 0.5s;";
       document.getElementById("logo").style.width = "190px";
       document.getElementById("logo").style.top = "-10px";
       // document.getElementById("logo").style.height = "auto";
-      document.getElementById("logo").style.transition = "width 0.5s";
+      document.getElementById("logo").style.transition = "width 0.3s";
       document.getElementById("logo").style.transitionTimingFunction = "ease";
     } else {
       document.getElementById("navbar").style.position = "relative";
@@ -34,6 +34,7 @@ function Header({ firestoreUser }) {
       document.getElementById("logo").style.width = "240px";
       document.getElementById("logo").style.top = "0px";
       document.getElementById("navbar").style.borderBottom = "2px solid #0d238e";
+      document.getElementById("navbar").style.transition = "all 0.5s ease 0.5s;";
     }
   }
 

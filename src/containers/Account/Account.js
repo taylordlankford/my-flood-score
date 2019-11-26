@@ -20,7 +20,7 @@ import Col from 'react-bootstrap/Col'
 
 import AccountSidebar from './AccountSidebar/AccountSidebar'
 import Dashboard from './Dashboard'
-import Orders from './Orders'
+import Orders from './Orders/Orders'
 import Downloads from './Downloads'
 import Addresses from './Addresses'
 import PaymentMethods from './PaymentMethods'

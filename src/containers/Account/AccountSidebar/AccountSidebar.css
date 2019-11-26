@@ -28,19 +28,6 @@ b {
   border: 0;
 }
 
-a {
-  color: #55B96A;
-}
-
-a:hover {
-  color: #66de80;
-  cursor: pointer;
-}
-
-a:visited {
-  color: #666666;
-}
-
 svg {
   vertical-align: center;
   margin-right: 10px;
@@ -49,3 +36,28 @@ svg {
 svg:hover {
   fill: #666666;
 }
+
+/* Side Bar Link Variations */
+.active-icon {
+  color: #666666 !important;
+}
+
+.active-link {
+  font-weight: 600 !important;
+  color: #666666 !important;
+}
+
+.inactive-icon {
+  color: #c4c4c4 !important;
+}
+
+.inactive-link {
+  font-weight: 500 !important;
+  color: #55B96A !important;
+}
+
+.inactive-link:hover {
+  color: #66de80 !important;
+  cursor: pointer !important;
+}
+/* EOF Side Bar Link Variations */

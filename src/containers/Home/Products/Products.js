@@ -11,7 +11,7 @@ const Products = () => {
   )
 
   return (
-    <Container style={{ paddingTop: '60px', margin: '0 auto', maxWidth: '748px' }}>
+    <Container style={{ fontWeight: '500', color: '#666666', paddingTop: '60px', margin: '0 auto', maxWidth: '748px' }}>
       {products.map((product, index) => (
         <Product
           key={index}

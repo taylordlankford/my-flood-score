@@ -108,7 +108,7 @@
 
 .popover-container {
   border: none !important;
-  padding: 30px 12px 30px 12px !important;
+  padding: 30px 0 30px 12px !important;
   vertical-align: top;
   border-top: none !important;
   position: relative;

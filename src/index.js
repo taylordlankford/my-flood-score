@@ -21,8 +21,8 @@ import cartReducer from './redux/reducers/cartReducer'
 WebFont.load({
   google: {
     families: [
-      'Montserrat:400,700,800', 'sans-serif',
-      'Montserrat+Alternates:400,700', 'sans-serif',
+      'Montserrat:400,500,600,700,800', 'sans-serif',
+      'Montserrat+Alternates:400,500,600,700', 'sans-serif',
     ]
   }
 });

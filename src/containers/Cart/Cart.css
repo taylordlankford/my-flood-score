@@ -9,6 +9,7 @@ label {
 .cart-container {
   min-height: 100vh;
   height: 640px;
+  padding-top: 64px;
 }
 
 .cart-header {

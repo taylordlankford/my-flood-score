@@ -1,0 +1,56 @@
+.col-title {
+  color: #666666;
+}
+
+.table-header {
+  text-align: left;
+}
+
+#table-actions {
+  text-align: right;
+}
+
+.table {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 500 !important;
+  color: #666666 !important;
+}
+
+.table th {
+  font-weight: 500 !important;
+  color: #c4c4c4 !important;
+}
+
+.table tr {
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.table td {
+  padding-top: 10px;
+}
+
+#order-status {
+  font-weight: 700 !important;
+}
+
+.order-number {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  color: #55B96A !important;
+}
+
+.order-number:hover {
+  font-weight: 600 !important;
+  color: #66de80 !important;
+}
+
+.order-action {
+  color: #666666 !important;
+  background-color: #c4c4c4 !important;
+}
+
+.order-action:hover {
+  color: #ffffff !important;
+  background-color: #66de80 !important;
+  cursor: pointer !important;
+}

@@ -16,7 +16,7 @@ const Column = ({title, description}) => (
 
 const CheckMarks = () => {
   return (
-    <div style={{ backgroundColor: '#f4f4f4' }}>
+    <div className="check-marks" style={{ backgroundColor: '#f4f4f4' }}>
       <Container style={{ maxWidth: '748px', padding: '40px 0 40px 0' }}>
         <Row>
           <Column

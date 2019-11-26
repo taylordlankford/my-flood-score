@@ -71,8 +71,7 @@ const App = () => {
 
           <Route
             render={({ location }) => (
-              <div className="main">
-                <div style={{}}>
+                <div>
                   {/* <TransitionGroup> */}
                     {/* no different than other usage of
                     CSSTransition, just make sure to pass
@@ -100,6 +99,7 @@ const App = () => {
                         <Route path={ROUTES.EXAMINE} component={Examine} />
                         <Route path={ROUTES.CERTIFY} component={Certify} />
                         <Route path={ROUTES.REDUCE} component={Reduce} />
+
                         <Route path={ROUTES.DISCOVER_HOMEOWNER} component={DiscoverHomeowner} />
                         <Route path={ROUTES.DISCOVER_HOMEOWNER_PLUS} component={DiscoverHomeownerPlus} />
                         <Route path={ROUTES.DISCOVER_BUSINESS} component={DiscoverBusiness} />
@@ -119,7 +119,6 @@ const App = () => {
                     {/* </CSSTransition> */}
                   {/* </TransitionGroup> */}
                 </div>
-              </div>
             )}
           />
           <FloatingLink />

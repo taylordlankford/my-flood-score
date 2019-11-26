@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 
 const Notification = (props) => {
   return (
-    <Container className="mt-5">
+    <Container>
       {
         props.items.length > 0 ?
           <div className="cartFlexBox">
