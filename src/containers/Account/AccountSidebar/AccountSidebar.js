@@ -3,9 +3,6 @@ import useReactRouter from 'use-react-router'
 import { useFirestoreUser, useFirebase } from '../../../hooks'
 
 import * as ROUTES from '../../../routes/constants/routes'
-import {
-  Link
-} from 'react-router-dom'
 
 /* Style Imports */
 import './AccountSidebar.css'
