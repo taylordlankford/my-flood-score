@@ -28,12 +28,12 @@ const SidebarItem = (props) => {
       {
         (window.location.pathname === props.routePath) ?
           <Link to={props.routePath}>
-            <span style={activeIconStyle}>{props.sidebarIcon}</span>
+            <span style={activeIconStyle}>{<props.sidebarIcon />}</span>
             <span style={activeLinkStyle}>{props.sidebarLink}</span>
           </Link>
           :
           <Link to={props.routePath}>
-            <span style={inactiveIconStyle}>{props.sidebarIcon}</span>
+            <span style={inactiveIconStyle}>{<props.sidebarIcon />}</span>
             <span style={inactiveLinkStyle}>{props.sidebarLink}</span>
           </Link>
       }
