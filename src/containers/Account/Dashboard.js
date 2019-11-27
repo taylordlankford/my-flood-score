@@ -1,9 +1,10 @@
 import React from 'react'
 import { useFirestoreUser, useFirebase } from '../../hooks'
+import { Link } from 'react-router-dom'
 
 import * as ROUTES from '../../routes/constants/routes'
 
-const Dashboard = ({ history }) => {
+const Dashboard = (props) => {
   const firebase = useFirebase()
   const userData = useFirestoreUser()
   const { firestoreUser, loading } = userData
@@ -11,7 +12,7 @@ const Dashboard = ({ history }) => {
   const handleSignOut = (firebase) => {
     firebase.doSignOut()
       .then(() => {
-        history.push(ROUTES.HOME)
+        props.history.push(ROUTES.HOME)
       })
   }
 
@@ -24,12 +25,12 @@ const Dashboard = ({ history }) => {
   }
 
   return (
-    <div>
+    <div className="dashboard">
       <p>
-        Hello <b>{firestoreUser.firstName + ' ' + firestoreUser.lastName}</b> (Not <b>{firestoreUser.firstName + ' ' + firestoreUser.lastName}</b>? <a onClick={() => handleSignOut(firebase)}>Log out</a>)
+        Hello <b>{firestoreUser.firstName + ' ' + firestoreUser.lastName}</b> (Not <b>{firestoreUser.firstName + ' ' + firestoreUser.lastName}</b>? <a className="inactive-link" onClick={() => handleSignOut(firebase)}>Log out</a>)
       </p>
       <p>
-        From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.
+        From your account dashboard you can view your <Link to={ROUTES.ACCOUNT_ORDERS} className="inactive-link">recent orders</Link>, manage your <Link to={ROUTES.ACCOUNT_ADDRESSES} className="inactive-link">shipping and billing addresses</Link>, and <Link to={ROUTES.EDIT_ACCOUNT} className="inactive-link">edit your password and account details</Link>.
       </p>
     </div>
   )

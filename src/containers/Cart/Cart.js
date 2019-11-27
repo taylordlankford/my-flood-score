@@ -75,7 +75,7 @@ const Cart = (props) => {
             </Button>
           </Container>
           :
-          <Container className="mt-5">
+          <Container>
             <Row>
               <Col sm={8}>
                 <Row className="cart-header">

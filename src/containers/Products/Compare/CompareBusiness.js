@@ -52,7 +52,7 @@ const CompareBusiness = (props) => {
   ] // end Tab Data
 
   return (
-    <Container style={{ 'marginTop': '64px' }}>
+    <Container style={{ paddingTop: '64px' }}>
       <Row>
         <Col sm={8}>
           <ProductBox

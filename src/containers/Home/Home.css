@@ -87,7 +87,7 @@
   max-width: 720px;
 }
 
-.video{
+.video {
   justify-content: center;
   background-color: #f4f4f4;
   display: flex;
@@ -96,7 +96,7 @@
 
 .video-title {
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 700 !important;
   color: #0d238e;
   text-align: center; 
   margin: 0;
@@ -126,7 +126,7 @@
   text-transform: uppercase;
   padding-right: 100px;
   text-align: left;
-  font-weight: 700;
+  font-weight: 700 !important;
   color: #0d238e;
 }
 
@@ -134,6 +134,11 @@
   text-transform: uppercase;
   padding-left: 100px;
   text-align: right;
-  font-weight: 700;
+  font-weight: 700 !important;
   color: #0d238e;
+}
+
+.check-marks {
+  font-weight: 500 !important;
+  color: #666666 !important;
 }
