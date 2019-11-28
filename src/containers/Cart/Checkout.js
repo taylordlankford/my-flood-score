@@ -21,7 +21,7 @@ class CheckoutPage extends React.Component {
     return (
       <div>
         <Elements>
-          <Container style={{ 'marginTop': '64px' }}>
+          <Container style={{ 'paddingTop': '64px' }}>
             <Row>
               <Col>
                 <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Billing details</h3>
