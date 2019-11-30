@@ -22,7 +22,7 @@ import AccountSidebar from './AccountSidebar/AccountSidebar'
 import Dashboard from './Dashboard'
 import Orders from './Orders/Orders'
 import Downloads from './Downloads'
-import Addresses from './Addresses'
+import Addresses from './Addresses/Addresses'
 import PaymentMethods from './PaymentMethods'
 import EditAccount from './EditAccount'
 
@@ -45,7 +45,7 @@ const Account = () => {
           <Container className="acct-container">
             <Row>
               <AccountSidebar />
-              <Col sm={9} className="acct-main">
+              <Col sm={9}>
                 <Switch>
                   <Route path={ROUTES.ACCOUNT_DASHBOARD} component={Dashboard} />
                   <Route path={ROUTES.ACCOUNT_ORDERS} component={Orders} />
