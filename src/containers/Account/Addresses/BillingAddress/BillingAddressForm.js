@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const BillingAddressForm = props => {
+  const [country] = useState(props.firestoreUser.country);
+  const [streetAddress1, setStreetAddress1] = useState(
+    props.firestoreUser.streetAddress1
+  );
+  const [streetAddress2, setStreetAddress2] = useState(
+    props.firestoreUser.streetAddress2
+  );
+
   return (
     <Col>
       <Row>
@@ -14,26 +23,33 @@ const BillingAddressForm = props => {
         </div>
       </Row>
       <Row>
-        <div>
-          <Form>
-            <Form.Group>
-              <Form.Label>Street Address 1</Form.Label>
-              <Form.Control
-                style={{ width: "100%" }}
-                type="text"
-                placeholder="Street Address 1"
-                defaultValue={props.firestoreUser.streetAddress1}
-              />
-              <Form.Label>Street Address 2</Form.Label>
-              <Form.Control
-                style={{ width: "100%" }}
-                type="text"
-                placeholder="Street Address 2"
-                defaultValue={props.firestoreUser.streetAddress2}
-              />
-            </Form.Group>
-          </Form>
-        </div>
+        <Form>
+          <Form.Group>
+            <Form.Label>Country*</Form.Label>
+            <Form.Control
+              disabled
+              type="text"
+              placeholder="Country"
+              defaultValue={country}
+            />
+            <Form.Label>Street Address*</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Street Address 1"
+              defaultValue={streetAddress1}
+              onChange={e => setStreetAddress1(e.target.value)}
+            />
+            <br />
+            <Form.Control
+              type="text"
+              placeholder="Apartment, suite, unit etc. (optional)"
+              defaultValue={streetAddress2}
+              onChange={e => setStreetAddress2(e.target.value)}
+            />
+            <br />
+            <Button>Save</Button>
+          </Form.Group>
+        </Form>
       </Row>
     </Col>
   );

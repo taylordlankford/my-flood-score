@@ -6,7 +6,6 @@ const BillingAddress = props => {
   return (
     <Col>
       <Row>
-        {console.log(props.firestoreUser)}
         <span>
           <h3 className="title">Billing Address</h3>
         </span>
