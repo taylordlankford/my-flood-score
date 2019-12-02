@@ -112,9 +112,14 @@ const createPaymentIntent = (data, context) => {
   const { intent } = data
 
   return (async () => {
-    const paymentIntent = await stripe.paymentIntents.create(intent)
-    console.log('paymentIntent', paymentIntent)
-    return paymentIntent.client_secret
+    try {
+      const paymentIntent = await stripe.paymentIntents.create(intent)
+      console.log('paymentIntent', paymentIntent)
+      return paymentIntent.client_secret
+    } catch (err) {
+      console.log('createPaymentIntent error:', err)
+      return err
+    }
   })()
 }
 
@@ -139,12 +144,19 @@ const paymentIntentSucceeded = (request, response) => {
           const { customerId } = data
           if (customerId) { // If user is already customer
             console.log('updating customer')
+            // update payment method
             const paymentMethod = await stripe.paymentMethods.attach(
               paymentIntent.payment_method,
               {
                 customer: customerId,
               }
             )
+            // Add order to orders
+            const order = JSON.parse(paymentIntent.metadata.order)
+            order.timestamp = new Date()
+            await userRef.update({
+              orders: admin.firestore.FieldValue.arrayUnion(order),
+            })
             response.json({ paymentMethod })
           } else { // If user is not already a customer
             console.log('creating customer')
@@ -158,6 +170,12 @@ const paymentIntentSucceeded = (request, response) => {
             });
             console.log('created customer:', customer)
             if (!customer) { return }
+            // Add order to orders
+            const order = JSON.parse(paymentIntent.metadata.order)
+            order.timestamp = new Date()
+            await userRef.update({
+              orders: admin.firestore.FieldValue.arrayUnion(order),
+            })
             // Add customer id to firestore
             userRef.set({
               customerId: customer.id,
@@ -188,30 +206,39 @@ const paymentIntentSucceeded = (request, response) => {
 const createCustomer = (data, context) => {
   const { customer } = data
   return (async () => {
-    const cus = await stripe.customers.create(customer)
-    console.log('createdCustomer', cus)
-    // Add customer to database
-    const userRef = admin.firestore().collection("users").doc(cus.metadata.uid)
-    await userRef.set({
-      customerId: cus.id,
-    }, { merge: true })
-    .catch((error) => { console.log('error:', error) })
-    return cus
+    try {
+      const cus = await stripe.customers.create(customer)
+      console.log('createdCustomer', cus)
+      // Add customer to database
+      const userRef = admin.firestore().collection("users").doc(cus.metadata.uid)
+      await userRef.set({
+        customerId: cus.id,
+      }, { merge: true })
+      .catch((error) => { console.log('error:', error) })
+      return cus
+    } catch (err) {
+      console.log('creating customer error:', err)
+      return err
+    }
   })()
 }
 
 const createSubscription = (data, context) => {
   const { subscription } = data
   return (async () => {
-    const sub = await stripe.subscriptions.create(subscription)
-    console.log('createSubscription', sub)
-    // Add subscription to database
-    const userRef = admin.firestore().collection("users").doc(sub.metadata.uid)
-    await userRef.update({
-      subscriptions: admin.firestore.FieldValue.arrayUnion(sub.id),
-    })
-    .catch((error) => { console.log('error:', error) })
-    return sub
+    try {
+      const sub = await stripe.subscriptions.create(subscription)
+      console.log('createSubscription', sub)
+      // Add subscription to database
+      const userRef = admin.firestore().collection("users").doc(sub.metadata.uid)
+      await userRef.update({
+        subscriptions: admin.firestore.FieldValue.arrayUnion(sub.id),
+      })
+      return sub
+    } catch (err) {
+      console.log('creating sub error: ', err)
+      return err
+    }
   })()
 }
 
