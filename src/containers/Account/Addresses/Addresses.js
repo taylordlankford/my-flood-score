@@ -1,58 +1,70 @@
-import React, { useState } from 'react'
-import './Addresses.css'
-import Row from 'react-bootstrap/Row'
+import React, { useState } from "react";
+import { useFirestoreUser, useFirebase } from "../../../hooks";
 
-import BillingAddress from './BillingAddress/BillingAddress'
-import BillingAddressForm from './BillingAddress/BillingAddressForm'
-import ShippingAddress from './ShippingAddress/ShippingAddress'
-import ShippingAddressForm from './ShippingAddress/ShippingAddressForm'
+import { AddressesContainer } from "./AddressesStyles";
+import Row from "react-bootstrap/Row";
+
+import BillingAddress from "./BillingAddress/BillingAddress";
+import BillingAddressForm from "./BillingAddress/BillingAddressForm";
+import ShippingAddress from "./ShippingAddress/ShippingAddress";
+import ShippingAddressForm from "./ShippingAddress/ShippingAddressForm";
+
+import "./Addresses.css";
 
 const Addresses = () => {
-  const [showBillingForm, setShowBillingForm] = useState(false)
-  const [showShippingForm, setShowShippingForm] = useState(false)
+  const userData = useFirestoreUser();
+  const { firestoreUser, loading } = userData;
+  const [showBillingForm, setShowBillingForm] = useState(false);
+  const [showShippingForm, setShowShippingForm] = useState(false);
 
-  const enableBillingForm = () => {
-    setShowBillingForm(true)
+  if (loading) {
+    return "loading...";
   }
 
-  const disableBillingForm = () => {
-    setShowBillingForm(false)
+  if (!firestoreUser) {
+    return "Unauthorized";
   }
 
-  const enableShippingForm = () => {
-    setShowShippingForm(true)
-  }
-
-  const disableShippingForm = () => {
-    setShowShippingForm(false)
-  }
+  const RenderAddressForm = () => {
+    if (showBillingForm) {
+      return (
+        <BillingAddressForm
+          disableBillingForm={() => setShowBillingForm(false)}
+          firestoreUser={firestoreUser}
+        />
+      );
+    } else if (showShippingForm) {
+      return (
+        <ShippingAddressForm
+          disableShippingForm={() => setShowShippingForm(false)}
+          firestoreUser={firestoreUser}
+        />
+      );
+    } else if ((showShippingForm && showBillingForm) === false) {
+      return (
+        <Row>
+          <BillingAddress
+            enableBillingForm={() => setShowBillingForm(true)}
+            firestoreUser={firestoreUser}
+          />
+          <ShippingAddress
+            enableShippingForm={() => setShowShippingForm(true)}
+          />
+        </Row>
+      );
+    }
+  };
 
   return (
-    <div className="addresses-container">
+    <AddressesContainer>
       <Row>
-        <p>The following addresses will be used on the checkout page by default.</p>
+        <p>
+          The following addresses will be used on the checkout page by default.
+        </p>
       </Row>
-      {
-        (showBillingForm || showShippingForm)
-          ?
-          <Row>
-            <BillingAddressForm
-              disableBillingForm={disableBillingForm} />
+      {RenderAddressForm()}
+    </AddressesContainer>
+  );
+};
 
-            <ShippingAddressForm
-              disableShippingForm={disableShippingForm} />
-          </Row>
-          :
-          <Row>
-            <BillingAddress
-              enableBillingForm={enableBillingForm} />
-
-            <ShippingAddress
-              enableShippingForm={enableShippingForm} />
-          </Row>
-      }
-    </div>
-  )
-}
-
-export default Addresses
+export default Addresses;

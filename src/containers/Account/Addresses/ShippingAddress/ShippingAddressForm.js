@@ -7,9 +7,12 @@ const ShippingAddressForm = (props) => {
     <Col>
       <Row>
         Shipping Form
+        <div onClick={props.disableShippingForm} className="link">
+          Cancel
+        </div>
       </Row>
     </Col>
-  )
+  );
 }
 
 export default ShippingAddressForm
