@@ -1,7 +1,8 @@
 // CheckoutForm.js
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { injectStripe } from 'react-stripe-elements'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 import { useFirebase, useFirestoreUser } from '../../hooks'
 // import AddressSection from './AddressSection';
@@ -14,6 +15,12 @@ const CheckoutForm = (props) => {
   const userData = useFirestoreUser()
   const { firestoreUser } = userData
   const { items, setPaymentProcessing } = props
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  // component did mount
+  useEffect(() => {
+    setPaymentProcessing(false)
+  }, [])
 
   const handleSubmit = async (ev) => {
     // We don't want to let default form submission happen here, which would refresh the page.
@@ -27,11 +34,20 @@ const CheckoutForm = (props) => {
     const cardElement = props.elements.getElement('card')
 
     // From here we cal call createPaymentMethod to create a PaymentMethod
-    const { paymentMethod } = await props.stripe.createPaymentMethod({
+    const fetchPaymentMethod = await props.stripe.createPaymentMethod({
       type: 'card',
       card: cardElement,
       // billing_details: {name: 'Jenny Rosen'},
     })
+    const { paymentMethod, error } = fetchPaymentMethod
+    console.log('paymentMethod', paymentMethod)
+    console.log('error', error)
+    if (typeof paymentMethod === 'undefined') {
+      console.log('createPaymentMethod error:', error)
+      setErrorMessage(error.message)
+      setPaymentProcessing(false)
+      return
+    }
     
     if (!customerId) { // We need to create customer
       console.log('creating customer')
@@ -47,16 +63,23 @@ const CheckoutForm = (props) => {
         },
       })
       console.log('customer', customer)
+      if (typeof customer.data.raw !== 'undefined') {
+        setErrorMessage('Error: ' + customer.data.raw.message)
+        setPaymentProcessing(false)
+        return
+      }
       customerId = customer.data.id
     } else { console.log('customer already exists') }
 
     let subItems = []
     let intentAmount = 0
+    const order = { items: [] }
     items.forEach(item => {
       console.log('item:', item)
       if (item.type === 'monthly') {
         subItems.push({ plan: item.plan })
       } else {
+        order.items.push({ id: item.id, title: item.title, price: item.price, quantity: item.quantity })
         intentAmount += item.price
       }
     });
@@ -74,11 +97,19 @@ const CheckoutForm = (props) => {
         },
       })
       console.log('subscription', subscription)
+      if (typeof subscription.data.raw !== 'undefined') {
+        console.log(subscription.data.statusCode)
+        setErrorMessage('Error: ' + subscription.data.raw.message)
+        setPaymentProcessing(false)
+        return
+      }
     }
 
     // Create Payment intent if necessary
     if (intentAmount > 0) {
       console.log('creating intent for amount of:', intentAmount)
+      order.amount = intentAmount
+      console.log('order is equal to:', order)
       const intent = await firebase.doCreatePaymentIntent({
         amount: intentAmount,
         currency: 'usd',
@@ -88,28 +119,37 @@ const CheckoutForm = (props) => {
         metadata: {
           email,
           uid,
+          order: JSON.stringify(order),
         },
       })
+      if (typeof intent.data.raw !== 'undefined') {
+        console.log(intent.data.statusCode)
+        setErrorMessage('Error: ' + intent.data.raw.message)
+        setPaymentProcessing(false)
+        return
+      }
       const client_secret = intent.data
       // Use client_secret to confirm card payment
       console.log('confirming card payment with CS:', client_secret)
-      await props.stripe.confirmCardPayment(client_secret, {
+      const result = await props.stripe.confirmCardPayment(client_secret, {
         payment_method: {card: cardElement},
         // setup_future_usage: 'off_session'
-      }).then(function(result) {
-        if (result.error) {
-          // Show error to your customer
-          console.log('confirmCardPayment', result.error.message);
-        } else {
-          if (result.paymentIntent.status === 'succeeded') {
-            console.log('confirmCardPayment success, result:', result)
-            // Show a success message to your customer
-            // There's a risk of the customer closing the window before callback execution
-            // Set up a webhook or plugin to listen for the payment_intent.succeeded event
-            // to save the card to a Customer
-          }
-        }
       })
+      if (result.error) {
+        // Show error to your customer
+        console.log('confirmCardPayment', result.error.message)
+        setErrorMessage('Error: ' + result.error.message)
+        setPaymentProcessing(false)
+        return
+      } else {
+        if (result.paymentIntent.status === 'succeeded') {
+          console.log('confirmCardPayment success, result:', result)
+          // Show a success message to your customer
+          // There's a risk of the customer closing the window before callback execution
+          // Set up a webhook or plugin to listen for the payment_intent.succeeded event
+          // to save the card to a Customer
+        }
+      }
     }
     setPaymentProcessing(false)
     props.history.push(ROUTES.ACCOUNT)
@@ -117,12 +157,16 @@ const CheckoutForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <AddressSection /> */}
-      <CardSection />
+      <CardSection onChange={() => setErrorMessage('') } />
+      <P className="errorMessage">{errorMessage}</P>
       <input type="submit" id="submit-form" style={{ display: 'none' }} />
     </form>
   )
 }
+
+const P = styled.p`
+  color: palevioletred;
+`
 
 const mapStateToProps = (state) => {
   return {
