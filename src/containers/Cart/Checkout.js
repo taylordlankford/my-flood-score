@@ -46,8 +46,8 @@ const mapStateToProps = (state) => {
     paymentProcessing: state.paymentProcessing,
   }
 }
-const mapDispatchToProps = (/* dispatch */) => {
-  return null
-}
+const mapDispatchToProps = () => ({
+  // pass
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPage)
