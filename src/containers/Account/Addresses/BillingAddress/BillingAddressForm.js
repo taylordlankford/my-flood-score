@@ -47,7 +47,13 @@ const BillingAddressForm = props => {
               onChange={e => setStreetAddress2(e.target.value)}
             />
             <br />
-            <Button>Save</Button>
+            <Button
+              onClick={e =>
+                props.handleUpdateUser(e, streetAddress1, streetAddress2)
+              }
+            >
+              Save
+            </Button>
           </Form.Group>
         </Form>
       </Row>
