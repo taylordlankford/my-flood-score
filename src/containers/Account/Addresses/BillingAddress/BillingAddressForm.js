@@ -16,37 +16,32 @@ const BillingAddressForm = props => {
 
   return (
     <Col>
-      <Row>
-        Billing Form
-        <div onClick={props.disableBillingForm} className="link">
-          Cancel
-        </div>
-      </Row>
-      <Row>
-        <Form>
-          <Form.Group>
-            <Form.Label>Country*</Form.Label>
-            <Form.Control
-              disabled
-              type="text"
-              placeholder="Country"
-              defaultValue={country}
-            />
-            <Form.Label>Street Address*</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Street Address 1"
-              defaultValue={streetAddress1}
-              onChange={e => setStreetAddress1(e.target.value)}
-            />
-            <br />
-            <Form.Control
-              type="text"
-              placeholder="Apartment, suite, unit etc. (optional)"
-              defaultValue={streetAddress2}
-              onChange={e => setStreetAddress2(e.target.value)}
-            />
-            <br />
+      <Form>
+        <Form.Group>
+          <Form.Label>Country*</Form.Label>
+          <Form.Control
+            disabled
+            type="text"
+            placeholder="Country"
+            defaultValue={country}
+          />
+          <br />
+          <Form.Label>Street Address*</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Street Address 1"
+            defaultValue={streetAddress1}
+            onChange={e => setStreetAddress1(e.target.value)}
+          />
+          <br />
+          <Form.Control
+            type="text"
+            placeholder="Apartment, suite, unit etc. (optional)"
+            defaultValue={streetAddress2}
+            onChange={e => setStreetAddress2(e.target.value)}
+          />
+          <br />
+          <span>
             <Button
               onClick={e =>
                 props.handleUpdateUser(e, streetAddress1, streetAddress2)
@@ -54,9 +49,16 @@ const BillingAddressForm = props => {
             >
               Save
             </Button>
-          </Form.Group>
-        </Form>
-      </Row>
+          </span>
+          <span
+            style={{ marginLeft: "10px" }}
+            onClick={props.disableBillingForm}
+            className="link"
+          >
+            Cancel
+          </span>
+        </Form.Group>
+      </Form>
     </Col>
   );
 };

@@ -10,15 +10,15 @@ import ShippingAddress from "./ShippingAddress/ShippingAddress";
 import ShippingAddressForm from "./ShippingAddress/ShippingAddressForm";
 
 import "./Addresses.css";
-import { firestore } from "firebase";
 
-const Addresses = () => {
+const Addresses = props => {
   const userData = useFirestoreUser();
   const firebase = useFirebase();
   const { firestoreUser, loading } = userData;
   const [showBillingForm, setShowBillingForm] = useState(false);
   const [showShippingForm, setShowShippingForm] = useState(false);
 
+  console.log(props);
   if (loading) {
     return "loading...";
   }
@@ -28,14 +28,14 @@ const Addresses = () => {
   }
 
   const handleUpdateUser = (e, streetAddress1, streetAddress2) => {
-    console.log(firestoreUser)
-    const updatedFireStoreUser = {
+    const updatedFirestoreUser = {
       ...firestoreUser,
       streetAddress1,
       streetAddress2
-    }
-
-    firebase.db.collection("users").doc(firestoreUser.uid).set(updatedFireStoreUser)
+    };
+    // firebase.db.collection("users").doc(firestoreUser.uid).set(updatedFirestoreUser)
+    firebase.doFirestoreSet("users", firestoreUser.uid, updatedFirestoreUser);
+    setShowBillingForm(false);
   };
 
   const RenderAddressForm = () => {
