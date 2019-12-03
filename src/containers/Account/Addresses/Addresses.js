@@ -18,7 +18,6 @@ const Addresses = props => {
   const [showBillingForm, setShowBillingForm] = useState(false);
   const [showShippingForm, setShowShippingForm] = useState(false);
 
-  console.log(props);
   if (loading) {
     return "loading...";
   }
@@ -71,7 +70,6 @@ const Addresses = props => {
 
   return (
     <AddressesContainer>
-      {console.log(firestoreUser)}
       <Row>
         <p>
           The following addresses will be used on the checkout page by default.
