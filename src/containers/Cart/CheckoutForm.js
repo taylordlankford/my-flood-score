@@ -80,7 +80,8 @@ const CheckoutForm = (props) => {
         subItems.push({ plan: item.plan })
       } else {
         order.items.push({ id: item.id, title: item.title, price: item.price, quantity: item.quantity })
-        intentAmount += item.price
+        // intentAmount += item.price
+        intentAmount += (item.price * item.quantity)
       }
     });
 
