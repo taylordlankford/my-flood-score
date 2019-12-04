@@ -71,6 +71,7 @@ const Addresses = props => {
   return (
     <AddressesContainer>
       <Row>
+        {console.log(firestoreUser)}
         <p>
           The following addresses will be used on the checkout page by default.
         </p>

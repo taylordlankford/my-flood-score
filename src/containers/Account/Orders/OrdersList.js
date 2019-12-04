@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Moment from "react-moment";
 
+
 const OrdersList = props => {
   const getQuantity = items => {
     let totalQuantity = 0;
@@ -20,7 +21,10 @@ const OrdersList = props => {
       {props.orders.map((order, index) => (
         <tr key={index}>
           <td>
-            <Link to="" className="order-number">
+            <Link
+              to={ROUTES.ACCOUNT_ORDER + "/" + (index + 1).toString()}
+              className="order-number"
+            >
               #{index + 1}
             </Link>
           </td>
@@ -38,9 +42,12 @@ const OrdersList = props => {
             items
           </td>
           <td>
-            <Button variant="btn btn-primary" className="order-action">
+            <Link
+              to={ROUTES.ACCOUNT_ORDER + "/" + (index + 1).toString()}
+              className="btn btn-primary view-action"
+            >
               View
-            </Button>
+            </Link>
           </td>
         </tr>
       ))}

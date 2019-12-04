@@ -54,3 +54,23 @@
   background-color: #66de80 !important;
   cursor: pointer !important;
 }
+
+#printer-icon {
+  color: #666666;
+  height: 28px;
+  width: 28px;
+}
+
+#printer-icon:hover {
+  cursor: pointer !important;
+  fill: #d4d4dd;
+  transition: 0.3s;
+}
+
+.view-action {
+  background-color: #c4c4c4!important;
+}
+
+.view-action:hover {
+  background-color: #66de80 !important;
+}

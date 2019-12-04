@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFirestoreUser, useFirebase } from "../../../hooks";
 
+import { TiArrowUnsorted } from "react-icons/ti";
 import Table from "react-bootstrap/Table";
 import "./Orders.css";
 import OrdersList from "./OrdersList";
@@ -9,7 +10,6 @@ const Orders = () => {
   const userData = useFirestoreUser();
   const firebase = useFirebase();
   const { firestoreUser, loading } = userData;
-  // const [orders, setOrders] = useState(ORDERS_DATA)
 
   if (loading) {
     return "loading...";

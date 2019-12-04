@@ -7,11 +7,7 @@
 
 #logout-link {
   color: #55B96A;
-}
-
-#logout-link:hover {
-  color: #66de80;
-  cursor: pointer;
+  font-weight: 500;
 }
 
 #logout-link:hover {

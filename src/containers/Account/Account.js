@@ -21,6 +21,7 @@ import Col from "react-bootstrap/Col";
 import AccountSidebar from "./AccountSidebar/AccountSidebar";
 import Dashboard from "./Dashboard";
 import Orders from "./Orders/Orders";
+import Order from "./Orders/Order";
 import Downloads from "./Downloads";
 import Addresses from "./Addresses/Addresses";
 import PaymentMethods from "./PaymentMethods";
@@ -50,10 +51,12 @@ const Account = () => {
                   <Switch>
                     <Route path={ROUTES.ACCOUNT_DASHBOARD} component={Dashboard} />
                     <Route path={ROUTES.ACCOUNT_ORDERS} component={Orders} />
-                    <Route path={ROUTES.ACCOUNT_DOWNLOADS} component={Downloads} />
+                    <Route path={ROUTES.ACCOUNT_DOWNLOADS} component={Downloads} /> 
                     <Route path={ROUTES.ACCOUNT_ADDRESSES} component={Addresses} />
-                    <Route path={ROUTES.ACCOUNT_PAYMENT_METHODS} component={PaymentMethods} />
+                    <Route path={ROUTES.ACCOUNT_PAYMENT_METHODS} component={PaymentMethods} /> 
                     <Route path={ROUTES.EDIT_ACCOUNT} component={EditAccount} />
+
+                    <Route path={"/account/order/:id"} component={Order} />
                   </Switch>
                 </Col>
               </Row>
