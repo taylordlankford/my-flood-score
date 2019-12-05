@@ -29,6 +29,7 @@ const Orders = () => {
           <th>Actions</th>
         </tr>
       </thead>
+      {console.log(firebase.doFirestoreGet("users"))}
       {firestoreUser.orders === "undefined" ? (
         "You don't have any orders yet. :("
       ) : (
