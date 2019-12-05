@@ -74,3 +74,7 @@
 .view-action:hover {
   background-color: #66de80 !important;
 }
+
+.card-body {
+  padding: 20px 50px 20px 50px !important;
+}

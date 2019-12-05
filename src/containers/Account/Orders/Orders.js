@@ -1,7 +1,6 @@
 import React from "react";
 import { useFirestoreUser, useFirebase } from "../../../hooks";
 
-import { TiArrowUnsorted } from "react-icons/ti";
 import Table from "react-bootstrap/Table";
 import "./Orders.css";
 import OrdersList from "./OrdersList";
@@ -20,7 +19,7 @@ const Orders = () => {
   }
 
   return (
-    <Table striped responsive borderless>
+    <Table responsive borderless>
       <thead>
         <tr>
           <th>Order</th>
