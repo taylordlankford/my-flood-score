@@ -11,12 +11,3 @@
   line-height: 1.4;
   letter-spacing: 0em;
 }
-
-.link {
-  color: #55B96A;
-}
-
-.link:hover {
-  color: #66DE80;
-  cursor: pointer;
-}

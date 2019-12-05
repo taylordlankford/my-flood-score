@@ -1,27 +1,37 @@
 import React from "react";
+
+import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
+import { Title, StyledLink } from "../../StyledComponents";
+
 const BillingAddress = props => {
   return (
-    <Col>
-      <Row>
-        <span>
-          <h3 className="title">Billing Address</h3>
-        </span>
-        <span style={{ paddingLeft: "20px" }}>
-          <div onClick={props.enableBillingForm} className="link">
-            Edit
+    <Card style={{ marginBottom: "20px", width: "100%" }}>
+      <Card.Body>
+        <Col>
+          <div style={{ textAlign: "right" }}>
+            <StyledLink onClick={props.enableBillingForm}>Edit</StyledLink>
           </div>
-        </span>
-        <div>
-          <div>{props.firestoreUser.companyName}</div>
-          <div>{props.firestoreUser.streetAddress1}</div>
-          <div>{props.firestoreUser.streetAddress2}</div>
-          <div>{props.firestoreUser.country}</div>
-        </div>
-      </Row>
-    </Col>
+          <Row>
+            <div style={{ paddingBottom: "10px" }}>
+              <span>
+                <Title>Billing Address</Title>
+              </span>
+            </div>
+          </Row>
+          <Row>
+            <div>
+              <div>{props.firestoreUser.companyName}</div>
+              <div>{props.firestoreUser.streetAddress1}</div>
+              <div>{props.firestoreUser.streetAddress2}</div>
+              <div>{props.firestoreUser.country}</div>
+            </div>
+          </Row>
+        </Col>
+      </Card.Body>
+    </Card>
   );
 };
 

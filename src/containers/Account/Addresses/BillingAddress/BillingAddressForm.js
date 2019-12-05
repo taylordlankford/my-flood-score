@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
 import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+
+import { StyledLink } from "../../StyledComponents";
 
 const BillingAddressForm = props => {
   const [country] = useState(props.firestoreUser.country);
@@ -50,13 +51,12 @@ const BillingAddressForm = props => {
               Save
             </Button>
           </span>
-          <span
+          <StyledLink
             style={{ marginLeft: "10px" }}
             onClick={props.disableBillingForm}
-            className="link"
           >
             Cancel
-          </span>
+          </StyledLink>
         </Form.Group>
       </Form>
     </Col>

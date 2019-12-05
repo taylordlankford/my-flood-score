@@ -23,6 +23,8 @@ const Order = ({ match }) => {
   if (!firestoreUser) {
     return "Unauthorized";
   }
+  
+  window.scrollTo(0, 0);
 
   const handlePrint = e => {
     e.preventDefault();

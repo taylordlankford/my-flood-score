@@ -1,25 +1,31 @@
 import React from "react";
+
+import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
+import { Title, StyledLink } from "../../StyledComponents";
+
 const ShippingAddress = props => {
   return (
-    <Col>
-      <Row>
-        <span>
-          <h3 className="title">Shipping Address</h3>
-        </span>
-        <span style={{ paddingLeft: "20px" }}>
-          {/* 
-            Currently displays billing address form. Not sure what the
-            property name for shipping address is yet. 
-          */}
-          <div onClick={props.enableShippingForm} className="link">
-            Edit
+    <Card style={{ marginBottom: "20px", width: "100%" }}>
+      <Card.Body>
+        <Col>
+          <div style={{ textAlign: "right" }}>
+            <span style={{ paddingLeft: "20px" }}>
+              {/* Currently displays billing address form. Not sure what the property name for shipping address is yet. */}
+              <StyledLink onClick={props.enableShippingForm}>Edit</StyledLink>
+            </span>
           </div>
-        </span>
-      </Row>
-    </Col>
+          <Row>
+            <span>
+              <Title>Shipping Address</Title>
+            </span>
+          </Row>
+          <Row></Row>
+        </Col>
+      </Card.Body>
+    </Card>
   );
 };
 

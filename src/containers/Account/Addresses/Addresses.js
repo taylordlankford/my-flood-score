@@ -11,7 +11,7 @@ import ShippingAddressForm from "./ShippingAddress/ShippingAddressForm";
 
 import "./Addresses.css";
 
-const Addresses = props => {
+const Addresses = () => {
   const userData = useFirestoreUser();
   const firebase = useFirebase();
   const { firestoreUser, loading } = userData;
@@ -71,7 +71,6 @@ const Addresses = props => {
   return (
     <AddressesContainer>
       <Row>
-        {console.log(firestoreUser)}
         <p>
           The following addresses will be used on the checkout page by default.
         </p>

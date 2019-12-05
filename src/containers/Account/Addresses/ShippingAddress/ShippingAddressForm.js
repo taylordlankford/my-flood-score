@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
 import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const ShippingAddressForm = (props) => {
+import { StyledLink } from "../../StyledComponents";
+
+const ShippingAddressForm = props => {
   const [country] = useState(props.firestoreUser.country);
   const [streetAddress1, setStreetAddress1] = useState(
     props.firestoreUser.streetAddress1
@@ -50,17 +51,16 @@ const ShippingAddressForm = (props) => {
               Save
             </Button>
           </span>
-          <span
+          <StyledLink
             style={{ marginLeft: "10px" }}
             onClick={props.disableShippingForm}
-            className="link"
           >
             Cancel
-          </span>
+          </StyledLink>
         </Form.Group>
       </Form>
     </Col>
   );
-}
+};
 
-export default ShippingAddressForm
+export default ShippingAddressForm;
