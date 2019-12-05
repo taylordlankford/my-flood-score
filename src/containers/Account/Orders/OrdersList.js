@@ -17,7 +17,6 @@ const OrdersList = props => {
 
   return (
     <tbody>
-      {console.log(props.orders)}
       {props.orders.map((order, index) => (
         <tr key={index}>
           <td>
