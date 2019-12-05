@@ -7,7 +7,7 @@ const Products = () => {
   const [products] = useState(PRODUCTS_DATA)
 
   const isEven = (value) => (
-    (value % 2 == 0) ? true : false
+    (value % 2 === 0) ? true : false
   )
 
   return (

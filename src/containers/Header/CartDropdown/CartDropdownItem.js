@@ -9,6 +9,7 @@ const CartDropdownItem = (props) => {
     <Row style={{ paddingBottom: '14px' }}>
       <Col md={3}>
         <img
+          alt={props.cartItem.name}
           src={props.cartItem.img ? props.cartItem.img : props.discoverImg}
           className="cart-item-img" />
       </Col>

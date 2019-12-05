@@ -1,14 +1,25 @@
-import React, { useState } from 'react'
-import Table from 'react-bootstrap/Table'
-import './Orders.css'
-import OrdersList from './OrdersList'
-import { ORDERS_DATA } from './OrdersData' // Dummy Data
+import React from "react";
+import { useFirestoreUser, useFirebase } from "../../../hooks";
+
+import Table from "react-bootstrap/Table";
+import "./Orders.css";
+import OrdersList from "./OrdersList";
 
 const Orders = () => {
-  const [orders, setOrders] = useState(ORDERS_DATA)
+  const userData = useFirestoreUser();
+  const firebase = useFirebase();
+  const { firestoreUser, loading } = userData;
+
+  if (loading) {
+    return "loading...";
+  }
+
+  if (!firestoreUser) {
+    return "Unauthorized";
+  }
 
   return (
-    <Table striped responsive borderless>
+    <Table responsive borderless>
       <thead>
         <tr>
           <th>Order</th>
@@ -18,9 +29,14 @@ const Orders = () => {
           <th>Actions</th>
         </tr>
       </thead>
-      <OrdersList orders={orders} />
+      {console.log(firebase.doFirestoreGet("users"))}
+      {firestoreUser.orders === "undefined" ? (
+        "You don't have any orders yet. :("
+      ) : (
+        <OrdersList orders={firestoreUser.orders} />
+      )}
     </Table>
-  )
-}
+  );
+};
 
-export default Orders
+export default Orders;
