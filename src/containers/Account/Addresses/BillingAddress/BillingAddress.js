@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import * as ROUTES from "../../../../routes/constants/routes";
 
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -11,9 +13,11 @@ const BillingAddress = props => {
     <Card style={{ marginBottom: "20px", width: "100%" }}>
       <Card.Body>
         <Col>
+        {/*
           <div style={{ textAlign: "right" }}>
-            <StyledLink onClick={props.enableBillingForm}>Edit</StyledLink>
+            <Link to={ROUTES.EDIT_BILLING_ADDRESS}>Edit</Link>
           </div>
+        */}
           <Row>
             <div style={{ paddingBottom: "10px" }}>
               <span>

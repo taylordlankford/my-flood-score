@@ -41,7 +41,7 @@ export const SIDEBAR_LINKS = [
   },
   {
     id: 6,
-    routePath: ROUTES.EDIT_ACCOUNT,
+    routePath: ROUTES.ACCOUNT_SETTINGS,
     sidebarIcon: FaUserAlt,
     sidebarLink: 'Account Settings'
   }

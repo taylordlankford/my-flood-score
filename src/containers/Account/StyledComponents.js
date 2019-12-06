@@ -16,3 +16,13 @@ export const StyledLink = styled.span`
     cursor: pointer;
   }
 `;
+
+export const StyledDropdownMenuItem = styled.div`
+  padding: 10px;
+
+  &:hover {
+    background-color: #eeeeee;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+`;

@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
+import * as ROUTES from "../../../routes/constants/routes";
 import { useFirestoreUser, useFirebase } from "../../../hooks";
+import { Link } from "react-router-dom";
 
 import { AddressesContainer } from "./AddressesStyles";
 import Row from "react-bootstrap/Row";
-
-import BillingAddress from "./BillingAddress/BillingAddress";
-import BillingAddressForm from "./BillingAddress/BillingAddressForm";
-import ShippingAddress from "./ShippingAddress/ShippingAddress";
-import ShippingAddressForm from "./ShippingAddress/ShippingAddressForm";
+import Card from "react-bootstrap/Card";
+import Col from "react-bootstrap/Col";
+import Dropdown from "react-bootstrap/Dropdown";
+import { Title, StyledLink, StyledDropdownMenuItem } from "../StyledComponents";
 
 import "./Addresses.css";
+
+import BillingAddress from "./BillingAddress/BillingAddress";
+import ShippingAddress from "./ShippingAddress/ShippingAddress";
 
 const Addresses = () => {
   const userData = useFirestoreUser();
   const firebase = useFirebase();
   const { firestoreUser, loading } = userData;
-  const [showBillingForm, setShowBillingForm] = useState(false);
-  const [showShippingForm, setShowShippingForm] = useState(false);
 
   if (loading) {
     return "loading...";
@@ -26,56 +28,35 @@ const Addresses = () => {
     return "Unauthorized";
   }
 
-  const handleUpdateUser = (e, streetAddress1, streetAddress2) => {
-    const updatedFirestoreUser = {
-      ...firestoreUser,
-      streetAddress1,
-      streetAddress2
-    };
-    // firebase.db.collection("users").doc(firestoreUser.uid).set(updatedFirestoreUser)
-    firebase.doFirestoreSet("users", firestoreUser.uid, updatedFirestoreUser);
-    setShowBillingForm(false);
-  };
-
-  const RenderAddressForm = () => {
-    if (showBillingForm) {
-      return (
-        <BillingAddressForm
-          disableBillingForm={() => setShowBillingForm(false)}
-          firestoreUser={firestoreUser}
-          handleUpdateUser={handleUpdateUser}
-        />
-      );
-    } else if (showShippingForm) {
-      return (
-        <ShippingAddressForm
-          disableShippingForm={() => setShowShippingForm(false)}
-          firestoreUser={firestoreUser}
-        />
-      );
-    } else if ((showShippingForm && showBillingForm) === false) {
-      return (
-        <Row>
-          <BillingAddress
-            enableBillingForm={() => setShowBillingForm(true)}
-            firestoreUser={firestoreUser}
-          />
-          <ShippingAddress
-            enableShippingForm={() => setShowShippingForm(true)}
-          />
-        </Row>
-      );
-    }
-  };
-
   return (
     <AddressesContainer>
-      <Row>
-        <p>
-          The following addresses will be used on the checkout page by default.
-        </p>
+      <Row style={{ paddingBottom: "20px" }}>
+        <Col sm={10}>
+          <p>
+            The following addresses will be used on the checkout page by
+            default.
+          </p>
+        </Col>
+        <Col sm={2} style={{ textAlign: "right" }}>
+          <Dropdown>
+            <Dropdown.Toggle>Edit{" "}</Dropdown.Toggle>
+            <Dropdown.Menu alignRight style={{ width: "200px" }}>
+              <Link to={ROUTES.EDIT_BILLING_ADDRESS}>
+                <StyledDropdownMenuItem>Billing Address</StyledDropdownMenuItem>
+              </Link>
+              <Link to={ROUTES.EDIT_SHIPPING_ADDRESS}>
+                <StyledDropdownMenuItem>
+                  Shipping Address
+                </StyledDropdownMenuItem>
+              </Link>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Col>
       </Row>
-      {RenderAddressForm()}
+      <Row>
+        <BillingAddress firestoreUser={firestoreUser} />
+        <ShippingAddress firestoreUser={firestoreUser} />
+      </Row>
     </AddressesContainer>
   );
 };

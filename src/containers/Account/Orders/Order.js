@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useFirestoreUser, useFirebase } from "../../../hooks";
 
 import MFS_Logo from '../../../assets/images/MFS_Logo.png'

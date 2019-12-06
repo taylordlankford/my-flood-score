@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useFirestoreUser, useFirebase } from "../../../hooks";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,16 +9,43 @@ import Button from "react-bootstrap/Button";
 import { Title, StyledLink } from "../StyledComponents";
 
 const EditAccountForm = props => {
-  const [firstName, setFirstName] = useState(props.firestoreUser.firstName);
-  const [lastName, setLastName] = useState(props.firestoreUser.lastName);
-  const [companyName, setCompanyName] = useState(props.firestoreUser.companyName);
-  const [phone, setPhone] = useState(props.firestoreUser.phone);
-  const [email, setEmail] = useState(props.firestoreUser.email);
-  const [password, setPassword] = useState(props.firestoreUser.password);
+  const userData = useFirestoreUser();
+  const firebase = useFirebase();
+  const { firestoreUser, loading } = userData;
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [email, setEmail] = useState("");
+  // const [phone, setPhone] = useState(props.firestoreUser.phone);
+  // const [password, setPassword] = useState(props.firestoreUser.password);
+
+  if (loading) {
+    return "loading...";
+  }
+
+  if (!firestoreUser) {
+    return "Unauthorized";
+  }
+
+  const handleOnClick = (e, firstName, lastName, companyName, email) => {
+    e.preventDefault();
+    console.log(props.history);
+
+    const updatedUser = {
+      ...firestoreUser,
+      firstName,
+      lastName,
+      companyName,
+      email
+    };
+
+    firebase.doFirestoreSet("users", firestoreUser.uid, updatedUser);
+  };
 
   return (
     <div>
-      {console.log(props.firestoreUser)}
+      {console.log(firestoreUser)}
 
       <Form>
         <Row>
@@ -30,7 +58,7 @@ const EditAccountForm = props => {
               <Form.Label>First Name*</Form.Label>
               <Form.Control
                 onChange={e => setFirstName(e.target.value)}
-                defaultValue={firstName}
+                defaultValue={firestoreUser.firstName}
                 type="text"
                 name="firstName"
                 placeholder="Enter First Name"
@@ -43,7 +71,7 @@ const EditAccountForm = props => {
               <Form.Label>Last Name*</Form.Label>
               <Form.Control
                 onChange={e => setLastName(e.target.value)}
-                defaultValue={lastName}
+                defaultValue={firestoreUser.lastName}
                 type="text"
                 name="lastName"
                 placeholder="Enter Last Name"
@@ -56,13 +84,14 @@ const EditAccountForm = props => {
           <Form.Label>Company Name (Optional)</Form.Label>
           <Form.Control
             onChange={e => setCompanyName(e.target.value)}
-            defaultValue={companyName}
+            defaultValue={firestoreUser.companyName}
             name="companyName"
             type="text"
             placeholder="Enter Company Name"
           />
         </Form.Group>
 
+        {/*
         <Form.Group>
           <Form.Label>Phone*</Form.Label>
           <Form.Control
@@ -72,19 +101,20 @@ const EditAccountForm = props => {
             type="tel"
             placeholder="Enter Phone Number"
           />
-        </Form.Group>
+        </Form.Group>*/}
 
         <Form.Group>
           <Form.Label>Email Address*</Form.Label>
           <Form.Control
             onChange={e => setEmail(e.target.value)}
-            defaultValue={email}
+            defaultValue={firestoreUser.email}
             type="email"
             name="email"
             placeholder="Enter email"
           />
         </Form.Group>
 
+        {/*
         <Form.Group>
           <Form.Label>Password*</Form.Label>
           <Form.Control
@@ -94,21 +124,13 @@ const EditAccountForm = props => {
             type="password"
             placeholder="Enter Password"
           />
-        </Form.Group>
+        </Form.Group> */}
 
         <br />
         <span>
           <Button
             onClick={e =>
-              props.handleOnClick(
-                e,
-                firstName,
-                lastName,
-                companyName,
-                phone,
-                email,
-                password
-              )
+              handleOnClick(e, firstName, lastName, companyName, email)
             }
           >
             Save

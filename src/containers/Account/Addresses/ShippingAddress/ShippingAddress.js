@@ -1,31 +1,40 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { useFirestoreUser, useFirebase } from "../../../../hooks";
+import * as ROUTES from "../../../../routes/constants/routes";
 
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import { Title, StyledLink } from "../../StyledComponents";
+import { Title } from "../../StyledComponents";
 
 const ShippingAddress = props => {
   return (
-    <Card style={{ marginBottom: "20px", width: "100%" }}>
-      <Card.Body>
-        <Col>
-          <div style={{ textAlign: "right" }}>
-            <span style={{ paddingLeft: "20px" }}>
-              {/* Currently displays billing address form. Not sure what the property name for shipping address is yet. */}
-              <StyledLink onClick={props.enableShippingForm}>Edit</StyledLink>
-            </span>
-          </div>
-          <Row>
-            <span>
-              <Title>Shipping Address</Title>
-            </span>
-          </Row>
-          <Row></Row>
-        </Col>
-      </Card.Body>
-    </Card>
+    <Fragment>
+      {props.firestoreUser.shippingAddress1 ||
+      props.firestoreUser.shippingAddress2 ? (
+        <Card style={{ marginBottom: "20px", width: "100%" }}>
+          <Card.Body>
+            <Col>
+            {/*
+              <div style={{ textAlign: "right" }}>
+                <Link to={ROUTES.EDIT_SHIPPING_ADDRESS}>Edit</Link>
+              </div>
+            */}
+              <Row>
+                <span>
+                  <Title>Shipping Address</Title>
+                </span>
+              </Row>
+              <Row></Row>
+            </Col>
+          </Card.Body>
+        </Card>
+      ) : (
+        <Fragment></Fragment>
+      )}
+    </Fragment>
   );
 };
 
