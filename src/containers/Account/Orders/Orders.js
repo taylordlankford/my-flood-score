@@ -5,6 +5,8 @@ import Table from "react-bootstrap/Table";
 import "./Orders.css";
 import OrdersList from "./OrdersList";
 
+import { StyledLink } from "../StyledComponents";
+
 const Orders = () => {
   const userData = useFirestoreUser();
   const firebase = useFirebase();
@@ -19,23 +21,27 @@ const Orders = () => {
   }
 
   return (
-    <Table responsive borderless>
-      <thead>
-        <tr>
-          <th>Order</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th>Total</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      {console.log(firebase.doFirestoreGet("users"))}
-      {firestoreUser.orders === "undefined" ? (
-        "You don't have any orders yet. :("
+    <>
+      {firestoreUser.orders === undefined ? (
+        <>
+          <p>You don't have any orders yet. :(</p>
+          <p>Checkout our <StyledLink>Services.</StyledLink> </p>
+        </>
       ) : (
-        <OrdersList orders={firestoreUser.orders} />
+        <Table responsive borderless>
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Total</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <OrdersList orders={firestoreUser.orders} />
+        </Table>
       )}
-    </Table>
+    </>
   );
 };
 

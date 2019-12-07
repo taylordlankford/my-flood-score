@@ -30,6 +30,8 @@ export const REDUCE_HOMEOWNER = "/product/reduce-homeowner";
 
 export const ACCOUNT = "/account";
 export const ACCOUNT_DASHBOARD = "/account/dashboard";
+export const ACCOUNT_INVENTORY = "/account/inventory";
+
 export const ACCOUNT_ORDERS = "/account/orders";
 export const ACCOUNT_ORDER = "/account/order";
 export const ACCOUNT_DOWNLOADS = "/account/downloads";

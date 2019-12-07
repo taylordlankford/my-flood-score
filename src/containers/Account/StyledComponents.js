@@ -9,11 +9,13 @@ export const Title = styled.div`
 `;
 
 export const StyledLink = styled.span`
-  color: #55b96a;
+  color: #66de80;
+  font-weight: 500;
 
   &:hover {
-    color: #66de80;
+    color: #55b96a;
     cursor: pointer;
+    transition: 0.3s;
   }
 `;
 

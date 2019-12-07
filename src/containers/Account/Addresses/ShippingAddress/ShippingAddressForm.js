@@ -72,7 +72,7 @@ const ShippingAddressForm = props => {
             </Button>
           </span>
           <Link to={ROUTES.ACCOUNT_ADDRESSES} style={{ marginLeft: "10px" }}>
-            Cancel
+            <StyledLink>Cancel</StyledLink>
           </Link>
         </Form.Group>
       </Form>

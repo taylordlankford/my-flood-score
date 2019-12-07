@@ -24,11 +24,11 @@ import Orders from "./Orders/Orders";
 import Order from "./Orders/Order";
 import Downloads from "./Downloads";
 import Addresses from "./Addresses/Addresses";
-import BillingAddressForm from "./Addresses/BillingAddress/BillingAddressForm";
+import EditBillingAddress from "./Addresses/BillingAddress/EditBillingAddress";
 import ShippingAddressForm from "./Addresses/ShippingAddress/ShippingAddressForm"
 import PaymentMethods from "./PaymentMethods";
-import EditAccount from "./EditAccount/EditAccount";
-import EditAccountForm from "./EditAccount/EditAccountForm";
+import AccountSettings from "./AccountSettings/AccountSettings";
+import EditAccount from "./AccountSettings/EditAccount";
 
 const Account = () => {
   const userData = useFirestoreUser();
@@ -58,13 +58,13 @@ const Account = () => {
 
                     <Route path={ROUTES.ACCOUNT_ADDRESSES} component={Addresses} />
 
-                    <Route path={ROUTES.EDIT_BILLING_ADDRESS} component={BillingAddressForm} />
+                    <Route path={ROUTES.EDIT_BILLING_ADDRESS} component={EditBillingAddress} />
                     <Route path={ROUTES.EDIT_SHIPPING_ADDRESS} component={ShippingAddressForm} />
 
                     <Route path={ROUTES.ACCOUNT_PAYMENT_METHODS} component={PaymentMethods} />
 
-                    <Route path={ROUTES.ACCOUNT_SETTINGS} component={EditAccount} />
-                    <Route path={ROUTES.EDIT_ACCOUNT_SETTINGS} component={EditAccountForm} />
+                    <Route path={ROUTES.ACCOUNT_SETTINGS} component={AccountSettings} />
+                    <Route path={ROUTES.EDIT_ACCOUNT_SETTINGS} component={EditAccount} />
 
                     <Route path={"/account/order/:id"} component={Order} />
                   </Switch>

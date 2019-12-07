@@ -3,13 +3,10 @@ import * as ROUTES from "../../../routes/constants/routes";
 import { useFirestoreUser, useFirebase } from "../../../hooks";
 import { Link } from "react-router-dom";
 
-import { Title, StyledLink, StyledDropdownMenuItem } from "../StyledComponents";
+import { Title, StyledLink } from "../StyledComponents";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { FaUser, FaPhone } from "react-icons/fa";
-import { IoIosBusiness } from "react-icons/io";
-import { MdEmail } from "react-icons/md";
 
 const EditAccount = props => {
   const userData = useFirestoreUser();
@@ -30,7 +27,9 @@ const EditAccount = props => {
       <Card>
         <Card.Body>
           <div style={{ textAlign: "right" }}>
-            <Link to={ROUTES.EDIT_ACCOUNT_SETTINGS}>Edit</Link>
+            <Link to={ROUTES.EDIT_ACCOUNT_SETTINGS}>
+              <StyledLink>Edit</StyledLink>
+            </Link>
           </div>
           <Row>
             <Title>Account Settings</Title>
