@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -14,18 +11,12 @@ const BillingAddressForm = props => {
     props.firestoreUser.streetAddress2
   );
 
+  const isInvalid = streetAddress1 === "";
+
   return (
-    <Col>
+    <div style={{ paddingBottom: "40px", borderBottom: "1px solid #eee" }}>
       <Form>
         <Form.Group>
-          <Form.Label>Country*</Form.Label>
-          <Form.Control
-            disabled
-            type="text"
-            placeholder="Country"
-            defaultValue={country}
-          />
-          <br />
           <Form.Label>Street Address*</Form.Label>
           <Form.Control
             type="text"
@@ -41,25 +32,27 @@ const BillingAddressForm = props => {
             onChange={e => setStreetAddress2(e.target.value)}
           />
           <br />
+          <Form.Label>Country*</Form.Label>
+          <Form.Control
+            disabled
+            type="text"
+            placeholder="Country"
+            defaultValue={country}
+          />
+          <br />
           <span>
             <Button
+              disabled={isInvalid}
               onClick={e =>
-                props.handleUpdateUser(e, streetAddress1, streetAddress2)
+                props.updateBillingAddress(e, streetAddress1, streetAddress2)
               }
             >
               Save
             </Button>
           </span>
-          <span
-            style={{ marginLeft: "10px" }}
-            onClick={props.disableBillingForm}
-            className="link"
-          >
-            Cancel
-          </span>
         </Form.Group>
       </Form>
-    </Col>
+    </div>
   );
 };
 

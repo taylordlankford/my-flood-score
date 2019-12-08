@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-import * as ROUTES from '../../../routes/constants/routes'
+import React from "react";
+import * as ROUTES from "../../../routes/constants/routes";
 import { Link } from "react-router-dom";
 
-import Button from "react-bootstrap/Button";
 import Moment from "react-moment";
-
 
 const OrdersList = props => {
   const getQuantity = items => {
