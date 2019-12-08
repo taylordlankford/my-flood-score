@@ -2,7 +2,7 @@ import React from 'react'
 import * as ROUTES from '../../../routes/constants/routes'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Button from 'react-bootstrap/Button'
+import { PrimaryBtn, SecondaryBtn } from "../../../StyledComponents/StyledComponents";
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import DiscoverImg from '../../../assets/images/Discover.svg'
@@ -50,19 +50,12 @@ const CartDropdownContent = (props) => {
                   <b>Subtotal: ${(props.total / 100).toFixed(2)}</b>
                 </h5>
               </div>
-              <Button
-                onClick={redirectToCart}
-                className="secondary-btn view-cart-btn"
-                style={{ backgroundColor: '#c4c4c4', width: '100%', marginBottom: '5px' }}
-              >
+              <SecondaryBtn onClick={redirectToCart}>
                 View Cart
-              </Button>
-              <Button
-                onClick={redirectToCheckout}
-                style={{ width: '100%' }}
-              >
+              </SecondaryBtn>
+              <PrimaryBtn onClick={redirectToCheckout}>
                 Checkout
-              </Button>
+              </PrimaryBtn>
             </div>
           </div>
         :

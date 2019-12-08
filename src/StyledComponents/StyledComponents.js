@@ -1,3 +1,5 @@
+// Global StyledComponents
+// For components that are commonly used throughout the application.
 import styled from "styled-components";
 
 export const Title = styled.div`
@@ -30,10 +32,12 @@ export const StyledDropdownMenuItem = styled.div`
   }
 `;
 
-export const InfBtn = styled.a`
+export const InfoBtn = styled.a`
   &,
   &:link,
   &:visited {
+    margin: 5px 5px;
+    width: 100%;
     text-align: center;
     margin-bottom: 35px;
     color: white !important;
@@ -72,6 +76,8 @@ export const PrimaryBtn = styled.a`
   &,
   &:link,
   &:visited {
+    margin: 5px 5px;
+    width: 100%;
     text-align: center;
     color: white !important;
     cursor: pointer;
@@ -109,10 +115,12 @@ export const SecondaryBtn = styled.a`
   &,
   &:link,
   &:visited {
+    margin: 5px 5px;
+    width: 100%;
     text-align: center;
     color: white !important;
     cursor: pointer;
-    background-color: #666666;
+    background-color: #d4d4d4;
     background-image: linear-gradient(
       90deg,
       transparent 0%,

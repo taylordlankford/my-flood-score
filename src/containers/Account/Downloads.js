@@ -1,9 +1,10 @@
 import React from 'react'
+import { Title } from "../../StyledComponents/StyledComponents"
 
 const Downloads = () => {
   return (
     <div>
-      <h3>Downloads</h3>
+      <Title>Downloads</Title>
     </div>
   )
 }

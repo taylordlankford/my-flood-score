@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { PrimaryBtn, SecondaryBtn } from "../../../../StyledComponents/StyledComponents";
 
 const UpdateEmailConfirmation = props => {
-  const [passwordConfirmation, setPasswordConfirmation ] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const isInvalid = passwordConfirmation === "";
 
   return (
@@ -19,10 +18,11 @@ const UpdateEmailConfirmation = props => {
         <Modal.Title id="contained-modal-title-vcenter"></Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div style={{ paddingBottom: "40px" }}>
+        <div style={{ color: "#666666", paddingBottom: "40px" }}>
           <h4>Confirm Password to Continue</h4>
         </div>
-        <Form>
+        <Form onSubmit={e => e.preventDefault()}>
+          <Form.Text>{props.error && <p>{props.error.message}</p>}</Form.Text>
           <Form.Control
             defaultValue={passwordConfirmation}
             onChange={e => setPasswordConfirmation(e.target.value)}
@@ -36,16 +36,20 @@ const UpdateEmailConfirmation = props => {
         </Form>
       </Modal.Body>
       <div style={{ padding: "10px 10px 40px 10px" }}>
-        <Button
+        <PrimaryBtn
           disabled={isInvalid}
           onClick={e => props.updateEmail(e, passwordConfirmation)}
-          // onClick={e => props.updateEmail(e, email)}
+          style={{ width: "100%", marginBottom: "10px" }}
         >
           Confirm Password
-        </Button>{" "}
-        <Button variant="secondary" disabled={isInvalid} onClick={props.onHide}>
+        </PrimaryBtn>
+        <SecondaryBtn
+          style={{ width: "100%" }}
+          variant="secondary"
+          onClick={props.onHide}
+        >
           Close
-        </Button>
+        </SecondaryBtn>
       </div>
     </Modal>
   );

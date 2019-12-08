@@ -1,11 +1,12 @@
 import React from 'react'
+import { Title } from "../../StyledComponents/StyledComponents"
 
 const PaymentMethods = () => {
   return (
     <div>
-      <h3>Payment Methods</h3>
+      <Title>Payment Methods</Title>
     </div>
-  )
+  );
 }
 
 export default PaymentMethods

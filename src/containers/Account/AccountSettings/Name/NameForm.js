@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { PrimaryBtn } from "../../../../StyledComponents/StyledComponents";
 
 const NameForm = props => {
   const [firstName, setFirstName] = useState(props.firestoreUser.firstName);
@@ -44,7 +44,7 @@ const NameForm = props => {
         <br />
         <Row>
           <Col sm={2} style={{ textAlign: "left" }}>
-            <Button
+            <PrimaryBtn
               disabled={isInvalid}
               onClick={e =>
                 props.handleNameChange(
@@ -57,7 +57,7 @@ const NameForm = props => {
               }
             >
               Save
-            </Button>
+            </PrimaryBtn>
           </Col>
           <Col></Col>
         </Row>
