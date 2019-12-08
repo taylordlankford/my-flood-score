@@ -1,19 +1,12 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import useReactRouter from "use-react-router";
 import { useFirestoreUser, useFirebase } from "../../../hooks";
-
 import * as ROUTES from "../../../routes/constants/routes";
-
-/* Style Imports */
 import "./AccountSidebar.css";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Col from "react-bootstrap/Col";
-
-/* React Icons */
 import { FaSignOutAlt } from "react-icons/fa";
-
 import SidebarItem from "./SidebarItem";
 import { SIDEBAR_LINKS } from "./SidebarData";
 
@@ -22,7 +15,7 @@ const AccountSidebar = props => {
   const userData = useFirestoreUser();
   const { firestoreUser } = userData;
   const [sidebarItems] = useState(SIDEBAR_LINKS);
-  const history = useHistory();
+  const { history } = useReactRouter()
 
   const handleSignOut = firebase => {
     firebase.doSignOut().then(() => {
