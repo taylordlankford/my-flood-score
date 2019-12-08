@@ -69,7 +69,7 @@ const NameFormToggle = props => {
               </h5>
               <p>
                 This is the name on your travel document, which could be a
-                license or a passport
+                license or a passport.
               </p>
             </Col>
             <Col sm={2} style={{ textAlign: "right" }}>

@@ -5,6 +5,7 @@ import NameFormToggle from "./Name/NameFormToggle";
 import EmailFormToggle from "./Email/EmailFormToggle";
 import CompanyFormToggle from "./Company/CompanyFormToggle";
 import BillingAddressFormToggle from "./BillingAddress/BillingAddressFormToggle";
+import { Title } from "../StyledComponents"
 import "./AccountSettings.css";
 
 const AccountSettings = () => {
@@ -12,6 +13,7 @@ const AccountSettings = () => {
     <AccountContext.Consumer>
       {value => (
         <Container>
+          <Title>Account Settings</Title>
           <NameFormToggle
             firebase={value.firebase}
             firestoreUser={value.firestoreUser}
