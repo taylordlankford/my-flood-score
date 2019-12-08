@@ -13,14 +13,15 @@ const EmailForm = props => {
   const updateEmail = (e, passwordConfirmation) => {
     e.preventDefault();
 
-    const updatedUser = {
+    const userToUpdate = {
       ...props.firestoreUser,
       email
     };
 
     /*
-     * Authenticate the user.
-     * then update the user's email
+     * Re-authenticate the user.
+     * then update the user auth email (to sign in)
+     * then update the user's firestore document email
      * then hide the modal.
     */
     props.firebase
@@ -35,7 +36,7 @@ const EmailForm = props => {
             props.firebase.doFirestoreSet(
               "users",
               props.firestoreUser.uid,
-              updatedUser
+              userToUpdate
             );
           })
           .then(() => {
