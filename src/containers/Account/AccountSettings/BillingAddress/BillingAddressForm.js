@@ -1,31 +1,22 @@
 import React, { useState } from "react";
-import { useFirestoreUser, useFirebase } from "../../../../hooks";
-import * as ROUTES from "../../../../routes/constants/routes";
-import { Link } from "react-router-dom";
-
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-import { StyledLink } from "../../StyledComponents";
-
 const BillingAddressForm = props => {
   const [country] = useState(props.firestoreUser.country);
-  const [streetAddress1, setStreetAddress1] = useState(props.firestoreUser.streetAddress1);
-  const [streetAddress2, setStreetAddress2] = useState(props.firestoreUser.streetAddress2);
+  const [streetAddress1, setStreetAddress1] = useState(
+    props.firestoreUser.streetAddress1
+  );
+  const [streetAddress2, setStreetAddress2] = useState(
+    props.firestoreUser.streetAddress2
+  );
+
+  const isInvalid = streetAddress1 === "";
 
   return (
-    <Col>
+    <div style={{ paddingBottom: "40px", borderBottom: "1px solid #eee" }}>
       <Form>
         <Form.Group>
-          <Form.Label>Country*</Form.Label>
-          <Form.Control
-            disabled
-            type="text"
-            placeholder="Country"
-            defaultValue={country}
-          />
-          <br />
           <Form.Label>Street Address*</Form.Label>
           <Form.Control
             type="text"
@@ -41,19 +32,27 @@ const BillingAddressForm = props => {
             onChange={e => setStreetAddress2(e.target.value)}
           />
           <br />
+          <Form.Label>Country*</Form.Label>
+          <Form.Control
+            disabled
+            type="text"
+            placeholder="Country"
+            defaultValue={country}
+          />
+          <br />
           <span>
             <Button
-              onClick={e => props.handleUpdateUser(e, streetAddress1, streetAddress2)}
+              disabled={isInvalid}
+              onClick={e =>
+                props.updateBillingAddress(e, streetAddress1, streetAddress2)
+              }
             >
               Save
             </Button>
           </span>
-          <Link to={ROUTES.ACCOUNT_ADDRESSES} style={{ marginLeft: "10px" }}>
-            <StyledLink>Cancel</StyledLink>
-          </Link>
         </Form.Group>
       </Form>
-    </Col>
+    </div>
   );
 };
 

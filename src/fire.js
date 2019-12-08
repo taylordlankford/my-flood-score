@@ -32,6 +32,9 @@ class Fire {
 
   doSignOut = () => this.auth.signOut()
 
+  doEmailUpdate = email =>
+    this.auth.currentUser.updateEmail(email)
+
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email)
 
   doPasswordUpdate = password =>

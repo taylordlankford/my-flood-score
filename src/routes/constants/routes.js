@@ -36,9 +36,9 @@ export const ACCOUNT_ORDERS = "/account/orders";
 export const ACCOUNT_ORDER = "/account/order";
 export const ACCOUNT_DOWNLOADS = "/account/downloads";
 
-export const ACCOUNT_ADDRESSES = "/account/addresses";
-export const EDIT_BILLING_ADDRESS = "/account/edit-billing-address"
-export const EDIT_SHIPPING_ADDRESS = "/account/edit-shipping-address"
+// export const ACCOUNT_ADDRESSES = "/account/addresses";
+// export const EDIT_BILLING_ADDRESS = "/account/edit-billing-address"
+// export const EDIT_SHIPPING_ADDRESS = "/account/edit-shipping-address"
 
 export const ACCOUNT_PAYMENT_METHODS = "/account/payment-methods";
 export const ACCOUNT_SETTINGS = "/account/account-settings";

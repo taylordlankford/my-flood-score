@@ -34,20 +34,20 @@ export const SIDEBAR_LINKS = [
     sidebarIcon: FaDownload,
     sidebarLink: 'Downloads'
   },
+  // {
+  //   id: 5,
+  //   routePath: ROUTES.ACCOUNT_ADDRESSES,
+  //   sidebarIcon: FaAddressBook,
+  //   sidebarLink: 'Addresses'
+  // },
   {
     id: 5,
-    routePath: ROUTES.ACCOUNT_ADDRESSES,
-    sidebarIcon: FaAddressBook,
-    sidebarLink: 'Addresses'
-  },
-  {
-    id: 6,
     routePath: ROUTES.ACCOUNT_PAYMENT_METHODS,
     sidebarIcon: FaCreditCard,
     sidebarLink: 'Payment Methods'
   },
   {
-    id: 7,
+    id: 6,
     routePath: ROUTES.ACCOUNT_SETTINGS,
     sidebarIcon: FaUserAlt,
     sidebarLink: 'Account Settings'

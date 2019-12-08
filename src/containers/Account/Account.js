@@ -1,8 +1,4 @@
 import React from "react";
-import { useFirestoreUser, useFirebase } from "../../hooks";
-
-/* React Router */
-// import useReactRouter from 'use-react-router'
 import * as ROUTES from "../../routes/constants/routes";
 import {
   BrowserRouter as Router,
@@ -12,69 +8,47 @@ import {
   Link
 } from "react-router-dom";
 
-/* Style Imports */
 import "./Account.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
 import AccountSidebar from "./AccountSidebar/AccountSidebar";
 import Dashboard from "./Dashboard";
 import Orders from "./Orders/Orders";
 import Order from "./Orders/Order";
 import Downloads from "./Downloads";
-import Addresses from "./Addresses/Addresses";
-import EditBillingAddress from "./Addresses/BillingAddress/EditBillingAddress";
-import ShippingAddressForm from "./Addresses/ShippingAddress/ShippingAddressForm"
 import PaymentMethods from "./PaymentMethods";
 import AccountSettings from "./AccountSettings/AccountSettings";
-import EditAccount from "./AccountSettings/EditAccount";
+import { AccountContextProvider } from "./AccountContext";
 
 const Account = () => {
-  const userData = useFirestoreUser();
-  const { firestoreUser, loading } = userData;
-
-  if (loading) {
-    return "loading...";
-  }
-
-  if (!firestoreUser) {
-    return "Unauthorized";
-  }
-
   return (
-    <Router>
-      <Route
-        render={() => (
-          <>
-            <Container className="acct-container">
-              <Row>
-                <AccountSidebar />
-                <Col sm={9}>
-                  <Switch>
-                    <Route path={ROUTES.ACCOUNT_DASHBOARD} component={Dashboard} />
-                    <Route path={ROUTES.ACCOUNT_ORDERS} component={Orders} />
-                    <Route path={ROUTES.ACCOUNT_DOWNLOADS} component={Downloads} />
+    <AccountContextProvider>
+      <Router>
+        <Route
+          render={() => (
+            <>
+              <Container className="acct-container">
+                <Row>
+                  <AccountSidebar />
+                  <Col sm={9}>
+                    <Switch>
+                      <Route path={ROUTES.ACCOUNT_DASHBOARD} component={Dashboard} />
+                      <Route path={ROUTES.ACCOUNT_ORDERS} component={Orders} />
+                      <Route path={ROUTES.ACCOUNT_DOWNLOADS} component={Downloads} />
+                      <Route path={ROUTES.ACCOUNT_PAYMENT_METHODS} component={PaymentMethods} />
+                      <Route path={ROUTES.ACCOUNT_SETTINGS} component={AccountSettings} />
 
-                    <Route path={ROUTES.ACCOUNT_ADDRESSES} component={Addresses} />
-
-                    <Route path={ROUTES.EDIT_BILLING_ADDRESS} component={EditBillingAddress} />
-                    <Route path={ROUTES.EDIT_SHIPPING_ADDRESS} component={ShippingAddressForm} />
-
-                    <Route path={ROUTES.ACCOUNT_PAYMENT_METHODS} component={PaymentMethods} />
-
-                    <Route path={ROUTES.ACCOUNT_SETTINGS} component={AccountSettings} />
-                    <Route path={ROUTES.EDIT_ACCOUNT_SETTINGS} component={EditAccount} />
-
-                    <Route path={"/account/order/:id"} component={Order} />
-                  </Switch>
-                </Col>
-              </Row>
-            </Container>
-          </>
-        )}
-      />
-    </Router>
+                      <Route path={"/account/order/:id"} component={Order} />
+                    </Switch>
+                  </Col>
+                </Row>
+              </Container>
+            </>
+          )}
+        />
+      </Router>
+    </AccountContextProvider>
   );
 };
 

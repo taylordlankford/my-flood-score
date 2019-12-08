@@ -48,6 +48,7 @@ const EditAccountForm = props => {
             </Form.Group>
           </Col>
         </Row>
+        {/*
         <Form.Group>
           <Form.Label>Company Name (Optional)</Form.Label>
           <Form.Control
@@ -68,6 +69,7 @@ const EditAccountForm = props => {
             placeholder="Enter email"
           />
         </Form.Group>
+        */}
         {/*
         <Form.Group>
           <Form.Label>Password*</Form.Label>
