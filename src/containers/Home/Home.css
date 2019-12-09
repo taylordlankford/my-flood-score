@@ -139,6 +139,11 @@
 }
 
 .check-marks {
-  font-weight: 500 !important;
-  color: #666666 !important;
+  color: #55b96a;
+  margin: 0 auto;
+  display: block;
+}
+
+.check-marks:hover {
+  fill: #55b96a !important;
 }

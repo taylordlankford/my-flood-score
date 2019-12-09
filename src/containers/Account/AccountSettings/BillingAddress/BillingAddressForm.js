@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { PrimaryBtn } from "../../../../StyledComponents/StyledComponents";
 
 const BillingAddressForm = props => {
   const [country] = useState(props.firestoreUser.country);
@@ -40,16 +42,19 @@ const BillingAddressForm = props => {
             defaultValue={country}
           />
           <br />
-          <span>
-            <Button
-              disabled={isInvalid}
-              onClick={e =>
-                props.updateBillingAddress(e, streetAddress1, streetAddress2)
-              }
-            >
-              Save
-            </Button>
-          </span>
+          <Row>
+            <Col sm={2} style={{ textAlign: "left" }}>
+              <PrimaryBtn
+                disabled={isInvalid}
+                onClick={e =>
+                  props.updateBillingAddress(e, streetAddress1, streetAddress2)
+                }
+              >
+                Save
+              </PrimaryBtn>
+            </Col>
+            <Col></Col>
+          </Row>
         </Form.Group>
       </Form>
     </div>

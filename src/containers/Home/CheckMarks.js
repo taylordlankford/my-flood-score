@@ -4,11 +4,7 @@ import { FaCheck } from 'react-icons/fa'
 
 const Column = ({title, description}) => (
   <Col style={{ padding: '15px 20px' }}>
-    <FaCheck
-      color="#55b96a"
-      size={36}
-      style={{ margin: '0 auto', display: 'block' }}
-    />
+    <FaCheck size={36} className="check-marks" />
     <h2 style={{ textAlign: 'center', color: '#0D238E', padding: '0.6em 0', fontWeight: 'bold', fontSize: '24px' }}>{title}</h2>
     <p style={{ color: '#666666', display: 'block', margin: '0 auto', textAlign: 'center' }}>{description}</p>
   </Col>

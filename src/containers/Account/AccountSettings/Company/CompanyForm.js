@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { PrimaryBtn } from "../../../../StyledComponents/StyledComponents";
 
 const CompanyForm = props => {
   const [companyName, setCompanyName] = useState(props.firestoreUser.companyName);
@@ -26,7 +26,7 @@ const CompanyForm = props => {
         <br />
         <Row>
           <Col sm={2} style={{ textAlign: "left" }}>
-            <Button
+            <PrimaryBtn
               onClick={e =>
                 props.updateCompany(
                   e,
@@ -37,7 +37,7 @@ const CompanyForm = props => {
               }
             >
               Save
-            </Button>
+            </PrimaryBtn>
           </Col>
           <Col></Col>
         </Row>

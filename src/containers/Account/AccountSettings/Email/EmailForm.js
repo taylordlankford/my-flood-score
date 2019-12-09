@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { PrimaryBtn } from "../../../../StyledComponents/StyledComponents";
 import UpdateEmailConfirmation from "./UpdateEmailConfirmation";
 
 const EmailForm = props => {
   const [modalShow, setModalShow] = React.useState(false);
   const [email, setEmail] = useState(props.firestoreUser.email);
-  const isInvalid = email === ''
+  const [error, setError] = useState(null);
+  const isInvalid = email === "";
 
   const updateEmail = (e, passwordConfirmation) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const EmailForm = props => {
      * then update the user auth email (to sign in)
      * then update the user's firestore document email
      * then hide the modal.
-    */
+     */
     props.firebase
       .doSignInWithEmailAndPassword(
         props.firestoreUser.email,
@@ -42,7 +43,15 @@ const EmailForm = props => {
           .then(() => {
             setModalShow(false);
           });
+      })
+      .catch(error => {
+        setError(error);
       });
+  };
+
+  const handleOnClick = e => {
+    e.preventDefault();
+    setModalShow(true);
   };
 
   return (
@@ -52,8 +61,9 @@ const EmailForm = props => {
         show={modalShow}
         onHide={() => setModalShow(false)}
         updateEmail={updateEmail}
+        error={error}
       />
-      <Form>
+      <Form onSubmit={e => e.preventDefault()}>
         <Row>
           <Col>
             <Form.Group>
@@ -70,13 +80,9 @@ const EmailForm = props => {
         <br />
         <Row>
           <Col sm={2} style={{ textAlign: "left" }}>
-            <Button
-              disabled={isInvalid}
-              onClick={() => setModalShow(true)}
-              // onClick={e => props.updateEmail(e, email)}
-            >
+            <PrimaryBtn disabled={isInvalid} onClick={e => handleOnClick(e)}>
               Save
-            </Button>
+            </PrimaryBtn>
           </Col>
           <Col></Col>
         </Row>
