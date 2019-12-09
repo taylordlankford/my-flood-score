@@ -77,7 +77,7 @@ const CheckoutForm = (props) => {
     items.forEach(item => {
       console.log('item:', item)
       if (item.type === 'monthly') {
-        subItems.push({ plan: item.plan })
+        subItems.push({ plan: item.plan, quantity: item.quantity })
       } else {
         order.items.push({ id: item.id, title: item.title, price: item.price, quantity: item.quantity })
         // intentAmount += item.price
@@ -153,7 +153,7 @@ const CheckoutForm = (props) => {
       }
     }
     setPaymentProcessing(false)
-    props.history.push(ROUTES.ACCOUNT)
+    props.history.push(ROUTES.ACCOUNT_INVENTORY)
   };
 
   return (
