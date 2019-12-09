@@ -34,7 +34,7 @@ export const ACCOUNT_INVENTORY = "/account/inventory";
 
 export const ACCOUNT_ORDERS = "/account/orders";
 export const ACCOUNT_ORDER = "/account/order";
-export const ACCOUNT_DOWNLOADS = "/account/downloads";
+export const ACCOUNT_SUBSCRIPTIONS = "/account/subscriptions";
 
 // export const ACCOUNT_ADDRESSES = "/account/addresses";
 // export const EDIT_BILLING_ADDRESS = "/account/edit-billing-address"

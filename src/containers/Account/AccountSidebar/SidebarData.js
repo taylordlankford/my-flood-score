@@ -3,7 +3,7 @@ import {
   FaTachometerAlt,
   FaList,
   FaShoppingBasket,
-  FaDownload,
+  FaSyncAlt,
   FaAddressBook,
   FaCreditCard,
   FaUserAlt,
@@ -30,9 +30,9 @@ export const SIDEBAR_LINKS = [
   },
   {
     id: 4,
-    routePath: ROUTES.ACCOUNT_DOWNLOADS,
-    sidebarIcon: FaDownload,
-    sidebarLink: 'Downloads'
+    routePath: ROUTES.ACCOUNT_SUBSCRIPTIONS,
+    sidebarIcon: FaSyncAlt,
+    sidebarLink: 'Subscriptions'
   },
   // {
   //   id: 5,

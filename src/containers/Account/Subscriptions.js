@@ -1,12 +1,12 @@
 import React from 'react'
 import { Title } from "../../StyledComponents/StyledComponents"
 
-const Downloads = () => {
+const Subscriptions = () => {
   return (
     <div>
-      <Title>Downloads</Title>
+      <Title>Subscriptions</Title>
     </div>
   )
 }
 
-export default Downloads
+export default Subscriptions
