@@ -31,8 +31,7 @@ const OrdersList = props => {
             </Moment>
           </td>
           <td id="order-status">
-            {/*order.orderStatus*/}
-            {order.processed !== undefined ? order.processed : "processed"}
+            {order.type !== undefined ? order.type : ""}
           </td>
           <td>
             ${(order.amount / 100).toFixed(2)} for {getQuantity(order.items)}{" "}

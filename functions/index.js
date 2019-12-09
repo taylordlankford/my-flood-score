@@ -123,11 +123,11 @@ const createPaymentIntent = (data, context) => {
   })()
 }
 
-const paymentIntentSucceeded = (request, response) => {
+const paymentIntentSucceeded = async (request, response) => {
   let sig = request.headers["stripe-signature"]
   let event = null
   try {
-    event = stripe.webhooks.constructEvent(request.rawBody, sig, endpointSecret);
+    event = await stripe.webhooks.constructEvent(request.rawBody, sig, endpointSecret);
   } catch (err) {
     return response.status(400).end();
   }
@@ -151,9 +151,11 @@ const paymentIntentSucceeded = (request, response) => {
                 customer: customerId,
               }
             )
+            console.log('adding order to ordrs')
             // Add order to orders
             const order = JSON.parse(paymentIntent.metadata.order)
             order.timestamp = new Date()
+            order.type = 'Ad-hoc'
             await userRef.update({
               orders: admin.firestore.FieldValue.arrayUnion(order),
             })
@@ -173,6 +175,7 @@ const paymentIntentSucceeded = (request, response) => {
             // Add order to orders
             const order = JSON.parse(paymentIntent.metadata.order)
             order.timestamp = new Date()
+            order.type = 'Adh-oc'
             await userRef.update({
               orders: admin.firestore.FieldValue.arrayUnion(order),
             })
@@ -231,8 +234,21 @@ const createSubscription = (data, context) => {
       console.log('createSubscription', sub)
       // Add subscription to database
       const userRef = admin.firestore().collection("users").doc(sub.metadata.uid)
+      let items = []
+      let total = 0
+      sub.items.data.forEach(item => {
+        items.push({ id: item.plan.id, title: item.plan.nickname, price: item.plan.amount, quantity: item.quantity })
+        total += item.quantity * item.plan.amount
+      });
+      const order = {
+        amount: total,
+        timestamp: new Date(),
+        items,
+        type: 'Subscription',
+      }
       await userRef.update({
         subscriptions: admin.firestore.FieldValue.arrayUnion(sub.id),
+        orders: admin.firestore.FieldValue.arrayUnion(order),
       })
       return sub
     } catch (err) {
