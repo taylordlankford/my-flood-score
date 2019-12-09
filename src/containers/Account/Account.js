@@ -16,7 +16,7 @@ import AccountSidebar from "./AccountSidebar/AccountSidebar";
 import Dashboard from "./Dashboard";
 import Orders from "./Orders/Orders";
 import Order from "./Orders/Order";
-import Downloads from "./Downloads";
+import Subscriptions from "./Subscriptions";
 import PaymentMethods from "./PaymentMethods";
 import AccountSettings from "./AccountSettings/AccountSettings";
 import { AccountContextProvider } from "./AccountContext";
@@ -35,7 +35,7 @@ const Account = () => {
                     <Switch>
                       <Route path={ROUTES.ACCOUNT_DASHBOARD} component={Dashboard} />
                       <Route path={ROUTES.ACCOUNT_ORDERS} component={Orders} />
-                      <Route path={ROUTES.ACCOUNT_DOWNLOADS} component={Downloads} />
+                      <Route path={ROUTES.ACCOUNT_SUBSCRIPTIONS} component={Subscriptions} />
                       <Route path={ROUTES.ACCOUNT_PAYMENT_METHODS} component={PaymentMethods} />
                       <Route path={ROUTES.ACCOUNT_SETTINGS} component={AccountSettings} />
 
