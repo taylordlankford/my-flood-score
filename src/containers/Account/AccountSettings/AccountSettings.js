@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import { AccountContext } from "../AccountContext";
 import NameFormToggle from "./Name/NameFormToggle";
 import EmailFormToggle from "./Email/EmailFormToggle";
 import CompanyFormToggle from "./Company/CompanyFormToggle";
 import BillingAddressFormToggle from "./BillingAddress/BillingAddressFormToggle";
-import { Title } from "../StyledComponents"
+import { Title } from "../../../StyledComponents/StyledComponents"
 import "./AccountSettings.css";
 
 const AccountSettings = () => {

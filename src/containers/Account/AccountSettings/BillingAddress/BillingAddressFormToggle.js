@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyledLink } from "../../StyledComponents";
+import { StyledLink } from "../../../../StyledComponents/StyledComponents";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

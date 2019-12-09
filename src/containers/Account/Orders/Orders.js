@@ -1,9 +1,8 @@
 import React from "react";
-import { useFirestoreUser, useFirebase } from "../../../hooks";
 import Table from "react-bootstrap/Table";
 import "./Orders.css";
 import OrdersList from "./OrdersList";
-import { StyledLink } from "../StyledComponents";
+import { Title, StyledLink } from "../../../StyledComponents/StyledComponents"
 import { AccountContext } from "../AccountContext";
 
 const Orders = () => {
