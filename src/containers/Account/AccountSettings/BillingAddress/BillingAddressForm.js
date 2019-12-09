@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { PrimaryBtn } from "../../../../StyledComponents/StyledComponents";
 
 const BillingAddressForm = props => {
@@ -40,16 +42,19 @@ const BillingAddressForm = props => {
             defaultValue={country}
           />
           <br />
-          <span>
-            <PrimaryBtn
-              disabled={isInvalid}
-              onClick={e =>
-                props.updateBillingAddress(e, streetAddress1, streetAddress2)
-              }
-            >
-              Save
-            </PrimaryBtn>
-          </span>
+          <Row>
+            <Col sm={2} style={{ textAlign: "left" }}>
+              <PrimaryBtn
+                disabled={isInvalid}
+                onClick={e =>
+                  props.updateBillingAddress(e, streetAddress1, streetAddress2)
+                }
+              >
+                Save
+              </PrimaryBtn>
+            </Col>
+            <Col></Col>
+          </Row>
         </Form.Group>
       </Form>
     </div>
