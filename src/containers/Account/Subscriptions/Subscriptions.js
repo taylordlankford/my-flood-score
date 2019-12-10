@@ -1,14 +1,13 @@
 import React, { useEffect, useContext, useState } from 'react'
-import { Title } from "../../../StyledComponents/StyledComponents"
-import { AccountContext } from "../AccountContext"
-
-const Subscription = ({sub}) => (
-  <p>{sub.id}</p>
-)
+import Table from 'react-bootstrap/Table'
+import { Title } from '../../../StyledComponents/StyledComponents'
+import { AccountContext } from '../AccountContext'
+import Subscription from './Subscription'
 
 const Subscriptions = () => {
   const { firestoreUser, firebase } = useContext(AccountContext)
-  const [subs, setSubs] = useState(null) 
+  const [subs, setSubs] = useState(null)
+  
 
   useEffect(() => {
     console.log('firestoreUser', firestoreUser)
@@ -27,7 +26,23 @@ const Subscriptions = () => {
     )
   }
   return (
-    subs.map((sub) => <Subscription sub={sub} />)
+    // <Container>
+    //   {subs.map((sub, index) => <Subscription sub={sub} index={index} />)}
+    // </Container>
+    <Table responsive borderless>
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Crated At</th>
+          <th>Next Bill Due</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {subs.map((sub, index) => <Subscription sub={sub} index={index} />)}
+      </tbody>
+    </Table>
   )
 }
 
