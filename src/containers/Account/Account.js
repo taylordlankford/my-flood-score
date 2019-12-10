@@ -16,7 +16,7 @@ import AccountSidebar from "./AccountSidebar/AccountSidebar";
 import Dashboard from "./Dashboard";
 import Orders from "./Orders/Orders";
 import Order from "./Orders/Order";
-import Subscriptions from "./Subscriptions";
+import Subscriptions from "./Subscriptions/Subscriptions";
 import PaymentMethods from "./PaymentMethods";
 import AccountSettings from "./AccountSettings/AccountSettings";
 import { AccountContextProvider } from "./AccountContext";

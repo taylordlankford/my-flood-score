@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'
-import { Title } from "../../StyledComponents/StyledComponents"
-import { AccountContext } from "./AccountContext"
+import { Title } from "../../../StyledComponents/StyledComponents"
+import { AccountContext } from "../AccountContext"
 
 const Subscription = ({sub}) => (
   <p>{sub.id}</p>
