@@ -8,7 +8,7 @@ import BillingAddressFormToggle from "./BillingAddress/BillingAddressFormToggle"
 import { Title } from "../../../StyledComponents/StyledComponents"
 import "./AccountSettings.css";
 import { useSelector } from "react-redux";
-import AlertComponent from "../../../components/Alerts/AlertComponent"
+import Notification from "../../../components/Notifications/Notification"
 
 const AccountSettings = () => {
   const notice = useSelector(state => state.notification);
@@ -18,7 +18,7 @@ const AccountSettings = () => {
     <AccountContext.Consumer>
       {value => (
         <Container>
-          <AlertComponent flag={notice.flag} notice={notice.message} />
+          <Notification flag={notice.flag} notice={notice.message} />
 
           <Title>Account Settings</Title>
           <NameFormToggle

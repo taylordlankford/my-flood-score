@@ -20,7 +20,7 @@ import OrderDetails from "./OrderDetails";
 
 import { pushDanger } from "../../redux/actions/notificationActions";
 import { useSelector, useDispatch } from 'react-redux'
-import AlertComponent from "../../components/Alerts/AlertComponent"
+import Notification from "../../components/Notifications/Notification"
 
 const handleQtyChange = (newValue, product, addQuantity, subtractQuantity) => {
   console.log("old value", product);
@@ -70,7 +70,7 @@ const Cart = props => {
   return (
     <Container className="cart-container">
       {/* <CartNotifcation items={items} gotoShop={gotoShop} /> */}
-      <AlertComponent flag={notice.flag} notice={notice.message} />
+      <Notification flag={notice.flag} notice={notice.message} />
       <div style={{ paddingTop: "32px" }}>
         {items.length === 0 ? (
           <Container>

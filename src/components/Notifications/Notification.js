@@ -6,9 +6,9 @@ import { IoMdClose } from "react-icons/io";
 import { pushClear } from "../../redux/actions/notificationActions";
 import { useDispatch } from "react-redux";
 
-const AlertComponent = props => {
+const Notification = props => {
   const dispatch = useDispatch();
-  
+
   // returned function will be called on component unmount
   // We don't need to see the notification after unmounting
   // [] as second param makes useEffect call only once.
@@ -29,4 +29,4 @@ const AlertComponent = props => {
   );
 };
 
-export default AlertComponent;
+export default Notification;
