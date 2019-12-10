@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as ROUTES from "../../routes/constants/routes";
-import { AccountContext } from './AccountContext'
+import { AccountContext } from "./AccountContext";
+import { Title } from "../../StyledComponents/StyledComponents";
 
 const Dashboard = props => {
   const handleSignOut = firebase => {
@@ -12,14 +13,24 @@ const Dashboard = props => {
 
   return (
     <AccountContext.Consumer>
-      {(value)=> (
+      {value => (
         <>
           <div className="dashboard">
+            <Title>Your Dashboard</Title>
             <p>
               Hello{" "}
-              <b>{value.firestoreUser.firstName + " " + value.firestoreUser.lastName}</b>{" "}
+              <b>
+                {value.firestoreUser.firstName +
+                  " " +
+                  value.firestoreUser.lastName}
+              </b>{" "}
               (Not{" "}
-              <b>{value.firestoreUser.firstName + " " + value.firestoreUser.lastName}</b>?{" "}
+              <b>
+                {value.firestoreUser.firstName +
+                  " " +
+                  value.firestoreUser.lastName}
+              </b>
+              ?{" "}
               <a
                 className="inactive-link"
                 onClick={() => handleSignOut(value.firebase)}

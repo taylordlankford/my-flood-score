@@ -1,7 +1,7 @@
 import React from "react";
 import * as ROUTES from "../../../routes/constants/routes";
 import { Link } from "react-router-dom";
-
+import { TransitionBtn } from "../../../StyledComponents/StyledComponents"
 import Moment from "react-moment";
 
 const OrdersList = props => {
@@ -38,12 +38,14 @@ const OrdersList = props => {
             items
           </td>
           <td>
-            <Link
-              to={ROUTES.ACCOUNT_ORDER + "/" + (index + 1).toString()}
-              className="btn btn-primary view-action"
-            >
-              View
-            </Link>
+            <TransitionBtn>
+              <Link
+                style={{ color: "#fff" }}
+                to={ROUTES.ACCOUNT_ORDER + "/" + (index + 1).toString()}
+              >
+                View
+              </Link>
+            </TransitionBtn>
           </td>
         </tr>
       ))}

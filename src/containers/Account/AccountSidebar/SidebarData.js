@@ -34,12 +34,6 @@ export const SIDEBAR_LINKS = [
     sidebarIcon: FaSyncAlt,
     sidebarLink: 'Subscriptions'
   },
-  // {
-  //   id: 5,
-  //   routePath: ROUTES.ACCOUNT_ADDRESSES,
-  //   sidebarIcon: FaAddressBook,
-  //   sidebarLink: 'Addresses'
-  // },
   {
     id: 5,
     routePath: ROUTES.ACCOUNT_PAYMENT_METHODS,
