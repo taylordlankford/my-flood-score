@@ -4,11 +4,15 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { PrimaryBtn } from "../../../../StyledComponents/StyledComponents";
 import UpdateEmailConfirmation from "./UpdateEmailConfirmation";
+import { useSelector, useDispatch } from "react-redux"
+import { pushSuccess } from "../../../../redux/actions/notificationActions"
 
 const EmailForm = props => {
   const [modalShow, setModalShow] = React.useState(false);
   const [email, setEmail] = useState(props.firestoreUser.email);
   const [error, setError] = useState(null);
+  const notice = useSelector(state => state.notifications)
+  const dispatch = useDispatch()
   const isInvalid = email === "";
 
   const updateEmail = (e, passwordConfirmation) => {
@@ -42,6 +46,7 @@ const EmailForm = props => {
           })
           .then(() => {
             setModalShow(false);
+            dispatch(pushSuccess("Successfully updated your Email Address."))
           });
       })
       .catch(error => {

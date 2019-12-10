@@ -38,7 +38,7 @@ const CartDropdown = (props) => {
           onClick={() => props.history.push(ROUTES.CART)}
           className="cart-icon" />
         {
-          (props.addedItems.length > 0) ?
+          (addedItems.length > 0) ?
             <CartCounter cartCount={cartQuantity()} />
             :
             <span style={{ display: 'none' }}></span>
@@ -61,8 +61,8 @@ const CartDropdown = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    addedItems: state.addedItems,
-    total: state.total
+    addedItems: state.cartReducer.addedItems,
+    total: state.cartReducer.total
 })
 
 const mapDispatchToProps = (/* dispatch */) => ({})

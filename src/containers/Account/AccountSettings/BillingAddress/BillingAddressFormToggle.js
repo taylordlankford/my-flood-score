@@ -4,9 +4,12 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import BillingAddressForm from "./BillingAddressForm";
+import { useDispatch } from "react-redux";
+import { pushSuccess } from '../../../../redux/actions/notificationActions'
 
 const BillingAddressFormToggle = props => {
   const [showBillingAddressForm, setShowBillingAddressForm] = useState(false);
+  const dispatch = useDispatch()
 
   const toggleBillingAddressForm = () => {
     showBillingAddressForm === true
@@ -28,6 +31,7 @@ const BillingAddressFormToggle = props => {
       props.firestoreUser.uid,
       updatedFirestoreUser
     );
+    dispatch(pushSuccess("Successfully updated Billing Address."));
   };
 
   return (

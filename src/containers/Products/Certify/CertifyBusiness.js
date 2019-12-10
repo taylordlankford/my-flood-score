@@ -62,6 +62,6 @@ const CertifyBusiness = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({ items: state.items })
+const mapStateToProps = (state) => ({ items: state.cartReducer.items })
 
 export default connect(mapStateToProps)(CertifyBusiness)

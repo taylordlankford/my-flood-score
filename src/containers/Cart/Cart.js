@@ -16,7 +16,11 @@ import {
 
 import CartItem from "./CartItem";
 import OrderDetails from "./OrderDetails";
-import CartNotifcation from "./CartNotification";
+// import CartNotifcation from "./CartNotification";
+
+import { pushDanger } from "../../redux/actions/notificationActions";
+import { useSelector, useDispatch } from 'react-redux'
+import Notification from "../../components/Notifications/Notification"
 
 const handleQtyChange = (newValue, product, addQuantity, subtractQuantity) => {
   console.log("old value", product);
@@ -33,6 +37,8 @@ const handleQtyChange = (newValue, product, addQuantity, subtractQuantity) => {
 };
 
 const Cart = props => {
+  const notice = useSelector(state => state.notification)
+  const dispatch = useDispatch()
   const { items, total, addQuantity, subtractQuantity, removeItem } = props;
 
   console.log("props in cart.js", props);
@@ -47,6 +53,7 @@ const Cart = props => {
 
   const handleRemoveItem = product => {
     removeItem(product.id);
+    dispatch(pushDanger("Removed an item from cart."));
   };
 
   const DPRODUCTS = items.map((product, index) => (
@@ -62,7 +69,8 @@ const Cart = props => {
 
   return (
     <Container className="cart-container">
-      <CartNotifcation items={items} gotoShop={gotoShop} />
+      {/* <CartNotifcation items={items} gotoShop={gotoShop} /> */}
+      <Notification flag={notice.flag} notice={notice.message} />
       <div style={{ paddingTop: "32px" }}>
         {items.length === 0 ? (
           <Container>
@@ -96,8 +104,8 @@ const Cart = props => {
 
 const mapStateToProps = state => {
   return {
-    items: state.addedItems,
-    total: state.total
+    items: state.cartReducer.addedItems,
+    total: state.cartReducer.total
   };
 };
 const mapDispatchToProps = dispatch => {
