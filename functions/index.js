@@ -264,7 +264,7 @@ const getSubscriptions = async (data, context) => {
   let subs = []
   // node 10 autopagination
   await stripe.subscriptions.list({ customer: customerId })
-    .autoPagingEach(function(subscription) {
+    .autoPagingEach((subscription) => {
       subs.push(subscription)
     });
   // const subs = await stripe.subscriptions.list({ customer: customerId })
@@ -272,9 +272,22 @@ const getSubscriptions = async (data, context) => {
   return { subs }
 }
 
+const cancelSubscription = async (data, context) => {
+  const { subscriptionId } = data
+  try {
+    const subscription = await stripe.subscriptions.del(subscriptionId)
+    return { subscription }
+  } catch (error) {
+    console.log('cancelSubscription error:', error)
+    error.status = 'failed'
+    return { subscription: error }
+  }
+}
+
 exports.addUser = functions.https.onCall(addUser)
 exports.createPaymentIntent = functions.https.onCall(createPaymentIntent)
 exports.createSubscription = functions.https.onCall(createSubscription)
 exports.getSubscriptions = functions.https.onCall(getSubscriptions)
+exports.cancelSubscription = functions.https.onCall(cancelSubscription)
 exports.createCustomer = functions.https.onCall(createCustomer)
 exports.paymentIntentSucceeded = functions.https.onRequest(paymentIntentSucceeded)

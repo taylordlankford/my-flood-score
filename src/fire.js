@@ -128,6 +128,10 @@ class Fire {
     const getSubscriptions = this.functions.httpsCallable('getSubscriptions')
     return await getSubscriptions({ customerId })
   }
+  doCancelSubscription = async (subscriptionId) => {
+    const cancelSubscription = this.functions.httpsCallable('cancelSubscription')
+    return await cancelSubscription({ subscriptionId })
+  }
 
 
 }
