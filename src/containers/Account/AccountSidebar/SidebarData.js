@@ -4,7 +4,6 @@ import {
   FaList,
   FaShoppingBasket,
   FaDownload,
-  FaAddressBook,
   FaCreditCard,
   FaUserAlt,
 } from 'react-icons/fa'
@@ -34,12 +33,6 @@ export const SIDEBAR_LINKS = [
     sidebarIcon: FaDownload,
     sidebarLink: 'Downloads'
   },
-  // {
-  //   id: 5,
-  //   routePath: ROUTES.ACCOUNT_ADDRESSES,
-  //   sidebarIcon: FaAddressBook,
-  //   sidebarLink: 'Addresses'
-  // },
   {
     id: 5,
     routePath: ROUTES.ACCOUNT_PAYMENT_METHODS,
