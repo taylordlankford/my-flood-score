@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 import Alert from "react-bootstrap/Alert";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Row";
-import { IoMdClose } from "react-icons/io";
 import { pushClear } from "../../redux/actions/notificationActions";
 import { useDispatch, useSelector } from "react-redux";
 
