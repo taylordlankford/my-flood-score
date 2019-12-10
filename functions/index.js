@@ -274,8 +274,14 @@ const getSubscriptions = async (data, context) => {
 
 const cancelSubscription = async (data, context) => {
   const { subscriptionId } = data
-  const subscription = await stripe.subscriptions.del(subscriptionId)
-  return { subscription }
+  try {
+    const subscription = await stripe.subscriptions.del(subscriptionId)
+    return { subscription }
+  } catch (error) {
+    console.log('cancelSubscription error:', error)
+    error.status = 'failed'
+    return { subscription: error }
+  }
 }
 
 exports.addUser = functions.https.onCall(addUser)

@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table'
 import { Title } from '../../../StyledComponents/StyledComponents'
 import { AccountContext } from '../AccountContext'
 import Subscription from './Subscription'
+import Notification from "../../../components/Notifications/Notification"
 
 const Subscriptions = () => {
   const { firestoreUser, firebase } = useContext(AccountContext)
@@ -22,13 +23,12 @@ const Subscriptions = () => {
 
   if (!subs) {
     return (
-      'waiting on subs'
+      'No subscriptions yet'
     )
   }
   return (
-    // <Container>
-    //   {subs.map((sub, index) => <Subscription sub={sub} index={index} />)}
-    // </Container>
+    <>
+    <Notification />
     <Table responsive borderless>
       <thead>
         <tr>
@@ -43,6 +43,7 @@ const Subscriptions = () => {
         {subs.map((sub, index) => <Subscription sub={sub} index={index} />)}
       </tbody>
     </Table>
+    </>
   )
 }
 

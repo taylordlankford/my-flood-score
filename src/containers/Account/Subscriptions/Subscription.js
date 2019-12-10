@@ -1,11 +1,14 @@
 import React, { useState, useContext } from 'react'
+import { useDispatch } from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Moment from "react-moment"
 import 'moment-timezone'
 import { AccountContext } from '../AccountContext'
+import { pushInfo, pushDanger } from '../../../redux/actions/notificationActions'
 
 const Subscription = ({ sub, index }) => {
+  const dispatch = useDispatch()
   const [handlingCancel, setHandlingCancel] = useState(false)
   const [canceled, setCanceled] = useState(false)
 
@@ -19,10 +22,41 @@ const Subscription = ({ sub, index }) => {
     setHandlingCancel(false)
     if (s.data.subscription.status === 'canceled') {
       setCanceled(true)
-      // Notify Success
+      dispatch(pushInfo('Subscription canceled'))
     } else {
-      // TODO: Notify error
+      dispatch(pushDanger('Failed to cancel subscription. Please try again or contact us'))
     }
+  }
+
+  const getnickname = (sub) => {
+    let nickname = ''
+    sub.items.data.forEach(item => {
+      console.log('in loop', item.plan.nickname)
+      nickname = nickname.concat(item.plan.nickname)
+      if (item.quantity > 1) {
+        nickname = nickname.concat(' x ', item.quantity)
+      }
+      nickname = nickname.concat('/')
+    })
+    nickname = nickname.split('/').filter(Boolean).join('/');
+    return nickname
+  }
+
+  const getAmount = (sub) => {
+    let amount = 0
+    sub.items.data.forEach(item => {
+      amount += item.quantity * item.plan.amount
+    })
+    amount = (amount / 100).toFixed(2)
+    return amount
+  }
+
+  const getQuantity = (sub) => {
+    let q = 0
+    sub.items.data.forEach(item => {
+      q += item.quantity
+    })
+    return q
   }
 
   if (canceled) {
@@ -32,7 +66,7 @@ const Subscription = ({ sub, index }) => {
   return (
     <tr key={index}>
       <td>
-        {sub.plan.nickname}
+        {getnickname(sub)}
       </td>
       <td>
       <Moment format="MM/DD/YYYY">
@@ -45,10 +79,7 @@ const Subscription = ({ sub, index }) => {
         </Moment>
       </td>
       <td>
-        {sub.quantity > 1
-        ? `$${(sub.plan.amount * sub.quantity / 100).toFixed(2)} for ${sub.quantity} plans`
-        : `$${(sub.plan.amount * sub.quantity / 100).toFixed(2)}`
-        }
+        {`$${getAmount(sub)}`}
       </td>
       <td>
         <Button
@@ -66,6 +97,7 @@ const Subscription = ({ sub, index }) => {
                 size="sm"
                 role="status"
                 aria-hidden="true"
+                style={{ marginLeft: '-15px', marginRight: '15px' }}
               />
               <span>Processing..</span>
               </>
