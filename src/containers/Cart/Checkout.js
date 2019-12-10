@@ -41,9 +41,9 @@ class CheckoutPage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    items: state.addedItems,
-    total: state.total,
-    paymentProcessing: state.paymentProcessing,
+    items: state.cartReducer.addedItems,
+    total: state.cartReducer.total,
+    paymentProcessing: state.cartReducer.paymentProcessing,
   }
 }
 const mapDispatchToProps = () => ({

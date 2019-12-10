@@ -7,12 +7,19 @@ import CompanyFormToggle from "./Company/CompanyFormToggle";
 import BillingAddressFormToggle from "./BillingAddress/BillingAddressFormToggle";
 import { Title } from "../../../StyledComponents/StyledComponents"
 import "./AccountSettings.css";
+import { useSelector } from "react-redux";
+import AlertComponent from "../../../components/Alerts/AlertComponent"
 
 const AccountSettings = () => {
+  const notice = useSelector(state => state.notification);
+  console.log(notice)
+
   return (
     <AccountContext.Consumer>
       {value => (
         <Container>
+          <AlertComponent flag={notice.flag} notice={notice.message} />
+
           <Title>Account Settings</Title>
           <NameFormToggle
             firebase={value.firebase}

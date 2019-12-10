@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { StyledLink } from "../../../../StyledComponents/StyledComponents";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import NameForm from "./NameForm";
+import { pushSuccess } from "../../../../redux/actions/notificationActions";
 
 const NameFormToggle = props => {
   const [showNameForm, setShowNameForm] = useState(false);
+  const dispatch = useDispatch();
 
   const toggleNameForm = () => {
     showNameForm === true ? setShowNameForm(false) : setShowNameForm(true);
@@ -27,6 +30,8 @@ const NameFormToggle = props => {
     };
 
     props.firebase.doFirestoreSet("users", firestoreUser.uid, updatedUser);
+    const currentUser = firestoreUser;
+    dispatch(pushSuccess("Successfully updated name.", currentUser));
     setShowNameForm(false);
   };
 

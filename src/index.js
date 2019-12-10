@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import WebFont from 'webfontloader'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import { PersistGate } from 'redux-persist/integration/react'
@@ -16,6 +16,7 @@ import StateReducer, { initialState } from './StateReducer'
 import Fire from './fire'
 import { FirebaseContext, StateProvider } from './hooks'
 import cartReducer from './redux/reducers/cartReducer'
+import notification from './redux/reducers/notification'
 
 
 WebFont.load({
@@ -29,10 +30,12 @@ WebFont.load({
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage
 }
-const persistedReducer = persistReducer(persistConfig, cartReducer)
-const store = createStore(persistedReducer)
+
+const combinedReducers = combineReducers({ cartReducer, notification});
+const persistedReducer = persistReducer(persistConfig, combinedReducers)
+const store = createStore(persistedReducer);
 const persistor = persistStore(store)
 
 

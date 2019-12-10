@@ -4,9 +4,12 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CompanyForm from "./CompanyForm";
+import { useDispatch } from "react-redux";
+import { pushSuccess } from "../../../../redux/actions/notificationActions"
 
 const CompanyFormToggle = props => {
   const [showCompanyForm, setShowCompanyForm] = useState(false);
+  const dispatch = useDispatch()
 
   const toggleCompanyForm = () => {
     showCompanyForm === true
@@ -23,6 +26,7 @@ const CompanyFormToggle = props => {
 
     setShowCompanyForm(false);
     firebase.doFirestoreSet("users", firestoreUser.uid, updatedFirestoreUser);
+    dispatch(pushSuccess("Successfully updated company name"));
   };
 
   return (
