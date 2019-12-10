@@ -114,15 +114,19 @@ class Fire {
   doAddUser = () => this.functions.httpsCallable('addUser')
   doCreatePaymentIntent = async (intent) => {
     const paymentIntent = this.functions.httpsCallable('createPaymentIntent')
-    return  await paymentIntent({intent})
+    return  await paymentIntent({ intent })
   }
   doCreateCustomer = async (customer) => {
     const createCustomer = this.functions.httpsCallable('createCustomer')
-    return await createCustomer({customer})
+    return await createCustomer({ customer })
   }
   doCreateSubscription = async (subscription) => {
     const createSubscription = this.functions.httpsCallable('createSubscription')
     return await createSubscription({subscription})
+  }
+  doGetSubscriptions = async (customerId) => {
+    const getSubscriptions = this.functions.httpsCallable('getSubscriptions')
+    return await getSubscriptions({ customerId })
   }
 
 

@@ -258,8 +258,23 @@ const createSubscription = (data, context) => {
   })()
 }
 
+const getSubscriptions = async (data, context) => {
+  const { customerId } = data
+  console.log('customerId', customerId)
+  let subs = []
+  // node 10 autopagination
+  await stripe.subscriptions.list({ customer: customerId })
+    .autoPagingEach(function(subscription) {
+      subs.push(subscription)
+    });
+  // const subs = await stripe.subscriptions.list({ customer: customerId })
+  console.log('subs', subs)
+  return { subs }
+}
+
 exports.addUser = functions.https.onCall(addUser)
 exports.createPaymentIntent = functions.https.onCall(createPaymentIntent)
 exports.createSubscription = functions.https.onCall(createSubscription)
+exports.getSubscriptions = functions.https.onCall(getSubscriptions)
 exports.createCustomer = functions.https.onCall(createCustomer)
 exports.paymentIntentSucceeded = functions.https.onRequest(paymentIntentSucceeded)
