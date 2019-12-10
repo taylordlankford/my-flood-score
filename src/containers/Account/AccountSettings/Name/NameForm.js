@@ -9,8 +9,10 @@ const NameForm = props => {
   const [lastName, setLastName] = useState(props.firestoreUser.lastName);
 
   const isInvalid =
-      firstName === '' ||
-      lastName === ''
+    firstName === "" ||
+    lastName === "" ||
+    (firstName === props.firestoreUser.firstName && 
+      lastName === props.firestoreUser.lastName);
 
   return (
     <div style={{ paddingBottom: "40px", borderBottom: "1px solid #eee" }}>
