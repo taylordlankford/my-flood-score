@@ -78,7 +78,7 @@ export const PrimaryBtn = styled.a`
   &:visited {
     margin: 5px 5px;
     width: 100%;
-    text-align: center;
+    text-align: center !important;
     color: white !important;
     cursor: pointer;
     background-color: #55b96a;
@@ -142,6 +142,46 @@ export const SecondaryBtn = styled.a`
   &:hover {
     background-position: 100%;
     color: white;
+  }
+
+  &:active {
+    outline: none;
+    transform: scale(0.9);
+  }
+`;
+
+export const TransitionBtn = styled.a`
+  &,
+  &:link,
+  &:visited {
+    margin: 5px 5px;
+    width: 100%;
+    text-align: center;
+    color: white !important;
+    cursor: pointer;
+    background-color: #d4d4d4;
+    background-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.2) 50%
+    );
+    font-size: 0.94rem;
+    font-weight: 700;
+    border-radius: 5px;
+    border: none;
+    display: inline-block;
+    padding: 0.62rem 1.25rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-size: 230%;
+    transition: all 0.4s;
+  }
+
+  &:hover {
+    background-position: 100%;
+    color: white;
+    background-color: #66de80;
   }
 
   &:active {

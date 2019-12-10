@@ -18,18 +18,21 @@ const Orders = () => {
               </p>
             </>
           ) : (
-            <Table responsive borderless>
-              <thead>
-                <tr>
-                  <th>Order</th>
-                  <th>Date</th>
-                  <th>Type</th>
-                  <th>Total</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <OrdersList orders={value.firestoreUser.orders} />
-            </Table>
+            <>
+              <Title>Orders</Title>
+              <Table responsive borderless>
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <OrdersList orders={value.firestoreUser.orders} />
+              </Table>
+            </>
           )}
         </>
       )}

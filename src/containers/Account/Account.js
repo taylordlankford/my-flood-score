@@ -14,6 +14,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AccountSidebar from "./AccountSidebar/AccountSidebar";
 import Dashboard from "./Dashboard";
+import Inventory from "./Inventory/Inventory";
 import Orders from "./Orders/Orders";
 import Order from "./Orders/Order";
 import Subscriptions from "./Subscriptions/Subscriptions";
@@ -34,6 +35,7 @@ const Account = () => {
                   <Col sm={9}>
                     <Switch>
                       <Route path={ROUTES.ACCOUNT_DASHBOARD} component={Dashboard} />
+                      <Route path={ROUTES.ACCOUNT_INVENTORY} component={Inventory} />
                       <Route path={ROUTES.ACCOUNT_ORDERS} component={Orders} />
                       <Route path={ROUTES.ACCOUNT_SUBSCRIPTIONS} component={Subscriptions} />
                       <Route path={ROUTES.ACCOUNT_PAYMENT_METHODS} component={PaymentMethods} />
