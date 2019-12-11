@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyledLink } from "../../../../StyledComponents/StyledComponents";
+import { Container, LinkPrimary } from "../../../../StyledComponents/StyledComponents";
 import { AccountSettingsFormContainer } from "../../StyledComponents/StyledComponents";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -30,7 +30,7 @@ const CompanyFormToggle = props => {
   };
 
   return (
-    <AccountSettingsFormContainer>
+    <Container padding="20px 0 20px 0" borderBottom="1px solid #eee">
       {!showCompanyForm ? (
         <Row sm={12}>
           <Col sm={10}>
@@ -44,7 +44,7 @@ const CompanyFormToggle = props => {
             </p>
           </Col>
           <Col sm={2} style={{ textAlign: "right" }}>
-            <StyledLink onClick={toggleCompanyForm}>Edit</StyledLink>
+            <LinkPrimary onClick={toggleCompanyForm}>Edit</LinkPrimary>
           </Col>
         </Row>
       ) : (
@@ -56,7 +56,7 @@ const CompanyFormToggle = props => {
             <p>Enter your company name.</p>
           </Col>
           <Col sm={2} style={{ textAlign: "right" }}>
-            <StyledLink onClick={toggleCompanyForm}>Cancel</StyledLink>
+            <LinkPrimary onClick={toggleCompanyForm}>Cancel</LinkPrimary>
           </Col>
         </Row>
       )}
@@ -70,7 +70,7 @@ const CompanyFormToggle = props => {
       ) : (
         <></>
       )}
-    </AccountSettingsFormContainer>
+    </Container>
   );
 };
 

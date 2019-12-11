@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { StyledLink } from "../../../../StyledComponents/StyledComponents";
-import { AccountSettingsFormContainer } from "../../StyledComponents/StyledComponents";
+import { Container, LinkPrimary } from "../../../../StyledComponents/StyledComponents";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import BillingAddressForm from "./BillingAddressForm";
@@ -35,7 +34,7 @@ const BillingAddressFormToggle = props => {
   };
 
   return (
-    <AccountSettingsFormContainer>
+    <Container padding="20px 0 20px 0" borderBottom="1px solid #eee">
       {!showBillingAddressForm ? (
         <Row sm={12}>
           <Col sm={10}>
@@ -47,7 +46,7 @@ const BillingAddressFormToggle = props => {
             <div>{props.firestoreUser.country}</div>
           </Col>
           <Col sm={2} style={{ textAlign: "right" }}>
-            <StyledLink onClick={toggleBillingAddressForm}>Edit</StyledLink>
+            <LinkPrimary onClick={toggleBillingAddressForm}>Edit</LinkPrimary>
           </Col>
         </Row>
       ) : (
@@ -59,7 +58,7 @@ const BillingAddressFormToggle = props => {
             <p>Enter a valid billing address.</p>
           </Col>
           <Col sm={2} style={{ textAlign: "right" }}>
-            <StyledLink onClick={toggleBillingAddressForm}>Cancel</StyledLink>
+            <LinkPrimary onClick={toggleBillingAddressForm}>Cancel</LinkPrimary>
           </Col>
         </Row>
       )}
@@ -72,7 +71,7 @@ const BillingAddressFormToggle = props => {
       ) : (
         <></>
       )}
-    </AccountSettingsFormContainer>
+    </Container>
   );
 };
 

@@ -284,10 +284,24 @@ const cancelSubscription = async (data, context) => {
   }
 }
 
+const getPaymentMethods = async (data, context) => {
+  const { customerId } = data;
+  let paymentMethods = [];
+
+  await stripe.paymentMethods
+    .list({ customer: customerId, type: "card" })
+    .autoPagingEach(paymentMethod => {
+      paymentMethods.push(paymentMethod);
+    });
+
+  return { paymentMethods };
+};
+
 exports.addUser = functions.https.onCall(addUser)
 exports.createPaymentIntent = functions.https.onCall(createPaymentIntent)
 exports.createSubscription = functions.https.onCall(createSubscription)
 exports.getSubscriptions = functions.https.onCall(getSubscriptions)
 exports.cancelSubscription = functions.https.onCall(cancelSubscription)
+exports.getPaymentMethods = functions.https.onCall(getPaymentMethods)
 exports.createCustomer = functions.https.onCall(createCustomer)
 exports.paymentIntentSucceeded = functions.https.onRequest(paymentIntentSucceeded)

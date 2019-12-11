@@ -2,7 +2,7 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 import "./Orders.css";
 import OrdersList from "./OrdersList";
-import { Title, StyledLink } from "../../../StyledComponents/StyledComponents"
+import { Title, LinkPrimary } from "../../../StyledComponents/StyledComponents"
 import { AccountContext } from "../AccountContext";
 
 const Orders = () => {
@@ -14,7 +14,7 @@ const Orders = () => {
             <>
               <p>You don't have any orders yet. :(</p>
               <p>
-                Checkout our <StyledLink>Services.</StyledLink>{" "}
+                Checkout our <LinkPrimary>Services.</LinkPrimary>{" "}
               </p>
             </>
           ) : (

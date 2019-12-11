@@ -133,6 +133,11 @@ class Fire {
     return await cancelSubscription({ subscriptionId })
   }
 
+  doGetPaymentMethods = async (customerId) => {
+    const getPaymentMethods = this.functions.httpsCallable("getPaymentMethods");
+    return await getPaymentMethods({ customerId });
+  }
+
 
 }
 
