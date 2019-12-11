@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { StyledLink } from "../../../../StyledComponents/StyledComponents";
+import { AccountSettingsFormContainer } from "../../StyledComponents/StyledComponents";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import NameForm from "./NameForm";
@@ -35,7 +36,7 @@ const NameFormToggle = props => {
   };
 
   return (
-    <div style={{ paddingBottom: "40px", borderBottom: "1px solid #eee" }}>
+    <AccountSettingsFormContainer>
       {!showNameForm ? (
         <Row sm={12}>
           <Col sm={10}>
@@ -82,7 +83,7 @@ const NameFormToggle = props => {
       ) : (
         <></>
       )}
-    </div>
+    </AccountSettingsFormContainer>
   );
 };
 
