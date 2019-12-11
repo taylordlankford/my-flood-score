@@ -10,7 +10,7 @@ const CompanyForm = props => {
   const isInvalid = companyName === "" || companyName === props.firestoreUser.companyName;
 
   return (
-    <div style={{ paddingBottom: "40px", borderBottom: "1px solid #eee" }}>
+    <div style={{ paddingBottom: "40px" }}>
       <Form onSubmit={(e) => e.preventDefault()}>
         <Row>
           <Col>

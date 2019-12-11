@@ -11,11 +11,11 @@ const NameForm = props => {
   const isInvalid =
     firstName === "" ||
     lastName === "" ||
-    (firstName === props.firestoreUser.firstName && 
+    (firstName === props.firestoreUser.firstName &&
       lastName === props.firestoreUser.lastName);
 
   return (
-    <div style={{ paddingBottom: "40px", borderBottom: "1px solid #eee" }}>
+    <div style={{ paddingBottom: "40px" }}>
       <Form>
         <Row>
           <Col>

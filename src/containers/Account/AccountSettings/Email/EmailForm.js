@@ -60,7 +60,7 @@ const EmailForm = props => {
   };
 
   return (
-    <div style={{ paddingBottom: "40px", borderBottom: "1px solid #eee" }}>
+    <div style={{ paddingBottom: "40px" }}>
       <UpdateEmailConfirmation
         firestoreUser={props.firestoreUser}
         show={modalShow}
