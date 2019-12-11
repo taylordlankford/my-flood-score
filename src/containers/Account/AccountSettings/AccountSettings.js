@@ -6,7 +6,6 @@ import EmailFormToggle from "./Email/EmailFormToggle";
 import CompanyFormToggle from "./Company/CompanyFormToggle";
 import BillingAddressFormToggle from "./BillingAddress/BillingAddressFormToggle";
 import { Title } from "../../../StyledComponents/StyledComponents"
-import "./AccountSettings.css";
 import Notification from "../../../components/Notifications/Notification"
 
 const AccountSettings = () => {

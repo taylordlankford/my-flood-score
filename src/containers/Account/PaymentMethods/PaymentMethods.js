@@ -1,5 +1,5 @@
 import React from 'react'
-import { Title } from "../../StyledComponents/StyledComponents"
+import { Title } from "../../../StyledComponents/StyledComponents"
 
 const PaymentMethods = () => {
   return (
