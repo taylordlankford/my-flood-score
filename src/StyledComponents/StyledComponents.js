@@ -32,7 +32,7 @@ export const StyledDropdownMenuItem = styled.div`
   }
 `;
 
-export const InfoBtn = styled.a`
+export const InfoBtn = styled.button`
   &,
   &:link,
   &:visited {
@@ -70,9 +70,14 @@ export const InfoBtn = styled.a`
     outline: none;
     transform: scale(0.9);
   }
+  
+  &:disabled {
+    background-color: #d4d4d4;
+    cursor: not-allowed;
+  }
 `;
 
-export const PrimaryBtn = styled.a`
+export const PrimaryBtn = styled.button`
   &,
   &:link,
   &:visited {
@@ -109,9 +114,14 @@ export const PrimaryBtn = styled.a`
     outline: none;
     transform: scale(0.9);
   }
+
+  &:disabled {
+    background-color: #d4d4d4;
+    cursor: not-allowed;
+  }
 `;
 
-export const SecondaryBtn = styled.a`
+export const SecondaryBtn = styled.button`
   &,
   &:link,
   &:visited {
@@ -148,9 +158,14 @@ export const SecondaryBtn = styled.a`
     outline: none;
     transform: scale(0.9);
   }
+
+  &:disabled {
+    background-color: #d4d4d4;
+    cursor: not-allowed;
+  }
 `;
 
-export const TransitionBtn = styled.a`
+export const TransitionBtn = styled.button`
   &,
   &:link,
   &:visited {
@@ -187,5 +202,10 @@ export const TransitionBtn = styled.a`
   &:active {
     outline: none;
     transform: scale(0.9);
+  }
+
+  &:disabled {
+    background-color: #d4d4d4;
+    cursor: not-allowed;
   }
 `;

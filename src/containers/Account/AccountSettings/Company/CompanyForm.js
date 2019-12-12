@@ -7,9 +7,11 @@ import { PrimaryBtn } from "../../../../StyledComponents/StyledComponents";
 const CompanyForm = props => {
   const [companyName, setCompanyName] = useState(props.firestoreUser.companyName);
 
+  const isInvalid = companyName === "" || companyName === props.firestoreUser.companyName;
+
   return (
-    <div style={{ paddingBottom: "40px", borderBottom: "1px solid #eee" }}>
-      <Form>
+    <div style={{ paddingBottom: "40px" }}>
+      <Form onSubmit={(e) => e.preventDefault()}>
         <Row>
           <Col>
             <Form.Group>
@@ -27,6 +29,7 @@ const CompanyForm = props => {
         <Row>
           <Col sm={2} style={{ textAlign: "left" }}>
             <PrimaryBtn
+              disabled={isInvalid}
               onClick={e =>
                 props.updateCompany(
                   e,
