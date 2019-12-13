@@ -67,6 +67,30 @@ admin.initializeApp(functions.config().firebase);
 //     }
 // });
 
+// Helper functions
+const getNewInventory = (inventory, order) => {
+  for (let i = 0; i < order.items.length; i++) {
+    const orderedItem = order.items[i]
+    let quantAdded = false
+    for (let j = 0; j < inventory.length; j++) {
+      const inven = inventory[j]
+      if (orderedItem.categoryId === inven.categoryId ) {
+        inventory[j].quantity = inven.quantity + (orderedItem.quantity * orderedItem.numInventory)
+        quantAdded = true
+        break
+      }
+    }
+    if (!quantAdded) {
+      inventory.push({
+        categoryId: orderedItem.categoryId,
+        quantity: orderedItem.quantity
+      })
+    }
+  }
+  return inventory
+}
+
+
 const addUser = (data, context) => {
   const { uid } = context.auth
   const { userDetails } = data
@@ -156,8 +180,13 @@ const paymentIntentSucceeded = async (request, response) => {
             const order = JSON.parse(paymentIntent.metadata.order)
             order.timestamp = new Date()
             order.type = 'Ad-hoc'
+            // Add items to inventory
+            let { inventory } = data
+            console.log('inventory', inventory)
+            const newInventory = getNewInventory(inventory, order)
             await userRef.update({
               orders: admin.firestore.FieldValue.arrayUnion(order),
+              inventory: newInventory,
             })
             response.json({ paymentMethod })
           } else { // If user is not already a customer
@@ -176,8 +205,13 @@ const paymentIntentSucceeded = async (request, response) => {
             const order = JSON.parse(paymentIntent.metadata.order)
             order.timestamp = new Date()
             order.type = 'Adh-oc'
+            // Add items to inventory
+            let { inventory } = data
+            console.log('inventory', inventory)
+            const newInventory = getNewInventory(inventory, order)
             await userRef.update({
               orders: admin.firestore.FieldValue.arrayUnion(order),
+              inventory: newInventory,
             })
             // Add customer id to firestore
             userRef.set({

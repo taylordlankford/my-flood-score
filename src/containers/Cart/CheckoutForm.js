@@ -76,10 +76,15 @@ const CheckoutForm = (props) => {
     const order = { items: [] }
     items.forEach(item => {
       console.log('item:', item)
+      const { id, title, price, plan, quantity, categoryId, numInventory } = item
       if (item.type === 'monthly') {
-        subItems.push({ plan: item.plan, quantity: item.quantity })
+        subItems.push({
+          plan,
+          quantity,
+          metadata: { categoryId, numInventory }
+        })
       } else {
-        order.items.push({ id: item.id, title: item.title, price: item.price, quantity: item.quantity })
+        order.items.push({ id, title, price, quantity, categoryId, numInventory })
         // intentAmount += item.price
         intentAmount += (item.price * item.quantity)
       }
@@ -95,6 +100,7 @@ const CheckoutForm = (props) => {
         metadata: {
           email,
           uid,
+          type: 'subscription'
         },
       })
       console.log('subscription', subscription)
@@ -121,6 +127,7 @@ const CheckoutForm = (props) => {
           email,
           uid,
           order: JSON.stringify(order),
+          type: 'ad-hoc',
         },
       })
       if (typeof intent.data.raw !== 'undefined') {

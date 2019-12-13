@@ -5,20 +5,22 @@ import { withRouter } from "react-router-dom"
 import * as ROUTES from '../../../routes/constants/routes'
 
 const Item = ({ item, index, allItems, history }) => {
+  console.log('allItems', allItems)
   const product = allItems.filter((el) => {
-    return el.id === item.id
+    return el.categoryId === item.categoryId
   })[0] // First item of the filtered array
 
   return (
     <tr key={index}>
-      <td>
-        {product.title}
+      <td style={{ display: 'inlineGrid', textAlign: 'center' }}>
+        <img src={product.img} style={{ position: 'relative', width: '100px' }} />
+        <span style={{ color: 'darkblue', fontWeight: 'bold' }}> {product.categoryId.charAt(0).toUpperCase() + product.categoryId.slice(1)}</span>
       </td>
       <td>
         {product.desc}
       </td>
       <td className="noWrap">
-        {item.inventory} Remaining
+        {item.quantity} Remaining
       </td>
       <td className="noWrap">
         <Button

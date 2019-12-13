@@ -13,6 +13,8 @@ export const cartInitState = {
       desc: "My Flood Score is the result of analyzing the best available flood data, combined with details of the property structure and land parcel, as well as a number of other significant flood factors even down to how the local community is responding to the risk of a flood.",
       price: 0,
       type: 'single',
+      categoryId: 'discover',
+      numInventory: 1,
     },
     {
       id: 1,
@@ -21,6 +23,8 @@ export const cartInitState = {
       desc: "My Flood Score is the result of analyzing the best available flood data, combined with details of the property structure and land parcel, as well as a number of other significant flood factors even down to how the local community is responding to the risk of a flood.",
       price: 500,
       type: 'single',
+      categoryId: 'discover',
+      numInventory: 10,
     },
     {
       id: 2,
@@ -30,6 +34,8 @@ export const cartInitState = {
       price: 1000,
       type: 'monthly',
       plan: 'plan_GD4tFIrEfqOPLx',
+      categoryId: 'discover',
+      numInventory: 25,
     },
     {
       id: 3,
@@ -38,6 +44,8 @@ export const cartInitState = {
       desc: "The Compare Product allows users to directly compare two specific properites.",
       price: 500,
       type: 'single',
+      categoryId: 'compare',
+      numInventory: 1,
     },
     {
       id: 4,
@@ -46,6 +54,8 @@ export const cartInitState = {
       desc: "The Compare Product allows users to directly compare two specific properites.",
       price: 1000,
       type: 'single',
+      categoryId: 'compare',
+      numInventory: 10,
     },
     {
       id: 5,
@@ -55,6 +65,8 @@ export const cartInitState = {
       price: 6000,
       type: 'monthly',
       plan: 'plan_GEq0gCG3Scmg4l',
+      categoryId: 'compare',
+      numInventory: 50,
     },
     {
       id: 6,
@@ -63,6 +75,8 @@ export const cartInitState = {
       desc: "The Examine product offers the most detailed flood risk understanding for an individual property.",
       price: 2500,
       type: 'single',
+      categoryId: 'examine',
+      numInventory: 1,
     },
     {
       id: 7,
@@ -72,6 +86,8 @@ export const cartInitState = {
       price: 2500,
       type: 'monthly',
       plan: 'plan_GEq1bYW1biDgvH',
+      categoryId: 'examine',
+      numInventory: 1,
     },
     {
       id: 8,
@@ -80,6 +96,8 @@ export const cartInitState = {
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 1000,
       type: 'single',
+      categoryId: 'certify',
+      numInventory: 1,
     },
     {
       id: 9,
@@ -89,6 +107,8 @@ export const cartInitState = {
       price: 1000,
       type: 'monthly',
       plan: 'plan_GEq24H2bM9Qofb',
+      categoryId: 'certify',
+      numInventory: 1,
     },
     {
       id: 10,
@@ -97,6 +117,8 @@ export const cartInitState = {
       desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",
       price: 39500,
       type: 'single',
+      categoryId: 'reduce',
+      numInventory: 1,
     },
   ],
   addedItems:[],
