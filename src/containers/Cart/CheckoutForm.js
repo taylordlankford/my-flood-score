@@ -100,7 +100,8 @@ const CheckoutForm = (props) => {
         metadata: {
           email,
           uid,
-          type: 'subscription'
+          type: 'subscription',
+          subItems: JSON.stringify(subItems),
         },
       })
       console.log('subscription', subscription)

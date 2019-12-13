@@ -83,7 +83,7 @@ const getNewInventory = (inventory, order) => {
     if (!quantAdded) {
       inventory.push({
         categoryId: orderedItem.categoryId,
-        quantity: orderedItem.quantity
+        quantity: orderedItem.quantity * orderedItem.numInventory
       })
     }
   }
@@ -159,6 +159,10 @@ const paymentIntentSucceeded = async (request, response) => {
     case 'payment_intent.succeeded': {
       const paymentIntent = event.data.object
       console.log('PaymentIntent was successful!', paymentIntent)
+      if (paymentIntent.invoice !== null) {
+        console.log('this is a subscription, we have a seperate hook for these')
+        return
+      }
       // check if user already a customer or needs to be created
       const userRef = admin.firestore().collection("users").doc(paymentIntent.metadata.uid)
       userRef.get().then( async (doc) => {
@@ -182,6 +186,7 @@ const paymentIntentSucceeded = async (request, response) => {
             order.type = 'Ad-hoc'
             // Add items to inventory
             let { inventory } = data
+            if (!inventory) { inventory = [] }
             console.log('inventory', inventory)
             const newInventory = getNewInventory(inventory, order)
             await userRef.update({
@@ -207,6 +212,7 @@ const paymentIntentSucceeded = async (request, response) => {
             order.type = 'Adh-oc'
             // Add items to inventory
             let { inventory } = data
+            if (!inventory) { inventory = [] }
             console.log('inventory', inventory)
             const newInventory = getNewInventory(inventory, order)
             await userRef.update({
@@ -238,6 +244,72 @@ const paymentIntentSucceeded = async (request, response) => {
   }
   // Return a response to acknowledge receipt of the event
   // response.json({received: true})
+}
+
+const invoicePaymentSucceeded = async (request, response) => {
+  console.log('process.version', process.version)
+  let sig = request.headers["stripe-signature"]
+  const invoiceEndpointSecret = 'whsec_M0YTl00hKCmcfOTcP08XRldrtuTcxqGk'
+  let event = null
+  try {
+    event = await stripe.webhooks.constructEvent(request.rawBody, sig, invoiceEndpointSecret);
+  } catch (err) {
+    console.log('error', err)
+    return response.status(400).end();
+  }
+  const invoice = event.data.object
+  console.log('invoice', invoice)
+  switch (event.type) {
+    case 'invoice.payment_succeeded': {
+      console.log('invoice payment succeeded')
+      const array = JSON.parse(invoice.lines.data[0].metadata.subItems)
+      const order = {}
+      order.items = []
+      array.forEach(el => {
+        const newObj = {
+          plan: el.plan,
+          quantity: el.quantity,
+          categoryId: el.metadata.categoryId,
+          numInventory: el.metadata.numInventory,
+        }
+        order.items.push(newObj)
+      })
+      console.log('order:', order)
+      const { uid } =  invoice.lines.data[0].metadata
+      console.log('uid', uid)
+      const userRef = admin.firestore().collection("users").doc(uid)
+      userRef.get().then( async (doc) => {
+        if (doc.exists) {
+          const data = doc.data()
+          console.log('Document data:', data)
+          let { inventory } = data
+          if (!inventory) { inventory = [] }
+          const newInventory = getNewInventory(inventory, order)
+          await userRef.update({
+            inventory: newInventory,
+          })
+          response.status(200).end();
+          return newInventory
+        } else {
+          return 'doc not found'
+        }
+      })
+      .catch((error => {
+        console.log('userReg.get error', error)
+      }))
+      break
+    }
+    case 'invoice.payment_failed': {
+      console.log('payment_failed')
+      break
+    }
+    case 'invoice.payment_action_required': {
+      console.log('payment_action_required')
+      break
+    }
+    default:
+      return response.status(400).end();
+  }
 }
 
 const createCustomer = (data, context) => {
@@ -325,3 +397,4 @@ exports.getSubscriptions = functions.https.onCall(getSubscriptions)
 exports.cancelSubscription = functions.https.onCall(cancelSubscription)
 exports.createCustomer = functions.https.onCall(createCustomer)
 exports.paymentIntentSucceeded = functions.https.onRequest(paymentIntentSucceeded)
+exports.invoicePaymentSucceeded = functions.https.onRequest(invoicePaymentSucceeded)
