@@ -91,7 +91,6 @@ export const Title = styled.div`
   font-weight: 700;
   line-height: 1.4;
   letter-spacing: 0em;
-  padding-bottom: 30px;
 `;
 
 export const StyledDropdownMenuItem = styled.div`

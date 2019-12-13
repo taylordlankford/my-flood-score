@@ -297,11 +297,35 @@ const getPaymentMethods = async (data, context) => {
   return { paymentMethods };
 };
 
+const detatchPaymentMethod = async (data) => {
+  const { paymentMethodId } = data;
+  await stripe.paymentMethods.detach(paymentMethodId);
+};
+
+const getCustomer = async (data, context) => {
+  const { customerId } = data;
+  const customer = await stripe.customers.retrieve(customerId);
+  return customer;
+};
+
+const deleteCustomer = async (data, context) => {
+  const { customerId } = data;
+  await stripe.customers.del(customerId, (err, confirmation) => {
+    if (err) {
+      console.log(err)
+    }
+    return confirmation
+  });
+}
+
 exports.addUser = functions.https.onCall(addUser)
 exports.createPaymentIntent = functions.https.onCall(createPaymentIntent)
 exports.createSubscription = functions.https.onCall(createSubscription)
 exports.getSubscriptions = functions.https.onCall(getSubscriptions)
 exports.cancelSubscription = functions.https.onCall(cancelSubscription)
 exports.getPaymentMethods = functions.https.onCall(getPaymentMethods)
+exports.detatchPaymentMethod = functions.https.onCall(detatchPaymentMethod)
 exports.createCustomer = functions.https.onCall(createCustomer)
+exports.getCustomer = functions.https.onCall(getCustomer)
+exports.deleteCustomer = functions.https.onCall(deleteCustomer)
 exports.paymentIntentSucceeded = functions.https.onRequest(paymentIntentSucceeded)

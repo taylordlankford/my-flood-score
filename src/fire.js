@@ -138,7 +138,20 @@ class Fire {
     return await getPaymentMethods({ customerId });
   }
 
+  doDetachPaymentMethod = async (paymentMethodId) => {
+    const detachPaymentMethod = this.functions.httpsCallable("detatchPaymentMethod");
+    return await detachPaymentMethod({ paymentMethodId });
+  }
 
+  doGetCustomer = async (customerId) => {
+    const getCustomer = this.functions.httpsCallable("getCustomer");
+    return await getCustomer({ customerId });
+  }
+
+  doDeleteCustomer = async (customerId) => {
+    const deleteCustomer = this.functions.httpsCallable("deleteCustomer")
+    return await deleteCustomer({ customerId })
+  }
 }
 
 export default Fire
