@@ -35,7 +35,7 @@ const NewCardForm = props => {
       </Modal.Header>
       <Modal.Body>
         <Row sm={12}>
-          <Col sm={9}>
+          <Col sm={7}>
             <Form onSubmit={e => e.preventDefault()}>
               <Form.Group>
                 <Form.Label>Card Number</Form.Label>
@@ -58,8 +58,9 @@ const NewCardForm = props => {
               </Row>
             </Form>
           </Col>
-          <Col sm={3}>
+          <Col sm={5}>
             <div>MyFloodScore accepts all major credit cards.</div>
+            <br />
             <div>
               <FaCcVisa size={60} />
               <FaCcMastercard size={60} />
