@@ -77,11 +77,12 @@ const PaymentMethods = (props) => {
     // Attach a new payment method to Stripe customer through Stripe API
     firebase.doAttachPaymentMethod(pmId, customerId).then(() => {
       // Update the customer with the new default payment method
-      firebase.doUpdateCustomerDefaultPaymentMethod(customer, pmId)
-      console.log('Customer new default PM: ', customer.invoice_settings.default_payment_method)
-      dispatch(pushInfo(`Successfully attached payment method.`));
-      fetchData() // refresh the page with new state from Stripe API
-      setProcessing(false)
+      firebase.doUpdateCustomerDefaultPaymentMethod(customer, pmId).then(() => {
+        // refresh the page with new state from Stripe API
+        fetchData();
+        setProcessing(false);
+        dispatch(pushInfo(`Successfully attached payment method.`));
+      });
     });
   };
 
@@ -94,6 +95,10 @@ const PaymentMethods = (props) => {
       dispatch(pushInfo(`Successfully detached payment method.`));
     })
     setProcessing(false);
+  }
+
+  const editDefaultPaymentMethod = (e) => {
+    e.preventDefault()
   }
 
   // Render correct icon for card type
@@ -145,7 +150,7 @@ const PaymentMethods = (props) => {
         onHide={() => setShowNewCardForm(false)}
       />
       {showRadioForm ? (
-        // Radio Form
+        // Radio Form (probably don't need this saving for later.)
         <Container>
           <Row sm={12}>
             <Col sm={10}>
@@ -244,7 +249,9 @@ const PaymentMethods = (props) => {
                         <Dropdown.Item disabled eventKey="1">
                           Set as Default
                         </Dropdown.Item>
-                        <Dropdown.Item eventKey="2">Edit Card</Dropdown.Item>
+                        <Dropdown.Item eventKey="2" onClick={() => editDefaultPaymentMethod()}>
+                          Edit Card
+                        </Dropdown.Item>
                         <Dropdown.Divider />
                         <Dropdown.Item disabled eventKey="3">
                           Remove
