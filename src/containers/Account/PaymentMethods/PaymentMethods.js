@@ -1,28 +1,37 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { AccountContext } from "../AccountContext";
+import Notification from "../../../components/Notifications/Notification";
+
+// Design imports
 import {
   Container,
   Title,
   LinkPrimary,
   LinkSecondary,
   TransitionBtn,
-  DangerTransitionBtn
 } from "../../../StyledComponents/StyledComponents";
-import { AccountContext } from "../AccountContext";
-import {
-  pushDanger,
-  pushInfo
-} from "../../../redux/actions/notificationActions";
-import Notification from "../../../components/Notifications/Notification";
-
+import { pushInfo } from "../../../redux/actions/notificationActions";
+import Spinner from 'react-bootstrap/Spinner'
 import { MdClose } from "react-icons/md";
-import { FaCcVisa, FaCcMastercard } from "react-icons/fa";
+import {
+  FaCcVisa,
+  FaCcMastercard,
+  FaCcDiscover,
+  FaCcAmex,
+  FaPencilAlt
+} from "react-icons/fa";
+import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/Modal";
-import NewCardForm from "./NewCardForm";
+import Table from "react-bootstrap/Table";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+
+// Children components
+import NewCardFormModal from "./NewCardFormModal";
 
 const PaymentMethods = () => {
   // Data
@@ -31,28 +40,103 @@ const PaymentMethods = () => {
 
   // States
   const [customer, setCustomer] = useState(null);
-  const [paymentMethods, setPaymentMethods] = useState(null);
-  const [sources, setSources] = useState(null);
-  const [subs, setSubs] = useState(null);
-  const [showRadioForm, setShowRadioForm] = useState(null);
+  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [showRadioForm, setShowRadioForm] = useState(false);
   const [showNewCardForm, setShowNewCardForm] = useState(null);
+  const [processing, setProcessing] = useState(false)
+  
+  useEffect(() => {
+    if (typeof firestoreUser.customerId !== "undefined") {
+      // Set Customer
+      firebase.doGetCustomer(firestoreUser.customerId).then(customerData => {
+        setProcessing(true)
+        console.log("customer: ", customerData);
+        setCustomer(customerData.data);
+      });
 
-  useEffect(() => {}, []);
+      // Set Payment Methods
+      firebase
+        .doGetPaymentMethods(firestoreUser.customerId)
+        .then(paymentMethodsData => {
+          setProcessing(true);
+          console.log("payment methods: ", paymentMethodsData.data.paymentMethods);
+          setPaymentMethods(paymentMethodsData.data.paymentMethods);
+        });
+    }
+    setProcessing(false)
+  }, []);
+
+  // Update default payment method (update default)
+  const attachPaymentMethod = (e, pmId, customerId) => {
+    e.preventDefault();
+
+    // Attach a new payment method to Stripe customer through Stripe API
+    firebase.doAttachPaymentMethod(pmId, customerId).then(() => {
+      setProcessing(true);
+      // Update the customer with the new default payment method
+      firebase.doUpdateCustomerDefaultPaymentMethod(customer, pmId)
+      console.log('Customer new default PM: ', customer.invoice_settings.default_payment_method)
+      dispatch(pushInfo(`Successfully attached payment method.`));
+    });
+    setProcessing(false)
+  };
+
+  // Detach payment method (delete)
+  const detachPaymentMethod = (e, pmId) => {
+    e.preventDefault()
+    firebase.doDetachPaymentMethod(pmId).then(() => {
+      setProcessing(true)
+      console.log("Payment Method detached successfully.");
+      dispatch(pushInfo(`Successfully detached payment method.`));
+    })
+    setProcessing(false);
+  }
+
+  // Render correct icon for card type
+  const renderCardIcon = cardType => {
+    switch (cardType) {
+      case "visa": {
+        return <><FaCcVisa size={30} /> Ending{" "}</>
+      }
+      case "mastercard": {
+        return <><FaCcMastercard size={30} /> Ending{" "}</>
+      }
+      case "discover": {
+        return <> <FaCcDiscover size={30} /> Ending{" "} </>
+      }
+      case "amex": {
+        return <> <FaCcAmex size={30} /> Ending{" "} </>
+      }
+      default: {
+        return cardType;
+      }
+    }
+  };
+
+  // Display loading message
+  if (customer === null || paymentMethods.length == 0) {
+    return (
+      <>
+        <h3>Retrieving your payment methods...</h3>
+      </>
+    );
+  }
 
   return (
     <>
+      <Notification />
+      <NewCardFormModal
+        customer={customer}
+        show={showNewCardForm}
+        onHide={() => setShowNewCardForm(false)}
+      />
       {showRadioForm ? (
         <Container>
-          <NewCardForm
-            show={showNewCardForm}
-            onHide={() => setShowNewCardForm(false)}
-          />
-
           <Row sm={12}>
             <Col sm={10}>
               <Title>Choose a Payment Method</Title>
             </Col>
-            <Col sm={2}>
+            <Col sm={2} style={{ textAlign: "right" }}>
               <LinkSecondary onClick={() => setShowRadioForm(false)}>
                 Close
                 <MdClose />
@@ -91,12 +175,113 @@ const PaymentMethods = () => {
             <Col sm={10}>
               <Title>Your Payment Methods</Title>
             </Col>
-            <Col sm={2}>
+            <Col sm={2} style={{ textAlign: "right" }}>
               <LinkSecondary onClick={() => setShowRadioForm(true)}>
                 Change
               </LinkSecondary>
             </Col>
           </Row>
+          <br />
+          <br />
+          <LinkSecondary onClick={() => setShowNewCardForm(true)}>
+            Add a credit or debit card
+          </LinkSecondary>
+          <span>{" - "}MyFloodScore accepts all major credit cards.</span>
+          <Table style={{ marginTop: "40px" }}>
+            <thead>
+              <tr>
+                <th>Your credit and debit cards</th>
+                <th>Expiration Date</th>
+                <th style={{ textAlign: "center" }}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* Render list of payment methods */}
+              {paymentMethods.map((paymentMethod, idx) =>
+                // Highlight Default Payment Method
+                paymentMethod.id === customer.invoice_settings.default_payment_method ? (
+                  <tr key={idx} style={{ backgroundColor: "#eeeeee" }}>
+                    <td>
+                      {renderCardIcon(paymentMethod.card.brand)} in{" "}
+                      {paymentMethod.card.last4}{" "}
+                      <Badge
+                        style={{ backgroundColor: "#8560a8", color: "#fff" }}
+                      >
+                        Default
+                      </Badge>
+                    </td>
+                    <td>
+                      {paymentMethod.card.exp_month +
+                        " / " +
+                        paymentMethod.card.exp_year}
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      <DropdownButton
+                        variant="success"
+                        alignRight
+                        title="Change"
+                        id="dropdown-menu-align-right"
+                      >
+                        <Dropdown.Item disabled eventKey="1">
+                          Set as Default
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Edit Card</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item disabled eventKey="3">
+                          Remove
+                        </Dropdown.Item>
+                      </DropdownButton>
+                    </td>
+                  </tr>
+                ) : (
+                  // Show non-default payment methods
+                  <tr key={idx}>
+                    <td>
+                      {renderCardIcon(paymentMethod.card.brand)} in{" "}
+                      {paymentMethod.card.last4}
+                    </td>
+                    <td>
+                      {paymentMethod.card.exp_month +
+                        " / " +
+                        paymentMethod.card.exp_year}
+                    </td>
+                    <td style={{ textAlign: "center" }}>
+                      <DropdownButton
+                        variant="success"
+                        alignRight
+                        title="Change"
+                        id="dropdown-menu-align-right"
+                      >
+                        <Dropdown.Item
+                          eventKey="1"
+                          onClick={e =>
+                            attachPaymentMethod(
+                              e,
+                              paymentMethod.id,
+                              firestoreUser.customerId
+                            )
+                          }
+                        >
+                          Set as Default
+                        </Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Edit Card</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item
+                          eventKey="4"
+                          onClick={e =>
+                            detachPaymentMethod(e, paymentMethod.id)
+                          }
+                        >
+                          Remove
+                        </Dropdown.Item>
+                      </DropdownButton>
+                    </td>
+                  </tr>
+                )
+              ) // EOF MAP
+              }
+            </tbody>
+          </Table>
         </Container>
       )}
     </>

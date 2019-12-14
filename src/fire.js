@@ -112,30 +112,46 @@ class Fire {
 
   // *** Functions API ***
   doAddUser = () => this.functions.httpsCallable('addUser')
+
   doCreatePaymentIntent = async (intent) => {
     const paymentIntent = this.functions.httpsCallable('createPaymentIntent')
     return  await paymentIntent({ intent })
   }
+
   doCreateCustomer = async (customer) => {
     const createCustomer = this.functions.httpsCallable('createCustomer')
     return await createCustomer({ customer })
   }
+
+  doUpdateCustomerDefaultPaymentMethod = async (customer, paymentMethodId) => {
+    const updateCustomerDefaultPaymentMethod = this.functions.httpsCallable('updateCustomerDefaultPaymentMethod')
+    return await updateCustomerDefaultPaymentMethod({ customer, paymentMethodId })
+  }
+
   doCreateSubscription = async (subscription) => {
     const createSubscription = this.functions.httpsCallable('createSubscription')
     return await createSubscription({subscription})
   }
+
   doGetSubscriptions = async (customerId) => {
     const getSubscriptions = this.functions.httpsCallable('getSubscriptions')
     return await getSubscriptions({ customerId })
   }
+  
   doCancelSubscription = async (subscriptionId) => {
     const cancelSubscription = this.functions.httpsCallable('cancelSubscription')
     return await cancelSubscription({ subscriptionId })
   }
 
+  /*** Payment methods API ***/
   doGetPaymentMethods = async (customerId) => {
     const getPaymentMethods = this.functions.httpsCallable("getPaymentMethods");
     return await getPaymentMethods({ customerId });
+  }
+
+  doAttachPaymentMethod = async (paymentMethodId, customerId) => {
+    const attachPaymentMethod = this.functions.httpsCallable("attachPaymentMethod");
+    return await attachPaymentMethod({ paymentMethodId, customerId });
   }
 
   doDetachPaymentMethod = async (paymentMethodId) => {
@@ -143,11 +159,13 @@ class Fire {
     return await detachPaymentMethod({ paymentMethodId });
   }
 
+  /*** EOF Payment methods API ***/
+
   doGetCustomer = async (customerId) => {
     const getCustomer = this.functions.httpsCallable("getCustomer");
     return await getCustomer({ customerId });
   }
-
+  
   doDeleteCustomer = async (customerId) => {
     const deleteCustomer = this.functions.httpsCallable("deleteCustomer")
     return await deleteCustomer({ customerId })
