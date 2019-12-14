@@ -53,22 +53,25 @@ const PaymentMethods = (props) => {
   }, [processing, showNewCardForm]);
 
   const fetchData = async () => {
-   if (typeof firestoreUser.customerId !== "undefined") {
-     // Set Customer
-     firebase.doGetCustomer(firestoreUser.customerId).then(customerData => {
-       console.log("customer: ", customerData);
-       setCustomer(customerData.data);
-     });
-
-     // Set Payment Methods
-     firebase
-       .doGetPaymentMethods(firestoreUser.customerId)
-       .then(paymentMethodsData => {
-         console.log("payment methods: ", paymentMethodsData.data.paymentMethods);
-         setPaymentMethods(paymentMethodsData.data.paymentMethods);
-       });
-   }
-  }
+    if (typeof firestoreUser.customerId !== "undefined") {
+      // Set Customer
+      firebase
+        .doGetCustomer(firestoreUser.customerId)
+        .then(customerData => {
+          console.log("customer: ", customerData);
+          setCustomer(customerData.data);
+        })
+        .then(() => {
+          // Set Payment Methods
+          firebase
+            .doGetPaymentMethods(firestoreUser.customerId)
+            .then(paymentMethodsData => {
+              console.log("payment methods: ", paymentMethodsData.data.paymentMethods);
+              setPaymentMethods(paymentMethodsData.data.paymentMethods);
+            });
+        });
+    }
+  };
 
   // Update default payment method (update default)
   const attachPaymentMethod = (e, pmId, customerId) => {
