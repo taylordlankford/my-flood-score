@@ -186,7 +186,7 @@ const paymentIntentSucceeded = async (request, response) => {
             order.type = 'Ad-hoc'
             // Add items to inventory
             let { inventory } = data
-            if (!inventory) { inventory = [] }
+            if (typeof inventory === 'undefined') { inventory = [] }
             console.log('inventory', inventory)
             const newInventory = getNewInventory(inventory, order)
             await userRef.update({
@@ -212,7 +212,7 @@ const paymentIntentSucceeded = async (request, response) => {
             order.type = 'Adh-oc'
             // Add items to inventory
             let { inventory } = data
-            if (!inventory) { inventory = [] }
+            if (typeof inventory === 'undefined') { inventory = [] }
             console.log('inventory', inventory)
             const newInventory = getNewInventory(inventory, order)
             await userRef.update({
@@ -283,7 +283,7 @@ const invoicePaymentSucceeded = async (request, response) => {
           const data = doc.data()
           console.log('Document data:', data)
           let { inventory } = data
-          if (!inventory) { inventory = [] }
+          if (typeof inventory === 'undefined') { inventory = [] }
           const newInventory = getNewInventory(inventory, order)
           await userRef.update({
             inventory: newInventory,
