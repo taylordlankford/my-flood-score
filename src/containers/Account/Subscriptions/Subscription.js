@@ -12,7 +12,7 @@ const Subscription = ({ sub, index }) => {
   const [handlingCancel, setHandlingCancel] = useState(false)
   const [canceled, setCanceled] = useState(false)
 
-  const { firebase } = useContext(AccountContext)
+  const { firebase, firestoreUser } = useContext(AccountContext)
 
   const handleSubCancel = async (id) => {
     console.log('canceling sub', id)
@@ -20,9 +20,15 @@ const Subscription = ({ sub, index }) => {
     const s = await firebase.doCancelSubscription(id)
     console.log('s', s.data.subscription)
     setHandlingCancel(false)
+    firestoreUser.subscriptions.pop(s);
+    const updatedUser = {
+      ...firestoreUser,
+    }
+    console.log(updatedUser)
     if (s.data.subscription.status === 'canceled') {
       setCanceled(true)
       dispatch(pushInfo('Subscription canceled'))
+      firebase.doFirestoreSet("users", firestoreUser.uid, updatedUser)
     } else {
       dispatch(pushDanger('Failed to cancel subscription. Please try again or contact us'))
     }

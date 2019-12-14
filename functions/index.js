@@ -332,6 +332,23 @@ const createCustomer = (data, context) => {
   })()
 }
 
+const updateCustomerDefaultPaymentMethod = data => {
+  const { customer, paymentMethodId } = data;
+  console.log("customer: ", customer);
+  console.log("pm id: ", paymentMethodId);
+  stripe.customers.update(
+    customer.id,
+    { invoice_settings: { default_payment_method: paymentMethodId } },
+    (err, customer) => {
+      // asynchronously called
+      if (err) {
+        console.log(err);
+      }
+      return { customer };
+    }
+  );
+};
+
 const createSubscription = (data, context) => {
   const { subscription } = data
   return (async () => {
@@ -390,11 +407,69 @@ const cancelSubscription = async (data, context) => {
   }
 }
 
+/*** Payment Method API ***/
+const getPaymentMethods = async (data, context) => {
+  const { customerId } = data;
+  let paymentMethods = [];
+
+  await stripe.paymentMethods
+    .list({ customer: customerId, type: "card" })
+    .autoPagingEach(paymentMethod => {
+      paymentMethods.push(paymentMethod);
+    });
+
+  return { paymentMethods };
+};
+
+const attachPaymentMethod = async data => {
+  const { paymentMethodId, customerId } = data;
+  console.log("pm id: ", paymentMethodId);
+  console.log("customer id: ", customerId);
+  await stripe.paymentMethods.attach(
+    paymentMethodId,
+    { customer: customerId },
+    (err, paymentMethod) => {
+      if (err) {
+        console.log(err);
+      }
+      return paymentMethod;
+    }
+  );
+};
+
+const detatchPaymentMethod = async (data) => {
+  const { paymentMethodId } = data;
+  await stripe.paymentMethods.detach(paymentMethodId);
+};
+/*** EOF Payment Method API ***/
+
+const getCustomer = async (data, context) => {
+  const { customerId } = data;
+  const customer = await stripe.customers.retrieve(customerId);
+  return customer;
+};
+
+const deleteCustomer = async (data, context) => {
+  const { customerId } = data;
+  await stripe.customers.del(customerId, (err, confirmation) => {
+    if (err) {
+      console.log(err)
+    }
+    return confirmation
+  });
+}
+
 exports.addUser = functions.https.onCall(addUser)
 exports.createPaymentIntent = functions.https.onCall(createPaymentIntent)
 exports.createSubscription = functions.https.onCall(createSubscription)
 exports.getSubscriptions = functions.https.onCall(getSubscriptions)
 exports.cancelSubscription = functions.https.onCall(cancelSubscription)
+exports.getPaymentMethods = functions.https.onCall(getPaymentMethods)
+exports.attachPaymentMethod = functions.https.onCall(attachPaymentMethod)
+exports.detatchPaymentMethod = functions.https.onCall(detatchPaymentMethod)
 exports.createCustomer = functions.https.onCall(createCustomer)
+exports.getCustomer = functions.https.onCall(getCustomer)
+exports.deleteCustomer = functions.https.onCall(deleteCustomer)
+exports.updateCustomerDefaultPaymentMethod = functions.https.onCall(updateCustomerDefaultPaymentMethod)
 exports.paymentIntentSucceeded = functions.https.onRequest(paymentIntentSucceeded)
 exports.invoicePaymentSucceeded = functions.https.onRequest(invoicePaymentSucceeded)

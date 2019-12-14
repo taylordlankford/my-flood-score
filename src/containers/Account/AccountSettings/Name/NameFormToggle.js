@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { StyledLink } from "../../../../StyledComponents/StyledComponents";
+import { Container, LinkPrimary } from "../../../../StyledComponents/StyledComponents";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import NameForm from "./NameForm";
@@ -35,7 +35,7 @@ const NameFormToggle = props => {
   };
 
   return (
-    <div style={{ paddingBottom: "40px", borderBottom: "1px solid #eee" }}>
+    <Container padding="0 0 20px 0" borderBottom="1px solid #eee">
       {!showNameForm ? (
         <Row sm={12}>
           <Col sm={10}>
@@ -49,9 +49,9 @@ const NameFormToggle = props => {
             </p>
           </Col>
           <Col sm={2} style={{ textAlign: "right" }}>
-            <StyledLink onClick={toggleNameForm}>
+            <LinkPrimary onClick={toggleNameForm}>
               {!showNameForm ? "Edit" : "Cancel"}
-            </StyledLink>
+            </LinkPrimary>
           </Col>
         </Row>
       ) : (
@@ -66,9 +66,9 @@ const NameFormToggle = props => {
             </p>
           </Col>
           <Col sm={2} style={{ textAlign: "right" }}>
-            <StyledLink onClick={toggleNameForm}>
+            <LinkPrimary onClick={toggleNameForm}>
               {!showNameForm ? "Edit" : "Cancel"}
-            </StyledLink>
+            </LinkPrimary>
           </Col>
         </Row>
       )}
@@ -82,7 +82,7 @@ const NameFormToggle = props => {
       ) : (
         <></>
       )}
-    </div>
+    </Container>
   );
 };
 

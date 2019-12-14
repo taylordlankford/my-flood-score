@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyledLink } from "../../../../StyledComponents/StyledComponents";
-import { AccountSettingsFormContainer } from "../../StyledComponents/StyledComponents";
+import { Container, LinkPrimary } from "../../../../StyledComponents/StyledComponents";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import EmailForm from "./EmailForm";
@@ -18,7 +17,7 @@ const EmailFormToggle = props => {
   }, [props.firestoreUser.email]);
 
   return (
-    <AccountSettingsFormContainer>
+    <Container padding="20px 0 20px 0" borderBottom="1px solid #eee">
       {!showEmailForm ? (
         <Row sm={12}>
           <Col sm={10}>
@@ -28,7 +27,7 @@ const EmailFormToggle = props => {
             <p>{props.firestoreUser.email}</p>
           </Col>
           <Col sm={2} style={{ textAlign: "right" }}>
-            <StyledLink onClick={toggleEmailForm}>Edit</StyledLink>
+            <LinkPrimary onClick={toggleEmailForm}>Edit</LinkPrimary>
           </Col>
         </Row>
       ) : (
@@ -40,7 +39,7 @@ const EmailFormToggle = props => {
             <p>Use an email address you’ll always have access to.</p>
           </Col>
           <Col sm={2} style={{ textAlign: "right" }}>
-            <StyledLink onClick={toggleEmailForm}>Cancel</StyledLink>
+            <LinkPrimary onClick={toggleEmailForm}>Cancel</LinkPrimary>
           </Col>
         </Row>
       )}
@@ -54,7 +53,7 @@ const EmailFormToggle = props => {
       ) : (
         <></>
       )}
-    </AccountSettingsFormContainer>
+    </Container>
   );
 };
 

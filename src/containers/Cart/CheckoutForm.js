@@ -95,6 +95,7 @@ const CheckoutForm = (props) => {
       console.log('creating sub for items:', subItems)
       const subscription = await firebase.doCreateSubscription({
         customer: customerId,
+        default_payment_method: paymentMethod.id,
         items: subItems,
         expand: ['latest_invoice.payment_intent'],
         metadata: {
