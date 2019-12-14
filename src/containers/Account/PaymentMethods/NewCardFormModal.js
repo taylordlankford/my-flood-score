@@ -9,7 +9,13 @@ import InjectedNewCardForm from "./InjectedNewCardForm"
 const NewCardFormModal = props => {
   return (
     <Elements>
-      <InjectedNewCardForm show={props.show} onHide={props.onHide} customer={props.customer} />
+      <InjectedNewCardForm
+        show={props.show}
+        onHide={props.onHide}
+        setProcessing={() => props.setProcessing()}
+        setShowNewCardForm={() => props.setShowNewCardForm()}
+        customer={props.customer}
+      />
     </Elements>
   );
 };

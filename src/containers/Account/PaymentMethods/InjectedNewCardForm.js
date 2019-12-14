@@ -4,12 +4,16 @@ import { AccountContext } from "../AccountContext";
 import { CardElement } from "react-stripe-elements";
 
 // Notifications
-import { pushInfo, pushDanger } from "../../../redux/actions/notificationActions"
+import {
+  pushInfo,
+  pushDanger
+} from "../../../redux/actions/notificationActions";
 
 // Stripe
 import { injectStripe } from "react-stripe-elements";
 
 // Styles
+import Spinner from "react-bootstrap/Spinner";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -24,17 +28,17 @@ import { Title } from "../../../StyledComponents/StyledComponents";
 
 const InjectedNewCardForm = props => {
   const { firebase } = useContext(AccountContext);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState(null);
   const [paymentProcessing, setPaymentProcessing] = useState(false);
-  const [customer, setCustomer] = useState(null)
+  const [customer, setCustomer] = useState(null);
 
   useEffect(() => {
-    setPaymentProcessing(false)
-    setCustomer(props.customer)
-  }, [])
+    setPaymentProcessing(false);
+    setCustomer(props.customer);
+  }, []);
 
-  const handleOnSubmit = async (e) => {
+  const handleOnSubmit = async e => {
     e.preventDefault();
     setPaymentProcessing(true);
 
@@ -47,17 +51,21 @@ const InjectedNewCardForm = props => {
       type: "card",
       card: cardElement
     });
-
     const { paymentMethod, error } = fetchPaymentMethod;
-    console.log('paymentMethod: ', paymentMethod)
 
     if (error) {
       console.log("erro: ", error);
     }
 
-    firebase.doAttachPaymentMethod(paymentMethod.id, props.customer.id).then(paymentMethod => {
-      console.log("pm: ", paymentMethod)
-    })
+    // Attach as non-default payment method
+    firebase
+      .doAttachPaymentMethod(paymentMethod.id, props.customer.id)
+      .then(paymentMethod => {
+        console.log("pm: ", paymentMethod);
+      });
+
+    props.setProcessing(true);
+    props.setShowNewCardForm(false);
   };
 
   return (

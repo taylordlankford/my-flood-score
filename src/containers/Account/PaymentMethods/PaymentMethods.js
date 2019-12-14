@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import * as ROUTES from "../../../routes/constants/routes";
 import { useDispatch } from "react-redux";
 import { AccountContext } from "../AccountContext";
 import Notification from "../../../components/Notifications/Notification";
@@ -33,7 +34,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 // Children components
 import NewCardFormModal from "./NewCardFormModal";
 
-const PaymentMethods = () => {
+const PaymentMethods = (props) => {
   // Data
   const { firebase, firestoreUser } = useContext(AccountContext);
   const dispatch = useDispatch();
@@ -44,41 +45,44 @@ const PaymentMethods = () => {
   const [showRadioForm, setShowRadioForm] = useState(false);
   const [showNewCardForm, setShowNewCardForm] = useState(null);
   const [processing, setProcessing] = useState(false)
-  
-  useEffect(() => {
-    if (typeof firestoreUser.customerId !== "undefined") {
-      // Set Customer
-      firebase.doGetCustomer(firestoreUser.customerId).then(customerData => {
-        setProcessing(true)
-        console.log("customer: ", customerData);
-        setCustomer(customerData.data);
-      });
 
-      // Set Payment Methods
-      firebase
-        .doGetPaymentMethods(firestoreUser.customerId)
-        .then(paymentMethodsData => {
-          setProcessing(true);
-          console.log("payment methods: ", paymentMethodsData.data.paymentMethods);
-          setPaymentMethods(paymentMethodsData.data.paymentMethods);
-        });
-    }
-    setProcessing(false)
-  }, []);
+  useEffect(() => {
+    fetchData();
+
+    // Trigger componentDidMount() when useEffect detect these state changes
+  }, [processing, showNewCardForm]);
+
+  const fetchData = async () => {
+   if (typeof firestoreUser.customerId !== "undefined") {
+     // Set Customer
+     firebase.doGetCustomer(firestoreUser.customerId).then(customerData => {
+       console.log("customer: ", customerData);
+       setCustomer(customerData.data);
+     });
+
+     // Set Payment Methods
+     firebase
+       .doGetPaymentMethods(firestoreUser.customerId)
+       .then(paymentMethodsData => {
+         console.log("payment methods: ", paymentMethodsData.data.paymentMethods);
+         setPaymentMethods(paymentMethodsData.data.paymentMethods);
+       });
+   }
+  }
 
   // Update default payment method (update default)
   const attachPaymentMethod = (e, pmId, customerId) => {
     e.preventDefault();
-
+    setProcessing(true)
     // Attach a new payment method to Stripe customer through Stripe API
     firebase.doAttachPaymentMethod(pmId, customerId).then(() => {
-      setProcessing(true);
       // Update the customer with the new default payment method
       firebase.doUpdateCustomerDefaultPaymentMethod(customer, pmId)
       console.log('Customer new default PM: ', customer.invoice_settings.default_payment_method)
       dispatch(pushInfo(`Successfully attached payment method.`));
+      fetchData() // refresh the page with new state from Stripe API
+      setProcessing(false)
     });
-    setProcessing(false)
   };
 
   // Detach payment method (delete)
@@ -114,9 +118,17 @@ const PaymentMethods = () => {
   };
 
   // Display loading message
-  if (customer === null || paymentMethods.length == 0) {
+  if (customer === null || paymentMethods === null) {
     return (
       <>
+        <Spinner
+          as="span"
+          animation="grow"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+          style={{ marginLeft: "-15px", marginRight: "15px" }}
+        />
         <h3>Retrieving your payment methods...</h3>
       </>
     );
@@ -128,9 +140,12 @@ const PaymentMethods = () => {
       <NewCardFormModal
         customer={customer}
         show={showNewCardForm}
+        setProcessing={() => setProcessing()}
+        setShowNewCardForm={() => setShowNewCardForm()}
         onHide={() => setShowNewCardForm(false)}
       />
       {showRadioForm ? (
+        // Radio Form
         <Container>
           <Row sm={12}>
             <Col sm={10}>
@@ -170,6 +185,7 @@ const PaymentMethods = () => {
           </Row>
         </Container>
       ) : (
+        // Table
         <Container>
           <Row sm={12}>
             <Col sm={10}>
@@ -179,6 +195,8 @@ const PaymentMethods = () => {
               <LinkSecondary onClick={() => setShowRadioForm(true)}>
                 Change
               </LinkSecondary>
+              <Button>
+              </Button>
             </Col>
           </Row>
           <br />
@@ -199,7 +217,8 @@ const PaymentMethods = () => {
               {/* Render list of payment methods */}
               {paymentMethods.map((paymentMethod, idx) =>
                 // Highlight Default Payment Method
-                paymentMethod.id === customer.invoice_settings.default_payment_method ? (
+                paymentMethod.id ===
+                customer.invoice_settings.default_payment_method ? (
                   <tr key={idx} style={{ backgroundColor: "#eeeeee" }}>
                     <td>
                       {renderCardIcon(paymentMethod.card.brand)} in{" "}
