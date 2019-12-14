@@ -67,6 +67,30 @@ admin.initializeApp(functions.config().firebase);
 //     }
 // });
 
+// Helper functions
+const getNewInventory = (inventory, order) => {
+  for (let i = 0; i < order.items.length; i++) {
+    const orderedItem = order.items[i]
+    let quantAdded = false
+    for (let j = 0; j < inventory.length; j++) {
+      const inven = inventory[j]
+      if (orderedItem.categoryId === inven.categoryId ) {
+        inventory[j].quantity = inven.quantity + (orderedItem.quantity * orderedItem.numInventory)
+        quantAdded = true
+        break
+      }
+    }
+    if (!quantAdded) {
+      inventory.push({
+        categoryId: orderedItem.categoryId,
+        quantity: orderedItem.quantity * orderedItem.numInventory
+      })
+    }
+  }
+  return inventory
+}
+
+
 const addUser = (data, context) => {
   const { uid } = context.auth
   const { userDetails } = data
@@ -135,6 +159,10 @@ const paymentIntentSucceeded = async (request, response) => {
     case 'payment_intent.succeeded': {
       const paymentIntent = event.data.object
       console.log('PaymentIntent was successful!', paymentIntent)
+      if (paymentIntent.invoice !== null) {
+        console.log('this is a subscription, we have a seperate hook for these')
+        return
+      }
       // check if user already a customer or needs to be created
       const userRef = admin.firestore().collection("users").doc(paymentIntent.metadata.uid)
       userRef.get().then( async (doc) => {
@@ -156,8 +184,14 @@ const paymentIntentSucceeded = async (request, response) => {
             const order = JSON.parse(paymentIntent.metadata.order)
             order.timestamp = new Date()
             order.type = 'Ad-hoc'
+            // Add items to inventory
+            let { inventory } = data
+            if (!inventory) { inventory = [] }
+            console.log('inventory', inventory)
+            const newInventory = getNewInventory(inventory, order)
             await userRef.update({
               orders: admin.firestore.FieldValue.arrayUnion(order),
+              inventory: newInventory,
             })
             response.json({ paymentMethod })
           } else { // If user is not already a customer
@@ -176,8 +210,14 @@ const paymentIntentSucceeded = async (request, response) => {
             const order = JSON.parse(paymentIntent.metadata.order)
             order.timestamp = new Date()
             order.type = 'Adh-oc'
+            // Add items to inventory
+            let { inventory } = data
+            if (!inventory) { inventory = [] }
+            console.log('inventory', inventory)
+            const newInventory = getNewInventory(inventory, order)
             await userRef.update({
               orders: admin.firestore.FieldValue.arrayUnion(order),
+              inventory: newInventory,
             })
             // Add customer id to firestore
             userRef.set({
@@ -204,6 +244,72 @@ const paymentIntentSucceeded = async (request, response) => {
   }
   // Return a response to acknowledge receipt of the event
   // response.json({received: true})
+}
+
+const invoicePaymentSucceeded = async (request, response) => {
+  console.log('process.version', process.version)
+  let sig = request.headers["stripe-signature"]
+  const invoiceEndpointSecret = 'whsec_M0YTl00hKCmcfOTcP08XRldrtuTcxqGk'
+  let event = null
+  try {
+    event = await stripe.webhooks.constructEvent(request.rawBody, sig, invoiceEndpointSecret);
+  } catch (err) {
+    console.log('error', err)
+    return response.status(400).end();
+  }
+  const invoice = event.data.object
+  console.log('invoice', invoice)
+  switch (event.type) {
+    case 'invoice.payment_succeeded': {
+      console.log('invoice payment succeeded')
+      const array = JSON.parse(invoice.lines.data[0].metadata.subItems)
+      const order = {}
+      order.items = []
+      array.forEach(el => {
+        const newObj = {
+          plan: el.plan,
+          quantity: el.quantity,
+          categoryId: el.metadata.categoryId,
+          numInventory: el.metadata.numInventory,
+        }
+        order.items.push(newObj)
+      })
+      console.log('order:', order)
+      const { uid } =  invoice.lines.data[0].metadata
+      console.log('uid', uid)
+      const userRef = admin.firestore().collection("users").doc(uid)
+      userRef.get().then( async (doc) => {
+        if (doc.exists) {
+          const data = doc.data()
+          console.log('Document data:', data)
+          let { inventory } = data
+          if (!inventory) { inventory = [] }
+          const newInventory = getNewInventory(inventory, order)
+          await userRef.update({
+            inventory: newInventory,
+          })
+          response.status(200).end();
+          return newInventory
+        } else {
+          return 'doc not found'
+        }
+      })
+      .catch((error => {
+        console.log('userReg.get error', error)
+      }))
+      break
+    }
+    case 'invoice.payment_failed': {
+      console.log('payment_failed')
+      break
+    }
+    case 'invoice.payment_action_required': {
+      console.log('payment_action_required')
+      break
+    }
+    default:
+      return response.status(400).end();
+  }
 }
 
 const createCustomer = (data, context) => {
@@ -366,3 +472,4 @@ exports.getCustomer = functions.https.onCall(getCustomer)
 exports.deleteCustomer = functions.https.onCall(deleteCustomer)
 exports.updateCustomerDefaultPaymentMethod = functions.https.onCall(updateCustomerDefaultPaymentMethod)
 exports.paymentIntentSucceeded = functions.https.onRequest(paymentIntentSucceeded)
+exports.invoicePaymentSucceeded = functions.https.onRequest(invoicePaymentSucceeded)
