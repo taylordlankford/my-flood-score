@@ -7,7 +7,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
-import { connect } from "react-redux";
 import {
   removeItem,
   addQuantity,
@@ -16,10 +15,9 @@ import {
 
 import CartItem from "./CartItem";
 import OrderDetails from "./OrderDetails";
-// import CartNotifcation from "./CartNotification";
 
 import { pushDanger } from "../../redux/actions/notificationActions";
-import { useDispatch } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import Notification from "../../components/Notifications/Notification"
 
 const handleQtyChange = (newValue, product, addQuantity, subtractQuantity) => {
