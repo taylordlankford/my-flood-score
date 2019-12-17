@@ -144,6 +144,11 @@ class Fire {
   }
 
   /*** Payment methods API ***/
+  doGetPaymentMethod = async (paymentMethodId) => {
+    const getPaymentMethod = this.functions.httpsCallable("getPaymentMethod")
+    return await getPaymentMethod({ paymentMethodId })
+  }
+
   doGetPaymentMethods = async (customerId) => {
     const getPaymentMethods = this.functions.httpsCallable("getPaymentMethods");
     return await getPaymentMethods({ customerId });

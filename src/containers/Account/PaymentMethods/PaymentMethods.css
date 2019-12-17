@@ -1,0 +1,66 @@
+.dropdown-menu {
+  width: inherit !important;
+}
+
+.disabled-item:hover {
+  cursor: not-allowed;
+}
+
+.btn,
+.btn-primary,
+.dropdown-toggle, 
+.dropdown-toggle:visited {
+  text-align: center;
+  color: white !important;
+  cursor: pointer;
+  background-color: #d4d4d4;
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 50%
+  );
+  font-size: 0.94rem;
+  font-weight: 700;
+  border-radius: 5px;
+  border: none;
+  display: inline-block;
+  padding: 0.62rem 1.25rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-size: 230%;
+  transition: all 0.4s;
+}
+
+.dropdown-toggle:hover {
+  background-position: 100%;
+  color: white;
+  background-color: #dddddd;
+}
+
+.dropdown-toggle:active {
+  outline: none;
+  transform: scale(0.9);
+  background-color: #dddddd;
+}
+
+.dropdown-toggle:disabled {
+  background-color: #d4d4d4;
+  cursor: not-allowed;
+}
+
+.dropdown-menu {
+  width: 240px !important;
+  background-color: #eeeeee !important;
+}
+
+.btn-success,
+.btn-success:not(:disabled):not(.disabled).active, 
+.btn-success:not(:disabled):not(.disabled):active, 
+.show > .btn-success.dropdown-toggle {
+  background-color: #d4d4d4 !important;
+  border: none !important;
+  border-color: #d4d4d4 !important;
+  border-style: none !important;
+  border-width: 0 !important;
+}

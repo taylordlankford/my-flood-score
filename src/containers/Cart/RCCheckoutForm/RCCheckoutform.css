@@ -1,0 +1,9 @@
+.radio-container:hover {
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.radio-container input:hover {
+  cursor: pointer;
+  transition: 0.5s;
+}

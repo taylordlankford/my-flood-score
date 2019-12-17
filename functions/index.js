@@ -408,6 +408,17 @@ const cancelSubscription = async (data, context) => {
 }
 
 /*** Payment Method API ***/
+const getPaymentMethod = async data => {
+  const { paymentMethodId } = data;
+  let paymentMethod = null
+  await stripe.paymentMethods.retrieve(paymentMethodId).then(pm => {
+    paymentMethod = pm;
+    return { paymentMethod };
+  })
+
+  return { paymentMethod };
+};
+
 const getPaymentMethods = async (data, context) => {
   const { customerId } = data;
   let paymentMethods = [];
@@ -464,6 +475,7 @@ exports.createPaymentIntent = functions.https.onCall(createPaymentIntent)
 exports.createSubscription = functions.https.onCall(createSubscription)
 exports.getSubscriptions = functions.https.onCall(getSubscriptions)
 exports.cancelSubscription = functions.https.onCall(cancelSubscription)
+exports.getPaymentMethod = functions.https.onCall(getPaymentMethod)
 exports.getPaymentMethods = functions.https.onCall(getPaymentMethods)
 exports.attachPaymentMethod = functions.https.onCall(attachPaymentMethod)
 exports.detatchPaymentMethod = functions.https.onCall(detatchPaymentMethod)

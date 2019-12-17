@@ -1,31 +1,37 @@
 // CheckoutForm.js
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { injectStripe } from 'react-stripe-elements'
-import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { useFirebase, useFirestoreUser } from '../../hooks'
 // import AddressSection from './AddressSection';
 import CardSection from './CardSection'
 import { setPaymentProcessing } from '../../redux/actions/cartActions'
 import * as ROUTES from '../../routes/constants/routes'
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
+
+import { useSelector, useDispatch } from "react-redux";
+import { CheckoutContext } from "./CheckoutContext"
+
+import Order from "./Order"
 
 const CheckoutForm = (props) => {
-  const firebase = useFirebase()
-  const userData = useFirestoreUser()
-  const { firestoreUser } = userData
-  const { items, setPaymentProcessing } = props
+  const cart = useSelector(state => state.cartReducer)
+  const dispatch = useDispatch()
+  const { firestoreUser, firebase } = useContext(CheckoutContext);
   const [errorMessage, setErrorMessage] = useState(null)
+  // const [returningCustomer, setReturningCustomer] = useState(false)
 
   // component did mount
   useEffect(() => {
-    setPaymentProcessing(false)
+    dispatch(setPaymentProcessing(false))
   }, [])
+
 
   const handleSubmit = async (ev) => {
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault()
-    setPaymentProcessing(true)
+    dispatch(setPaymentProcessing(true))
     const { email, uid } = firestoreUser
     let { customerId } = firestoreUser
 
@@ -45,7 +51,7 @@ const CheckoutForm = (props) => {
     if (typeof paymentMethod === 'undefined') {
       console.log('createPaymentMethod error:', error)
       setErrorMessage(error.message)
-      setPaymentProcessing(false)
+      dispatch(setPaymentProcessing(false))
       return
     }
     
@@ -65,7 +71,7 @@ const CheckoutForm = (props) => {
       console.log('customer', customer)
       if (typeof customer.data.raw !== 'undefined') {
         setErrorMessage('Error: ' + customer.data.raw.message)
-        setPaymentProcessing(false)
+        dispatch(setPaymentProcessing(false))
         return
       }
       customerId = customer.data.id
@@ -74,7 +80,7 @@ const CheckoutForm = (props) => {
     let subItems = []
     let intentAmount = 0
     const order = { items: [] }
-    items.forEach(item => {
+    cart.addedItems.forEach(item => {
       console.log('item:', item)
       const { id, title, price, plan, quantity, categoryId, numInventory } = item
       if (item.type === 'monthly') {
@@ -109,7 +115,7 @@ const CheckoutForm = (props) => {
       if (typeof subscription.data.raw !== 'undefined') {
         console.log(subscription.data.statusCode)
         setErrorMessage('Error: ' + subscription.data.raw.message)
-        setPaymentProcessing(false)
+        dispatch(setPaymentProcessing(false))
         return
       }
     }
@@ -135,7 +141,7 @@ const CheckoutForm = (props) => {
       if (typeof intent.data.raw !== 'undefined') {
         console.log(intent.data.statusCode)
         setErrorMessage('Error: ' + intent.data.raw.message)
-        setPaymentProcessing(false)
+        dispatch(setPaymentProcessing(false))
         return
       }
       const client_secret = intent.data
@@ -149,7 +155,7 @@ const CheckoutForm = (props) => {
         // Show error to your customer
         console.log('confirmCardPayment', result.error.message)
         setErrorMessage('Error: ' + result.error.message)
-        setPaymentProcessing(false)
+        dispatch(setPaymentProcessing(false))
         return
       } else {
         if (result.paymentIntent.status === 'succeeded') {
@@ -161,30 +167,51 @@ const CheckoutForm = (props) => {
         }
       }
     }
-    setPaymentProcessing(false)
+    dispatch(setPaymentProcessing(false))
     props.history.push(ROUTES.ACCOUNT_INVENTORY)
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardSection onChange={() => setErrorMessage('') } />
-      <P className="errorMessage">{errorMessage}</P>
-      <input type="submit" id="submit-form" style={{ display: 'none' }} />
-    </form>
-  )
+    <>
+      <Row>
+        <Col>
+          {/* <h3 style={{ color: "#0D238E", fontWeight: "bold", margin: "0 0 1.5rem" }} > Billing details </h3> */}
+          {/*
+              <InjectedCheckoutForm
+                items={cart.addedItems}
+                total={cart.total}
+                history={history}
+              />
+              */}
+          <form onSubmit={handleSubmit}>
+            <CardSection onChange={() => setErrorMessage("")} />
+            <P className="errorMessage">{errorMessage}</P>
+            <input type="submit" id="submit-form" style={{ display: "none" }} />
+          </form>
+        </Col>
+        <Col>
+          <h3
+            style={{
+              color: "#0D238E",
+              fontWeight: "bold",
+              margin: "0 0 1.5rem"
+            }}
+          >
+            Your order
+          </h3>
+          <Order
+            items={cart.addedItems}
+            total={cart.total}
+            paymentProcessing={cart.paymentProcessing}
+          />
+        </Col>
+      </Row>
+    </>
+  );
 }
 
 const P = styled.p`
   color: palevioletred;
 `
 
-const mapStateToProps = (state) => {
-  return {
-    paymentProcessing: state.paymentProcessing,
-  }
-}
-const mapDispatchToProps = (dispatch) => ({
-  setPaymentProcessing: (value) => { dispatch(setPaymentProcessing(value)) }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(injectStripe(CheckoutForm))
+export default injectStripe(CheckoutForm)

@@ -1,7 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { AccountContext } from "../AccountContext";
 import { CardElement } from "react-stripe-elements";
+
+// Notifications
+import {
+  pushInfo,
+  pushDanger
+} from "../../../redux/actions/notificationActions";
 
 // Stripe
 import { injectStripe } from "react-stripe-elements";
@@ -18,33 +23,32 @@ import {
   FaCcAmex,
   FaCcDiscover
 } from "react-icons/fa";
-import { Title, TransitionBtn } from "../../../StyledComponents/StyledComponents";
+import { Title } from "../../../StyledComponents/StyledComponents";
+
+import { CheckoutContext } from "../CheckoutContext";
 
 const InjectedNewCardForm = props => {
-  const {
-    customer,
-    show,
-    setShowNewCardForm,
-    onHide,
-    stripe,
-    elements
-  } = props;
-
-  const { firebase } = useContext(AccountContext);
+  const { firebase } = useContext(CheckoutContext);
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState(null);
-  const [processing, setProcessing] = useState(false);
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const [customer, setCustomer] = useState(null);
+
+  useEffect(() => {
+    setPaymentProcessing(false);
+    setCustomer(props.customer);
+  }, []);
 
   const handleOnSubmit = async e => {
     e.preventDefault();
-    setProcessing(true);
+    setPaymentProcessing(true);
 
     // Use Elements to get a reference to the Card Element mounted somewhere
     // in your <Elements> tree. Elements will know how to find your Card Element
-    const cardElement = elements.getElement("card");
+    const cardElement = props.elements.getElement("card");
 
     // Fetch newly created payment method from Stripe's API
-    const fetchPaymentMethod = await stripe.createPaymentMethod({
+    const fetchPaymentMethod = await props.stripe.createPaymentMethod({
       type: "card",
       card: cardElement
     });
@@ -54,17 +58,15 @@ const InjectedNewCardForm = props => {
       console.log("erro: ", error);
     }
 
-    if (typeof paymentMethod != "undefined") {
-      // Attach as non-default payment method
-      firebase
-        .doAttachPaymentMethod(paymentMethod.id, customer.id)
-        .then(paymentMethod => {
-          console.log("pm: ", paymentMethod);
-        });
+    // Attach as non-default payment method
+    firebase
+      .doAttachPaymentMethod(paymentMethod.id, props.customer.id)
+      .then(paymentMethod => {
+        console.log("pm: ", paymentMethod);
+      });
 
-      setProcessing(false);
-      setShowNewCardForm();
-    }
+    props.setProcessing(true);
+    props.setShowNewCardForm(false);
   };
 
   return (
@@ -74,7 +76,7 @@ const InjectedNewCardForm = props => {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
-        show={show}
+        show={props.show}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -93,37 +95,21 @@ const InjectedNewCardForm = props => {
                     }}
                   />
                 </div>
-                <p className="errorMessage">{errorMessage}</p>
                 <input
                   type="submit"
                   id="submit-form"
                   style={{ display: "none" }}
                 />
-                {processing ? (
-                  <TransitionBtn>
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                    <span style={{ marginLeft: "10px" }}>Processing...</span>
-                  </TransitionBtn>
-                ) : (
-                  <>
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      style={{ marginBottom: "4px", width: "100%" }}
-                    >
-                      Add your card
-                    </Button>
-                  </>
-                )}
+                <Button
+                  variant="primary"
+                  type="submit"
+                  style={{ marginBottom: "4px", width: "100%" }}
+                >
+                  Add your card
+                </Button>
                 <Button
                   variant="secondary"
-                  onClick={onHide}
+                  onClick={props.onHide}
                   style={{
                     width: "100%",
                     borderColor: "#d4d4d4",
