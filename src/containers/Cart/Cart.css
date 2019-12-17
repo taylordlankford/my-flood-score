@@ -46,6 +46,11 @@ label {
   cursor: pointer;
 }
 
+.place-order-button:disabled {
+  cursor: not-allowed !important;
+  background-color: #66de80;
+}
+
 .order-complete {
   text-align: center;
   margin-top: 8px;
@@ -221,3 +226,4 @@ label {
 .react-numeric-input i:hover {
   color: #55b96a !important;
 }
+

@@ -5,6 +5,7 @@ import {
   ADD_QUANTITY,
   ADD_SHIPPING,
   SET_PAYMENT_PROCESSING_STATE,
+  RESET_TOTAL
 } from '../actions/action-types/cart-actions'
 import { cartInitState } from '../cartInitState'
 
@@ -113,6 +114,12 @@ const cartReducer = (state = cartInitState, action) => {
     return {
       ...state,
       paymentProcessing: action.value
+    }
+  }
+  if (action.type === RESET_TOTAL) {
+    return {
+      ...state,
+      total: action.value
     }
   }
   else {

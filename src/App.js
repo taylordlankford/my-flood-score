@@ -48,7 +48,6 @@ import * as ROUTES from './routes/constants/routes'
 import { useFirestoreUser, useStateValue} from './hooks'
 import './App.css'
 
-
 const App = () => {
   const [{ user, error }, dispatch] = useStateValue()
   const userData = useFirestoreUser()
@@ -87,6 +86,7 @@ const App = () => {
                         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
                         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
                         <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+
                         <Route path={ROUTES.CHECKOUT} component={CheckoutPage} />
                         <Route path={ROUTES.CHECKOUT_FREE} component={CheckoutFreePage} />
                         <Route path={ROUTES.ORDER_RECEIVED} component={OrderReceivedPage} />

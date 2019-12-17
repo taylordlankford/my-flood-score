@@ -6,23 +6,16 @@ const OrderDetails = (props) => {
     <Col sm={4}>
       <div className="order-details">
         <div className="cartSubTotalAmount">
-          <span>
-            Subtotal
-          </span>
-          <span className="cart-amount">
-            ${(props.total / 100).toFixed(2)}
-          </span>
+          <span>Subtotal</span>
+          <span className="cart-amount">${(props.total / 100).toFixed(2)}</span>
         </div>
         <div className="cartTotalAmount">
-          <span>
-            Total
-          </span>
-          <span className="cart-amount">
-            ${(props.total / 100).toFixed(2)}
-          </span>
+          <span>Total</span>
+          <span className="cart-amount">${(props.total / 100).toFixed(2)}</span>
         </div>
         <br />
         <label
+          style={{ padding: "4px 10px" }}
           onClick={props.gotoCheckout}
           htmlFor="submit-form"
           tabIndex="0"
@@ -33,7 +26,7 @@ const OrderDetails = (props) => {
         </label>
       </div>
     </Col>
-  )
+  );
 }
 
 export default OrderDetails

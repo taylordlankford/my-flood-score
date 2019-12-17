@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import * as ROUTES from "../../routes/constants/routes";
 
@@ -7,40 +7,31 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
-import { connect } from "react-redux";
 import {
   removeItem,
   addQuantity,
-  subtractQuantity
+  subtractQuantity,
+  resetTotal 
 } from "../../redux/actions/cartActions";
 
 import CartItem from "./CartItem";
 import OrderDetails from "./OrderDetails";
-// import CartNotifcation from "./CartNotification";
 
 import { pushDanger } from "../../redux/actions/notificationActions";
-import { useDispatch } from 'react-redux'
-import Notification from "../../components/Notifications/Notification"
-
-const handleQtyChange = (newValue, product, addQuantity, subtractQuantity) => {
-  console.log("old value", product);
-  console.log("new value", newValue);
-  if (newValue < product.quantity) {
-    // subtracted quantity
-    console.log("subtracting");
-    subtractQuantity(product.id);
-  } else if (newValue > product.quantity) {
-    // added quantity
-    console.log("adding");
-    addQuantity(product.id);
-  }
-};
+import { useDispatch, useSelector } from "react-redux";
+import Notification from "../../components/Notifications/Notification";
 
 const Cart = props => {
-  const dispatch = useDispatch()
-  const { items, total, addQuantity, subtractQuantity, removeItem } = props;
+  const dispatch = useDispatch();
+  const cart = useSelector(state => state.cartReducer)
 
-  console.log("props in cart.js", props);
+  useEffect(() => {
+    if (cart.addedItems.length == 0) {
+      dispatch(resetTotal(0));
+    }
+  }, [])
+  
+  console.log("props in cart.js", cart);
 
   const gotoShop = () => {
     props.history.push(ROUTES.SHOP);
@@ -51,11 +42,25 @@ const Cart = props => {
   };
 
   const handleRemoveItem = product => {
-    removeItem(product.id);
+    dispatch(removeItem(product.id));
     dispatch(pushDanger("Removed an item from cart."));
   };
 
-  const DPRODUCTS = items.map((product, index) => (
+  const handleQtyChange = (newValue, product, addQuantity, subtractQuantity) => {
+    console.log("old value", product);
+    console.log("new value", newValue);
+    if (newValue < product.quantity) {
+      // subtracted quantity
+      console.log("subtracting");
+      dispatch(subtractQuantity(product.id))
+    } else if (newValue > product.quantity) {
+      // added quantity
+      console.log("adding");
+      dispatch(addQuantity(product.id))
+    }
+  };
+
+  const DPRODUCTS = cart.addedItems.map((product, index) => (
     <CartItem
       product={product}
       key={index}
@@ -70,7 +75,7 @@ const Cart = props => {
     <Container className="cart-container">
       <Notification />
       <div style={{ paddingTop: "32px" }}>
-        {items.length === 0 ? (
+        {cart.addedItems.length === 0 ? (
           <Container>
             <p>Your cart is currently empty.</p>
             <Button onClick={gotoShop}>RETURN TO SHOP</Button>
@@ -91,7 +96,7 @@ const Cart = props => {
                 {DPRODUCTS}
               </Col>
 
-              <OrderDetails gotoCheckout={gotoCheckout} total={total} />
+              <OrderDetails gotoCheckout={gotoCheckout} total={cart.total} />
             </Row>
           </Container>
         )}
@@ -100,24 +105,4 @@ const Cart = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    items: state.cartReducer.addedItems,
-    total: state.cartReducer.total
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    removeItem: id => {
-      dispatch(removeItem(id));
-    },
-    addQuantity: id => {
-      dispatch(addQuantity(id));
-    },
-    subtractQuantity: id => {
-      dispatch(subtractQuantity(id));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Cart));
+export default withRouter(Cart);

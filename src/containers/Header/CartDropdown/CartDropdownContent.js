@@ -28,47 +28,50 @@ const CartDropdownContent = (props) => {
 
   return (
     <div className="cart-popover-menu">
-      {
-        (props.addedItems.length > 0) ?
+      {props.addedItems.length > 0 ? (
+        <div>
+          {props.addedItems.map((cartItem, index) => {
+            return (
+              <CartDropdownItem
+                key={index}
+                cartItem={cartItem}
+                discoverImg={DiscoverImg}
+                handleOnClickTitle={handleOnClickTitle}
+                removeItem={removeItem}
+              />
+            );
+          })}
           <div>
-            {
-              props.addedItems.map((cartItem, index) => {
-                return (
-                  <CartDropdownItem
-                    key={index}
-                    cartItem={cartItem}
-                    discoverImg={DiscoverImg}
-                    handleOnClickTitle={handleOnClickTitle}
-                    removeItem={removeItem}
-                  />
-                )
-              })
-            }
+            <div
+              style={{
+                color: "#666666",
+                padding: "14px 0 14px 0",
+                textAlign: "center"
+              }}
+            >
+              <h5>
+                <b>Subtotal: ${(props.total / 100).toFixed(2)}</b>
+              </h5>
+            </div>
+            <div style={{ marginBottom: "10px" }}>
+              <SecondaryBtn onClick={redirectToCart}>View Cart</SecondaryBtn>
+            </div>
             <div>
-              <div style={{ color: '#666666', padding: '14px 0 14px 0', textAlign: 'center' }}>
-                <h5>
-                  <b>Subtotal: ${(props.total / 100).toFixed(2)}</b>
-                </h5>
-              </div>
-              <SecondaryBtn onClick={redirectToCart}>
-                View Cart
-              </SecondaryBtn>
-              <PrimaryBtn onClick={redirectToCheckout}>
-                Checkout
-              </PrimaryBtn>
+              <PrimaryBtn onClick={redirectToCheckout}>Checkout</PrimaryBtn>
             </div>
           </div>
-        :
-          <Row>
-            <Col sm={12}>
-              <p style={{ color: '#666666', fontSize: '16px' }}>
-                No Products in the cart.
-              </p>
-            </Col>
-          </Row>
-      }
+        </div>
+      ) : (
+        <Row>
+          <Col sm={12}>
+            <p style={{ color: "#666666", fontSize: "16px" }}>
+              No Products in the cart.
+            </p>
+          </Col>
+        </Row>
+      )}
     </div>
-  )
+  );
 }
 
 const mapStateToProps = (/* state */) => ({})
