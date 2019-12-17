@@ -52,6 +52,7 @@ const InjectedNewCardForm = props => {
 
     if (error) {
       console.log("erro: ", error);
+      setProcessing(false)
     }
 
     if (typeof paymentMethod != "undefined") {
@@ -100,7 +101,7 @@ const InjectedNewCardForm = props => {
                   style={{ display: "none" }}
                 />
                 {processing ? (
-                  <TransitionBtn>
+                  <TransitionBtn stlye={{ marginBottom: "4px" }}>
                     <Spinner
                       as="span"
                       animation="border"
