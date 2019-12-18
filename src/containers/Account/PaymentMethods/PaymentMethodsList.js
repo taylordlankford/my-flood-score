@@ -76,7 +76,6 @@ const PaymentMethodsList = props => {
                         <Dropdown.Item
                           eventKey="1"
                           onClick={e => handleOnClick(e, paymentMethod)}
-                          disabled
                         >
                           Set as default
                         </Dropdown.Item>

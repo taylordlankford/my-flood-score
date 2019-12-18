@@ -194,7 +194,7 @@ const RCCheckoutForm = props => {
     }
 
     console.log("SELECTED PM : ", selectedPaymentMethod);
-    /*
+    /**
      * Create Payment Intent if necessary with the selected card.
      * Use the selected payment method from checkout.
      */
@@ -235,7 +235,7 @@ const RCCheckoutForm = props => {
       // Use client_secret to confirm card payment
       const client_secret = intent.data;
       
-      /*
+      /**
        * Use the selected payment method from customer instead of the card
        * fetched from stripe.
        */ 
@@ -388,36 +388,6 @@ const RCCheckoutForm = props => {
                         )}
                       </>
                     ))}
-
-                    {/*paymentMethods.map((paymentMethod, idx) => (
-                      <tr key={idx}>
-                        <td>
-                          <label className="radio-container">
-                            <input
-                              type="radio"
-                              name="paymentMethod"
-                              id={idx}
-                              value={paymentMethod.id}
-                              checked={
-                                selectedPaymentMethod === paymentMethod.id
-                              }
-                              onChange={e =>
-                                handleOptionChange(e, paymentMethod)
-                              }
-                              style={{ marginRight: "20px" }}
-                            />
-                            <span className="checkmark"></span>
-                            {renderCardIcon(paymentMethod.card.brand)} in{" "}
-                            {paymentMethod.card.last4}{" "}
-                          </label>
-                        </td>
-                        <td>
-                          {paymentMethod.card.exp_month +
-                            " / " +
-                            paymentMethod.card.exp_year}
-                        </td>
-                      </tr>
-                          ))*/}
                   </tbody>
                 </Table>
                 <div style={{ paddingTop: "20px" }}>
