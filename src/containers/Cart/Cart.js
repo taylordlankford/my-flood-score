@@ -26,10 +26,10 @@ const Cart = props => {
   const cart = useSelector(state => state.cartReducer)
 
   useEffect(() => {
-    if (cart.addedItems.length == 0) {
-      dispatch(resetTotal(0));
+    if (cart.addedItems.length < 1 || cart.addedItems.length == 0) {
+      dispatch(resetTotal(0))
     }
-  }, [])
+  }, [cart])
   
   console.log("props in cart.js", cart);
 
