@@ -24,7 +24,6 @@ const DeleteDefaultPaymentMethodWarning = props => {
     >
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
-        {console.log("default pm: ", defaultpm)}
         {!hasSubscriptions ? (
           <></>
         ) : (

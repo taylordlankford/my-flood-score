@@ -34,7 +34,7 @@ const PaymentMethods = () => {
 
   const [showNewCardForm, setShowNewCardForm] = useState(null);
   const [processing, setProcessing] = useState(false);
-  const [isFetchingData, SetIsFetchingData] = useState(false);
+  const [isFetchingData, setIsFetchingData] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
   const [hasSubscriptions, setHasSubscriptions] = useState(false);
@@ -48,17 +48,25 @@ const PaymentMethods = () => {
     fetchData();
   }, [processing, isFetchingData]);
 
-  /*
-   * If the firestoreUser customer ID exists, fetch the
-   * customer object, and the customer's list of payment methods.
+  /**
+   * Fetch data from Stripe API,
+   * Set states for,
+   *    customer
+   *    default payment method,
+   *    list of payment methods
    */
   const fetchData = async () => {
+    let defaultPmId = "";
     if (typeof firestoreUser.customerId !== "undefined") {
-      SetIsFetchingData(true);
+      setIsFetchingData(true);
       firebase
         .doGetCustomer(firestoreUser.customerId)
         .then(customerData => {
           setCustomer(customerData.data);
+          defaultPmId = customerData.data.invoice_settings.default_payment_method
+          firebase.doGetPaymentMethod(defaultPmId).then(defaultPm => {
+            setDefaultPaymentMethod(defaultPm.data.paymentMethod)
+          })
         })
         .then(() => {
           firebase
@@ -66,9 +74,9 @@ const PaymentMethods = () => {
             .then(paymentMethodsData => {
               setPaymentMethods(paymentMethodsData.data.paymentMethods);
             });
-        });
+        })
     }
-    SetIsFetchingData(false);
+    setIsFetchingData(false);
   };
 
   /*
@@ -101,7 +109,7 @@ const PaymentMethods = () => {
         fetchData();
         setShowWarning(false);
         setProcessing(false);
-        setDefaultPaymentMethod(defaultPaymentMethod);
+        // setDefaultPaymentMethod(defaultPaymentMethod);
         dispatch(
           pushInfo(
             `${defaultPaymentMethod.card.brand} ending in ${defaultPaymentMethod.card.last4} is your new default payment method.`
@@ -162,8 +170,9 @@ const PaymentMethods = () => {
     <IsLoading />
   ) : (
     <>
-      {console.log("customer ", customer)}
-      {console.log("paymentMethods ", paymentMethods)}
+      {console.log("CUSTOMER => ", customer)}
+      {console.log("PAYMENT METHODS => ", paymentMethods)}
+      {console.log("DEFAULT PAYMENT METHOD => ", defaultPaymentMethod)}
 
       {/* Notification */}
       <Notification />
@@ -228,6 +237,7 @@ const PaymentMethods = () => {
         detachPaymentMethod={detachPaymentMethod}
         processing={processing}
         customer={customer}
+        defaultPaymentMethod={defaultPaymentMethod}
       />
     </>
   );

@@ -50,7 +50,6 @@ const RCCheckoutForm = props => {
   // Fetch Customer & Customer's Payment Methods
   const fetchData = async () => {
     if (typeof firestoreUser.customerId !== "undefined") {
-      // Set Customer
       firebase
         .doGetCustomer(firestoreUser.customerId)
         .then(customerData => {
@@ -58,7 +57,6 @@ const RCCheckoutForm = props => {
           setCustomer(customerData.data);
         })
         .then(() => {
-          // Set Payment Methods
           firebase
             .doGetPaymentMethods(firestoreUser.customerId)
             .then(paymentMethodsData => {
@@ -68,7 +66,7 @@ const RCCheckoutForm = props => {
               );
               setPaymentMethods(paymentMethodsData.data.paymentMethods);
             });
-        });
+        })
     }
   };
 
@@ -82,8 +80,9 @@ const RCCheckoutForm = props => {
     let { customerId } = firestoreUser;
 
     /**
-     * If customer does not exist, create the customer and set a default_payment_method for the customer.
-     * Subscriptions will require the customer's invoice_settings default_payment_method to be set.
+     * If customer does not exist, create the customer and set a
+     * default_payment_method for the customer. Subscriptions will require the
+     * customer's invoice_settings default_payment_method to be set.
      */
     if (!customerId) {
       console.log("creating customer");
@@ -227,13 +226,13 @@ const RCCheckoutForm = props => {
         return;
       }
 
-      console.log("confirming card payment with CS:", client_secret);
       console.log("Customer: ", customer);
       console.log("Customer default payment method: ", defaultPaymentMethodId);
       console.log('SELECTED PM: ', selectedPaymentMethod)
 
       // Use client_secret to confirm card payment
       const client_secret = intent.data;
+      console.log("confirming card payment with CS:", client_secret);
       
       /**
        * Use the selected payment method from customer instead of the card

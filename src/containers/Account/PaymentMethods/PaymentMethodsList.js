@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import useReactRouter from "use-react-router";
 import * as ROUTES from "../../../routes/constants/routes"
 import {
@@ -21,7 +21,8 @@ const PaymentMethodsList = props => {
     handleOnClick,
     detachPaymentMethod,
     processing,
-    customer
+    customer,
+    defaultPaymentMethod
   } = props;
   const { history } = useReactRouter()
 
@@ -34,6 +35,8 @@ const PaymentMethodsList = props => {
             <th>Expiration Date</th>
             <th style={{ textAlign: "center" }}>Actions</th>
           </tr>
+          {console.log(props)}
+          {console.log(defaultPaymentMethod)}
         </thead>
         <tbody>
           {paymentMethods.map((paymentMethod, idx) =>
@@ -42,7 +45,9 @@ const PaymentMethodsList = props => {
                 <td>
                   {renderCardIcon(paymentMethod.card.brand)} in{" "}
                   {paymentMethod.card.last4}{" "}
-                  <Badge style={{ backgroundColor: "#8560a8", color: "#ffffff"}}>
+                  <Badge
+                    style={{ backgroundColor: "#8560a8", color: "#ffffff" }}
+                  >
                     DEFAULT
                   </Badge>
                 </td>
@@ -75,20 +80,15 @@ const PaymentMethodsList = props => {
                       >
                         <Dropdown.Item
                           eventKey="1"
-                          onClick={e => handleOnClick(e, paymentMethod)}
-                        >
-                          Set as default
-                        </Dropdown.Item>
-                        <Dropdown.Divider />
-                        <Dropdown.Item
-                          eventKey="2"
-                          onClick={() => history.push(ROUTES.ACCOUNT_SUBSCRIPTIONS)}
+                          onClick={() =>
+                            history.push(ROUTES.ACCOUNT_SUBSCRIPTIONS)
+                          }
                         >
                           View Subscriptions
                         </Dropdown.Item>
                         <Dropdown.Divider />
                         <Dropdown.Item
-                          eventKey="3"
+                          eventKey="2"
                           onClick={e =>
                             detachPaymentMethod(e, paymentMethod, customer)
                           }
