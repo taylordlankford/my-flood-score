@@ -29,9 +29,9 @@ const Cart = props => {
     if (cart.addedItems.length < 1 || cart.addedItems.length == 0) {
       dispatch(resetTotal(0))
     }
-  }, [cart])
-  
-  console.log("props in cart.js", cart);
+  }, [cart.addedItems])
+
+  // console.log("props in cart.js", cart);
 
   const gotoShop = () => {
     props.history.push(ROUTES.SHOP);

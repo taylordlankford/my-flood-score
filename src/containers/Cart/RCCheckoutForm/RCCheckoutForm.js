@@ -4,11 +4,13 @@ import * as ROUTES from "../../../routes/constants/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckoutContext } from "../CheckoutContext";
 import useReactRouter from "use-react-router";
+import Loading from "../../../components/Loading/Loading";
 
 import {
   Title,
   LinkSecondary,
-  TransitionBtn
+  TransitionBtn,
+  SubscriptionNotice
 } from "../../../StyledComponents/StyledComponents";
 import { pushInfo } from "../../../redux/actions/notificationActions";
 import Button from "react-bootstrap/Button";
@@ -36,6 +38,7 @@ const RCCheckoutForm = props => {
   const [showRadioForm, setShowRadioForm] = useState(false);
   const [showNewCardForm, setShowNewCardForm] = useState(null);
   const [processing, setProcessing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [selectedPaymentMethod, setSelectPaymentMethod] = useState("");
   const [chosenPaymentMethod, setChosenPaymentMethod] = useState(null);
@@ -50,6 +53,7 @@ const RCCheckoutForm = props => {
   // Fetch Customer & Customer's Payment Methods
   const fetchData = async () => {
     if (typeof firestoreUser.customerId !== "undefined") {
+      setIsLoading(true);
       firebase
         .doGetCustomer(firestoreUser.customerId)
         .then(customerData => {
@@ -66,7 +70,9 @@ const RCCheckoutForm = props => {
               );
               setPaymentMethods(paymentMethodsData.data.paymentMethods);
             });
-        })
+        });
+
+      setIsLoading(false);
     }
   };
 
@@ -74,6 +80,7 @@ const RCCheckoutForm = props => {
    *  Place order is triggered from OrderDetails component.
    */
   const placeOrder = async e => {
+    setProcessing(true);
     e.preventDefault();
     dispatch(setPaymentProcessing(true));
     const { email, uid } = firestoreUser;
@@ -159,10 +166,9 @@ const RCCheckoutForm = props => {
      * We won't set the default payment method. Let it always fall back on the
      * customer's invoice setting's default payment method.
      *
-     * SCENARIO:
      * When the customer changes their default payment method. We don't want
      * them to have to keep track of which subscription belongs to which cards.
-     * Keep it null so subscriptions defaults to one card a.k.a the user's
+     * Keep it null so subscriptions defaults to one card a.k.a the customer's
      * invoice_setting's default_payment_method.
      *
      * Create subscription if necessary
@@ -228,16 +234,17 @@ const RCCheckoutForm = props => {
 
       console.log("Customer: ", customer);
       console.log("Customer default payment method: ", defaultPaymentMethodId);
-      console.log('SELECTED PM: ', selectedPaymentMethod)
+      console.log("SELECTED PM: ", selectedPaymentMethod);
 
       // Use client_secret to confirm card payment
       const client_secret = intent.data;
       console.log("confirming card payment with CS:", client_secret);
-      
+
       /**
        * Use the selected payment method from customer instead of the card
        * fetched from stripe.
-       */ 
+       */
+
       const result = await props.stripe.confirmCardPayment(client_secret, {
         payment_method: selectedPaymentMethod
         // payment_method: chosenPaymentMethod.id
@@ -264,13 +271,14 @@ const RCCheckoutForm = props => {
 
     // Clean up
     dispatch(setPaymentProcessing(false));
+    setProcessing(false);
     history.push(ROUTES.ACCOUNT_INVENTORY);
-  }; 
+  };
   // EOF placeOrder()
 
   const handleOptionChange = (e, paymentMethod) => {
     setSelectPaymentMethod(paymentMethod.id);
-    console.log('Customer selected: ', selectedPaymentMethod);
+    console.log("Customer selected: ", selectedPaymentMethod);
   };
 
   /**
@@ -284,13 +292,18 @@ const RCCheckoutForm = props => {
         console.log("You've selected PM: ", paymentMethod);
         setChosenPaymentMethod(paymentMethod);
         setShowRadioForm(false);
-        dispatch(pushInfo(`You've added ${paymentMethod.card.brand} ending in ${paymentMethod.card.last4}.`));
+        dispatch(
+          pushInfo(
+            `You've selected ${paymentMethod.card.brand} ending in ${paymentMethod.card.last4}.`
+          )
+        );
       }
     });
   };
 
   // Disable the place order button if no card has been selected
-  const isInvalid = chosenPaymentMethod == null || typeof chosenPaymentMethod == "undefined";
+  const isInvalid =
+    chosenPaymentMethod == null || typeof chosenPaymentMethod == "undefined";
 
   return (
     <>
@@ -303,155 +316,120 @@ const RCCheckoutForm = props => {
       />
 
       <Row sm={12}>
-        {showRadioForm ? (
-          <Col sm={6}>
-            <Row sm={12}>
-              <Col sm={10} style={{ paddingBottom: "20px" }}>
-                <Title>Choose a Payment Method</Title>
-                <p style={{ color: "#666666" }}>
-                  * Subscriptions will be charged to your default payment
-                  method.
-                </p>
-              </Col>
-              <Col sm={2} style={{ textAlign: "right" }}>
-                <LinkSecondary onClick={() => setShowRadioForm(false)}>
-                  Close
+        <Col sm={6}>
+          <Row sm={12}>
+            <Col sm={10} style={{ paddingBottom: "20px" }}>
+              <Title>Choose a Payment Method</Title>
+              <SubscriptionNotice>
+                * Subscriptions will be charged to your default payment method.
+              </SubscriptionNotice>
+            </Col>
+            <Col sm={2} style={{ textAlign: "right" }}></Col>
+          </Row>
+          <Row sm={12}>
+            <Form onSubmit={e => handleFormSubmit(e)}>
+              <Table hover>
+                <thead>
+                  <tr>
+                    <th>Your credit and debit cards</th>
+                    <th>Expiration Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {paymentMethods.map((paymentMethod, idx) =>
+                    paymentMethod.id ===
+                    customer.invoice_settings.default_payment_method ? (
+                      <tr key={idx}>
+                        <td>
+                          <label className="radio-container">
+                            <input
+                              type="radio"
+                              name="paymentMethod"
+                              id={idx}
+                              value={paymentMethod.id}
+                              checked={
+                                selectedPaymentMethod === paymentMethod.id
+                              }
+                              onChange={e =>
+                                handleOptionChange(e, paymentMethod)
+                              }
+                              style={{ marginRight: "20px" }}
+                            />
+                            <span className="checkmark"></span>
+                            {renderCardIcon(paymentMethod.card.brand)} in{" "}
+                            {paymentMethod.card.last4}{" "}
+                            <Badge
+                              style={{
+                                backgroundColor: "#0D238E",
+                                color: "#ffffff"
+                              }}
+                            >
+                              DEFAULT
+                            </Badge>
+                          </label>
+                        </td>
+                        <td>
+                          {paymentMethod.card.exp_month +
+                            " / " +
+                            paymentMethod.card.exp_year}
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr key={idx}>
+                        <td>
+                          <label className="radio-container">
+                            <input
+                              disabled={processing}
+                              type="radio"
+                              name="paymentMethod"
+                              id={idx}
+                              value={paymentMethod.id}
+                              checked={
+                                selectedPaymentMethod === paymentMethod.id
+                              }
+                              onChange={e =>
+                                handleOptionChange(e, paymentMethod)
+                              }
+                              style={{ marginRight: "20px" }}
+                            />
+                            <span className="checkmark"></span>
+                            {renderCardIcon(paymentMethod.card.brand)} in{" "}
+                            {paymentMethod.card.last4}{" "}
+                          </label>
+                        </td>
+                        <td>
+                          {paymentMethod.card.exp_month +
+                            " / " +
+                            paymentMethod.card.exp_year}
+                        </td>
+                      </tr>
+                    )
+                  )}
+                </tbody>
+              </Table>
+              <div style={{ paddingTop: "20px" }}>
+                <LinkSecondary onClick={() => setShowNewCardForm(true)}>
+                  Add a credit or debit card
                 </LinkSecondary>
-              </Col>
-            </Row>
-            <Row sm={12}>
-              {/* Radio Form */}
-              <Form onSubmit={e => handleFormSubmit(e)}>
-                <Table hover>
-                  <thead>
-                    <tr>
-                      <th>Your credit and debit cards</th>
-                      <th>Expiration Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {paymentMethods.map((paymentMethod, idx) => (
-                      <>
-                        {paymentMethod.id === customer.invoice_settings.default_payment_method ? (
-                          <tr key={idx}>
-                            <td>
-                              <label className="radio-container">
-                                <input
-                                  type="radio"
-                                  name="paymentMethod"
-                                  id={idx}
-                                  value={paymentMethod.id}
-                                  checked={selectedPaymentMethod === paymentMethod.id}
-                                  onChange={e => handleOptionChange(e, paymentMethod)}
-                                  style={{ marginRight: "20px" }}
-                                />
-                                <span className="checkmark"></span>
-                                {renderCardIcon(paymentMethod.card.brand)} in {paymentMethod.card.last4}{" "}
-                                <Badge
-                                  style={{
-                                    backgroundColor: "blue",
-                                    color: "#ffffff"
-                                  }}
-                                >
-                                  DEFAULT
-                                </Badge>
-                              </label>
-                            </td>
-                            <td>
-                              {paymentMethod.card.exp_month + " / " + paymentMethod.card.exp_year}
-                            </td>
-                          </tr>
-                        ) : (
-                          <tr key={idx}>
-                            <td>
-                              <label className="radio-container">
-                                <input
-                                  type="radio"
-                                  name="paymentMethod"
-                                  id={idx}
-                                  value={paymentMethod.id}
-                                  checked={selectedPaymentMethod === paymentMethod.id}
-                                  onChange={e => handleOptionChange(e, paymentMethod)}
-                                  style={{ marginRight: "20px" }}
-                                />
-                                <span className="checkmark"></span>
-                                {renderCardIcon( paymentMethod.card.brand)} in {paymentMethod.card.last4}{" "}
-                              </label>
-                            </td>
-                            <td>
-                              {paymentMethod.card.exp_month +
-                                " / " +
-                                paymentMethod.card.exp_year}
-                            </td>
-                          </tr>
-                        )}
-                      </>
-                    ))}
-                  </tbody>
-                </Table>
-                <div style={{ paddingTop: "20px" }}>
-                  <LinkSecondary onClick={() => setShowNewCardForm(true)}>
-                    Add a credit or debit card
-                  </LinkSecondary>
-                  <span style={{ fontSize: "14px" }}>
-                    {" - "}MyFloodScore accepts all major credit cards.
-                  </span>
-                </div>
-                <Row sm={12} style={{ paddingTop: "40px" }}>
-                  <Col sm={7}>
-                    <TransitionBtn>Use this payment method</TransitionBtn>
-                  </Col>
-                  <Col sm={5}></Col>
-                </Row>
-              </Form>
-              {/* EOF Radio Form */}
-            </Row>
-          </Col>
-        ) : (
-          <Col sm={6}>
-            <Row sm={12}>
-              <Col sm={10} style={{ paddingBottom: "20px" }}>
-                <Title>Your Payment Methods</Title>
-                <p style={{ color: "#666666" }}>
-                  * Subscriptions will be charged to your default payment
-                  method.
-                </p>
-              </Col>
-              <Col sm={2} style={{ textAlign: "right" }}>
-                <LinkSecondary onClick={() => setShowRadioForm(true)}>
-                  Change
-                </LinkSecondary>
-                <Button></Button>
-              </Col>
-            </Row>
-            {chosenPaymentMethod != null ? (
-              <Row sm={12}>
-                {console.log(chosenPaymentMethod)}
-                <Col sm={6} style={{ textAlign: "left" }}>
-                  {renderCardIcon(chosenPaymentMethod.card.brand)} in{" "}
-                  {chosenPaymentMethod.card.last4}{" "}
+                <span style={{ fontSize: "14px" }}>
+                  {" - "}MyFloodScore accepts all major credit cards.
+                </span>
+              </div>
+              <Row sm={12} style={{ paddingTop: "40px" }}>
+                <Col sm={7}>
+                  <TransitionBtn>Use this payment method</TransitionBtn>
                 </Col>
-                <Col sm={6} style={{ textAlign: "right" }}>
-                  {chosenPaymentMethod.card.exp_month +
-                    " / " +
-                    chosenPaymentMethod.card.exp_year}
-                </Col>
+                <Col sm={5}></Col>
               </Row>
-            ) : (
-              <>
-                <LinkSecondary onClick={() => setShowRadioForm(true)}>
-                  Select
-                </LinkSecondary>
-                <span> your payment method first.</span>
-              </>
-            )}
-          </Col>
-        )}
+            </Form>
+          </Row>
+        </Col>
         {/* Order Deetails */}
         <OrderDetails
           cart={cart}
           placeOrder={placeOrder}
           isInvalid={isInvalid}
+          processing={processing}
         />
       </Row>
     </>
