@@ -43,3 +43,5 @@ export const ACCOUNT_SUBSCRIPTIONS = "/account/subscriptions";
 export const ACCOUNT_PAYMENT_METHODS = "/account/payment-methods";
 export const ACCOUNT_SETTINGS = "/account/account-settings";
 export const EDIT_ACCOUNT_SETTINGS = "/account/edit-account-settings";
+
+export const ACCOUNT_GET_REPORT = "/account/get-report"

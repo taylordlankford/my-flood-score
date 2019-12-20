@@ -8,13 +8,13 @@ import CheckoutGateway from "./CheckoutGateway"
 // const CheckoutPage = ({ history }) => {
 // const cart = useSelector(state => state.cartReducer);
 
-const CheckoutPage = () => {
+const CheckoutPage = ({ history }) => {
   return (
     <CheckoutContextProvider>
       <Elements>
         <Container style={{ paddingTop: "64px" }}>
           <Notification />
-          <CheckoutGateway />
+          <CheckoutGateway history={history} />
         </Container>
       </Elements>
     </CheckoutContextProvider>

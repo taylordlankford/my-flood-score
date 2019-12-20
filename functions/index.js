@@ -159,6 +159,7 @@ const paymentIntentSucceeded = async (request, response) => {
     case 'payment_intent.succeeded': {
       const paymentIntent = event.data.object
       console.log('PaymentIntent was successful!', paymentIntent)
+      const { paymentMethod } = paymentIntent
       if (paymentIntent.invoice !== null) {
         console.log('this is a subscription, we have a seperate hook for these')
         return
@@ -173,12 +174,17 @@ const paymentIntentSucceeded = async (request, response) => {
           if (customerId) { // If user is already customer
             console.log('updating customer')
             // update payment method
-            const paymentMethod = await stripe.paymentMethods.attach(
-              paymentIntent.payment_method,
-              {
-                customer: customerId,
-              }
-            )
+            try { // this will catch if customer is using a saved card
+              await stripe.paymentMethods.attach(
+                paymentIntent.payment_method,
+                {
+                  customer: customerId,
+                }
+              )
+            } catch (error) {
+              console.log('customer probably using saved card.')
+              console.log(error)
+            }
             console.log('adding order to ordrs')
             // Add order to orders
             const order = JSON.parse(paymentIntent.metadata.order)
@@ -193,7 +199,7 @@ const paymentIntentSucceeded = async (request, response) => {
               orders: admin.firestore.FieldValue.arrayUnion(order),
               inventory: newInventory,
             })
-            response.json({ paymentMethod })
+            response.json({ paymentIntent })
           } else { // If user is not already a customer
             console.log('creating customer')
             const customer = await stripe.customers.create({
