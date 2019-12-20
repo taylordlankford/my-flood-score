@@ -101,7 +101,7 @@ const CheckoutForm = (props) => {
       console.log('creating sub for items:', subItems)
       const subscription = await firebase.doCreateSubscription({
         customer: customerId,
-        default_payment_method: paymentMethod.id,
+        // default_payment_method: paymentMethod.id,
         items: subItems,
         expand: ['latest_invoice.payment_intent'],
         metadata: {
@@ -127,6 +127,8 @@ const CheckoutForm = (props) => {
       console.log('order is equal to:', order)
       const intent = await firebase.doCreatePaymentIntent({
         amount: intentAmount,
+        customer: customerId,
+        payment_method: paymentMethod.id,
         currency: 'usd',
         setup_future_usage: 'off_session',
         receipt_email: email,
