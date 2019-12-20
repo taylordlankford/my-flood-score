@@ -25,7 +25,7 @@ import {
 
 const InjectedNewCardForm = props => {
   const {
-    customer,
+    // customer,
     show,
     setShowNewCardForm,
     stripe,
@@ -33,12 +33,13 @@ const InjectedNewCardForm = props => {
     fetchdata 
   } = props;
 
-  const { firebase } = useContext(AccountContext);
+  const { firebase, firestoreUser } = useContext(AccountContext);
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState(null);
   const [processing, setProcessing] = useState(false);
+  const [customer, setCustomer] = useState(null);
 
-  useEffect(() => {}, [processing]);
+  useEffect(() => { }, [processing]);
 
   const handleOnSubmit = async e => {
     e.preventDefault();
@@ -60,19 +61,43 @@ const InjectedNewCardForm = props => {
       setProcessing(false);
     }
 
-    if (typeof paymentMethod != "undefined") {
-      // Attach as non-default payment method
-      firebase
-        .doAttachPaymentMethod(paymentMethod.id, customer.id)
-        .then(paymentMethod => {
-          console.log("pm: ", paymentMethod);
-        });
-
-      // Update our components by fetching the newly added data
-      fetchdata();
-      setProcessing(false);
-      setShowNewCardForm()
+    let { customerId } = firestoreUser
+    if (!firestoreUser.customerId) { // We need to create customer
+      console.log('creating customer')
+      const customer = await firebase.doCreateCustomer({
+        email: firestoreUser.email,
+        payment_method: paymentMethod.id,
+        invoice_settings: {
+          default_payment_method: paymentMethod.id,
+        },
+        metadata: {
+          email: firestoreUser.email,
+          uid: firestoreUser.uid,
+        },
+      })
+      console.log('customer', customer)
+      if (typeof customer.data.raw !== 'undefined') {
+        setErrorMessage('Error: ' + customer.data.raw.message)
+        setProcessing(false)
+        // dispatch(setPaymentProcessing(false))
+        return
+      }
+      customerId = customer.data.id
+    } else { 
+      console.log('customer already exists') 
     }
+
+    // Attach as non-default payment method
+    firebase
+      .doAttachPaymentMethod(paymentMethod.id, customerId)
+      .then(paymentMethod => {
+        console.log("pm: ", paymentMethod);
+      });
+
+    // Update our components by fetching the newly added data
+    fetchdata();
+    setProcessing(false);
+    setShowNewCardForm()
   };
 
   return (
