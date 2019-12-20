@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { AccountContext } from "../AccountContext";
 import { CardElement } from "react-stripe-elements";
@@ -18,22 +18,27 @@ import {
   FaCcAmex,
   FaCcDiscover
 } from "react-icons/fa";
-import { Title, TransitionBtn } from "../../../StyledComponents/StyledComponents";
+import {
+  Title,
+  TransitionBtn
+} from "../../../StyledComponents/StyledComponents";
 
 const InjectedNewCardForm = props => {
   const {
     customer,
     show,
     setShowNewCardForm,
-    onHide,
     stripe,
-    elements
+    elements,
+    fetchdata 
   } = props;
 
   const { firebase } = useContext(AccountContext);
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState(null);
   const [processing, setProcessing] = useState(false);
+
+  useEffect(() => {}, [processing]);
 
   const handleOnSubmit = async e => {
     e.preventDefault();
@@ -52,7 +57,7 @@ const InjectedNewCardForm = props => {
 
     if (error) {
       console.log("erro: ", error);
-      setProcessing(false)
+      setProcessing(false);
     }
 
     if (typeof paymentMethod != "undefined") {
@@ -63,8 +68,10 @@ const InjectedNewCardForm = props => {
           console.log("pm: ", paymentMethod);
         });
 
+      // Update our components by fetching the newly added data
+      fetchdata();
       setProcessing(false);
-      setShowNewCardForm();
+      setShowNewCardForm()
     }
   };
 
@@ -76,6 +83,7 @@ const InjectedNewCardForm = props => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         show={show}
+        onHide={() => setShowNewCardForm()}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -101,7 +109,7 @@ const InjectedNewCardForm = props => {
                   style={{ display: "none" }}
                 />
                 {processing ? (
-                  <TransitionBtn stlye={{ marginBottom: "4px" }}>
+                  <TransitionBtn style={{ marginBottom: "4px" }}>
                     <Spinner
                       as="span"
                       animation="border"
@@ -124,7 +132,7 @@ const InjectedNewCardForm = props => {
                 )}
                 <Button
                   variant="secondary"
-                  onClick={onHide}
+                  onClick={() => setShowNewCardForm()}
                   style={{
                     width: "100%",
                     borderColor: "#d4d4d4",

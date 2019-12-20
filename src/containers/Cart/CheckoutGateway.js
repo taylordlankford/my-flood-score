@@ -11,9 +11,18 @@ const CheckoutGateway = () => {
     checkReturningCustomer()
   }, [])
 
+  const isCustomer =
+    firestoreUser.customerId !== "" ||
+    typeof firestoreUser.customerId != "undefined" ||
+    firestoreUser.customerId != null;
+
   const checkReturningCustomer = () => {
-    if (firestoreUser.customerId !== '' || typeof firestoreUser !== 'undefined') {
+    console.log(firestoreUser)
+    if (isCustomer) {
       setReturningCustomer(true)
+    }
+    else {
+      setReturningCustomer(false)
     }
   } 
 

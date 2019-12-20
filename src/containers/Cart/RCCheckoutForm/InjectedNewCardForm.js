@@ -28,7 +28,7 @@ import { Title } from "../../../StyledComponents/StyledComponents";
 import { CheckoutContext } from "../CheckoutContext";
 
 const InjectedNewCardForm = props => {
-  const { firebase } = useContext(CheckoutContext);
+  const { firebase, firestoreUser } = useContext(CheckoutContext);
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState(null);
   const [paymentProcessing, setPaymentProcessing] = useState(false);
@@ -58,14 +58,37 @@ const InjectedNewCardForm = props => {
       console.log("erro: ", error);
     }
 
+    let { customerId } = firestoreUser
+    if (!firestoreUser.customerId) { // We need to create customer
+      console.log('creating customer')
+      const customer = await firebase.doCreateCustomer({
+        email: firestoreUser.email,
+        payment_method: paymentMethod.id,
+        invoice_settings: {
+          default_payment_method: paymentMethod.id,
+        },
+        metadata: {
+          email: firestoreUser.email,
+          uid: firestoreUser.uid,
+        },
+      })
+      console.log('customer', customer)
+      if (typeof customer.data.raw !== 'undefined') {
+        setErrorMessage('Error: ' + customer.data.raw.message)
+        dispatch(setPaymentProcessing(false))
+        return
+      }
+      customerId = customer.data.id
+    } else { console.log('customer already exists') }
+
     // Attach as non-default payment method
     firebase
-      .doAttachPaymentMethod(paymentMethod.id, props.customer.id)
+      .doAttachPaymentMethod(paymentMethod.id, customerId)
       .then(paymentMethod => {
         console.log("pm: ", paymentMethod);
       });
 
-    props.setProcessing(true);
+    // props.setProcessing(true);
     props.setShowNewCardForm(false);
   };
 

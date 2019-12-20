@@ -8,24 +8,19 @@ import {
   Title,
   LinkSecondary,
   TransitionBtn,
-  DefaultPaymentMethodTag
 } from "../../../StyledComponents/StyledComponents";
 import { pushInfo } from "../../../redux/actions/notificationActions";
-import Spinner from "react-bootstrap/Spinner";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Table from "react-bootstrap/Table";
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import "./PaymentMethods.css";
 
-// Functions
-import { renderCardIcon } from "./renderCardIcon";
-
 // Components
+import IsLoading from "./IsLoading";
+import PaymentMethodsList from "./PaymentMethodsList";
 import Notification from "../../../components/Notifications/Notification";
 import NewCardFormModal from "./NewCardFormModal";
 import ChangeDefaultPaymentMethodWarning from "./ChangeDefaultPaymentMethodWarning";
+import DeleteDefaultPaymentMethodWarning from "./DeleteDefaultPaymentMethodWarning";
 
 const PaymentMethods = () => {
   // Data
@@ -35,136 +30,180 @@ const PaymentMethods = () => {
   // States
   const [customer, setCustomer] = useState(null);
   const [paymentMethods, setPaymentMethods] = useState([]);
-  const [showNewCardForm, setShowNewCardForm] = useState(null);
-  const [processing, setProcessing] = useState(false);
-  const [showWarning, setShowWarning] = useState(false);
-  const [loadDefaultPm, setLoadDefaultPm] = useState(null);
   const [defaultPaymentMethod, setDefaultPaymentMethod] = useState(null);
 
+  const [showNewCardForm, setShowNewCardForm] = useState(null);
+  const [processing, setProcessing] = useState(false);
+  const [isFetchingData, setIsFetchingData] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+  const [showDeleteWarning, setShowDeleteWarning] = useState(false);
+  const [hasSubscriptions, setHasSubscriptions] = useState(false);
+
+  /*
+   * Trigger useEffect() hook everytime it detects a change from state that
+   * tracks processing. We want to keep the table updated live with response
+   * from Stripe.
+   */
   useEffect(() => {
     fetchData();
-  }, [processing, showNewCardForm, showWarning, loadDefaultPm]);
+  }, [processing, isFetchingData]);
 
-  // Fetch customer, default payment method, payment methods from Stripe
+  /**
+   * Fetch data from Stripe API,
+   * Set states for,
+   *    customer
+   *    default payment method,
+   *    list of payment methods
+   */
   const fetchData = async () => {
+    let defaultPmId = "";
     if (typeof firestoreUser.customerId !== "undefined") {
-      // Set Customer
+      setIsFetchingData(true);
       firebase
         .doGetCustomer(firestoreUser.customerId)
         .then(customerData => {
           setCustomer(customerData.data);
-          const defaultPmId =
-            customerData.data.invoice_settings.default_payment_method;
-
-          // Get Customer's default payment method object from ID
-          firebase.doGetPaymentMethod(defaultPmId).then(pm => {
-            setDefaultPaymentMethod(pm.data.paymentMethod);
-          });
+          defaultPmId = customerData.data.invoice_settings.default_payment_method
+          firebase.doGetPaymentMethod(defaultPmId).then(defaultPm => {
+            setDefaultPaymentMethod(defaultPm.data.paymentMethod)
+          })
         })
         .then(() => {
-          // Get Payment Methods
           firebase
             .doGetPaymentMethods(firestoreUser.customerId)
             .then(paymentMethodsData => {
               setPaymentMethods(paymentMethodsData.data.paymentMethods);
             });
-        });
+        })
+    }
+    setIsFetchingData(false);
+  };
+
+  /*
+   * Triggers the Modal Warning for updating default payment method.
+   * Set the default payment method so we can pass it off to the modal to handle.
+   * 
+   * The ChangeDefaultPaymentMethodWarning modal component will have an event
+   * handler to attach a new default payment method to the customer
+   */
+  const handleOnClick = (e, paymentMethod) => {
+    e.preventDefault();
+    setShowWarning(true);
+    setDefaultPaymentMethod(paymentMethod);
+  };
+
+  /**
+   * Attach Default Payment Method to Customer
+   * 
+   * Function to update the customer's default payment method with a new
+   * payment method from their list of payment methods.
+   * 
+   * First, attach the payment method to the customer, then update the
+   * invoice_setting's default_payment_method.
+   */
+  const attachDefaultPaymentMethod = (e, pmId, customerId) => {
+    e.preventDefault();
+    setProcessing(true);
+    firebase.doAttachPaymentMethod(pmId, customerId).then(() => {
+      firebase.doUpdateCustomerDefaultPaymentMethod(customer, pmId).then(() => {
+        fetchData();
+        setShowWarning(false);
+        setProcessing(false);
+        // setDefaultPaymentMethod(defaultPaymentMethod);
+        dispatch(
+          pushInfo(
+            `${defaultPaymentMethod.card.brand} ending in ${defaultPaymentMethod.card.last4} is your new default payment method.`
+          )
+        );
+      });
+    });
+  };
+
+  /**
+   * Detach Payment Method from Customer
+   * 
+   * Before detaching the payment method from the customer, check if the
+   * payment method is the same as customer's invoice setting's default payment
+   * method.
+   *
+   * If it's true, check if the default payment method has subscriptions. If true,
+   * show warning.
+   * 
+   * If customer has no subscriptions, just detach the default payment method.
+   * 
+   * If it is a non-default payment method, just detach the card.
+   */
+  const detachPaymentMethod = (e, pm, customer) => {
+    e.preventDefault();
+
+    if (pm.id === customer.invoice_settings.default_payment_method) {
+      if (customer.subscriptions.data.length > 0) {
+        console.log("There are subscriptions");
+        setHasSubscriptions(true);
+        setShowDeleteWarning(true);
+      } else {
+      firebase.doDetachPaymentMethod(pm.id).then(() => {
+        setProcessing(true);
+        console.log("Payment Method detached successfully.");
+        dispatch(pushInfo(`Successfully removed payment method.`));
+        setProcessing(false);
+      });
+      }
+    } else {
+      firebase.doDetachPaymentMethod(pm.id).then(() => {
+        setProcessing(true);
+        console.log("Payment Method detached successfully.");
+        dispatch(pushInfo(`Successfully removed payment method.`));
+        setProcessing(false);
+      });
     }
   };
 
   const handleCloseWarning = () => setShowWarning(false);
+  const closeDeleteWarning = () => setShowDeleteWarning(false)
+  const didCustomerLoad = customer == null || typeof customer == "undefined";
 
-  const handleOnClick = (e, paymentMethod) => {
-    e.preventDefault();
-    setShowWarning(true);
-    setLoadDefaultPm(paymentMethod);
-    // setDefaultPaymentMethod(paymentMethod);
-  };
-
-  // Update default payment method
-  const attachDefaultPaymentMethod = (e, pmId, customerId) => {
-    e.preventDefault();
-    setProcessing(true);
-    // Attach a new payment method to Stripe customer through Stripe API
-    firebase
-      .doAttachPaymentMethod(pmId, customerId)
-      .then(() => {
-        // Update the customer with the new default payment method
-        firebase
-          .doUpdateCustomerDefaultPaymentMethod(customer, pmId)
-          .then(() => {
-            // refresh the page with new state from Stripe API
-            fetchData();
-            setShowWarning(false);
-            setProcessing(false);
-            setDefaultPaymentMethod(loadDefaultPm);
-            dispatch(pushInfo(`${loadDefaultPm.card.brand} ending in ${loadDefaultPm.card.last4} is your new default payment method.`));
-          });
-      })
-  };
-
-  // Detach payment method (delete)
-  const detachPaymentMethod = (e, pmId) => {
-    e.preventDefault();
-    setProcessing(true)
-    firebase.doDetachPaymentMethod(pmId).then(() => {
-      setProcessing(true);
-      console.log("Payment Method detached successfully.");
-      dispatch(pushInfo(`Successfully removed payment method.`));
-      setProcessing(false);
-    });
-  };
-
-  const isLoading =
-    customer === null ||
-    paymentMethods === null ||
-    defaultPaymentMethod === null
-
-  // Display loading message
-  if (isLoading) {
-    return (
-      <Container style={{ textAlign: "center", color: "#666666" }}>
-        <Spinner
-          as="span"
-          animation="border"
-          size="lg"
-          role="status"
-          aria-hidden="true"
-          style={{
-            marginLeft: "-15px",
-            marginRight: "15px"
-          }}
-        />
-        <span style={{ fontSize: "28px" }}>
-          Retrieve your payment methods...
-        </span>
-      </Container>
-    );
-  }
-
-  return (
+  /**
+   * Render an IsLoading component if the component is fetching data.
+   */
+  return isFetchingData == true ? (
+    <IsLoading />
+  ) : (
     <>
-      {console.log(customer)}
-      {console.log(paymentMethods)}
+      {console.log("CUSTOMER => ", customer)}
+      {console.log("PAYMENT METHODS => ", paymentMethods)}
+      {console.log("DEFAULT PAYMENT METHOD => ", defaultPaymentMethod)}
+
+      {/* Notification */}
       <Notification />
 
-      {/* Modals */}
+      {/* Modal Warning for deleting default payment method */}
+      <DeleteDefaultPaymentMethodWarning
+        closeModal={closeDeleteWarning}
+        show={showDeleteWarning}
+        hasSubscriptions={hasSubscriptions}
+      />
+
+      {/* Modal for changing default payment method */}
       <ChangeDefaultPaymentMethodWarning
         showWarning={showWarning}
         handleCloseWarning={handleCloseWarning}
-        loadDefaultPm={loadDefaultPm}
+        defaultPaymentMethod={defaultPaymentMethod}
         attachDefaultPaymentMethod={attachDefaultPaymentMethod}
         firestoreUser={firestoreUser}
         processing={processing}
       />
+
+      {/* Modal for adding a non-default payment method */}
       <NewCardFormModal
+        fetchdata={fetchData}
         customer={customer}
         show={showNewCardForm}
         setShowNewCardForm={() => setShowNewCardForm()}
         onHide={() => setShowNewCardForm(false)}
       />
 
-      {/* Payment Methods */}
+      {/* Payment Methods Header */}
       <Container>
         <Row sm={12}>
           <Col sm={12}>
@@ -172,6 +211,13 @@ const PaymentMethods = () => {
             <p style={{ color: "#666666" }}>
               *Default payment method is used for recurring subscriptions.
             </p>
+            {!didCustomerLoad ? (
+              <p style={{ color: "#666666" }}>
+                Set a default payment method for subscriptions.
+              </p>
+            ) : (
+              <></>
+            )}
           </Col>
         </Row>
         <br />
@@ -180,99 +226,19 @@ const PaymentMethods = () => {
           Add a credit or debit card
         </LinkSecondary>
         <span>{" - "}MyFloodScore accepts all major credit cards.</span>
-        {/* Table */}
-        <Table style={{ marginTop: "40px" }}>
-          <thead>
-            <tr>
-              <th>Your credit and debit cards</th>
-              <th>Expiration Date</th>
-              <th style={{ textAlign: "center" }}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              style={{
-                backgroundColor: "#eeeeee"
-              }}
-            >
-              <td>
-                {renderCardIcon(defaultPaymentMethod.card.brand)} in{" "}
-                {defaultPaymentMethod.card.last4}{" "}
-              </td>
-              <td>
-                {defaultPaymentMethod.card.exp_month +
-                  " / " +
-                  defaultPaymentMethod.card.exp_year}
-              </td>
-              <td style={{ textAlign: "center" }}>
-                <DefaultPaymentMethodTag>Default</DefaultPaymentMethodTag>
-              </td>
-            </tr>
-            {/* Render list of payment methods */}
-            {paymentMethods.map((paymentMethod, idx) =>
-              // Highlight Default Payment Method
-              paymentMethod.id !== defaultPaymentMethod.id ? (
-                // Show only non-default payment methods
-                <tr key={idx}>
-                  <td>
-                    {renderCardIcon(paymentMethod.card.brand)} in{" "}
-                    {paymentMethod.card.last4}
-                  </td>
-                  <td>
-                    {paymentMethod.card.exp_month +
-                      " / " +
-                      paymentMethod.card.exp_year}
-                  </td>
-                  <td
-                    style={{
-                      textAlign: "center"
-                    }}
-                  >
-                    {processing ? (
-                      <TransitionBtn disabled style={{ width: "50%" }}>
-                        <Spinner
-                          as="span"
-                          animation="border"
-                          size="sm"
-                          role="status"
-                          aria-hidden="true"
-                        />
-                      </TransitionBtn>
-                    ) : (
-                      <>
-                        <DropdownButton
-                          variant="secondary"
-                          alignRight
-                          title="Update"
-                          id="dropdown-menu-align-right"
-                        >
-                          <Dropdown.Item
-                            eventKey="1"
-                            onClick={e => handleOnClick(e, paymentMethod)}
-                          >
-                            Set as Default
-                          </Dropdown.Item>
-                          <Dropdown.Divider />
-                          <Dropdown.Item
-                            eventKey="2"
-                            onClick={e =>
-                              detachPaymentMethod(e, paymentMethod.id)
-                            }
-                          >
-                            Remove
-                          </Dropdown.Item>
-                        </DropdownButton>
-                      </>
-                    )}
-                  </td>
-                </tr>
-              ) : (
-                <></>
-              )
-            )}
-          </tbody>
-        </Table>
+        <br />
+        <br />
       </Container>
+
+      {/* Render List of Payment Methods */}
+      <PaymentMethodsList
+        paymentMethods={paymentMethods}
+        handleOnClick={handleOnClick}
+        detachPaymentMethod={detachPaymentMethod}
+        processing={processing}
+        customer={customer}
+        defaultPaymentMethod={defaultPaymentMethod}
+      />
     </>
   );
 };

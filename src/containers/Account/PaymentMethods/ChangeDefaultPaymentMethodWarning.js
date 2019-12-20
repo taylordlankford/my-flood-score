@@ -12,7 +12,7 @@ const ChangeDefaultPaymentMethodWarning = props => {
     showWarning,
     handleCloseWarning,
     attachDefaultPaymentMethod,
-    loadDefaultPm,
+    defaultPaymentMethod,
     firestoreUser,
     processing
   } = props;
@@ -79,7 +79,7 @@ const ChangeDefaultPaymentMethodWarning = props => {
                 onClick={e =>
                   attachDefaultPaymentMethod(
                     e,
-                    loadDefaultPm.id,
+                    defaultPaymentMethod.id,
                     firestoreUser.customerId
                   )
                 }

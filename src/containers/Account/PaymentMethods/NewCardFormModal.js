@@ -11,10 +11,11 @@ const NewCardFormModal = props => {
     <Elements>
       <InjectedNewCardForm
         show={props.show}
-        onHide={props.onHide}
+        onhide={props.onhide}
         setProcessing={() => props.setProcessing()}
         setShowNewCardForm={() => props.setShowNewCardForm()}
         customer={props.customer}
+        fetchdata={props.fetchdata}
       />
     </Elements>
   );
