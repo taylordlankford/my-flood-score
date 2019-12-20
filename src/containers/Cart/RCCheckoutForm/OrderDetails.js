@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 
-const OrderDetails = ({ cart, placeOrder, isInvalid }) => {
+const OrderDetails = ({ cart, placeOrder, isInvalid, processing }) => {
   const renderItem = item => {
     return (
       <p className="cart-item">
@@ -30,7 +30,7 @@ const OrderDetails = ({ cart, placeOrder, isInvalid }) => {
           Total{" "}
           <span className="cart-amount">${(cart.total / 100).toFixed(2)}</span>
         </p>
-        {cart.paymentProcessing ? (
+        {(cart.paymentProcessing || processing == true) ? (
           <Button
             variant="primary"
             type="submit"

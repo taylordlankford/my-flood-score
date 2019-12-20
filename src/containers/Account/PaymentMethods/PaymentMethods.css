@@ -1,14 +1,10 @@
-.dropdown-menu {
-  width: inherit !important;
-}
-
 .disabled-item:hover {
   cursor: not-allowed;
 }
 
 .btn,
 .btn-primary,
-.dropdown-toggle, 
+.dropdown-toggle,
 .dropdown-toggle:visited {
   text-align: center;
   color: white !important;
@@ -33,6 +29,7 @@
 }
 
 .dropdown-toggle:hover {
+  cursor: pointer;
   background-position: 100%;
   color: white;
   background-color: #dddddd;
@@ -50,13 +47,13 @@
 }
 
 .dropdown-menu {
-  max-width: 100% !important;
-  background-color: #eeeeee !important;
+  background-color: #f4f4f4 !important;
+  border: 1px solid #dddddd !important;
 }
 
 .btn-success,
-.btn-success:not(:disabled):not(.disabled).active, 
-.btn-success:not(:disabled):not(.disabled):active, 
+.btn-success:not(:disabled):not(.disabled).active,
+.btn-success:not(:disabled):not(.disabled):active,
 .show > .btn-success.dropdown-toggle {
   background-color: #d4d4d4 !important;
   border: none !important;

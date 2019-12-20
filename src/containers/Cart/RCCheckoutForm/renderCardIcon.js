@@ -13,14 +13,14 @@ export const renderCardIcon = cardType => {
     case "visa": {
       return (
         <>
-          <FaCcVisa size={30} /> Ending{" "}
+          <FaCcVisa style={{ color: "#000" }}size={30} /> Ending{" "}
         </>
       );
     }
     case "mastercard": {
       return (
         <>
-          <FaCcMastercard size={30} /> Ending{" "}
+          <FaCcMastercard style={{ color: "#000" }}size={30} /> Ending{" "}
         </>
       );
     }
@@ -28,7 +28,7 @@ export const renderCardIcon = cardType => {
       return (
         <>
           {" "}
-          <FaCcDiscover size={30} /> Ending{" "}
+          <FaCcDiscover style={{ color: "#000" }}size={30} /> Ending{" "}
         </>
       );
     }
@@ -36,7 +36,7 @@ export const renderCardIcon = cardType => {
       return (
         <>
           {" "}
-          <FaCcAmex size={30} /> Ending{" "}
+          <FaCcAmex style={{ color: "#000" }}size={30} /> Ending{" "}
         </>
       );
     }

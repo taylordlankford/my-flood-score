@@ -2,6 +2,14 @@
 // For components that are commonly used throughout the application.
 import styled from "styled-components";
 
+export const SubscriptionNotice = styled.div`
+  margin-top: 20px;
+  padding: 20px;
+  font-weight: 600;
+  background-color: #eeeeee;
+  color: #666666;
+`
+
 // Structures that can contain more than one element.
 export const Container = styled.div.attrs(props => ({
   padding: props.padding || "0",

@@ -7,7 +7,7 @@ import {
   Container,
   Title,
   LinkSecondary,
-  TransitionBtn,
+  SubscriptionNotice
 } from "../../../StyledComponents/StyledComponents";
 import { pushInfo } from "../../../redux/actions/notificationActions";
 import Row from "react-bootstrap/Row";
@@ -15,7 +15,8 @@ import Col from "react-bootstrap/Col";
 import "./PaymentMethods.css";
 
 // Components
-import IsLoading from "./IsLoading";
+// import IsLoading from "./IsLoading";
+import Loading from "../../../components/Loading/Loading"
 import PaymentMethodsList from "./PaymentMethodsList";
 import Notification from "../../../components/Notifications/Notification";
 import NewCardFormModal from "./NewCardFormModal";
@@ -25,21 +26,21 @@ import DeleteDefaultPaymentMethodWarning from "./DeleteDefaultPaymentMethodWarni
 const PaymentMethods = () => {
   // Data
   const { firebase, firestoreUser } = useContext(AccountContext);
-  const dispatch = useDispatch();
+  const dispatch                    = useDispatch();
 
   // States
-  const [customer, setCustomer] = useState(null);
-  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [customer, setCustomer]                         = useState(null);
+  const [paymentMethods, setPaymentMethods]             = useState([]);
   const [defaultPaymentMethod, setDefaultPaymentMethod] = useState(null);
 
-  const [showNewCardForm, setShowNewCardForm] = useState(null);
-  const [processing, setProcessing] = useState(false);
-  const [isFetchingData, setIsFetchingData] = useState(false);
-  const [showWarning, setShowWarning] = useState(false);
+  const [showNewCardForm, setShowNewCardForm]     = useState(null);
+  const [processing, setProcessing]               = useState(false);
+  const [isFetchingData, setIsFetchingData]       = useState(false);
+  const [showWarning, setShowWarning]             = useState(false);
   const [showDeleteWarning, setShowDeleteWarning] = useState(false);
-  const [hasSubscriptions, setHasSubscriptions] = useState(false);
+  const [hasSubscriptions, setHasSubscriptions]   = useState(false);
 
-  /*
+  /**
    * Trigger useEffect() hook everytime it detects a change from state that
    * tracks processing. We want to keep the table updated live with response
    * from Stripe.
@@ -79,25 +80,21 @@ const PaymentMethods = () => {
     setIsFetchingData(false);
   };
 
-  /*
-   * Triggers the Modal Warning for updating default payment method.
-   * Set the default payment method so we can pass it off to the modal to handle.
-   * 
-   * The ChangeDefaultPaymentMethodWarning modal component will have an event
-   * handler to attach a new default payment method to the customer
+  /**
+   * Fetch the default payment method. Requires default payment method id.
    */
-  const handleOnClick = (e, paymentMethod) => {
-    e.preventDefault();
-    setShowWarning(true);
-    setDefaultPaymentMethod(paymentMethod);
-  };
+  const fetchDefaultPaymentMethod = (defaultPaymentMethodId) => {
+    firebase.doGetPaymentMethod(defaultPaymentMethodId).then(data => {
+      setDefaultPaymentMethod(data.data.paymentMethod)
+    })
+  }
 
   /**
    * Attach Default Payment Method to Customer
-   * 
+   *
    * Function to update the customer's default payment method with a new
    * payment method from their list of payment methods.
-   * 
+   *
    * First, attach the payment method to the customer, then update the
    * invoice_setting's default_payment_method.
    */
@@ -121,16 +118,16 @@ const PaymentMethods = () => {
 
   /**
    * Detach Payment Method from Customer
-   * 
+   *
    * Before detaching the payment method from the customer, check if the
    * payment method is the same as customer's invoice setting's default payment
    * method.
    *
    * If it's true, check if the default payment method has subscriptions. If true,
    * show warning.
-   * 
+   *
    * If customer has no subscriptions, just detach the default payment method.
-   * 
+   *
    * If it is a non-default payment method, just detach the card.
    */
   const detachPaymentMethod = (e, pm, customer) => {
@@ -142,12 +139,12 @@ const PaymentMethods = () => {
         setHasSubscriptions(true);
         setShowDeleteWarning(true);
       } else {
-      firebase.doDetachPaymentMethod(pm.id).then(() => {
-        setProcessing(true);
-        console.log("Payment Method detached successfully.");
-        dispatch(pushInfo(`Successfully removed payment method.`));
-        setProcessing(false);
-      });
+        firebase.doDetachPaymentMethod(pm.id).then(() => {
+          setProcessing(true);
+          console.log("Payment Method detached successfully.");
+          dispatch(pushInfo(`Successfully removed payment method.`));
+          setProcessing(false);
+        });
       }
     } else {
       firebase.doDetachPaymentMethod(pm.id).then(() => {
@@ -159,6 +156,19 @@ const PaymentMethods = () => {
     }
   };
 
+  /**
+   * Triggers the Modal Warning for updating default payment method.
+   * Set the default payment method so we can pass it off to the modal to handle.
+   *
+   * The ChangeDefaultPaymentMethodWarning modal component will have an event
+   * handler to attach a new default payment method to the customer
+   */
+  const handleOnClick = (e, paymentMethod) => {
+    e.preventDefault();
+    setShowWarning(true);
+    setDefaultPaymentMethod(paymentMethod);
+  };
+
   const handleCloseWarning = () => setShowWarning(false);
   const closeDeleteWarning = () => setShowDeleteWarning(false)
   const didCustomerLoad = customer == null || typeof customer == "undefined";
@@ -167,7 +177,7 @@ const PaymentMethods = () => {
    * Render an IsLoading component if the component is fetching data.
    */
   return isFetchingData == true ? (
-    <IsLoading />
+    <Loading message="Loading..." />
   ) : (
     <>
       {console.log("CUSTOMER => ", customer)}
@@ -208,10 +218,10 @@ const PaymentMethods = () => {
         <Row sm={12}>
           <Col sm={12}>
             <Title>Your Payment Methods</Title>
-            <p style={{ color: "#666666" }}>
-              *Default payment method is used for recurring subscriptions.
-            </p>
-            {!didCustomerLoad ? (
+            <SubscriptionNotice>
+              * Default payment method is used for recurring subscriptions.
+            </SubscriptionNotice>
+            {didCustomerLoad ? (
               <p style={{ color: "#666666" }}>
                 Set a default payment method for subscriptions.
               </p>
