@@ -20,7 +20,6 @@ import Order from "./Orders/Order";
 import Subscriptions from "./Subscriptions/Subscriptions";
 import PaymentMethods from "./PaymentMethods/PaymentMethods";
 import AccountSettings from "./AccountSettings/AccountSettings";
-import Request from './Request/Request'
 import { AccountContextProvider } from "./AccountContext";
 
 const Account = () => {
@@ -41,7 +40,6 @@ const Account = () => {
                       <Route path={ROUTES.ACCOUNT_SUBSCRIPTIONS} component={Subscriptions} />
                       <Route path={ROUTES.ACCOUNT_PAYMENT_METHODS} component={PaymentMethods} />
                       <Route path={ROUTES.ACCOUNT_SETTINGS} component={AccountSettings} />
-                      <Route path={ROUTES.ACCOUNT_GET_REPORT} component={Request} />
 
                       <Route path={"/account/order/:id"} component={Order} />
                     </Switch>
