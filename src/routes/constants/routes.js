@@ -45,3 +45,4 @@ export const ACCOUNT_SETTINGS = "/account/account-settings";
 export const EDIT_ACCOUNT_SETTINGS = "/account/edit-account-settings";
 
 export const DISCOVER_GET_REPORT = "/get-report"
+export const REPORT = "/report/:id"

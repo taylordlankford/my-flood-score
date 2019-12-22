@@ -42,6 +42,7 @@ import CertifyBusiness from './containers/Products/Certify/CertifyBusiness'
 import ReduceHomeowner from './containers/Products/Reduce/ReduceHomeowner'
 
 import Request from './containers/Products/Discover/Request/Request'
+import Report from './containers/Reports/Report'
 
 import Account from './containers/Account/Account'
 
@@ -115,6 +116,7 @@ const App = () => {
                         <Route path={ROUTES.REDUCE_HOMEOWNER} component={ReduceHomeowner} />
 
                         <Route path={ROUTES.DISCOVER_GET_REPORT} component={Request} />
+                        <Route path={ROUTES.REPORT} component={Report} />
 
                         <Route path={ROUTES.ACCOUNT} component={Account} />
 

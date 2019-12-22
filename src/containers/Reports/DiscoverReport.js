@@ -2,6 +2,7 @@ import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 
 import './Reports.css'
 
@@ -21,7 +22,6 @@ import MFS_Text_Logo from '../../assets/images/MFS_Text_Logo.svg'
 
 // import * as ROUTES from '../../constants/routes'
 import * as ROUTES from '../../routes/constants/routes'
-import Button from 'react-bootstrap/Button'
 
 const range = [
   {
@@ -100,7 +100,6 @@ const DiscoverReport = (props) => {
   } = props
   return (
     <div id="reportContainer">
-      <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>Your FREE Discover Report</h3>
       <div className="reportContainer">
         <div className="reportHeader">
           <img src={MFS_Logo} alt="logo" />

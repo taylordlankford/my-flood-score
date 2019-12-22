@@ -92,7 +92,7 @@ class Fire {
     });
   }
 
-  doFirestoreGet = (collection) => {
+  doFirestoreCollectionGet = (collection) => {
     const documents = []
     return this.db.collection(collection)
       .get()
@@ -106,6 +106,24 @@ class Fire {
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
+    });
+  }
+
+  doFirestoreDocGet = (collection, doc, getOptions) => {
+    return this.db.collection(collection).doc(doc)
+      .get(getOptions)
+      .then((doc) => {
+        if (doc.exists) {
+          console.log("Document data:", doc.data())
+          return doc.data()
+        } else {
+            console.log("No such document!")
+            return "No such document!"
+        }
+      })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error)
+        return error
     });
   }
 
