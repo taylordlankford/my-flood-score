@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { TopSection } from '../../StyledComponents'
 import AutoSuggest from '../../../../components/AutoSuggest/AutoSuggest'
 import { useFirebase, useFirestoreUser } from '../../../../hooks'
@@ -11,7 +12,9 @@ import { useFirebase, useFirestoreUser } from '../../../../hooks'
 import requestGraphic1 from '../../../../assets/images/request-graphic1.png'
 import requestGraphic2 from '../../../../assets/images/request-graphic2.png'
 
-const Request = () => {
+import * as ROUTES from '../../../../routes/constants/routes'
+
+const Request = (props) => {
   const [validAddress, setValidAddress] = useState(false)
   const [address, setAddress] = useState("")
 
@@ -27,7 +30,7 @@ const Request = () => {
     console.log('suggestionValue', suggestionValue)
     await autoSuggestRef.current.setState({ value: suggestionValue })
     setValidAddress(await autoSuggestRef.current.validateValue())
-    // setAddress(suggestion)
+    setAddress(suggestionValue)
     // history.push(ROUTES.CHECKOUT_FREE, { selected: suggestion })
   }
 
@@ -43,6 +46,22 @@ const Request = () => {
     await autoSuggestRef.current.setState({ value: newValue })
     setValidAddress(await autoSuggestRef.current.validateValue())
     setAddress(newValue)
+  }
+
+  const handleGetReport = async () => {
+    // get propertyRef
+    console.log('address:', address)
+    const properties = await firebase.doFirestoreAddressRefGet(address)
+    console.log('properties', properties)
+    // create report
+    const setObj = {
+      createdAt: new Date(),
+      property: properties[0],
+      uid: firestoreUser.uid,
+    }
+    const reportRef = await firebase.doFirestoreAdd("reports", setObj)
+    console.log('reportRef', reportRef)
+    props.history.push(ROUTES.REPORT + "/" + reportRef.id)
   }
 
   if (loading) {
@@ -92,10 +111,15 @@ const Request = () => {
           <div style={{ height: '45px' }} />
           <Button
             primary
-            // className="view-action"
+            onClick={handleGetReport}
             disabled={!validAddress}
           >
-            Submit Request
+            {/* <Link
+              // style={{ color: "#fff" }}
+              to={ROUTES.REPORT + "/" + "gQZeJL1KmxMtLxtaRD69"}
+            > */}
+              Get Report
+            {/* </Link> */}
           </Button>
         </Col>
       </Row>

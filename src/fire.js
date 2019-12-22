@@ -54,6 +54,19 @@ class Fire {
 
   // *** Firestore API ***
 
+  doFirestoreAdd = (collection, setObj, callback) => {
+    return this.db.collection(collection).add(setObj)
+    .then(function(docRef) {
+      console.log("Document written with ID: ", docRef.id)
+      if (callback) { callback() }
+      return docRef
+    })
+    .catch(function(error) {
+      console.error("Error adding document: ", error)
+      return error
+    })
+  }
+
   doFirestoreSet = (collection, doc, setObj, callback) => {
     this.db.collection(collection).doc(doc).set(setObj)
     .then(function() {
@@ -65,31 +78,46 @@ class Fire {
     })
   }
 
-  doFirestoreWhereGet = (collection, whereField, whereOperation, whereValue) => {
-    console.log('doing firestore where get')
-    const strlength = whereValue.length
-    const strFrontCode = whereValue.slice(0, strlength-1)
-    const strEndCode = whereValue.slice(strlength-1, whereValue.length)
-    
-    const startCode = whereValue
-    const endCode = strFrontCode + String.fromCharCode(strEndCode.charCodeAt(0) + 1)
+  doFirestoreAddressRefGet = (address) => {
+    console.log('doing firestore compound where get')
+    const splitAddress = address.split(",")
+    const propAdd = splitAddress[0]
+    let propZip = splitAddress[splitAddress.length - 1]
+    propZip = propZip.trim()
+    propZip = Number(propZip)
 
-    console.log('startcode', startCode)
-    console.log('endCode', endCode)
+    console.log('propAdd', propAdd)
+    console.log('propZip', propZip)
     const documents = []
-    this.db.collection(collection).where(whereField, whereOperation, startCode).where(whereField, '<', endCode)
+    return this.db.collection("properties").where("PROP_ADD", "==", propAdd).where("PROP_ZIP", '==', propZip)
     .get()
     .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-            documents.push(doc.data())
-        });
-        return documents
+      querySnapshot.forEach(function(doc) {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data())
+        documents.push(doc.ref)
+      })
+      return documents
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
     });
+  }
+
+  doFirestoreWhereGet = async (collection, whereField, whereOperation, whereValue) => {
+    console.log('doing firestore where get')
+    const documents = []
+    const querySnapshot = await this.db.collection(collection).where(whereField, whereOperation, whereValue).get()
+    return querySnapshot
+    // querySnapshot.forEach(async (doc) => {
+    //     // doc.data() is never undefined for query doc snapshots
+    //     console.log(doc.id, " => ", doc.data());
+    //     documents.push(doc.data())
+    //   })
+    //   return documents
+    // .catch(function(error) {
+    //     console.log("Error getting documents: ", error);
+    // });
   }
 
   doFirestoreCollectionGet = (collection) => {

@@ -18,34 +18,21 @@ const Report = (props) => {
           .then((doc) => {
             if (typeof doc.property !== 'undefined') {
               doc.property.get().then((doc) => {
-                  if (doc.exists) {
-                    setProperty(doc.data())
-                  } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!")
-                    setProperty("not found")
-                  }
-                }).catch(function(error) {
-                  console.log("Error getting document:", error)
-                  setError(error.messsage)
-                })
+                if (doc.exists) {
+                  setProperty(doc.data())
+                } else {
+                  // doc.data() will be undefined in this case
+                  console.log("No such document!")
+                  setProperty("not found")
+                }
+              }).catch(function(error) {
+                console.log("Error getting document:", error)
+                setError(error.messsage)
+              })
             } else {
               setProperty("not found")
             }
           })
-        // if we have a propertyRef we can do this i.e. coming from history
-        // firestoreUser.propertyRef.get().then((doc) => {
-        //   if (doc.exists) {
-        //     console.log("property Document data:", doc.data());
-        //     setProperty(doc.data())
-        //   } else {
-        //     // doc.data() will be undefined in this case
-        //     console.log("No such document!");
-        //   }
-        // }).catch(function(error) {
-        //   console.log("Error getting document:", error)
-        //   setError(error.messsage)
-        // })
       }
     }, [loading])
 
