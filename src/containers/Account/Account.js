@@ -4,8 +4,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  withRouter,
-  Link
 } from "react-router-dom";
 
 import "./Account.css";
@@ -20,6 +18,7 @@ import Order from "./Orders/Order";
 import Subscriptions from "./Subscriptions/Subscriptions";
 import PaymentMethods from "./PaymentMethods/PaymentMethods";
 import AccountSettings from "./AccountSettings/AccountSettings";
+import Reports from "./Reports/Reports"
 import { AccountContextProvider } from "./AccountContext";
 
 const Account = () => {
@@ -40,6 +39,7 @@ const Account = () => {
                       <Route path={ROUTES.ACCOUNT_SUBSCRIPTIONS} component={Subscriptions} />
                       <Route path={ROUTES.ACCOUNT_PAYMENT_METHODS} component={PaymentMethods} />
                       <Route path={ROUTES.ACCOUNT_SETTINGS} component={AccountSettings} />
+                      <Route path={ROUTES.ACCOUNT_REPORTS} component={Reports} />
 
                       <Route path={"/account/order/:id"} component={Order} />
                     </Switch>

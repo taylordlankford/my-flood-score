@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { connect } from 'react-redux'
 import Button from 'react-bootstrap/Button'
-import { withRouter } from "react-router-dom"
+import { withRouter, Link } from "react-router-dom"
 import * as ROUTES from '../../../routes/constants/routes'
 
 const Item = ({ item, index, allItems, history }) => {
@@ -25,7 +25,7 @@ const Item = ({ item, index, allItems, history }) => {
       <td className="noWrap">
         <Button
           className="btn btn-primary view-action"
-          onClick={() => history.push(ROUTES.ACCOUNT_DASHBOARD)}
+          onClick={() => history.push(ROUTES.DISCOVER_GET_REPORT)}
         >
           Get Report
         </Button>

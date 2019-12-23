@@ -17,6 +17,7 @@ class Fire {
   constructor() {
     app.initializeApp(firebaseConfig)
 
+    this.app = app
     this.auth = app.auth()
     this.db = app.firestore()
     this.functions = app.functions()
@@ -53,6 +54,17 @@ class Fire {
     this.auth.confirmPasswordReset(actionCode, newPassword)
 
   // *** Firestore API ***
+
+  doFirestoreUpdate = (collection, doc, updateObj) => {
+    this.db.collection(collection).doc(doc).update(updateObj)
+      .then(function() {
+        console.log("Document successfully updated!")
+      })
+      .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error)
+      })
+  }
 
   doFirestoreAdd = (collection, setObj, callback) => {
     return this.db.collection(collection).add(setObj)

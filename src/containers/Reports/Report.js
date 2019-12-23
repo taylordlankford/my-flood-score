@@ -10,7 +10,7 @@ const Report = (props) => {
   const { firestoreUser, loading } = userData
 
     useEffect(() => {
-      const { pathname } = props.history.location
+      const { pathname } = props.location
       const pathArray = pathname.split('/')
       const reportId = pathArray[pathArray.length - 1]
       if (!loading) {

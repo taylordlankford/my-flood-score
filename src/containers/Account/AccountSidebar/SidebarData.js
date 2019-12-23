@@ -7,6 +7,7 @@ import {
   FaAddressBook,
   FaCreditCard,
   FaUserAlt,
+  FaHistory,
 } from 'react-icons/fa'
 
 export const SIDEBAR_LINKS = [
@@ -30,18 +31,24 @@ export const SIDEBAR_LINKS = [
   },
   {
     id: 4,
+    routePath: ROUTES.ACCOUNT_REPORTS,
+    sidebarIcon: FaHistory,
+    sidebarLink: 'Reports'
+  },
+  {
+    id: 5,
     routePath: ROUTES.ACCOUNT_SUBSCRIPTIONS,
     sidebarIcon: FaSyncAlt,
     sidebarLink: 'Subscriptions'
   },
   {
-    id: 5,
+    id: 6,
     routePath: ROUTES.ACCOUNT_PAYMENT_METHODS,
     sidebarIcon: FaCreditCard,
     sidebarLink: 'Payment Methods'
   },
   {
-    id: 6,
+    id: 7,
     routePath: ROUTES.ACCOUNT_SETTINGS,
     sidebarIcon: FaUserAlt,
     sidebarLink: 'Account Settings'

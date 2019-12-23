@@ -4,7 +4,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 import { TopSection } from '../../StyledComponents'
 import AutoSuggest from '../../../../components/AutoSuggest/AutoSuggest'
 import { useFirebase, useFirestoreUser } from '../../../../hooks'
@@ -49,8 +48,8 @@ const Request = (props) => {
   }
 
   const handleGetReport = async () => {
-    // get propertyRef
-    console.log('address:', address)
+    // get the address's propertyRef
+    console.log('firebase:', firebase)
     const properties = await firebase.doFirestoreAddressRefGet(address)
     console.log('properties', properties)
     // create report
@@ -61,7 +60,12 @@ const Request = (props) => {
     }
     const reportRef = await firebase.doFirestoreAdd("reports", setObj)
     console.log('reportRef', reportRef)
-    props.history.push(ROUTES.REPORT + "/" + reportRef.id)
+    // add to firestoreUser
+    const updateObj = {
+      reports: firebase.app.firestore.FieldValue.arrayUnion({ address, reportRef })
+    }
+    await firebase.doFirestoreUpdate("users", firestoreUser.uid, updateObj)
+    props.history.push("report/" + reportRef.id)
   }
 
   if (loading) {
@@ -114,12 +118,7 @@ const Request = (props) => {
             onClick={handleGetReport}
             disabled={!validAddress}
           >
-            {/* <Link
-              // style={{ color: "#fff" }}
-              to={ROUTES.REPORT + "/" + "gQZeJL1KmxMtLxtaRD69"}
-            > */}
-              Get Report
-            {/* </Link> */}
+            Get Report
           </Button>
         </Col>
       </Row>
