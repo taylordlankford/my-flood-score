@@ -60,11 +60,15 @@ const Request = (props) => {
     }
     const reportRef = await firebase.doFirestoreAdd("reports", setObj)
     console.log('reportRef', reportRef)
-    // add to firestoreUser
+    // Add to firestoreUser and decrease inventory
+    const index = firestoreUser.inventory.map(e => e.categoryId).indexOf('discover')
+    let newInventory = firestoreUser.inventory
+    newInventory[index].quantity--
     const updateObj = {
-      reports: firebase.app.firestore.FieldValue.arrayUnion({ address, reportRef })
+      reports: firebase.app.firestore.FieldValue.arrayUnion({ address, reportRef }),
+      inventory: newInventory,
     }
-    await firebase.doFirestoreUpdate("users", firestoreUser.uid, updateObj)
+    await firebase.doFirestoreUpdate("users", firestoreUser.uid, updateObj)    
     props.history.push("report/" + reportRef.id)
   }
 
