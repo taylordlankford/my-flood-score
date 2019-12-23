@@ -11,7 +11,6 @@ const Subscriptions = () => {
   
 
   useEffect(() => {
-    console.log('firestoreUser', firestoreUser)
     if (typeof firestoreUser.customerId !== 'undefined') {
       firebase.doGetSubscriptions(firestoreUser.customerId)
         .then((subs) => {
