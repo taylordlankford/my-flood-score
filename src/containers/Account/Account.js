@@ -24,32 +24,30 @@ import { AccountContextProvider } from "./AccountContext";
 const Account = () => {
   return (
     <AccountContextProvider>
-      <Router>
-        <Route
-          render={() => (
-            <>
-              <Container className="acct-container">
-                <Row>
-                  <AccountSidebar />
-                  <Col sm={9}>
-                    <Switch>
-                      <Route path={ROUTES.ACCOUNT_DASHBOARD} component={Dashboard} />
-                      <Route path={ROUTES.ACCOUNT_INVENTORY} component={Inventory} />
-                      <Route path={ROUTES.ACCOUNT_ORDERS} component={Orders} />
-                      <Route path={ROUTES.ACCOUNT_SUBSCRIPTIONS} component={Subscriptions} />
-                      <Route path={ROUTES.ACCOUNT_PAYMENT_METHODS} component={PaymentMethods} />
-                      <Route path={ROUTES.ACCOUNT_SETTINGS} component={AccountSettings} />
-                      <Route path={ROUTES.ACCOUNT_REPORTS} component={Reports} />
+      <Route
+        render={() => (
+          <>
+            <Container className="acct-container">
+              <Row>
+                <AccountSidebar />
+                <Col sm={9}>
+                  <Switch>
+                    <Route path={ROUTES.ACCOUNT_DASHBOARD} component={Dashboard} />
+                    <Route path={ROUTES.ACCOUNT_INVENTORY} component={Inventory} />
+                    <Route path={ROUTES.ACCOUNT_ORDERS} component={Orders} />
+                    <Route path={ROUTES.ACCOUNT_SUBSCRIPTIONS} component={Subscriptions} />
+                    <Route path={ROUTES.ACCOUNT_PAYMENT_METHODS} component={PaymentMethods} />
+                    <Route path={ROUTES.ACCOUNT_SETTINGS} component={AccountSettings} />
+                    <Route path={ROUTES.ACCOUNT_REPORTS} component={Reports} />
 
-                      <Route path={"/account/order/:id"} component={Order} />
-                    </Switch>
-                  </Col>
-                </Row>
-              </Container>
-            </>
-          )}
-        />
-      </Router>
+                    <Route path={"/account/order/:id"} component={Order} />
+                  </Switch>
+                </Col>
+              </Row>
+            </Container>
+          </>
+        )}
+      />
     </AccountContextProvider>
   );
 };
