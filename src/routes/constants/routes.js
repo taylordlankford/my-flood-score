@@ -44,4 +44,6 @@ export const ACCOUNT_PAYMENT_METHODS = "/account/payment-methods";
 export const ACCOUNT_SETTINGS = "/account/account-settings";
 export const EDIT_ACCOUNT_SETTINGS = "/account/edit-account-settings";
 
-export const ACCOUNT_GET_REPORT = "/account/get-report"
+export const ACCOUNT_REPORTS = "/account/reports";
+export const DISCOVER_GET_REPORT = "/get-report";
+export const REPORT = "/report";

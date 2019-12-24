@@ -164,15 +164,15 @@ class FloodScoreGauge extends React.Component {
 
     //reportContainer
     setTimeout(() => {
-      var reportHtml = document.getElementById('reportContainer')
-      html2canvas(reportHtml)
-        .then((canvas) => {
-          const imgData = canvas.toDataURL('image/png');
-          console.log('imgData', imgData)
-          const pdf = new jsPDF();
-          pdf.addImage(imgData, 'PNG', 0, 0);
-          pdf.save("download.pdf");
-        })
+      // var reportHtml = document.getElementById('reportContainer')
+      // html2canvas(reportHtml)
+      //   .then((canvas) => {
+      //     const imgData = canvas.toDataURL('image/png');
+      //     console.log('imgData', imgData)
+      //     const pdf = new jsPDF();
+      //     pdf.addImage(imgData, 'PNG', 0, 0);
+      //     pdf.save("download.pdf");
+      //   })
     }, 300);
 
     //reportContainer

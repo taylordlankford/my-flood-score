@@ -61,7 +61,7 @@ class AutoSuggest extends React.Component {
   }
 
   componentDidMount() {
-    this.props.firebase.doFirestoreGet("index")
+    this.props.firebase.doFirestoreCollectionGet("index")
       .then((index) => {
         // console.log('index', index)
         const { addresses } = index[0]
@@ -72,6 +72,7 @@ class AutoSuggest extends React.Component {
 
   validateValue = () => {
     const { value, addresses } = this.state
+    console.log('valid value:', value)
     if (addresses.includes(value)) {
       return true
     } else {

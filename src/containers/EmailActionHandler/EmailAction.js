@@ -149,7 +149,12 @@ const EmailAction = ({ match, location, history }) => {
   }
 
   if (mode === 'verifyEmail' && property) {
-    return <DiscoverReport {...property} />
+    return (
+      <>
+        <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>Your FREE Discover Report</h3>
+        <DiscoverReport {...property} />
+      </>
+    )
   } else if (mode === 'verifyEmail') {
     return 'verifying email.'
   } 

@@ -4,7 +4,7 @@ import './Home.css'
 import backgroundImage from '../../assets/images/Background-Image.jpg'
 import ReactPlayer from 'react-player'
 import { Parallax } from "react-parallax"
-import { useFirebase } from '../../hooks'
+import { useFirebase, useFirestoreUser } from '../../hooks'
 
 import SecondRow from '../Header/SecondRow'
 import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
@@ -19,10 +19,15 @@ import * as ROUTES from '../../routes/constants/routes'
 
 function Home ({ history }) {
   const firebase = useFirebase()
+  const { firestoreUser } = useFirestoreUser()
 
   const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
     console.log('selected', suggestion)
-    history.push(ROUTES.CHECKOUT_FREE, { selected: suggestion })
+    if (firestoreUser) {
+      history.push(ROUTES.DISCOVER_GET_REPORT, { selected: suggestion })
+    } else {
+      history.push(ROUTES.CHECKOUT_FREE, { selected: suggestion })
+    }
   }
 
   return (

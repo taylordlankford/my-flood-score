@@ -11,7 +11,6 @@ import styled from "styled-components";
 
 const Order = ({ match }) => {
   const userData = useFirestoreUser();
-  const firebase = useFirebase();
   const { firestoreUser, loading } = userData;
 
   if (loading) {
