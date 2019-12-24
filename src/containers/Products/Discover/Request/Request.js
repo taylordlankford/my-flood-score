@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -11,7 +11,7 @@ import { useFirebase, useFirestoreUser } from '../../../../hooks'
 import requestGraphic1 from '../../../../assets/images/request-graphic1.png'
 import requestGraphic2 from '../../../../assets/images/request-graphic2.png'
 
-import * as ROUTES from '../../../../routes/constants/routes'
+// import * as ROUTES from '../../../../routes/constants/routes'
 
 const Request = (props) => {
   const [validAddress, setValidAddress] = useState(false)
@@ -22,7 +22,16 @@ const Request = (props) => {
   const { firestoreUser, loading } = userData
 
   const autoSuggestRef = React.createRef()
-  // !autoSuggestRef.current.validateValue()
+
+  useEffect(() => {
+    const { state } = props.location
+    let selected = ''
+    if (state !== undefined) {
+      selected = state.selected
+      setAddress(selected)
+      setValidAddress(true)
+    }
+  }, [])
 
   const onSuggestionSelected = async (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
     console.log('selected', suggestion)
@@ -92,6 +101,7 @@ const Request = (props) => {
             ref={autoSuggestRef}
             theme={autoSuggestTheme}
             onSuggestionSelected={onSuggestionSelected}
+            startingValue={address}
             inputProps={{ id: 'requestAddressSuggest' }}
             firebase={firebase}
             inputProps={{
