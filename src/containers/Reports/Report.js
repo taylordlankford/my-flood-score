@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import DiscoverReport from './DiscoverReport'
+import CompareReport from './CompareReport'
 import {  useFirebase, useFirestoreUser } from '../../hooks'
 
 const Report = (props) => {
@@ -48,8 +49,11 @@ const Report = (props) => {
 
   return (
     <>
-      <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>Discover Report</h3>
-      <DiscoverReport {...property} />
+      <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>
+        Compare Report
+      </h3>
+      {/* <DiscoverReport {...property} /> */}
+      <CompareReport {...property} />
     </>
   )
 }

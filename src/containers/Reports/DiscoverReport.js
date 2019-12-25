@@ -118,7 +118,7 @@ const DiscoverReport = (props) => {
                 {/* <p>{props.PROP_ADD}</p> */}
               </Col>
               <Col>
-                <FloodScoreGauge MFS={MFS} />
+                <FloodScoreGauge MFS={MFS} index={0} />
               </Col>
             </Row>
           </Container>
