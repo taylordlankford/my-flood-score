@@ -128,32 +128,36 @@ const CompareReport = (props) => {
           <h3 style={{ marginTop: '-30px', position: 'absolute', right: '0', paddingRight: '125px' }}>Compare</h3>
           <div style={{ backgroundImage: 'linear-gradient(to right, #1166bf , transparent)', marginTop: '2px', height: '3px', width: '88%' }} />
         </div>
-        <div className="reportSection" style={{ marginTop: '-22px', height: '225px', background: 'transparent', boxShadow: 'none' }}> { /* Section One */ }
+        <div className="reportSection" style={{ marginTop: '-22px', height: '250px', background: 'transparent', boxShadow: 'none' }}> { /* Section One */ }
           <Container>
             <Row>
-              <Col style={{ paddingLeft: '43px' }}>
+              <Col style={{ paddingLeft: '30px' }}>
                 <p className="bold" style={{ marginBottom: '0rem' }}>Property Address:</p>
-                <p>{PROP_ADD}, {PROP_CITY}, {PROP_STATE} {PROP_ZIP}</p>
+                <p style={{ marginLeft: '14px' }}>{PROP_ADD}, {PROP_CITY}, {PROP_STATE} {PROP_ZIP}</p>
+                <img style={{ position: 'relative', marginTop: '-16px', width: '190px' }} src={MFS_Logo} />
+                <img style={{ position: 'relative', marginTop: '-16px', width: '40px' }} src={Blue_House} />
               </Col>
-              <Col style={{ position: 'absolute', left: '171px', marginTop: '40px' }}>
+              <Col style={{ position: 'absolute', left: '171px', marginTop: '90px' }}>
                 <FloodScoreGauge MFS={MFS} index={0}/>
               </Col>
-              <div style={{ borderLeft: '1px solid black', height: '200px' }} />
-              <Col style={{ paddingLeft: '43px' }}>
+              <div style={{ borderLeft: '1px solid black', height: '350px' }} />
+              <Col style={{ paddingLeft: '30px' }}>
                 <p className="bold" style={{ marginBottom: '0rem' }}>Property Address:</p>
-                <p>{PROP_ADD}, {PROP_CITY}, {PROP_STATE} {PROP_ZIP}</p>
+                <p style={{ marginLeft: '14px' }}>{PROP_ADD}, {PROP_CITY}, {PROP_STATE} {PROP_ZIP}</p>
+                <img style={{ position: 'relative', marginTop: '-16px', width: '190px' }} src={MFS_Logo} />
+                <img style={{ position: 'relative', marginTop: '-16px', width: '40px' }} src={Green_House} />
               </Col>
-              <Col style={{ position: 'absolute', left: '548px', marginTop: '40px' }}>
+              <Col style={{ position: 'absolute', left: '548px', marginTop: '90px' }}>
                   <FloodScoreGauge MFS={MFS} index={1}/>
               </Col>
             </Row>
           </Container>
         </div>
         <div className="reportSection learMore" style={{ background: 'transparent', boxShadow: 'none' }}> { /* Section Two */ }
-          <p style={{ textAlign: 'center' }}>
+          <p style={{ textAlign: 'center', marginTop: '10px' }}>
             <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black', backgroundColor: '#f2f2f2', padding: '8px 105px' }}>Review of Key Flood Influencers</span>
             <Container style={{ marginTop: '15px', textAlign: 'left' }}>
-              <Row>
+              <Row style={{ marginTop: '27px' }}>
                 <Col>
                   {keyFloodInfluencers.map((riksLevelObj, index) => {
                     return <KeyInfluencer key={index} property={props} riksLevelObj={riksLevelObj} />
