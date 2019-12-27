@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -54,7 +54,7 @@ const range = [
 
 const getRiskLevel = (property) => {
   console.log('property in risk level', property)
-  if (property.MFS < 50) {
+  if (property.MFS < 23) {
     return 'neg'
   }
   return 'pos'
@@ -110,18 +110,49 @@ const KeyInfluencer = ({ riksLevelObj, property }) => {
 }
 
 const CompareReport = (props) => {
-  const {
-    MFS,
-    PROP_ADD,
-    PROP_CITY,
-    PROP_STATE,
-    PROP_ZIP,
-    SGE,
-    FEMA_BFE,
-  } = props
-  console.log('in compareReport props:', props)
+  const [property1, setProperty1] = useState(null)
+  const [property2, setProperty2] = useState(null)
+  const { report } = props
+
+  useEffect(() => {
+      // property 1
+      report.property1.get().then((doc) => {
+        if (doc.exists) {
+          setProperty1(doc.data())
+        } else {
+          console.log("No such document!")
+          setProperty1("not found")
+        }
+      }).catch(function(error) {
+        console.log("Error getting document:", error)
+        setProperty1("not found")
+      })
+      // property 2
+      report.property2.get().then((doc) => {
+        if (doc.exists) {
+          setProperty2(doc.data())
+        } else {
+          console.log("No such document!")
+          setProperty2("not found")
+        }
+      }).catch(function(error) {
+        console.log("Error getting document:", error)
+        setProperty2("not found")
+      })
+  }, [])
+
+  if (!property1 || !property2) {
+    return 'loading...'
+  }
+  if (property1 === "not found" || property2 === "not found") {
+    return 'No Report Found'
+  }
+
   return (
     <div id="reportContainer">
+      <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>
+        Compare Report
+      </h3>
       <div className="reportContainer">
         <div className="reportHeader" style={{ position: 'relative', background: 'transparent', boxShadow: 'none', height: '108px' }}>
           <img src={MyFloodSnapShotLogo} alt="logo" />
@@ -133,22 +164,22 @@ const CompareReport = (props) => {
             <Row>
               <Col style={{ paddingLeft: '30px' }}>
                 <p className="bold" style={{ marginBottom: '0rem' }}>Property Address:</p>
-                <p style={{ marginLeft: '14px' }}>{PROP_ADD}, {PROP_CITY}, {PROP_STATE} {PROP_ZIP}</p>
-                <img style={{ position: 'relative', marginTop: '-16px', width: '190px' }} src={MFS_Logo} />
-                <img style={{ position: 'relative', marginTop: '-16px', width: '40px' }} src={Blue_House} />
+                <p style={{ marginLeft: '14px' }}>{property1.PROP_ADD}, {property1.PROP_CITY}, {property1.PROP_STATE} {property1.PROP_ZIP}</p>
+                <img style={{ position: 'relative', marginTop: '-30px', width: '190px' }} src={MFS_Logo} />
+                <img style={{ position: 'relative', marginTop: '-30px', width: '40px' }} src={Blue_House} />
               </Col>
-              <Col style={{ position: 'absolute', left: '171px', marginTop: '90px' }}>
-                <FloodScoreGauge MFS={MFS} index={0}/>
+              <Col style={{ position: 'absolute', left: '171px', marginTop: '95px' }}>
+                <FloodScoreGauge MFS={property1.MFS} index={0}/>
               </Col>
               <div style={{ borderLeft: '1px solid black', height: '350px' }} />
               <Col style={{ paddingLeft: '30px' }}>
                 <p className="bold" style={{ marginBottom: '0rem' }}>Property Address:</p>
-                <p style={{ marginLeft: '14px' }}>{PROP_ADD}, {PROP_CITY}, {PROP_STATE} {PROP_ZIP}</p>
-                <img style={{ position: 'relative', marginTop: '-16px', width: '190px' }} src={MFS_Logo} />
-                <img style={{ position: 'relative', marginTop: '-16px', width: '40px' }} src={Green_House} />
+                <p style={{ marginLeft: '14px' }}>{property2.PROP_ADD}, {property2.PROP_CITY}, {property2.PROP_STATE} {property2.PROP_ZIP}</p>
+                <img style={{ position: 'relative', marginTop: '-30px', width: '190px' }} src={MFS_Logo} />
+                <img style={{ position: 'relative', marginTop: '-30px', width: '40px' }} src={Green_House} />
               </Col>
-              <Col style={{ position: 'absolute', left: '548px', marginTop: '90px' }}>
-                  <FloodScoreGauge MFS={MFS} index={1}/>
+              <Col style={{ position: 'absolute', left: '548px', marginTop: '95px' }}>
+                  <FloodScoreGauge MFS={property2.MFS} index={1}/>
               </Col>
             </Row>
           </Container>
@@ -160,13 +191,13 @@ const CompareReport = (props) => {
               <Row style={{ marginTop: '27px' }}>
                 <Col>
                   {keyFloodInfluencers.map((riksLevelObj, index) => {
-                    return <KeyInfluencer key={index} property={props} riksLevelObj={riksLevelObj} />
+                    return <KeyInfluencer key={index} property={property1} riksLevelObj={riksLevelObj} />
                   })}
                 </Col>
                 <div style={{ borderLeft: '1px solid black', height: '200px' }} />
                 <Col>
                   {keyFloodInfluencers.map((riksLevelObj, index) => {
-                    return <KeyInfluencer key={index} property={props} riksLevelObj={riksLevelObj} />
+                    return <KeyInfluencer key={index} property={property2} riksLevelObj={riksLevelObj} />
                   })}
                 </Col>
               </Row>
