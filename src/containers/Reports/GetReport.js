@@ -5,11 +5,12 @@ import GetCompare from './GetCompare'
  
 // import * as ROUTES from '../../../../routes/constants/routes'
 
-const Request = (props) => {
+const GetReport = (props) => {
   const firebase = useFirebase()
   const userData = useFirestoreUser()
   const { firestoreUser, loading } = userData
-  const [selected, SetSelected] = useState("")
+  const [selected, setSelected] = useState("")
+  const [category, setCategory] = useState('discover')
 
   useEffect(() => {
     console.log('locaiton:', props.location)
@@ -17,7 +18,8 @@ const Request = (props) => {
     let selected = ''
     if (state !== undefined) {
       selected = state.selected
-      SetSelected(selected)
+      setSelected(selected)
+      setCategory(state.categoryId)
     }
   }, [])
 
@@ -43,16 +45,30 @@ const Request = (props) => {
     return 'Unautherized'
   }
 
-  return (
-    <GetCompare
-      firebase={firebase}
-      firestoreUser={firestoreUser}
-      getInventory={getInventory}
-      getNewInventory={getNewInventory}
-      selected={selected}
-      {...props}
-    />
-  )
+  if (category === 'compare') {
+    return (
+      <GetCompare
+        firebase={firebase}
+        firestoreUser={firestoreUser}
+        getInventory={getInventory}
+        getNewInventory={getNewInventory}
+        selected={selected}
+        {...props}
+      />
+    )
+  } else if (category === 'discover') {
+    return (
+      <GetDiscover
+        firebase={firebase}
+        firestoreUser={firestoreUser}
+        getInventory={getInventory}
+        getNewInventory={getNewInventory}
+        selected={selected}
+        {...props}
+      />
+    )
+  }
+  return null
 }
 
-export default Request
+export default GetReport
