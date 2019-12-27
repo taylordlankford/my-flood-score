@@ -135,14 +135,14 @@ const GetDiscover = (props) => {
             <P>Inventory <span style={{ color: 'black', fontSize: '10.5px' }}>v</span></P>
             <Rinput
               disabled
-              value={getInventory('discover')}
+              value={getInventory('compare')}
             />
             <Rspan> Remaining</Rspan>
             <div style={{ height: '45px' }} />
             <Button
               primary
               onClick={handleGetReport}
-              disabled={!validAddress1 || !validAddress2 || !isValidZip}
+              disabled={!(getInventory('compare') > 0) || !validAddress1 || !validAddress2 || !isValidZip}
             >
               Get Report
             </Button>

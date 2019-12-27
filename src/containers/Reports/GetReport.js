@@ -23,11 +23,37 @@ const GetReport = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    const { state } = props.location
+    if (state.selected !== undefined && getInventory('discover') === 0) {
+      if (getInventory('compare') > 0) {
+        setCategory('compare')
+      } else if (getInventory('examine') > 0) {
+        setCategory('examine')
+      } else if (getInventory('certify') > 0) {
+        setCategory('certify')
+      } else if (getInventory('reduce') > 0) {
+        setCategory('reduce')
+      } else {
+        setCategory(state.categoryId) 
+      }
+    } else {
+      setCategory(state.categoryId)
+    }
+  }, [firestoreUser])
+
   const getInventory = (categoryId) => {
-    const discoverInventory =  firestoreUser.inventory.filter((item) => {
-      return item.categoryId === categoryId
-    })
-    return discoverInventory[0].quantity
+    console.log('getInventory categoryId', categoryId)
+    try {
+      const catInventory =  firestoreUser.inventory.filter((item) => {
+        return item.categoryId === categoryId
+      })
+      console.log('catInventory', catInventory)
+      return catInventory[0].quantity
+    } catch (err) {
+      console.log('error', err)
+      return 0
+    }
   }
 
   const getNewInventory = (categoryId) => {
@@ -68,7 +94,16 @@ const GetReport = (props) => {
       />
     )
   }
-  return null
+  return (
+    <GetDiscover
+      firebase={firebase}
+      firestoreUser={firestoreUser}
+      getInventory={getInventory}
+      getNewInventory={getNewInventory}
+      selected={selected}
+      {...props}
+    />
+  )
 }
 
 export default GetReport

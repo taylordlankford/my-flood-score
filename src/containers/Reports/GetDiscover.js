@@ -97,7 +97,7 @@ const GetDiscover = (props) => {
             <Button
               primary
               onClick={handleGetReport}
-              disabled={!validAddress}
+              disabled={!(getInventory('compare') > 0) || !validAddress}
             >
               Get Report
             </Button>
