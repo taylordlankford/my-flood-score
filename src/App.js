@@ -41,7 +41,7 @@ import CertifyHomeowner from './containers/Products/Certify/CertifyHomeowner'
 import CertifyBusiness from './containers/Products/Certify/CertifyBusiness'
 import ReduceHomeowner from './containers/Products/Reduce/ReduceHomeowner'
 
-import Request from './containers/Products/Discover/Request/Request'
+import Request from './containers/Reports/Request'
 import Report from './containers/Reports/Report'
 
 import Account from './containers/Account/Account'
