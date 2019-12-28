@@ -5,7 +5,8 @@ import {
     ADD_QUANTITY,
     ADD_SHIPPING,
     SET_PAYMENT_PROCESSING_STATE,
-    RESET_TOTAL
+    RESET_TOTAL,
+    RESET_CART,
 } from './action-types/cart-actions'
 
 // add cart action with quantity
@@ -57,4 +58,8 @@ export const setPaymentProcessing = (value) => ({
 export const resetTotal = (value) => ({
     type: RESET_TOTAL,
     value
+})
+
+export const resetCart = () => ({
+    type: RESET_CART,
 })

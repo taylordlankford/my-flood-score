@@ -23,7 +23,7 @@ import "./RCCheckoutform.css";
 
 import NewCardFormModal from "./NewCardFormModal";
 import OrderDetails from "./OrderDetails";
-import { setPaymentProcessing } from "../../../redux/actions/cartActions";
+import { setPaymentProcessing, resetCart } from "../../../redux/actions/cartActions";
 import { renderCardIcon } from "./renderCardIcon";
 
 const RCCheckoutForm = props => {
@@ -272,6 +272,7 @@ const RCCheckoutForm = props => {
     // Clean up
     dispatch(setPaymentProcessing(false));
     setProcessing(false);
+    dispatch(resetCart())
     history.push(ROUTES.ACCOUNT_INVENTORY);
   };
   // EOF placeOrder()

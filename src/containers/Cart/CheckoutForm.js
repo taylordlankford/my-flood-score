@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 // import AddressSection from './AddressSection';
 import CardSection from './CardSection'
-import { setPaymentProcessing } from '../../redux/actions/cartActions'
+import { setPaymentProcessing, resetCart } from '../../redux/actions/cartActions'
 import * as ROUTES from '../../routes/constants/routes'
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
@@ -170,6 +170,7 @@ const CheckoutForm = (props) => {
       }
     }
     dispatch(setPaymentProcessing(false))
+    dispatch(resetCart())
     props.history.push(ROUTES.ACCOUNT_INVENTORY)
   };
 
