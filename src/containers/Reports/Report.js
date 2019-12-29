@@ -39,9 +39,9 @@ const Report = (props) => {
   }
 
   if (report.categoryId === 'compare') {
-    return <CompareReport report={report} />
+    return <CompareReport report={report} firebase={firebase} />
   } else if (report.categoryId === 'discover') {
-    return <DiscoverReport report={report} />
+    return <DiscoverReport report={report} firebase={firebase} />
   }
   return null
 }

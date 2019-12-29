@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 import './Reports.css'
 
 import FloodScoreGauge from '../../components/Charts/FloodScoreGauge'
+import ComparisonChart from './ComparisonChart'
 
 import Compare from '../../assets/images/Compare.svg'
 import Examine from '../../assets/images/Examine.svg'
@@ -54,10 +55,10 @@ const range = [
 
 const getRiskLevel = (property) => {
   console.log('property in risk level', property)
-  if (property.MFS < 23) {
-    return 'neg'
+  if (property.FEMA_ZONE === 'X, AREA OF MINIMAL FLOOD HAZARD' || property.FEMA_ZONE === 'X, 0.2 PCT ANNUAL CHANCE FLOOD HAZARD') {
+    return 'pos'
   }
-  return 'pos'
+  return 'neg'
 }
 
 const getStructure = (property) => {
@@ -112,7 +113,8 @@ const KeyInfluencer = ({ riksLevelObj, property }) => {
 const CompareReport = (props) => {
   const [property1, setProperty1] = useState(null)
   const [property2, setProperty2] = useState(null)
-  const { report } = props
+  const [distributionDoc, setDistributionDoc] = useState(null)
+  const { report, firebase } = props
 
   useEffect(() => {
       // property 1
@@ -139,6 +141,14 @@ const CompareReport = (props) => {
         console.log("Error getting document:", error)
         setProperty2("not found")
       })
+      firebase.doFirestoreDocGet('zipCodes', '2JOexGsMVKCNAsiXoaPn')
+        .then((doc) => {
+          console.log('zip doc:', doc)
+          setDistributionDoc(doc)
+        })
+        .catch((err) => {
+          console.log('error:', err)
+        })
   }, [])
 
   if (!property1 || !property2) {
@@ -185,7 +195,7 @@ const CompareReport = (props) => {
           </Container>
         </div>
         <div className="reportSection learMore" style={{ background: 'transparent', boxShadow: 'none' }}> { /* Section Two */ }
-          <p style={{ textAlign: 'center', marginTop: '10px' }}>
+          <div style={{ textAlign: 'center', marginTop: '10px' }}>
             <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black', backgroundColor: '#f2f2f2', padding: '8px 105px' }}>Review of Key Flood Influencers</span>
             <Container style={{ marginTop: '15px', textAlign: 'left' }}>
               <Row style={{ marginTop: '27px' }}>
@@ -202,11 +212,24 @@ const CompareReport = (props) => {
                 </Col>
               </Row>
             </Container>
-          </p>
-
+          </div>
         </div>
-        <div className="reportSection" style={{ padding: '20px' }} > { /* Section Three */ }
 
+        <div className="reportSection" style={{ padding: '20px', background: 'transparent', boxShadow: 'none' }} > { /* Section Three */ }
+          <div style={{ textAlign: 'center', marginTop: '10px' }}>
+            <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black', backgroundColor: '#f2f2f2', padding: '8px 105px' }}>My Flood Score comparison between both properties</span>
+            <Container style={{ marginTop: '15px', textAlign: 'left' }}>
+              <Row style={{ marginTop: '27px' }}>
+                <Col style={{ marginTop: '-35px' }}>
+                  <ComparisonChart distributionDoc={distributionDoc} />
+                </Col>
+                <div style={{ borderLeft: '1px solid black', height: '200px' }} />
+                <Col style={{ marginTop: '-35px' }}>
+                  <ComparisonChart distributionDoc={distributionDoc} />
+                </Col>
+              </Row>
+            </Container>
+          </div>
         </div>
       </div>
     </div>
