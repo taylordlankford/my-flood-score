@@ -4,7 +4,6 @@ import * as ROUTES from "../../../routes/constants/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { CheckoutContext } from "../CheckoutContext";
 import useReactRouter from "use-react-router";
-import Loading from "../../../components/Loading/Loading";
 
 import {
   Title,
@@ -13,7 +12,6 @@ import {
   SubscriptionNotice
 } from "../../../StyledComponents/StyledComponents";
 import { pushInfo } from "../../../redux/actions/notificationActions";
-import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -46,8 +44,6 @@ const RCCheckoutForm = props => {
   useEffect(() => {
     fetchData();
     dispatch(setPaymentProcessing(false));
-    console.log(firestoreUser);
-    console.log("selected pm Use this for intent --> ", selectedPaymentMethod);
   }, [processing, showNewCardForm]);
 
   // Fetch Customer & Customer's Payment Methods
