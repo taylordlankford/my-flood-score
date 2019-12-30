@@ -24,7 +24,7 @@ function Home ({ history }) {
   const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
     console.log('selected', suggestion)
     if (firestoreUser) {
-      history.push(ROUTES.DISCOVER_GET_REPORT, { selected: suggestion })
+      history.push(ROUTES.GET_REPORT, { selected: suggestion })
     } else {
       history.push(ROUTES.CHECKOUT_FREE, { selected: suggestion })
     }

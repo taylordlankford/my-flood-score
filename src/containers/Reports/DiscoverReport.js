@@ -100,6 +100,9 @@ const DiscoverReport = (props) => {
   } = props
   return (
     <div id="reportContainer">
+      <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>
+        Discover Report
+      </h3>
       <div className="reportContainer">
         <div className="reportHeader">
           <img src={MFS_Logo} alt="logo" />
@@ -118,7 +121,7 @@ const DiscoverReport = (props) => {
                 {/* <p>{props.PROP_ADD}</p> */}
               </Col>
               <Col>
-                <FloodScoreGauge MFS={MFS} />
+                <FloodScoreGauge MFS={MFS} index={0} />
               </Col>
             </Row>
           </Container>

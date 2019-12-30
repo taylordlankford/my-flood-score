@@ -138,7 +138,7 @@ class FloodScoreGauge extends React.Component {
 }
 
   componentDidMount() {
-    const series = document.getElementsByClassName('apexcharts-series')[0]
+    const series = document.getElementsByClassName('apexcharts-series')[this.props.index]
     const path = series.querySelector("path");
     const pathOrig = path.getAttributeNode("d").nodeValue
     var containerDiv = path.closest("div[class='col']")

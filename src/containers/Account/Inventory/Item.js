@@ -25,7 +25,7 @@ const Item = ({ item, index, allItems, history }) => {
       <td className="noWrap">
         <Button
           className="btn btn-primary view-action"
-          onClick={() => history.push(ROUTES.DISCOVER_GET_REPORT)}
+          onClick={() => history.push(ROUTES.GET_REPORT, { categoryId: product.categoryId })}
         >
           Get Report
         </Button>
