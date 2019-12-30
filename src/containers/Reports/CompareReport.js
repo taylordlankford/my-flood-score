@@ -54,7 +54,6 @@ const range = [
 ]
 
 const getRiskLevel = (property) => {
-  console.log('property in risk level', property)
   if (property.FEMA_ZONE === 'X, AREA OF MINIMAL FLOOD HAZARD' || property.FEMA_ZONE === 'X, 0.2 PCT ANNUAL CHANCE FLOOD HAZARD') {
     return 'pos'
   }
@@ -122,16 +121,17 @@ const CompareReport = (props) => {
   }, [])
 
   const getAllData = async () => {
-    // property 2
-    const propertyOneData = await getPropertyData(report.property1)
+    const { property1, property2, distributionType } = report
+    // property 1
+    const propertyOneData = await getPropertyData(property1)
     setProperty1(propertyOneData)
     // property 2
-    const propertyTwoData = await getPropertyData(report.property2)
+    const propertyTwoData = await getPropertyData(property2)
     setProperty2(propertyTwoData)
     // Get Score Distribution Data
-    const distributionData1 = await getDistributionData(propertyOneData.PROP_ZIP.toString())
+    const distributionData1 = await getDistributionData(distributionType, propertyOneData)
     setDistributionData1(distributionData1)
-    const distributionData2 = await getDistributionData(propertyTwoData.PROP_ZIP.toString())
+    const distributionData2 = await getDistributionData(distributionType, propertyTwoData)
     setDistributionData2(distributionData2)
   }
 
@@ -144,8 +144,12 @@ const CompareReport = (props) => {
     }
   }
 
-  const getDistributionData = async (zip) => {
-    const distributionData = await firebase.doFirestoreDocGet('zipCodes', '33573')
+  const getDistributionData = async (distributionType, propertyData) => {
+    console.log('distributionType', distributionType)
+    const v = (distributionType === 'zipCodes') ? propertyData.PROP_ZIP.toString() : propertyData.COMMUNITY
+    console.log('v', v)
+    const distributionData = await firebase.doFirestoreDocGet(distributionType, v)
+    console.log('distributionData', distributionData)
     return distributionData
   }
 
