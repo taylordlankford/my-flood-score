@@ -33,10 +33,9 @@ const RCCheckoutForm = props => {
 
   const [customer, setCustomer] = useState(null);
   const [paymentMethods, setPaymentMethods] = useState([]);
-  const [showRadioForm, setShowRadioForm] = useState(false);
+  // const [showRadioForm, setShowRadioForm] = useState(false);
   const [showNewCardForm, setShowNewCardForm] = useState(null);
   const [processing, setProcessing] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [selectedPaymentMethod, setSelectPaymentMethod] = useState("");
   const [chosenPaymentMethod, setChosenPaymentMethod] = useState(null);
@@ -49,26 +48,18 @@ const RCCheckoutForm = props => {
   // Fetch Customer & Customer's Payment Methods
   const fetchData = async () => {
     if (typeof firestoreUser.customerId !== "undefined") {
-      setIsLoading(true);
       firebase
         .doGetCustomer(firestoreUser.customerId)
         .then(customerData => {
-          console.log("customer: ", customerData);
           setCustomer(customerData.data);
         })
         .then(() => {
           firebase
             .doGetPaymentMethods(firestoreUser.customerId)
             .then(paymentMethodsData => {
-              console.log(
-                "payment methods: ",
-                paymentMethodsData.data.paymentMethods
-              );
               setPaymentMethods(paymentMethodsData.data.paymentMethods);
             });
         });
-
-      setIsLoading(false);
     }
   };
 
@@ -79,7 +70,7 @@ const RCCheckoutForm = props => {
     setProcessing(true);
     e.preventDefault();
     dispatch(setPaymentProcessing(true));
-    const { email, uid } = firestoreUser;
+    // const { email, uid } = firestoreUser;
     let { customerId } = firestoreUser;
 
     /**
@@ -88,7 +79,6 @@ const RCCheckoutForm = props => {
      * customer's invoice_settings default_payment_method to be set.
      */
     if (!customerId) {
-      console.log("creating customer");
       const customer = await firebase.doCreateCustomer({
         email,
         payment_method: selectedPaymentMethod,
@@ -100,7 +90,7 @@ const RCCheckoutForm = props => {
           uid
         }
       });
-      console.log("CUSTOMER", customer);
+
       if (typeof customer.data.raw !== "undefined") {
         setErrorMessage("Error: " + customer.data.raw.message);
         dispatch(setPaymentProcessing(false));
@@ -112,12 +102,10 @@ const RCCheckoutForm = props => {
     }
 
     // Create the Order, Sub items and Intent Amount
-    console.log("Cart Added Items => ", cart.addedItems);
     let subItems = [];
     let intentAmount = 0;
     const order = { items: [] };
     cart.addedItems.forEach(item => {
-      console.log("ITEM -> ", item);
       const {
         id,
         title,
@@ -135,7 +123,6 @@ const RCCheckoutForm = props => {
           metadata: { categoryId, numInventory }
         });
       } else if (item.type === "single") {
-        console.log("SINGLE ITEM", item);
         order.items.push({
           id,
           title,
@@ -149,9 +136,7 @@ const RCCheckoutForm = props => {
       }
     });
 
-    console.log(customer);
-    let defaultPaymentMethodId = customer.invoice_settings.default_payment_method;
-    console.log("Customers default payment method: ", defaultPaymentMethodId);
+    // let defaultPaymentMethodId = customer.invoice_settings.default_payment_method;
 
     /**
      * default_payment_method (optional)
@@ -170,7 +155,6 @@ const RCCheckoutForm = props => {
      * Create subscription if necessary
      */
     if (subItems.length > 0) {
-      console.log("creating sub for items:", subItems);
       const subscription = await firebase.doCreateSubscription({
         customer: customerId,
         // default_payment_method: defaultPaymentMethodId,
@@ -184,25 +168,20 @@ const RCCheckoutForm = props => {
         }
       });
 
-      console.log("Subscription -> ", subscription);
-
       if (typeof subscription.data.raw !== "undefined") {
-        console.log(subscription.data.statusCode);
+        // console.log(subscription.data.statusCode);
         setErrorMessage("Error: " + subscription.data.raw.message);
         dispatch(setPaymentProcessing(false));
         return;
       }
     }
 
-    console.log("SELECTED PM : ", selectedPaymentMethod);
     /**
      * Create Payment Intent if necessary with the selected card.
      * Use the selected payment method from checkout.
      */
     if (intentAmount > 0) {
-      console.log("creating intent for amount of:", intentAmount);
       order.amount = intentAmount;
-      console.log("order is equal to --> ", order);
       const intent = await firebase.doCreatePaymentIntent({
         customer: customer.id,
         payment_method: selectedPaymentMethod,
@@ -219,22 +198,17 @@ const RCCheckoutForm = props => {
         }
       });
 
-      console.log("Intent obj -> ", intent);
+      // console.log("Intent obj -> ", intent);
 
       if (typeof intent.data.raw !== "undefined") {
-        console.log(intent.data.statusCode);
+        // console.log(intent.data.statusCode);
         setErrorMessage("Error: " + intent.data.raw.message);
         dispatch(setPaymentProcessing(false));
         return;
       }
 
-      console.log("Customer: ", customer);
-      console.log("Customer default payment method: ", defaultPaymentMethodId);
-      console.log("SELECTED PM: ", selectedPaymentMethod);
-
       // Use client_secret to confirm card payment
       const client_secret = intent.data;
-      console.log("confirming card payment with CS:", client_secret);
 
       /**
        * Use the selected payment method from customer instead of the card
@@ -250,13 +224,12 @@ const RCCheckoutForm = props => {
 
       if (result.error) {
         // Show error to your customer
-        console.log("confirmCardPayment", result.error.message);
         setErrorMessage("Error: " + result.error.message);
         dispatch(setPaymentProcessing(false));
         return;
       } else {
         if (result.paymentIntent.status === "succeeded") {
-          console.log("confirmCardPayment success, result:", result);
+          // console.log("confirmCardPayment success, result:", result);
           // Show a success message to your customer
           // There's a risk of the customer closing the window before callback execution
           // Set up a webhook or plugin to listen for the payment_intent.succeeded event
@@ -275,7 +248,6 @@ const RCCheckoutForm = props => {
 
   const handleOptionChange = (e, paymentMethod) => {
     setSelectPaymentMethod(paymentMethod.id);
-    console.log("Customer selected: ", selectedPaymentMethod);
   };
 
   /**
@@ -283,12 +255,10 @@ const RCCheckoutForm = props => {
    */
   const handleFormSubmit = e => {
     e.preventDefault();
-    console.log("Youve submitted, ", selectedPaymentMethod);
     paymentMethods.map(paymentMethod => {
       if (paymentMethod.id === selectedPaymentMethod) {
-        console.log("You've selected PM: ", paymentMethod);
         setChosenPaymentMethod(paymentMethod);
-        setShowRadioForm(false);
+        // setShowRadioForm(false);
         dispatch(
           pushInfo(
             `You've selected ${paymentMethod.card.brand} ending in ${paymentMethod.card.last4}.`
@@ -299,8 +269,7 @@ const RCCheckoutForm = props => {
   };
 
   // Disable the place order button if no card has been selected
-  const isInvalid =
-    chosenPaymentMethod == null || typeof chosenPaymentMethod == "undefined";
+  const isInvalid = chosenPaymentMethod == null || typeof chosenPaymentMethod == "undefined";
 
   return (
     <>
@@ -324,6 +293,7 @@ const RCCheckoutForm = props => {
             <Col sm={2} style={{ textAlign: "right" }}></Col>
           </Row>
           <Row sm={12}>
+            <p className="errorMessage">{errorMessage}</p>
             <Form onSubmit={e => handleFormSubmit(e)}>
               <Table hover>
                 <thead>
@@ -344,12 +314,8 @@ const RCCheckoutForm = props => {
                               name="paymentMethod"
                               id={idx}
                               value={paymentMethod.id}
-                              checked={
-                                selectedPaymentMethod === paymentMethod.id
-                              }
-                              onChange={e =>
-                                handleOptionChange(e, paymentMethod)
-                              }
+                              checked={selectedPaymentMethod === paymentMethod.id}
+                              onChange={e => handleOptionChange(e, paymentMethod)}
                               style={{ marginRight: "20px" }}
                             />
                             <span className="checkmark"></span>
@@ -366,9 +332,7 @@ const RCCheckoutForm = props => {
                           </label>
                         </td>
                         <td>
-                          {paymentMethod.card.exp_month +
-                            " / " +
-                            paymentMethod.card.exp_year}
+                          {paymentMethod.card.exp_month + " / " + paymentMethod.card.exp_year}
                         </td>
                       </tr>
                     ) : (
@@ -381,12 +345,8 @@ const RCCheckoutForm = props => {
                               name="paymentMethod"
                               id={idx}
                               value={paymentMethod.id}
-                              checked={
-                                selectedPaymentMethod === paymentMethod.id
-                              }
-                              onChange={e =>
-                                handleOptionChange(e, paymentMethod)
-                              }
+                              checked={selectedPaymentMethod === paymentMethod.id}
+                              onChange={e => handleOptionChange(e, paymentMethod) }
                               style={{ marginRight: "20px" }}
                             />
                             <span className="checkmark"></span>
@@ -395,9 +355,7 @@ const RCCheckoutForm = props => {
                           </label>
                         </td>
                         <td>
-                          {paymentMethod.card.exp_month +
-                            " / " +
-                            paymentMethod.card.exp_year}
+                          {paymentMethod.card.exp_month + " / " + paymentMethod.card.exp_year}
                         </td>
                       </tr>
                     )
