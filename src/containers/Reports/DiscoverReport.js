@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -89,6 +89,35 @@ const LearnMoreBox = ({ title, description, img, link, extra }) => (
 )
 
 const DiscoverReport = (props) => {
+  const { report } = props
+  const [property, setProperty] = useState(null)
+
+  useEffect(() => {
+    getAllData()
+}, [])
+
+const getAllData = async () => {
+  const { property } = report
+  const propertyData = await getPropertyData(property)
+  setProperty(propertyData)
+}
+
+const getPropertyData = async (propertyRef) => {
+  const doc = await propertyRef.get()
+  if (doc.exists) {
+    return await doc.data()
+  } else {
+    return 'not found'
+  }
+}
+
+if (!property) {
+  return 'loading...'
+}
+if (property === "not found") {
+  return 'No Report Found'
+}
+
   const {
     MFS,
     PROP_ADD,
@@ -97,7 +126,8 @@ const DiscoverReport = (props) => {
     PROP_ZIP,
     SGE,
     FEMA_BFE,
-  } = props
+  } = property
+
   return (
     <div id="reportContainer">
       <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>

@@ -58,8 +58,9 @@ const GetDiscover = (props) => {
     const properties1 = await firebase.doFirestoreAddressRefGet(address1)
     const properties2 = await firebase.doFirestoreAddressRefGet(address2)
     // create report
+    const createdAt = new Date()
     const setReportObj = {
-      createdAt: new Date(),
+      createdAt,
       property1: properties1[0],
       property2: properties2[0],
       distributionType,
@@ -70,7 +71,7 @@ const GetDiscover = (props) => {
     // Add to firestoreUser and decrease inventory
     const newInventory = getNewInventory(categoryId)
     const updateObj = {
-      reports: firebase.app.firestore.FieldValue.arrayUnion({ distributionType, reportRef }),
+      reports: firebase.app.firestore.FieldValue.arrayUnion({ categoryId, createdAt, reportRef }),
       inventory: newInventory,
     }
     await firebase.doFirestoreUpdate("users", firestoreUser.uid, updateObj)    

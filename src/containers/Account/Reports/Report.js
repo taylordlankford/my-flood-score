@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
+import Moment from 'react-moment'
+
 import * as ROUTES from '../../../routes/constants/routes'
 
 const Report = ({ report, index, history }) => {
+  const { categoryId, createdAt } = report
   return (
     <tr>
       <td>
@@ -15,7 +18,12 @@ const Report = ({ report, index, history }) => {
         </Link>
       </td>
       <td>
-        {report.address.split(',')[0]}
+        {categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}
+      </td>
+      <td>
+        <Moment format="MM/DD/YYYY">
+          {new Date(createdAt.seconds * 1000)}
+        </Moment>
       </td>
       <td>
         <Button

@@ -19,7 +19,8 @@ const Reports = ({ history }) => {
       <thead>
         <tr>
           <th>Report</th>
-          <th>Address</th>
+          <th>Type</th>
+          <th>Created</th>
           <th>Action</th>
         </tr>
       </thead>
