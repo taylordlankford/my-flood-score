@@ -4,16 +4,16 @@ import ReactApexChart from 'react-apexcharts'
 var colors = [ '#29B366', '#1268C1', '#FDD21F', '#F2A173', '#F56E6D' ]
 
 const ComparisonChart = (props) => {      
-  const { distributionDoc } = props
+  const { distributionData } = props
 
   let seriesData = [0, 0, 0, 0, 0]
-  if (distributionDoc) {
+  if (distributionData) {
     seriesData = [
-      (Math.floor(distributionDoc['10-20']*100)),
-      (Math.floor(distributionDoc['20-30']*100)),
-      (Math.floor(distributionDoc['30-50']*100)),
-      (Math.floor(distributionDoc['50-70']*100)),
-      (Math.floor(distributionDoc['70-95']*100)),
+      (Math.floor(distributionData['10_20']*100)),
+      (Math.floor(distributionData['20_30']*100)),
+      (Math.floor(distributionData['30_50']*100)),
+      (Math.floor(distributionData['50_70']*100)),
+      (Math.floor(distributionData['70_95']*100)),
     ]
   }
   const options = {

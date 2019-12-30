@@ -113,43 +113,41 @@ const KeyInfluencer = ({ riksLevelObj, property }) => {
 const CompareReport = (props) => {
   const [property1, setProperty1] = useState(null)
   const [property2, setProperty2] = useState(null)
-  const [distributionDoc, setDistributionDoc] = useState(null)
+  const [distributionData1, setDistributionData1] = useState(null)
+  const [distributionData2, setDistributionData2] = useState(null)
   const { report, firebase } = props
 
   useEffect(() => {
-      // property 1
-      report.property1.get().then((doc) => {
-        if (doc.exists) {
-          setProperty1(doc.data())
-        } else {
-          console.log("No such document!")
-          setProperty1("not found")
-        }
-      }).catch(function(error) {
-        console.log("Error getting document:", error)
-        setProperty1("not found")
-      })
-      // property 2
-      report.property2.get().then((doc) => {
-        if (doc.exists) {
-          setProperty2(doc.data())
-        } else {
-          console.log("No such document!")
-          setProperty2("not found")
-        }
-      }).catch(function(error) {
-        console.log("Error getting document:", error)
-        setProperty2("not found")
-      })
-      firebase.doFirestoreDocGet('zipCodes', '2JOexGsMVKCNAsiXoaPn')
-        .then((doc) => {
-          console.log('zip doc:', doc)
-          setDistributionDoc(doc)
-        })
-        .catch((err) => {
-          console.log('error:', err)
-        })
+      getAllData()
   }, [])
+
+  const getAllData = async () => {
+    // property 2
+    const propertyOneData = await getPropertyData(report.property1)
+    setProperty1(propertyOneData)
+    // property 2
+    const propertyTwoData = await getPropertyData(report.property2)
+    setProperty2(propertyTwoData)
+    // Get Score Distribution Data
+    const distributionData1 = await getDistributionData(propertyOneData.PROP_ZIP.toString())
+    setDistributionData1(distributionData1)
+    const distributionData2 = await getDistributionData(propertyTwoData.PROP_ZIP.toString())
+    setDistributionData2(distributionData2)
+  }
+
+  const getPropertyData = async (propertyRef) => {
+    const doc = await propertyRef.get()
+    if (doc.exists) {
+      return await doc.data()
+    } else {
+      return 'not found'
+    }
+  }
+
+  const getDistributionData = async (zip) => {
+    const distributionData = await firebase.doFirestoreDocGet('zipCodes', '33573')
+    return distributionData
+  }
 
   if (!property1 || !property2) {
     return 'loading...'
@@ -221,11 +219,11 @@ const CompareReport = (props) => {
             <Container style={{ marginTop: '15px', textAlign: 'left' }}>
               <Row style={{ marginTop: '27px' }}>
                 <Col style={{ marginTop: '-35px' }}>
-                  <ComparisonChart distributionDoc={distributionDoc} />
+                  <ComparisonChart distributionData={distributionData1} />
                 </Col>
                 <div style={{ borderLeft: '1px solid black', height: '200px' }} />
                 <Col style={{ marginTop: '-35px' }}>
-                  <ComparisonChart distributionDoc={distributionDoc} />
+                  <ComparisonChart distributionData={distributionData2} />
                 </Col>
               </Row>
             </Container>
