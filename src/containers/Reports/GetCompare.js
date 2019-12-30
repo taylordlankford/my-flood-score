@@ -19,20 +19,15 @@ const GetDiscover = (props) => {
     getNewInventory,
     selected,
   } = props
+  const categoryId = 'compare'
   const [validAddress1, setValidAddress1] = useState((selected) ? true : false)
   const [validAddress2, setValidAddress2] = useState(false)
   const [address1, setAddress1] = useState((selected) ? selected : "")
   const [address2, setAddress2] = useState("")
-  const [zip, setZip] = useState("")
-  const [isValidZip, setIsValidZip] = useState(false)
+  const [distributionType, setDistributionType] = useState('zipCodes')
 
   const autoSuggestRef1 = React.createRef()
   const autoSuggestRef2 = React.createRef()
-  
-  const validateZipCode = (z) => {
-    var zipCodePattern = /^\d{5}$|^\d{5}-\d{4}$/
-    setIsValidZip(zipCodePattern.test(z))
-  }
 
   const onSuggestionSelected1 = async (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
     await autoSuggestRef1.current.setState({ value: suggestionValue })
@@ -67,21 +62,22 @@ const GetDiscover = (props) => {
       createdAt: new Date(),
       property1: properties1[0],
       property2: properties2[0],
-      zip,
-      categoryId: 'compare',
+      distributionType,
+      categoryId,
       uid: firestoreUser.uid,
     }
     const reportRef = await firebase.doFirestoreAdd("reports", setReportObj)
     // Add to firestoreUser and decrease inventory
-    const newInventory = getNewInventory('discover')
+    const newInventory = getNewInventory(categoryId)
     const updateObj = {
-      reports: firebase.app.firestore.FieldValue.arrayUnion({ address1, reportRef }),
+      reports: firebase.app.firestore.FieldValue.arrayUnion({ distributionType, reportRef }),
       inventory: newInventory,
     }
     await firebase.doFirestoreUpdate("users", firestoreUser.uid, updateObj)    
     history.push("report/" + reportRef.id)
   }
 
+  console.log('distributionType:', distributionType)
   return (
     <>
       <TopSection>Compare</TopSection>
@@ -114,16 +110,16 @@ const GetDiscover = (props) => {
               }}
             />
             <P style={{ marginTop: '22px', marginBottom: '3px' }}>Score Distribution</P>
-            <Form.Group controlId="compareZip" style={{ width: '130px' }}>
-            <Form.Control
-              name="zip"
-              value={zip}
-              onChange={(e) => {setZip(e.target.value); validateZipCode(e.target.value)}}
-              type="text"
-              placeholder="By Zip Code"
-              isValid={isValidZip}
-            />
-          </Form.Group>
+            <Form.Group controlId="distribution" style={{ width: '155px' }}>
+              <Form.Control
+                name="state"
+                as="select"
+                onChange={(e) => {setDistributionType(e.target.value)}}
+              >
+                <option value="zipCodes">By Zip Code</option> {/* value to match name of collection */}
+                <option value="communityStats">By Community</option> {/* value to match name of collection */}
+              </Form.Control >
+            </Form.Group>
             <div style={{ marginTop: '30px', textAlign: 'center', paddingRight: '110px' }}>
             </div>
           </Col>
@@ -135,14 +131,13 @@ const GetDiscover = (props) => {
             <P>Inventory <span style={{ color: 'black', fontSize: '10.5px' }}>v</span></P>
             <Rinput
               disabled
-              value={getInventory('compare')}
+              value={getInventory(categoryId)}
             />
             <Rspan> Remaining</Rspan>
             <div style={{ height: '45px' }} />
             <Button
-              primary
               onClick={handleGetReport}
-              disabled={!(getInventory('compare') > 0) || !validAddress1 || !validAddress2 || !isValidZip}
+              disabled={!(getInventory(categoryId) > 0) || !validAddress1 || !validAddress2}
             >
               Get Report
             </Button>
