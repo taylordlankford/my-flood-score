@@ -5,7 +5,7 @@ import { CheckoutContext } from "./CheckoutContext"
 
 const CheckoutGateway = (props) => {
   const { history } = props
-  const { firestoreUser, firebase } = useContext(CheckoutContext);
+  const { firestoreUser } = useContext(CheckoutContext);
   const [returningCustomer, setReturningCustomer] = useState(false)
 
   useEffect(() => {
@@ -18,8 +18,8 @@ const CheckoutGateway = (props) => {
     firestoreUser.customerId === null);
 
   const checkReturningCustomer = () => {
-    console.log(firestoreUser)
-    console.log('isCustomer:', isCustomer)
+    // console.log(firestoreUser)
+    // console.log('isCustomer:', isCustomer)
     if (isCustomer) {
       setReturningCustomer(true)
     }
@@ -29,13 +29,13 @@ const CheckoutGateway = (props) => {
   } 
 
   return (
-    <>
+    <div style={{ height: "100vh" }}>
       {returningCustomer ? (
         <RCCheckoutForm history={history} />
       ) : (
         <CheckoutForm history={history} />
       )}
-    </>
+    </div>
   )
 }
 

@@ -1,9 +1,9 @@
 import React from "react";
 
-import Row from "react-bootstrap/Row";
+import { TransitionBtn } from "../../../StyledComponents/StyledComponents";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+// import Button from "react-bootstrap/Button";
 
 const OrderDetails = ({ cart, placeOrder, isInvalid, processing }) => {
   const renderItem = item => {
@@ -31,7 +31,7 @@ const OrderDetails = ({ cart, placeOrder, isInvalid, processing }) => {
           <span className="cart-amount">${(cart.total / 100).toFixed(2)}</span>
         </p>
         {(cart.paymentProcessing || processing == true) ? (
-          <Button
+          <TransitionBtn
             variant="primary"
             type="submit"
             className="place-order-button"
@@ -45,9 +45,9 @@ const OrderDetails = ({ cart, placeOrder, isInvalid, processing }) => {
               aria-hidden="true"
             />
             <span style={{ marginLeft: "10px" }}>Processing...</span>
-          </Button>
+          </TransitionBtn>
         ) : (
-          <Button
+          <TransitionBtn
             disabled={isInvalid}
             onClick={e => placeOrder(e)}
             htmlFor="submit-form"
@@ -55,7 +55,7 @@ const OrderDetails = ({ cart, placeOrder, isInvalid, processing }) => {
             className="place-order-button add-to-cart-button btn btn-primary"
           >
             PLACE ORDER
-          </Button>
+          </TransitionBtn>
         )}
       </div>
     </Col>

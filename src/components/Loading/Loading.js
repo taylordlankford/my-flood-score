@@ -4,11 +4,12 @@ import Spinner from "react-bootstrap/Spinner";
 
 const Loading = (props) => {
   const {
-    message
+    message,
+    style
   } = props
 
   return (
-    <Container style={{ textAlign: "center", color: "#666666" }}>
+    <Container style={{ color: "#666666" }}>
       <Spinner
         as="span"
         animation="border"
@@ -20,7 +21,7 @@ const Loading = (props) => {
           marginRight: "15px"
         }}
       />
-      <span style={{ fontSize: "28px" }}>{message}</span>
+      <span style={style}>{message}</span>
     </Container>
   );
 };
