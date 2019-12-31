@@ -9,14 +9,12 @@ import Spinner from "react-bootstrap/Spinner";
 import Dropdown from "react-bootstrap/Dropdown";
 import {
   Container,
-  SecondaryBtn,
-  DefaultPaymentMethodTag
+  SecondaryBtn
 } from "../../../StyledComponents/StyledComponents";
 import {
   CustomToggle,
   CustomMenu
 } from "../../../components/CustomDropdown/CustomDropdown";
-import { FaPencilAlt } from "react-icons/fa";
 
 const DefaultPaymentMethod = props => {
   const { firestoreUser, firebase } = useContext(AccountContext);
@@ -67,17 +65,7 @@ const DefaultPaymentMethod = props => {
           color: "#666666"
         }}
       >
-        <Spinner
-          as="span"
-          animation="border"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-          style={{ paddingLeft: "10px" }}
-        />
-        <span style={{ paddingLeft: "10px", fontSize: "18px" }}>
-          Updating default payment method...
-        </span>
+        <Loading message="Updating default payment method." />
       </Container>
     );
   } else if (defaultPaymentMethod == null) {
@@ -94,9 +82,7 @@ const DefaultPaymentMethod = props => {
         </Badge>
       </td>
       <td>
-        {defaultPaymentMethod.card.exp_month +
-          " / " +
-          defaultPaymentMethod.card.exp_year}
+        {defaultPaymentMethod.card.exp_month + " / " + defaultPaymentMethod.card.exp_year}
       </td>
       <td>
         {processing ? (

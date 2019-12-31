@@ -9,7 +9,7 @@ import {
   LinkSecondary,
   SubscriptionNotice
 } from "../../../StyledComponents/StyledComponents";
-import { pushInfo } from "../../../redux/actions/notificationActions";
+import { pushInfo, pushClear } from "../../../redux/actions/notificationActions";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./PaymentMethods.css";
@@ -83,11 +83,11 @@ const PaymentMethods = () => {
   /**
    * Fetch the default payment method. Requires default payment method id.
    */
-  const fetchDefaultPaymentMethod = (defaultPaymentMethodId) => {
-    firebase.doGetPaymentMethod(defaultPaymentMethodId).then(data => {
-      setDefaultPaymentMethod(data.data.paymentMethod)
-    })
-  }
+  // const fetchDefaultPaymentMethod = (defaultPaymentMethodId) => {
+  //   firebase.doGetPaymentMethod(defaultPaymentMethodId).then(data => {
+  //     setDefaultPaymentMethod(data.data.paymentMethod)
+  //   })
+  // }
 
   /**
    * Attach Default Payment Method to Customer
@@ -105,13 +105,9 @@ const PaymentMethods = () => {
       firebase.doUpdateCustomerDefaultPaymentMethod(customer, pmId).then(() => {
         fetchData();
         setShowWarning(false);
-        setProcessing(false);
         // setDefaultPaymentMethod(defaultPaymentMethod);
-        dispatch(
-          pushInfo(
-            `${defaultPaymentMethod.card.brand} ending in ${defaultPaymentMethod.card.last4} is your new default payment method.`
-          )
-        );
+        dispatch(pushInfo(`${defaultPaymentMethod.card.brand} ending in ${defaultPaymentMethod.card.last4} is your new default payment method.`));
+        setProcessing(false);
       });
     });
   };
