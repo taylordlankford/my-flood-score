@@ -8,10 +8,9 @@ import useReactRouter from "use-react-router";
 import {
   Title,
   LinkSecondary,
-  TransitionBtn,
   SubscriptionNotice
 } from "../../../StyledComponents/StyledComponents";
-import { pushInfo } from "../../../redux/actions/notificationActions";
+import { pushInfo, pushClear } from "../../../redux/actions/notificationActions";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -19,6 +18,7 @@ import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
 import "./RCCheckoutform.css";
 
+import Loading from "../../../components/Loading/Loading";
 import NewCardFormModal from "./NewCardFormModal";
 import OrderDetails from "./OrderDetails";
 import { setPaymentProcessing, resetCart } from "../../../redux/actions/cartActions";
@@ -28,28 +28,31 @@ const RCCheckoutForm = props => {
   const { history } = useReactRouter();
   const cart = useSelector(state => state.cartReducer);
   const { firestoreUser, firebase } = useContext(CheckoutContext);
-  const { email, uid } = firestoreUser;
+  const { email, uid, customerId } = firestoreUser;
   const dispatch = useDispatch();
 
   const [customer, setCustomer] = useState(null);
   const [paymentMethods, setPaymentMethods] = useState([]);
-  // const [showRadioForm, setShowRadioForm] = useState(false);
   const [showNewCardForm, setShowNewCardForm] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [selectedPaymentMethod, setSelectPaymentMethod] = useState("");
   const [chosenPaymentMethod, setChosenPaymentMethod] = useState(null);
+  const [isInvalid, setIsInvalid] = useState(true)
+  const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
     fetchData();
-    dispatch(setPaymentProcessing(false));
+    // dispatch(setPaymentProcessing(false));
+    dispatch(pushClear())
   }, [processing, showNewCardForm]);
 
   // Fetch Customer & Customer's Payment Methods
   const fetchData = async () => {
-    if (typeof firestoreUser.customerId !== "undefined") {
+    setIsFetching(true)
+    if (typeof customerId !== "undefined") {
       firebase
-        .doGetCustomer(firestoreUser.customerId)
+        .doGetCustomer(customerId)
         .then(customerData => {
           setCustomer(customerData.data);
         })
@@ -58,6 +61,7 @@ const RCCheckoutForm = props => {
             .doGetPaymentMethods(firestoreUser.customerId)
             .then(paymentMethodsData => {
               setPaymentMethods(paymentMethodsData.data.paymentMethods);
+              setIsFetching(false)
             });
         });
     }
@@ -71,35 +75,36 @@ const RCCheckoutForm = props => {
     e.preventDefault();
     dispatch(setPaymentProcessing(true));
     // const { email, uid } = firestoreUser;
-    let { customerId } = firestoreUser;
+    // let { customerId } = firestoreUser;
 
     /**
+     * Do we need this since this form is for returning customers
      * If customer does not exist, create the customer and set a
      * default_payment_method for the customer. Subscriptions will require the
      * customer's invoice_settings default_payment_method to be set.
      */
-    if (!customerId) {
-      const customer = await firebase.doCreateCustomer({
-        email,
-        payment_method: selectedPaymentMethod,
-        invoice_settings: {
-          default_payment_method: selectedPaymentMethod
-        },
-        metadata: {
-          email,
-          uid
-        }
-      });
+    // if (!customerId) {
+    //   const customer = await firebase.doCreateCustomer({
+    //     email,
+    //     payment_method: selectedPaymentMethod,
+    //     invoice_settings: {
+    //       default_payment_method: selectedPaymentMethod
+    //     },
+    //     metadata: {
+    //       email,
+    //       uid
+    //     }
+    //   });
 
-      if (typeof customer.data.raw !== "undefined") {
-        setErrorMessage("Error: " + customer.data.raw.message);
-        dispatch(setPaymentProcessing(false));
-        return;
-      }
-      customerId = customer.data.id;
-    } else {
-      console.log("customer already exists");
-    }
+    //   if (typeof customer.data.raw !== "undefined") {
+    //     setErrorMessage("Error: " + customer.data.raw.message);
+    //     dispatch(setPaymentProcessing(false));
+    //     return;
+    //   }
+    //   customerId = customer.data.id;
+    // } else {
+    //   console.log("customer already exists");
+    // }
 
     // Create the Order, Sub items and Intent Amount
     let subItems = [];
@@ -248,31 +253,15 @@ const RCCheckoutForm = props => {
 
   const handleOptionChange = (e, paymentMethod) => {
     setSelectPaymentMethod(paymentMethod.id);
+    setChosenPaymentMethod(paymentMethod);
+    dispatch(pushInfo(`You've selected ${paymentMethod.card.brand} ending in ${paymentMethod.card.last4}.`));
+    setIsInvalid(false)
   };
-
-  /**
-   * Handles selecting the card to be used for the Payment Intent.
-   */
-  const handleFormSubmit = e => {
-    e.preventDefault();
-    paymentMethods.map(paymentMethod => {
-      if (paymentMethod.id === selectedPaymentMethod) {
-        setChosenPaymentMethod(paymentMethod);
-        // setShowRadioForm(false);
-        dispatch(
-          pushInfo(
-            `You've selected ${paymentMethod.card.brand} ending in ${paymentMethod.card.last4}.`
-          )
-        );
-      }
-    });
-  };
-
-  // Disable the place order button if no card has been selected
-  const isInvalid = chosenPaymentMethod == null || typeof chosenPaymentMethod == "undefined";
 
   return (
     <>
+      {console.log("Youve selected pm: ", chosenPaymentMethod)}
+      {console.log(isInvalid)}
       <NewCardFormModal
         customer={customer}
         show={showNewCardForm}
@@ -292,92 +281,100 @@ const RCCheckoutForm = props => {
             </Col>
             <Col sm={2} style={{ textAlign: "right" }}></Col>
           </Row>
-          <Row sm={12}>
-            <p className="errorMessage">{errorMessage}</p>
-            <Form onSubmit={e => handleFormSubmit(e)}>
-              <Table hover>
-                <thead>
-                  <tr>
-                    <th>Your credit and debit cards</th>
-                    <th>Expiration Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {paymentMethods.map((paymentMethod, idx) =>
-                    paymentMethod.id ===
-                    customer.invoice_settings.default_payment_method ? (
-                      <tr key={idx}>
-                        <td>
-                          <label className="radio-container">
-                            <input
-                              type="radio"
-                              name="paymentMethod"
-                              id={idx}
-                              value={paymentMethod.id}
-                              checked={selectedPaymentMethod === paymentMethod.id}
-                              onChange={e => handleOptionChange(e, paymentMethod)}
-                              style={{ marginRight: "20px" }}
-                            />
-                            <span className="checkmark"></span>
-                            {renderCardIcon(paymentMethod.card.brand)} in{" "}
-                            {paymentMethod.card.last4}{" "}
-                            <Badge
-                              style={{
-                                backgroundColor: "#0D238E",
-                                color: "#ffffff"
-                              }}
-                            >
-                              DEFAULT
-                            </Badge>
-                          </label>
-                        </td>
-                        <td>
-                          {paymentMethod.card.exp_month + " / " + paymentMethod.card.exp_year}
-                        </td>
-                      </tr>
-                    ) : (
-                      <tr key={idx}>
-                        <td>
-                          <label className="radio-container">
-                            <input
-                              disabled={processing}
-                              type="radio"
-                              name="paymentMethod"
-                              id={idx}
-                              value={paymentMethod.id}
-                              checked={selectedPaymentMethod === paymentMethod.id}
-                              onChange={e => handleOptionChange(e, paymentMethod) }
-                              style={{ marginRight: "20px" }}
-                            />
-                            <span className="checkmark"></span>
-                            {renderCardIcon(paymentMethod.card.brand)} in{" "}
-                            {paymentMethod.card.last4}{" "}
-                          </label>
-                        </td>
-                        <td>
-                          {paymentMethod.card.exp_month + " / " + paymentMethod.card.exp_year}
-                        </td>
-                      </tr>
-                    )
-                  )}
-                </tbody>
-              </Table>
-              <div style={{ paddingTop: "20px" }}>
-                <LinkSecondary onClick={() => setShowNewCardForm(true)}>
-                  Add a credit or debit card
-                </LinkSecondary>
-                <span style={{ fontSize: "14px" }}>
-                  {" - "}MyFloodScore accepts all major credit cards.
-                </span>
-              </div>
-              <Row sm={12} style={{ paddingTop: "40px" }}>
-                <Col sm={7}>
-                  <TransitionBtn>Use this payment method</TransitionBtn>
-                </Col>
-                <Col sm={5}></Col>
-              </Row>
-            </Form>
-          </Row>
+          {isFetching ? (
+            <Loading 
+              message="Retrieving Payment Methods" 
+              style={{ fontSize: "24px", textAlign: "left" }} 
+              />
+            ) : (
+            <Row sm={12}>
+              <p className="errorMessage">{errorMessage}</p>
+              <Form onSubmit={e => e.preventDefault()}>
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>Your credit and debit cards</th>
+                      <th>Expiration Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {paymentMethods.map((paymentMethod, idx) =>
+                      paymentMethod.id === customer.invoice_settings.default_payment_method ? (
+                        <tr key={idx}>
+                          <td>
+                            <label className="radio-container">
+                              <input
+                                type="radio"
+                                name="paymentMethod"
+                                id={idx}
+                                value={paymentMethod.id}
+                                checked={selectedPaymentMethod === paymentMethod.id}
+                                onChange={e => handleOptionChange(e, paymentMethod)}
+                                style={{ marginRight: "20px" }}
+                              />
+                              <span className="checkmark"></span>
+                              {renderCardIcon(paymentMethod.card.brand)} in{" "}
+                              {paymentMethod.card.last4}{" "}
+                              <Badge
+                                style={{
+                                  backgroundColor: "#0D238E",
+                                  color: "#ffffff"
+                                }}
+                              >
+                                DEFAULT
+                              </Badge>
+                            </label>
+                          </td>
+                          <td>
+                            {paymentMethod.card.exp_month +
+                              " / " +
+                              paymentMethod.card.exp_year}
+                          </td>
+                        </tr>
+                      ) : (
+                        <tr key={idx}>
+                          <td>
+                            <label className="radio-container">
+                              <input
+                                disabled={processing}
+                                type="radio"
+                                name="paymentMethod"
+                                id={idx}
+                                value={paymentMethod.id}
+                                checked={
+                                  selectedPaymentMethod === paymentMethod.id
+                                }
+                                onChange={e =>
+                                  handleOptionChange(e, paymentMethod)
+                                }
+                                style={{ marginRight: "20px" }}
+                              />
+                              <span className="checkmark"></span>
+                              {renderCardIcon(paymentMethod.card.brand)} in{" "}
+                              {paymentMethod.card.last4}{" "}
+                            </label>
+                          </td>
+                          <td>
+                            {paymentMethod.card.exp_month +
+                              " / " +
+                              paymentMethod.card.exp_year}
+                          </td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </Table>
+                <div style={{ paddingTop: "20px" }}>
+                  <LinkSecondary onClick={() => setShowNewCardForm(true)}>
+                    Add a credit or debit card
+                  </LinkSecondary>
+                  <span style={{ fontSize: "14px" }}>
+                    {" - "}MyFloodScore accepts all major credit cards.
+                  </span>
+                </div>
+              </Form>
+            </Row>
+          )}
         </Col>
         {/* Order Deetails */}
         <OrderDetails
