@@ -39,18 +39,18 @@ const DefaultPaymentMethod = props => {
    *    list of payment methods
    */
   const fetchData = () => {
+    setIsFetchingData(true);
     let defaultPmId = "";
     if (typeof firestoreUser.customerId !== "undefined") {
-      setIsFetchingData(true);
       firebase.doGetCustomer(firestoreUser.customerId).then(customerData => {
         setCustomer(customerData.data);
         defaultPmId = customerData.data.invoice_settings.default_payment_method;
         firebase.doGetPaymentMethod(defaultPmId).then(defaultPm => {
           setDefaultPaymentMethod(defaultPm.data.paymentMethod);
+          setIsFetchingData(false);
         });
       });
     }
-    setIsFetchingData(false);
   };
 
   /**
