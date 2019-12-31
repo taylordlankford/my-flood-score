@@ -8,6 +8,7 @@ import './Reports.css'
 
 import FloodScoreGauge from '../../components/Charts/FloodScoreGauge'
 import ComparisonChart from './ComparisonChart'
+import { AddFloodplainInfo } from './CompareReportComponents/Components'
 
 import Compare from '../../assets/images/Compare.svg'
 import Examine from '../../assets/images/Examine.svg'
@@ -206,7 +207,7 @@ const CompareReport = (props) => {
                     return <KeyInfluencer key={index} property={property1} riksLevelObj={riksLevelObj} />
                   })}
                 </Col>
-                <div style={{ borderLeft: '1px solid black', height: '200px' }} />
+                <div style={{ borderLeft: '1px solid black', height: '310px' }} /> {/* divider line */}
                 <Col>
                   {keyFloodInfluencers.map((riksLevelObj, index) => {
                     return <KeyInfluencer key={index} property={property2} riksLevelObj={riksLevelObj} />
@@ -218,14 +219,14 @@ const CompareReport = (props) => {
         </div>
 
         <div className="reportSection" style={{ padding: '20px', background: 'transparent', boxShadow: 'none' }} > { /* Section Three */ }
-          <div style={{ textAlign: 'center', marginTop: '10px' }}>
-            <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black', backgroundColor: '#f2f2f2', padding: '8px 105px' }}>My Flood Score comparison between both properties</span>
+          <div style={{ textAlign: 'center', marginTop: '-95px' }}>
+            <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black', backgroundColor: '#f2f2f2', padding: '8px 55px' }}>My Flood Score comparison between both properties</span>
             <Container style={{ marginTop: '15px', textAlign: 'left' }}>
               <Row style={{ marginTop: '27px' }}>
                 <Col style={{ marginTop: '-35px' }}>
                   <ComparisonChart distributionData={distributionData1} />
                 </Col>
-                <div style={{ borderLeft: '1px solid black', height: '200px' }} />
+                <div style={{ borderLeft: '1px solid black', height: '250px' }} />
                 <Col style={{ marginTop: '-35px' }}>
                   <ComparisonChart distributionData={distributionData2} />
                 </Col>
@@ -233,6 +234,33 @@ const CompareReport = (props) => {
             </Container>
           </div>
         </div>
+
+        <div className="reportSection" style={{ padding: '20px', background: 'transparent', boxShadow: 'none' }} > { /* Section Four */ }
+          <div style={{ textAlign: 'center', marginTop: '-80px' }}>
+            <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black', backgroundColor: '#f2f2f2', padding: '8px 105px' }}>Additional Floodplain Information</span>
+            <div style={{ marginTop: '30px' }} />
+            <AddFloodplainInfo left="Zone X" middle="FEMA Flood Zone" right="Zone AE" />
+            <AddFloodplainInfo left="No" middle="Flood Insurance" right="Yes" />
+            <AddFloodplainInfo left="N/A" middle="LOMA Recommendation" right="Low" />
+          </div>
+        </div>
+
+        <div className="reportSection" style={{ padding: '20px', background: 'transparent', boxShadow: 'none' }} > { /* Section Five */ }
+          <div style={{ textAlign: 'center', marginTop: '-55px' }}>
+            <Container style={{ marginTop: '15px', textAlign: 'left' }}>
+              <Row style={{ marginTop: '27px' }}>
+                <Col style={{ marginTop: '10px' }}>
+                  The Best Available floodplain information generally agrees with the effective FEMA data for this property
+                </Col>
+                <div style={{ borderLeft: '1px solid black', height: '84px' }} />
+                <Col style={{ marginTop: '10px' }}>
+                  The Best Available floodplain information generally agrees with the effective FEMA data for this property
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </div>
+
       </div>
     </div>
   )

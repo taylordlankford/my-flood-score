@@ -19,6 +19,7 @@ const GetDiscover = (props) => {
     getNewInventory,
     selected,
   } = props
+  const categoryId = 'discover'
   const [validAddress, setValidAddress] = useState((selected) ? true : false)
   const [address, setAddress] = useState((selected) ? selected : "")
 
@@ -40,16 +41,18 @@ const GetDiscover = (props) => {
     // get the address's propertyRef
     const properties = await firebase.doFirestoreAddressRefGet(address)
     // create report
+    const createdAt = new Date()
     const setReportObj = {
-      createdAt: new Date(),
+      createdAt,
       property: properties[0],
+      categoryId,
       uid: firestoreUser.uid,
     }
     const reportRef = await firebase.doFirestoreAdd("reports", setReportObj)
     // Add to firestoreUser and decrease inventory
-    const newInventory = getNewInventory('discover')
+    const newInventory = getNewInventory(categoryId)
     const updateObj = {
-      reports: firebase.app.firestore.FieldValue.arrayUnion({ address, reportRef }),
+      reports: firebase.app.firestore.FieldValue.arrayUnion({ categoryId, createdAt, reportRef }),
       inventory: newInventory,
     }
     await firebase.doFirestoreUpdate("users", firestoreUser.uid, updateObj)    
@@ -90,7 +93,7 @@ const GetDiscover = (props) => {
             <P>Inventory <span style={{ color: 'black', fontSize: '10.5px' }}>v</span></P>
             <Rinput
               disabled
-              value={getInventory('discover')}
+              value={getInventory(categoryId)}
             />
             <Rspan> Remaining</Rspan>
             <div style={{ height: '45px' }} />
