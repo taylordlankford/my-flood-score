@@ -84,3 +84,65 @@
 .noWrap {
   white-space: nowrap;
 }
+
+/* 
+ * react-bootstrap-table-next library caret is not working out of the box with
+ * our bootstrap version. These styles make the carets work.
+ */
+
+ th, td {
+   text-align: left;
+ }
+
+ .sortable:hover {
+   cursor: pointer;
+ }
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-top: 4px solid \9;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.dropup, .dropdown {
+  position: relative;
+}
+
+.dropup .caret, .navbar-fixed-bottom .dropdown .caret {
+  border-top: 0;
+  border-bottom: 4px dashed;
+  border-bottom: 4px solid \9;
+  content: "";
+}
+
+.page-link {
+  background-color: #dddddd !important;
+  color: #ffffff;
+}
+
+.page-link:hover {
+  background-color: #d4d4d4 !important;
+  color: #ffffff;
+}
+
+.page-item.active .page-link {
+  border: 1px solid #d4d4d4 !important;
+  background-color: #d4d4d4 !important;
+  color: #ffffff !important;
+  transition: all 0.5s !important;
+  font-weight: 700;
+}
+
+.react-bootstrap-table-pagination-list {
+  padding-left: 200px;
+}
+
+#pageDropDown {
+  display: none;
+}
