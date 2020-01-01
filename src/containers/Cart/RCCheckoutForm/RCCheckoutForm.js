@@ -44,8 +44,12 @@ const RCCheckoutForm = props => {
   useEffect(() => {
     fetchData();
     // dispatch(setPaymentProcessing(false));
+  }, [showNewCardForm]);
+
+  useEffect(() => {
+    // dispatch(setPaymentProcessing(false));
     dispatch(pushClear())
-  }, [processing, showNewCardForm]);
+  }, [processing]);
 
   // Fetch Customer & Customer's Payment Methods
   const fetchData = async () => {
