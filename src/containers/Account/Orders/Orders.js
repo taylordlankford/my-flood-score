@@ -117,7 +117,7 @@ const Orders = () => {
             columns={columns}
             bordered={false}
             defaultSorted={defaultSorted}
-            pagination={paginationFactory()}
+            pagination={paginationFactory({ hidePageListOnlyOnePage: true })}
           />
 
           {/*

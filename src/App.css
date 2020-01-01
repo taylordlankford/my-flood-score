@@ -115,3 +115,7 @@ h6 {
   top: 5px;
   margin: 5px auto;
 }
+/* For pagination tabel on orders and other pages  */
+.react-bootstrap-table-pagination-list-hidden {
+  display: none;
+}
