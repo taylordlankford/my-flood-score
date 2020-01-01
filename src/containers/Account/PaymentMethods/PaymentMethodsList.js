@@ -1,6 +1,4 @@
 import React from "react";
-import useReactRouter from "use-react-router";
-import * as ROUTES from "../../../routes/constants/routes"
 import { SecondaryBtn } from "../../../StyledComponents/StyledComponents";
 import Table from "react-bootstrap/Table";
 import Dropdown from "react-bootstrap/Dropdown";
