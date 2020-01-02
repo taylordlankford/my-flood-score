@@ -207,7 +207,7 @@ const CompareReport = (props) => {
                     return <KeyInfluencer key={index} property={property1} riksLevelObj={riksLevelObj} />
                   })}
                 </Col>
-                <div style={{ marginLeft: '-13px', borderLeft: '1px solid black', height: '310px' }} /> {/* divider line */}
+                <div style={{ marginLeft: '-13px', borderLeft: '1px solid black', height: '315px' }} /> {/* divider line */}
                 <Col>
                   {keyFloodInfluencers.map((riksLevelObj, index) => {
                     return <KeyInfluencer key={index} property={property2} riksLevelObj={riksLevelObj} />
@@ -219,16 +219,16 @@ const CompareReport = (props) => {
         </div>
 
         <div className="reportSection" style={{ padding: '20px', background: 'transparent', boxShadow: 'none' }} > { /* Section Three */ }
-          <div style={{ textAlign: 'center', marginTop: '-95px' }}>
+          <div style={{ textAlign: 'center', marginTop: '-100px' }}>
             <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black', backgroundColor: '#f2f2f2', padding: '8px 55px' }}>My Flood Score comparison between both properties</span>
             <Container style={{ marginTop: '15px', textAlign: 'left', maxWidth: '700px' }}>
               <Row style={{ marginTop: '27px' }}>
-                <Col style={{ marginTop: '-35px' }}>
+                <Col style={{ marginTop: '-35px', left: '-25px' }}>
                   <ComparisonChart distributionData={distributionData1} />
                   <MFSRangeImg />
                 </Col>
                 <div style={{ marginLeft: '-13px', borderLeft: '1px solid black', height: '250px' }} />
-                <Col style={{ marginTop: '-35px' }}>
+                <Col style={{ marginTop: '-35px', left: '-25px' }}>
                   <ComparisonChart distributionData={distributionData2} />
                   <MFSRangeImg />
                 </Col>
