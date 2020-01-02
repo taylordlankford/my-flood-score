@@ -2,9 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import useReactRouter from "use-react-router";
 import * as ROUTES from "../../../routes/constants/routes";
 import "./Orders.css";
-// import Table from "react-bootstrap/Table";
-// import OrdersList from "./OrdersList";
-// import Moment from "react-moment";
 import { Title, LinkPrimary } from "../../../StyledComponents/StyledComponents"
 import { AccountContext } from "../AccountContext";
 import moment from "moment";
