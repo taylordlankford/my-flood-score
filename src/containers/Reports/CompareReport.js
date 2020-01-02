@@ -169,41 +169,45 @@ const CompareReport = (props) => {
           <div style={{ backgroundImage: 'linear-gradient(to right, #1166bf , transparent)', marginTop: '2px', height: '3px', width: '88%' }} />
         </div>
         <div className="reportSection" style={{ marginTop: '-22px', height: '250px', background: 'transparent', boxShadow: 'none' }}> { /* Section One */ }
-          <Container>
+          <Container style={{ maxWidth: '750px'  }}>
             <Row>
-              <Col style={{ paddingLeft: '30px' }}>
-                <p className="bold" style={{ marginBottom: '0rem' }}>Property Address:</p>
-                <p style={{ marginLeft: '14px' }}>{property1.PROP_ADD}, {property1.PROP_CITY}, {property1.PROP_STATE} {property1.PROP_ZIP}</p>
-                <img style={{ position: 'relative', marginTop: '-30px', width: '190px' }} src={MFS_Logo} />
-                <img style={{ position: 'relative', marginTop: '-30px', width: '40px' }} src={Blue_House} />
-              </Col>
-              <Col style={{ position: 'absolute', left: '171px', marginTop: '95px' }}>
-                <FloodScoreGauge MFS={property1.MFS} index={0}/>
-              </Col>
+              <div className="compareFirstSectionRow">
+                <Col xs={12} style={{  }}>
+                  <p className="bold" style={{ marginBottom: '0rem' }}>Property Address:</p>
+                  <p style={{ marginLeft: '14px' }}>{property1.PROP_ADD}, {property1.PROP_CITY}, {property1.PROP_STATE} {property1.PROP_ZIP}</p>
+                  <img style={{ position: 'relative', marginTop: '-30px', width: '190px' }} src={MFS_Logo} />
+                  <img style={{ position: 'relative', marginTop: '-30px', width: '40px' }} src={Blue_House} />
+                </Col>
+                <Col style={{ position: 'absolute', alignSelf: 'flex-end', marginTop: '-100px' }}>
+                  <FloodScoreGauge MFS={property1.MFS} index={0}/>
+                </Col>
+              </div>
               <div style={{ borderLeft: '1px solid black', height: '350px' }} />
-              <Col style={{ paddingLeft: '30px' }}>
-                <p className="bold" style={{ marginBottom: '0rem' }}>Property Address:</p>
-                <p style={{ marginLeft: '14px' }}>{property2.PROP_ADD}, {property2.PROP_CITY}, {property2.PROP_STATE} {property2.PROP_ZIP}</p>
-                <img style={{ position: 'relative', marginTop: '-30px', width: '190px' }} src={MFS_Logo} />
-                <img style={{ position: 'relative', marginTop: '-30px', width: '40px' }} src={Green_House} />
-              </Col>
-              <Col style={{ position: 'absolute', left: '548px', marginTop: '95px' }}>
-                  <FloodScoreGauge MFS={property2.MFS} index={1}/>
-              </Col>
+              <div className="compareFirstSectionRow">
+                <Col xs={12} style={{ }}>
+                  <p className="bold" style={{ marginBottom: '0rem' }}>Property Address:</p>
+                  <p style={{ marginLeft: '14px' }}>{property2.PROP_ADD}, {property2.PROP_CITY}, {property2.PROP_STATE} {property2.PROP_ZIP}</p>
+                  <img style={{ position: 'relative', marginTop: '-30px', width: '190px' }} src={MFS_Logo} />
+                  <img style={{ position: 'relative', marginTop: '-30px', width: '40px' }} src={Green_House} />
+                </Col>
+                <Col style={{ position: 'absolute', alignSelf: 'flex-end', marginTop: '-100px' }}>
+                    <FloodScoreGauge MFS={property2.MFS} index={1}/>
+                </Col>
+              </div>
             </Row>
           </Container>
         </div>
         <div className="reportSection learMore" style={{ background: 'transparent', boxShadow: 'none' }}> { /* Section Two */ }
           <div style={{ textAlign: 'center', marginTop: '10px' }}>
             <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black', backgroundColor: '#f2f2f2', padding: '8px 105px' }}>Review of Key Flood Influencers</span>
-            <Container style={{ marginTop: '15px', textAlign: 'left' }}>
+            <Container style={{ marginTop: '15px', textAlign: 'left', maxWidth: '750px' }}>
               <Row style={{ marginTop: '27px' }}>
                 <Col>
                   {keyFloodInfluencers.map((riksLevelObj, index) => {
                     return <KeyInfluencer key={index} property={property1} riksLevelObj={riksLevelObj} />
                   })}
                 </Col>
-                <div style={{ borderLeft: '1px solid black', height: '310px' }} /> {/* divider line */}
+                <div style={{ marginLeft: '-13px', borderLeft: '1px solid black', height: '315px' }} /> {/* divider line */}
                 <Col>
                   {keyFloodInfluencers.map((riksLevelObj, index) => {
                     return <KeyInfluencer key={index} property={property2} riksLevelObj={riksLevelObj} />
@@ -215,16 +219,16 @@ const CompareReport = (props) => {
         </div>
 
         <div className="reportSection" style={{ padding: '20px', background: 'transparent', boxShadow: 'none' }} > { /* Section Three */ }
-          <div style={{ textAlign: 'center', marginTop: '-95px' }}>
+          <div style={{ textAlign: 'center', marginTop: '-100px' }}>
             <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black', backgroundColor: '#f2f2f2', padding: '8px 55px' }}>My Flood Score comparison between both properties</span>
-            <Container style={{ marginTop: '15px', textAlign: 'left' }}>
+            <Container style={{ marginTop: '15px', textAlign: 'left', maxWidth: '700px' }}>
               <Row style={{ marginTop: '27px' }}>
-                <Col style={{ marginTop: '-35px' }}>
+                <Col style={{ marginTop: '-35px', left: '-25px' }}>
                   <ComparisonChart distributionData={distributionData1} />
                   <MFSRangeImg />
                 </Col>
-                <div style={{ borderLeft: '1px solid black', height: '250px' }} />
-                <Col style={{ marginTop: '-35px' }}>
+                <div style={{ marginLeft: '-13px', borderLeft: '1px solid black', height: '250px' }} />
+                <Col style={{ marginTop: '-35px', left: '-25px' }}>
                   <ComparisonChart distributionData={distributionData2} />
                   <MFSRangeImg />
                 </Col>
@@ -245,12 +249,12 @@ const CompareReport = (props) => {
 
         <div className="reportSection" style={{ padding: '20px', background: 'transparent', boxShadow: 'none' }} > { /* Section Five */ }
           <div style={{ textAlign: 'center', marginTop: '-55px' }}>
-            <Container style={{ marginTop: '15px', textAlign: 'left' }}>
+            <Container style={{ marginTop: '15px', textAlign: 'left', maxWidth: '700px' }}>
               <Row style={{ marginTop: '27px' }}>
                 <Col style={{ marginTop: '10px' }}>
                   The Best Available floodplain information <span className="bold">generally agrees</span> with the effective FEMA data for this property
                 </Col>
-                <div style={{ borderLeft: '1px solid black', height: '84px' }} />
+                <div style={{ marginLeft: '-13px', borderLeft: '1px solid black', height: '84px' }} />
                 <Col style={{ marginTop: '10px' }}>
                   The Best Available floodplain information <span className="bold">generally agrees</span> with the effective FEMA data for this property
                 </Col>

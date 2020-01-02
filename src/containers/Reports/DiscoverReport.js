@@ -73,14 +73,14 @@ const getRiskRange = (score) => {
 const LearnMoreBox = ({ title, description, img, link, extra }) => (
   <Container className="learnMoreBox">
     <Row>
-      <Col sm={9}>
+      <Col xs={9}>
         <h3>{title}</h3>
         <p>
           {description}
         </p>
         <p className="italic" style={{ lineHeight: '8px' }}>{extra}</p>
       </Col>
-      <Col style={{ display: 'grid' }} sm={3}>
+      <Col style={{ display: 'grid' }} xs={3}>
         <img src={img} alt={title} />
         <Button className="learnMoreButton" href={link}>Learn More</Button>
       </Col>
@@ -108,6 +108,20 @@ const getPropertyData = async (propertyRef) => {
     return await doc.data()
   } else {
     return 'not found'
+  }
+}
+
+const getLOMARecommendation = (property) => {
+  if (property.LOMA === 0) {
+    return 'N/A'
+  } else if (property.LOMA === 1) {
+    return 'Low'
+  } else if (property.LOMA === 2) {
+    return 'Medium'
+  } else if (property.LOMA === 3) {
+    return 'High'
+  } else {
+    return 'N/A'
   }
 }
 
@@ -150,7 +164,7 @@ if (property === "not found") {
                 <p>{PROP_ADD}<br />{PROP_CITY}, {PROP_STATE} {PROP_ZIP}</p>
                 {/* <p>{props.PROP_ADD}</p> */}
               </Col>
-              <Col>
+              <Col style={{ left: '100px' }}>
                 <FloodScoreGauge MFS={MFS} index={0} />
               </Col>
             </Row>
@@ -167,14 +181,14 @@ if (property === "not found") {
             title="My flood snapshot"
             description="Compare your property's score with that of property another, identify key flood influencers, see how your score compares to your community."
             img={Compare}
-            link={ROUTES.HOME}
+            link={ROUTES.COMPARE}
             extra={null}
           />
           <LearnMoreBox
             title="My flood Analysis Memo"
             description="Your detailed flood risk analysis. Floodplain maps, building and structure impacts, and flood insurance premium estimates"
             img={Examine}
-            link={ROUTES.HOME}
+            link={ROUTES.EXAMINE}
             extra="A 5-page report thoroughly reviewing your flood risk!"
           />
           {(MFS < 25) &&
@@ -182,7 +196,7 @@ if (property === "not found") {
               title="My flood Safe Certificate"
               description="My flood Safe Certificate is certified by our Professional Water Resource Engineers"
               img={Certificate}
-              link={ROUTES.HOME}
+              link={ROUTES.CERTIFY}
               extra="Recommended for MyFloodScores less than 25"
             />
           }
@@ -190,12 +204,12 @@ if (property === "not found") {
             title="Letter of Map Amendment (LOMA)"
             description="Reduce or Eliminate your flood insurance premium through a FEMA Approved Letter of Map Amendment"
             img={Reduce_Eliminate}
-            link={ROUTES.HOME}
+            link={ROUTES.REDUCE}
             extra={
               <span className="LOMACat">
-                <span className={(SGE - FEMA_BFE > 2) ? "LOMASelect" : undefined} style={{ backgroundColor: '#00B366' }}>High</span>
-                <span className={(SGE - FEMA_BFE > 1 && SGE - FEMA_BFE <= 2) ? "LOMASelect" : undefined} style={{ backgroundColor: '#FED220' }}>Medium</span>
-                <span className={(SGE - FEMA_BFE > -1.5 && SGE - FEMA_BFE <= 1) ? "LOMASelect" : undefined} style={{ backgroundColor: '#FF605F' }}>Low</span>
+                <span className={(getLOMARecommendation(property) === 'High') ? "LOMASelect" : undefined} style={{ backgroundColor: '#00B366' }}>High</span>
+                <span className={(getLOMARecommendation(property) === 'Medium') ? "LOMASelect" : undefined} style={{ backgroundColor: '#FED220' }}>Medium</span>
+                <span className={(getLOMARecommendation(property) === 'Low' || getLOMARecommendation(property) === 'N/A') ? "LOMASelect" : undefined} style={{ backgroundColor: '#FF605F' }}>Low</span>
               </span>
             }
           />

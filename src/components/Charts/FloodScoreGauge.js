@@ -41,6 +41,7 @@ class FloodScoreGauge extends React.Component {
           id: 'apexchart-example',
           type: 'radialBar',
           offsetY: -20,
+          offsetX: -131,
           animations: {
             enabled: false,
           }
@@ -73,7 +74,7 @@ class FloodScoreGauge extends React.Component {
                   }
               },
               track: {
-                  show: false,
+                  show: true,
                   startAngle: undefined,
                   endAngle: undefined,
                   background: '#f2f2f2',
@@ -124,7 +125,7 @@ class FloodScoreGauge extends React.Component {
         fill: {
           colors: ['#f2f2f2'],
           // colors: ['#FF0000'],
-          opacity: 0,
+          opacity: 1,
         },
         labels: ['Average Results'],
       }, // end options
@@ -151,7 +152,7 @@ class FloodScoreGauge extends React.Component {
     transform = transform.replace("matrix", '').replace(')', '').replace('(', '');
     transform = transform.split(', ')
     const translateX = transform[4]
-    const margLeft = parseInt(translateX) + 10
+    const margLeft = parseInt(translateX) - 121
 
     const pathOrigs = pathOrig.split(" ");
     var droplet = document.createElement("IMG");
@@ -210,7 +211,7 @@ class FloodScoreGauge extends React.Component {
     return (
       <div>
         <Chart options={options} series={series} type="radialBar" width={500} height={320} />
-        <img style={{ opacity: '1', position: 'absolute', top: '3px', left: '131px', width: '240px' }} src={MFS_Graphic} width={250} height={160} />
+        <img style={{ opacity: '1', position: 'absolute', top: '3px', width: '240px' }} src={MFS_Graphic} width={250} height={160} />
       </div>
     )
   }

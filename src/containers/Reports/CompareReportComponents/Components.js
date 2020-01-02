@@ -21,7 +21,7 @@ export const AddFloodplainInfo = ({left, middle, right}) => (
 )
 
 export const MFSRangeImg = () => (
-  <div style={{ marginTop: '-70px', marginBottom: '30px', textAlign: 'center' }}>
+  <div style={{ marginTop: '-70px', marginBottom: '30px', marginLeft: '30px', textAlign: 'center' }}>
     <img style={{ position: 'relative', marginTop: '-8px', marginRight: '5px', width: '190px' }} src={MFS_Logo} />
     <span className="bold" style={{ fontSize: '19px' }}>Range</span>
   </div>
