@@ -8,12 +8,12 @@ import Subscription from "./Subscription";
 import Notification from "../../../components/Notifications/Notification";
 import Spinner from "react-bootstrap/Spinner";
 
-import "./subscriptions.css"
 import moment from "moment";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { Link } from "react-router-dom";
 import { TransitionBtn } from "../../../StyledComponents/StyledComponents";
+import "./subscriptions.css";
 
 const Subscriptions = () => {
   const dispatch = useDispatch()
