@@ -8,7 +8,7 @@ import './Reports.css'
 
 import FloodScoreGauge from '../../components/Charts/FloodScoreGauge'
 import ComparisonChart from './ComparisonChart'
-import { AddFloodplainInfo } from './CompareReportComponents/Components'
+import { AddFloodplainInfo, MFSRangeImg } from './CompareReportComponents/Components'
 
 import Compare from '../../assets/images/Compare.svg'
 import Examine from '../../assets/images/Examine.svg'
@@ -25,35 +25,6 @@ import Red_House from '../../assets/images/Red_House.svg'
 import MFS_Text_Logo from '../../assets/images/MFS_Text_Logo.svg'
 
 
-import * as ROUTES from '../../routes/constants/routes'
-
-const range = [
-  {
-    under: 0,
-    result: 'Very Good'
-  },
-  {
-    under: 20,
-    result: 'Very Good',
-  },
-  {
-    under: 30,
-    result: 'Good',
-  },
-  {
-    under: 50,
-    result: 'Fair',
-  },
-  {
-    under: 70,
-    result: 'Poor',
-  },
-  {
-    under: 95,
-    result: 'Extremely Poor',
-  }
-]
-
 const getRiskLevel = (property) => {
   if (property.FEMA_ZONE === 'X, AREA OF MINIMAL FLOOD HAZARD' || property.FEMA_ZONE === 'X, 0.2 PCT ANNUAL CHANCE FLOOD HAZARD') {
     return 'pos'
@@ -62,18 +33,41 @@ const getRiskLevel = (property) => {
 }
 
 const getStructure = (property) => {
-  return 'pos'
+  if ((property.SGE - property.BA_PPE) <= -4 ) {
+    return 'pos'
+  }
+  return 'neg'
 }
 
 const getImpacts = (property) => {
+  if (property.STRUC_PCT === 0 && property.PARCEL_PCT === 0) {
+    return 'pos'
+  } else if (property.STRUC_PCT === 100 && property.PARCEL_PCT === 100) {
+    return 'neg'
+  }
   return 'pos'
+  // return 'partial'
 }
 
 const getCRS = (property) => {
   if (property.CRS < 6) {
-    return 'neg'
+    return 'pos'
   }
-  return 'pos'
+  return 'neg'
+}
+
+const getLOMARecommendation = (property) => {
+  if (property.LOMA === 0) {
+    return 'N/A'
+  } else if (property.LOMA === 1) {
+    return 'Low'
+  } else if (property.LOMA === 2) {
+    return 'Medium'
+  } else if (property.LOMA === 3) {
+    return 'High'
+  } else {
+    return 'N/A'
+  }
 }
 
 
@@ -95,7 +89,7 @@ const keyFloodInfluencers = [
   },
   {
     pos: 'Good Community Rating System (CRS) Score',
-    neg: 'Pood Community Rating System (CRS) Score',
+    neg: 'Community Rating System (CRS) Score could use improvement',
     func: getCRS,
   },
 ]
@@ -126,9 +120,11 @@ const CompareReport = (props) => {
     // property 1
     const propertyOneData = await getPropertyData(property1)
     setProperty1(propertyOneData)
+    console.log('property1:', propertyOneData)
     // property 2
     const propertyTwoData = await getPropertyData(property2)
     setProperty2(propertyTwoData)
+    console.log('property2:', propertyTwoData)
     // Get Score Distribution Data
     const distributionData1 = await getDistributionData(distributionType, propertyOneData)
     setDistributionData1(distributionData1)
@@ -225,10 +221,12 @@ const CompareReport = (props) => {
               <Row style={{ marginTop: '27px' }}>
                 <Col style={{ marginTop: '-35px' }}>
                   <ComparisonChart distributionData={distributionData1} />
+                  <MFSRangeImg />
                 </Col>
                 <div style={{ borderLeft: '1px solid black', height: '250px' }} />
                 <Col style={{ marginTop: '-35px' }}>
                   <ComparisonChart distributionData={distributionData2} />
+                  <MFSRangeImg />
                 </Col>
               </Row>
             </Container>
@@ -239,9 +237,9 @@ const CompareReport = (props) => {
           <div style={{ textAlign: 'center', marginTop: '-80px' }}>
             <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black', backgroundColor: '#f2f2f2', padding: '8px 105px' }}>Additional Floodplain Information</span>
             <div style={{ marginTop: '30px' }} />
-            <AddFloodplainInfo left="Zone X" middle="FEMA Flood Zone" right="Zone AE" />
-            <AddFloodplainInfo left="No" middle="Flood Insurance" right="Yes" />
-            <AddFloodplainInfo left="N/A" middle="LOMA Recommendation" right="Low" />
+            <AddFloodplainInfo left={`Zone ${property1.FEMA_ZONE.split(',')[0]}`} middle="FEMA Flood Zone" right={`Zone ${property2.FEMA_ZONE.split(',')[0]}`} />
+            <AddFloodplainInfo left={(getRiskLevel(property1)) === 'pos' ? 'No' : 'Yes'} middle="Flood Insurance" right={(getRiskLevel(property2)) === 'pos' ? 'No' : 'Yes'} />
+            <AddFloodplainInfo left={getLOMARecommendation(property1)} middle="LOMA Recommendation" right={getLOMARecommendation(property2)} />
           </div>
         </div>
 
@@ -250,11 +248,11 @@ const CompareReport = (props) => {
             <Container style={{ marginTop: '15px', textAlign: 'left' }}>
               <Row style={{ marginTop: '27px' }}>
                 <Col style={{ marginTop: '10px' }}>
-                  The Best Available floodplain information generally agrees with the effective FEMA data for this property
+                  The Best Available floodplain information <span className="bold">generally agrees</span> with the effective FEMA data for this property
                 </Col>
                 <div style={{ borderLeft: '1px solid black', height: '84px' }} />
                 <Col style={{ marginTop: '10px' }}>
-                  The Best Available floodplain information generally agrees with the effective FEMA data for this property
+                  The Best Available floodplain information <span className="bold">generally agrees</span> with the effective FEMA data for this property
                 </Col>
               </Row>
             </Container>
