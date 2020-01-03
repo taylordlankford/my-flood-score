@@ -178,7 +178,7 @@ const CompareReport = (props) => {
                   <img style={{ position: 'relative', marginTop: '-30px', width: '190px' }} src={MFS_Logo} />
                   <img style={{ position: 'relative', marginTop: '-30px', width: '40px' }} src={Blue_House} />
                 </Col>
-                <Col style={{ position: 'absolute', alignSelf: 'flex-end', marginTop: '-100px' }}>
+                <Col style={{ position: 'absolute', alignSelf: 'flex-end', bottom: '100px' }}>
                   <FloodScoreGauge MFS={property1.MFS} index={0}/>
                 </Col>
               </div>
@@ -190,7 +190,7 @@ const CompareReport = (props) => {
                   <img style={{ position: 'relative', marginTop: '-30px', width: '190px' }} src={MFS_Logo} />
                   <img style={{ position: 'relative', marginTop: '-30px', width: '40px' }} src={Green_House} />
                 </Col>
-                <Col style={{ position: 'absolute', alignSelf: 'flex-end', marginTop: '-100px' }}>
+                <Col style={{ position: 'absolute', alignSelf: 'flex-end', bottom: '100px' }}>
                     <FloodScoreGauge MFS={property2.MFS} index={1}/>
                 </Col>
               </div>
