@@ -66,7 +66,6 @@ const EmailAction = ({ match, location, history }) => {
       uid: firestoreUser.firestoreUser.uid,
     }
     const reportRef = await firebase.doFirestoreAdd("reports", setReportObj)
-    console.log('setting report:', reportRef)
     setReport(setReportObj)
     // Add to firestoreUser and decrease inventory
     const updateObj = {
@@ -175,7 +174,6 @@ const EmailAction = ({ match, location, history }) => {
   }
 
   if (mode === 'verifyEmail' && report) {
-    console.log('passed if statement report:', report)
     return (
       <>
         <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>Your FREE Discover Report</h3>
