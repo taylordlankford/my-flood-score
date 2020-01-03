@@ -104,7 +104,9 @@ const DiscoverReport = (props) => {
 
 const getAllData = async () => {
   const { property } = report
+  console.log('property', property)
   const propertyData = await getPropertyData(property)
+  console.log('propertyData', propertyData)
   setProperty(propertyData)
 }
 
