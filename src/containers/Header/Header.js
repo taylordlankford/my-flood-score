@@ -50,26 +50,26 @@ const Header = ({ firestoreUser }) => {
 
     if (nav != null) {
       nav.style.height = "60px"
-      nav.style.transition = "all 0.3s"
-      nav.style.transitionTimingFunction = "ease";
+      nav.style.transition = "all 0.2s"
+      nav.style.transitionTimingFunction = "ease-in-out";
     }
 
     if (navItems != null) {
       navItems.style.paddingTop = "13px";
-      navItems.style.transition = "all 0.3s";
-      navItems.style.transitionTimingFunction = "ease";
+      navItems.style.transition = "all 0.2s";
+      navItems.style.transitionTimingFunction = "ease-in-out";
     }
 
     if (logo != null) {
       logo.style.top = "-10px";
-      logo.style.transition = "all 0.3s";
-      logo.style.transitionTimingFunction = "ease";
+      logo.style.transition = "all 0.2s";
+      logo.style.transitionTimingFunction = "ease-in-out";
     }
 
     if (mobileNavItems != null) {
       mobileNavItems.style.paddingTop = "5px"
-      mobileNavItems.style.transition = "all 0.3s";
-      mobileNavItems.style.transitionTimingFunction = "ease";
+      mobileNavItems.style.transition = "all 0.2s";
+      mobileNavItems.style.transitionTimingFunction = "ease-in-out";
     }
   }
 
@@ -84,26 +84,26 @@ const Header = ({ firestoreUser }) => {
 
     if (nav != null) {
       nav.style.height = "80px";
-      nav.style.transition = "all 0.3s"
-      nav.style.transitionTimingFunction = "ease";
+      nav.style.transition = "all 0.2s"
+      nav.style.transitionTimingFunction = "ease-in-out";
     }
 
     if (navItems != null) {
       navItems.style.paddingTop = "26px";
-      navItems.style.transition = "all 0.3s";
-      navItems.style.transitionTimingFunction = "ease";
+      navItems.style.transition = "all 0.2s";
+      navItems.style.transitionTimingFunction = "ease-in-out";
     }
 
     if (logo != null) {
       logo.style.top = "0";
-      logo.style.transition = "all 0.3s";
-      logo.style.transitionTimingFunction = "ease";
+      logo.style.transition = "all 0.2s";
+      logo.style.transitionTimingFunction = "ease-in-out";
     }
 
     if (mobileNavItems != null) {
       mobileNavItems.style.paddingTop = "16px"
-      mobileNavItems.style.transition = "all 0.3s";
-      mobileNavItems.style.transitionTimingFunction = "ease";
+      mobileNavItems.style.transition = "all 0.2s";
+      mobileNavItems.style.transitionTimingFunction = "ease-in-out";
     }
   }
 
@@ -113,8 +113,6 @@ const Header = ({ firestoreUser }) => {
   const handleOnScroll = (e) => {
     e.preventDefault()
     let hasOffsetY = document.body.scrollTop > 20 || document.documentElement.scrollTop > 20
-
-    // setIsOffsetY(hasOffsetY)
 
     if (hasOffsetY) {
       shrinkHeader()
@@ -219,7 +217,7 @@ const Header = ({ firestoreUser }) => {
               ) : (
                 <>
                   <MobileNavListItem>
-                    <Link gotolink={e => gotolink(e, ROUTES.SIGN_IN)}>
+                    <Link onClick={e => gotolink(e, ROUTES.SIGN_IN)}>
                       Login
                     </Link>
                   </MobileNavListItem>
