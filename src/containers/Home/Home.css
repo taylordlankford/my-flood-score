@@ -33,14 +33,16 @@
 
 .headlineWrapper {
   margin: 0 auto;
-  max-width: 1120px;
+  /* max-width: 1120px; */
 }
 
 .headlineContainer {
   position: absolute;
   flex-direction: column;
   padding-top: 50px;
+  padding-bottom: 50px;
   /*
+  padding-top: 50px;
   margin: 0 -1.6rem;
   padding: 5rem 10rem;
   width: 84%;
@@ -98,7 +100,7 @@
   font-size: 28px;
   font-weight: 700 !important;
   color: #0d238e;
-  text-align: center; 
+  text-align: center;
   margin: 0;
   padding-bottom: 20px;
 }
