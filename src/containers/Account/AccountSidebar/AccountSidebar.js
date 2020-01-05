@@ -24,7 +24,7 @@ const AccountSidebar = props => {
   };
 
   return (
-    <Col sm={3}>
+    <Col lg={3}>
       <ListGroup>
         {sidebarItems.map((item, key) => (
           <SidebarItem

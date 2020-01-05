@@ -16,6 +16,7 @@ import Testimonials from './Testimonials/Testimonials'
 import { TESTIMONIAL_TITLE, TESTIMONIAL_LIST } from './Testimonials/TestimonialData'
 // import * as ROUTES from '../../constants/routes'
 import * as ROUTES from '../../routes/constants/routes'
+import Container from "react-bootstrap/Container"
 
 function Home ({ history }) {
   const firebase = useFirebase()
@@ -34,31 +35,35 @@ function Home ({ history }) {
     <>
       <SecondRow />
       <Parallax bgImage={backgroundImage} strength={500}>
-        <div className="headlineWrapper" style={{ height: '500px' }}>
-          <div className="headlineContainer">
-            <h1 className="headline">
-              Do You Know Your Flood Score?
-            </h1>
-            <h2 className="headline subtitle">
-              The Most Accurate Flood Risk Assessment for Home Owners
-            </h2>
-          </div>
-          {/* <AutoSuggest
+        <Container>
+          <div className="headlineWrapper" style={{ height: '500px' }}>
+            <div className="headlineContainer">
+              <h1 className="headline">
+                Do You Know Your Flood Score?
+              </h1>
+              <h2 className="headline subtitle">
+                The Most Accurate Flood Risk Assessment for Home Owners
+              </h2>
+            </div>
+            {/* <AutoSuggest
             theme={autoSuggestTheme}
             onSuggestionSelected={onSuggestionSelected}
             inputProps={{ id: 'homeAddressSuggest' }}
             firebase={firebase}
           /> */}
-        </div>
+          </div>
+        </Container>
       </Parallax>
       <div className="container2">
         <div className="autosuggestWrapper">
-          <AutoSuggest
-            theme={autoSuggestTheme}
-            onSuggestionSelected={onSuggestionSelected}
-            inputProps={{ id: 'homeAddressSuggest' }}
-            firebase={firebase}
-          />
+          <Container>
+            <AutoSuggest
+              theme={autoSuggestTheme}
+              onSuggestionSelected={onSuggestionSelected}
+              inputProps={{ id: 'homeAddressSuggest' }}
+              firebase={firebase}
+            />
+          </Container>
         </div>
         <h1 className="video-title">
           Why You Should Know Your Flood Score
