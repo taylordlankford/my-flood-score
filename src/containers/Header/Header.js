@@ -14,13 +14,14 @@ import styled from "styled-components";
 const Header = ({ firestoreUser }) => {
   const { history } = useReactRouter()
 
-  const [lgBreakpoint, setLgBreakpoint] = useState(window.innerWidth <= 992 || window.innerWidth == 992)
+  const [lgBreakpoint, setLgBreakpoint] = useState(window.innerWidth < 1080)
   const [showMobileNav, setShowMobileNav] = useState(false)
   // const [isOffsetY, setIsOffsetY] = useState(false)
 
   useEffect(() => {
     window.addEventListener("resize", (e) => updateWindowDimensions(e))
     window.addEventListener("scroll", (e) => handleOnScroll(e))
+    console.log('Inner Width => ', window.innerWidth)
 
     normalizeHeader()
     mobileNavHeaderStyles()
@@ -130,12 +131,12 @@ const Header = ({ firestoreUser }) => {
 
   /**
    * Update window dimensions, decides what to update based on breakpoint.
-   * If breakpoint is NOT greater than or equal to 992 pixel:
+   * If breakpoint is NOT greater than or equal to 1280 pixel:
    *    set breakpoint to false (unmounts mobile button)
    *    set mobile nav to false (unmounts mobile nav)
    */
   const updateWindowDimensions = () => {
-    let lg = window.innerWidth <= 992 || window.innerWidth == 992
+    let lg = window.innerWidth < 1080 
 
     if (lg) {
       console.log('Hit LG Breakpoint')
@@ -318,22 +319,16 @@ const NavContainer = styled.div`
   max-width: 1080px;
   padding-left: 20px;
   padding-right: 20px;
-
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+  text-align: right;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
 `
 
 const NavBrand = styled.div`
-  flex: 1 0 0;
   text-align: left;
 `
 
 const NavMenuItems = styled.div`
-  justify-content: flex-end;
-  flex: 2 0 0;
   text-align: right;
 `;
 
