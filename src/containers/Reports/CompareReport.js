@@ -25,7 +25,7 @@ import Red_House from '../../assets/images/Red_House.svg'
 import MFS_Text_Logo from '../../assets/images/MFS_Text_Logo.svg'
 
 
-const getRiskLevel = (property) => {
+const getFEMARiskLevel = (property) => {
   if (property.FEMA_ZONE === 'X, AREA OF MINIMAL FLOOD HAZARD' || property.FEMA_ZONE === 'X, 0.2 PCT ANNUAL CHANCE FLOOD HAZARD') {
     return 'pos'
   }
@@ -44,9 +44,13 @@ const getImpacts = (property) => {
     return 'pos'
   } else if (property.STRUC_PCT === 100 && property.PARCEL_PCT === 100) {
     return 'neg'
+  } else if (property.STRUC_PCT < 25) {
+    return 'potential'
+  } else if (property.STRUC_PCT < 50) {
+    return 'substantial'
+  } else {
+    return 'majority'
   }
-  return 'pos'
-  // return 'partial'
 }
 
 const getCRS = (property) => {
@@ -70,12 +74,27 @@ const getLOMARecommendation = (property) => {
   }
 }
 
+const getGenerallyAgrees = (property) => {
+  console.log('property.BA_FLDZONE_S', property.BA_FLDZONE_S)
+  console.log('property.BA_FLDZONE_S !== 4', property.BA_FLDZONE_S !== 4)
+  console.log('getLOMARecommendation(property)', getFEMARiskLevel(property))
+  if (property.BA_FLDZONE_S === undefined) {
+    return 'generally agrees'
+  } else if (property.BA_FLDZONE_S === 4 && getFEMARiskLevel(property) === 'pos') {
+    return 'generally agrees'
+  } else if (property.BA_FLDZONE_S !== 4 && !(getFEMARiskLevel(property) === 'pos')) {
+    return 'generally agrees'
+  } else {
+    return 'does not agree'
+  }
+}
+
 
 const keyFloodInfluencers = [
   {
     pos: 'LowRisk Flood Zone',
     neg: 'HighRisk Flood Zone',
-    func: getRiskLevel,
+    func: getFEMARiskLevel,
   },
   {
     pos: 'Structure is considerably higher than nearest high-risk zone',
@@ -85,6 +104,9 @@ const keyFloodInfluencers = [
   {
     pos: 'No parcel or structure impacts',
     neg: 'property is completely within',
+    potential: 'Potential structure impacts from high-risk floodplain',
+    substantial: 'Substantial portion of structure impacted by high-risk floodplain',
+    majority: 'Majority of structure impacted by high-risk floodplain',
     func: getImpacts,
   },
   {
@@ -178,7 +200,7 @@ const CompareReport = (props) => {
                   <img style={{ position: 'relative', marginTop: '-30px', width: '190px' }} src={MFS_Logo} />
                   <img style={{ position: 'relative', marginTop: '-30px', width: '40px' }} src={Blue_House} />
                 </Col>
-                <Col style={{ position: 'absolute', alignSelf: 'flex-end', marginTop: '-100px' }}>
+                <Col style={{ position: 'absolute', alignSelf: 'flex-end', bottom: '100px' }}>
                   <FloodScoreGauge MFS={property1.MFS} index={0}/>
                 </Col>
               </div>
@@ -190,7 +212,7 @@ const CompareReport = (props) => {
                   <img style={{ position: 'relative', marginTop: '-30px', width: '190px' }} src={MFS_Logo} />
                   <img style={{ position: 'relative', marginTop: '-30px', width: '40px' }} src={Green_House} />
                 </Col>
-                <Col style={{ position: 'absolute', alignSelf: 'flex-end', marginTop: '-100px' }}>
+                <Col style={{ position: 'absolute', alignSelf: 'flex-end', bottom: '100px' }}>
                     <FloodScoreGauge MFS={property2.MFS} index={1}/>
                 </Col>
               </div>
@@ -242,7 +264,7 @@ const CompareReport = (props) => {
             <span style={{ fontSize: '15px', fontWeight: 'bold', color: 'black', backgroundColor: '#f2f2f2', padding: '8px 105px' }}>Additional Floodplain Information</span>
             <div style={{ marginTop: '30px' }} />
             <AddFloodplainInfo left={`Zone ${property1.FEMA_ZONE.split(',')[0]}`} middle="FEMA Flood Zone" right={`Zone ${property2.FEMA_ZONE.split(',')[0]}`} />
-            <AddFloodplainInfo left={(getRiskLevel(property1)) === 'pos' ? 'No' : 'Yes'} middle="Flood Insurance" right={(getRiskLevel(property2)) === 'pos' ? 'No' : 'Yes'} />
+            <AddFloodplainInfo left={(getFEMARiskLevel(property1)) === 'pos' ? 'No' : 'Yes'} middle="Flood Insurance" right={(getFEMARiskLevel(property2)) === 'pos' ? 'No' : 'Yes'} />
             <AddFloodplainInfo left={getLOMARecommendation(property1)} middle="LOMA Recommendation" right={getLOMARecommendation(property2)} />
           </div>
         </div>
@@ -252,11 +274,11 @@ const CompareReport = (props) => {
             <Container style={{ marginTop: '15px', textAlign: 'left', maxWidth: '700px' }}>
               <Row style={{ marginTop: '27px' }}>
                 <Col style={{ marginTop: '10px' }}>
-                  The Best Available floodplain information <span className="bold">generally agrees</span> with the effective FEMA data for this property
+                  The Best Available floodplain information <span className="bold">{getGenerallyAgrees(property1)}</span> with the effective FEMA data for this property
                 </Col>
                 <div style={{ marginLeft: '-13px', borderLeft: '1px solid black', height: '84px' }} />
                 <Col style={{ marginTop: '10px' }}>
-                  The Best Available floodplain information <span className="bold">generally agrees</span> with the effective FEMA data for this property
+                  The Best Available floodplain information <span className="bold">{getGenerallyAgrees(property2)}</span> with the effective FEMA data for this property
                 </Col>
               </Row>
             </Container>

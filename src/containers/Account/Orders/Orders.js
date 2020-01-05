@@ -42,17 +42,21 @@ const Orders = () => {
   const populateColumns = () => {
     let currentOrders = [];
 
-    orders.map((order, index) => {
-      let formattedDate = moment(new Date(order.timestamp.seconds * 1000)).format("MM/DD/YYYY")
-      console.log(formattedDate)
-      currentOrders.push({
-        index: parseInt(index + 1),
-        timestamp: formattedDate,
-        type: order.type,
-        items: `$${(order.amount / 100).toFixed(2)} for ${getQuantity(order.items)} items`,
-        action: actionBtn(index)
+    try {
+      orders.map((order, index) => {
+        let formattedDate = moment(new Date(order.timestamp.seconds * 1000)).format("MM/DD/YYYY")
+        console.log(formattedDate)
+        currentOrders.push({
+          index: parseInt(index + 1),
+          timestamp: formattedDate,
+          type: order.type,
+          items: `$${(order.amount / 100).toFixed(2)} for ${getQuantity(order.items)} items`,
+          action: actionBtn(index)
+        });
       });
-    });
+    } catch (err) {
+      // we just don't have orders yet
+    }
 
     setOrdersData([...currentOrders])
   };

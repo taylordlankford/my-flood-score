@@ -40,8 +40,8 @@ class FloodScoreGauge extends React.Component {
         chart: {
           id: 'apexchart-example',
           type: 'radialBar',
-          offsetY: -20,
-          offsetX: -131,
+          // offsetY: -20,
+          // offsetX: -131,
           animations: {
             enabled: false,
           }
@@ -210,8 +210,10 @@ class FloodScoreGauge extends React.Component {
     } = this.state
     return (
       <div>
-        <Chart options={options} series={series} type="radialBar" width={500} height={320} />
-        <img style={{ opacity: '1', position: 'absolute', top: '3px', width: '240px' }} src={MFS_Graphic} width={250} height={160} />
+        <div style={{ position: 'relative', left: '-131px', top: '-20px' }}>
+          <Chart options={options} series={series} type="radialBar" width={500} height={320} />
+        </div>
+        <img style={{ opacity: '1', position: 'absolute', top: '3px' }} src={MFS_Graphic} width={240} height={160} />
       </div>
     )
   }

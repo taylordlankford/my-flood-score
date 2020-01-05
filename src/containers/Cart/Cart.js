@@ -34,7 +34,7 @@ const Cart = props => {
   // console.log("props in cart.js", cart);
 
   const gotoShop = () => {
-    props.history.push(ROUTES.SHOP);
+    props.history.push(ROUTES.HOME);
   };
 
   const gotoCheckout = () => {

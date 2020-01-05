@@ -80,9 +80,15 @@ const LearnMoreBox = ({ title, description, img, link, extra }) => (
         </p>
         <p className="italic" style={{ lineHeight: '8px' }}>{extra}</p>
       </Col>
-      <Col style={{ display: 'grid' }} xs={3}>
-        <img src={img} alt={title} />
-        <Button className="learnMoreButton" href={link}>Learn More</Button>
+      <Col xs={3}>
+        <Container>
+          <Row>
+            <img src={img} alt={title} />
+          </Row>
+          <Row>
+            <Button className="learnMoreButton" href={link}>Learn More</Button>
+          </Row>
+        </Container>
       </Col>
     </Row>
   </Container>

@@ -48,6 +48,8 @@ const DefaultPaymentMethod = props => {
           setIsFetchingData(false);
         });
       });
+    } else {
+      setIsFetchingData(false)
     }
   };
 
