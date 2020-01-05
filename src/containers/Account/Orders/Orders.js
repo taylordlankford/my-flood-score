@@ -9,6 +9,8 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import { Link } from "react-router-dom";
 import { TransitionBtn } from "../../../StyledComponents/StyledComponents"
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Orders = () => {
   const { firestoreUser } = useContext(AccountContext)
@@ -108,14 +110,14 @@ const Orders = () => {
           <div style={{ paddingBottom: "20px" }}>
             <Title>Your Orders</Title>
           </div>
-          <BootstrapTable
-            keyField="id"
-            data={ordersData}
-            columns={columns}
-            bordered={false}
-            defaultSorted={defaultSorted}
-            pagination={paginationFactory({ hidePageListOnlyOnePage: true })}
-          />
+            <BootstrapTable
+              keyField="id"
+              data={ordersData}
+              columns={columns}
+              bordered={false}
+              defaultSorted={defaultSorted}
+              pagination={paginationFactory({ hidePageListOnlyOnePage: true })}
+            />
 
           {/*
           <Title>Orders</Title>

@@ -1,11 +1,33 @@
 .navbar {
+  border-bottom: 2px solid #0d238e !important;
+  background-color: #ffffff !important;
   font-weight: 500 !important;
-  padding: 0;
-  border-bottom: 2px solid #0d238e;
+  padding: 0 !important;
+  /* padding: 0; */
+  /* height: 80px; */
+}
+
+.navbar-toggler {
+  outline: none !important;
+}
+
+.navbar-toggler:hover {
+  background-color: #ffffff;
+}
+
+/* 
+ * If height is set, override container properties on the collapse menu
+ */
+.navbar-collapse .collapse {
+  background-color: #fff !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
 }
 
 .navbar-wrapper {
-  padding: 0 !important;
+  /* padding: 0 !important; */
 }
 
 .grid {
@@ -41,8 +63,12 @@
 }
 
 .MFS-Logo {
-  width: 240px;
-  top: 0px;
+  position: relative !important;
+  margin: 0 auto;
+  max-width: 240px;
+  box-sizing: border-box;
+  /* width: 240px; */
+  /* top: 0px; */
   /* height: 80px; */
 }
 

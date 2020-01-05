@@ -30,7 +30,7 @@ const Account = () => {
             <Container className="acct-container">
               <Row>
                 <AccountSidebar />
-                <Col sm={9}>
+                <Col lg={9}>
                   <Switch>
                     <Route path={ROUTES.ACCOUNT_DASHBOARD} component={Dashboard} />
                     <Route path={ROUTES.ACCOUNT_INVENTORY} component={Inventory} />
