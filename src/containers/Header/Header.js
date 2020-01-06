@@ -160,17 +160,15 @@ const Header = ({ firestoreUser }) => {
    * Navbar Toggler component
    */
   const NavbarToggler = () => (
-    <>
-      {showMobileNav == true ? (
-        <Nav.MobileNavToggler onClick={e => toggleMobileNav(e)}>
-          <IoMdClose size={48} style={{ margin: "0" }} />
-        </Nav.MobileNavToggler>
-      ) : (
+    showMobileNav == true ? (
+      <Nav.MobileNavToggler onClick={e => toggleMobileNav(e)}>
+        <IoMdClose size={48} style={{ margin: "0" }} />
+      </Nav.MobileNavToggler>
+    ) : (
         <Nav.MobileNavToggler onClick={e => toggleMobileNav(e)}>
           <MdMenu size={48} style={{ margin: "0" }} />
         </Nav.MobileNavToggler>
-      )}
-    </>
+      )
   );
 
   /**
