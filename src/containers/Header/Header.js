@@ -93,7 +93,6 @@ const Header = ({ firestoreUser }) => {
     let logo           = document.getElementById("logo")
 
     if (nav != null) {
-      nav.style.overflow = "scroll";
       nav.style.height = "80px";
       nav.style.transition = `all ${TRANSITION_TIME}s`
       nav.style.transitionTimingFunction = `${TIMING_FUNCTION}`
@@ -181,7 +180,6 @@ const Header = ({ firestoreUser }) => {
 
     let nav = document.getElementById("nav")
     if (showMobileNav == true) {
-      nav.style.overflow = "none";
       nav.style.borderBottom = "2px solid #ffffff";
     }
   }
