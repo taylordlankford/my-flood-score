@@ -10,7 +10,7 @@ import CartDropdown from "./CartDropdown/CartDropdown";
 import { IoMdClose } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
 
-import * as Nav from './StyledComponents'
+import * as Nav from './HeaderStyledComponents';
 
 const Header = ({ firestoreUser }) => {
   const { history } = useReactRouter()
@@ -93,6 +93,7 @@ const Header = ({ firestoreUser }) => {
     let logo           = document.getElementById("logo")
 
     if (nav != null) {
+      nav.style.overflow = "scroll";
       nav.style.height = "80px";
       nav.style.transition = `all ${TRANSITION_TIME}s`
       nav.style.transitionTimingFunction = `${TIMING_FUNCTION}`
@@ -180,6 +181,7 @@ const Header = ({ firestoreUser }) => {
 
     let nav = document.getElementById("nav")
     if (showMobileNav == true) {
+      nav.style.overflow = "none";
       nav.style.borderBottom = "2px solid #ffffff";
     }
   }

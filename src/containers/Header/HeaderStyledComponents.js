@@ -33,14 +33,19 @@ export const NavMenuItems = styled.div`
 
  /**
   * Mobile navigation
+  * Need these attributes in order for mobile nav to be scrollable
+  * height: 100%;
+  * position: fixed;
+  * overflow: scroll !important;
   */
 export const MobileNav = styled.div`
-  margin: 0 auto;
-  min-height: 100vh;
-  width: 100%;
-  z-index: 999;
-  position: fixed;
   background-color: #ffffff;
+  margin: 0 auto;
+  z-index: 999;
+  width: 100%;
+  height: 100% !important;
+  position: fixed !important;
+  overflow: auto !important;
 `;
 
 export const MobileNavContainer = styled.div`
