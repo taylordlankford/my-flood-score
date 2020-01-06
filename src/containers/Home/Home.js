@@ -36,43 +36,34 @@ function Home ({ history }) {
       <SecondRow />
       <Parallax bgImage={backgroundImage} strength={500}>
         <Container>
-          <div className="headlineWrapper" style={{ height: '500px' }}>
+          <div className="headlineWrapper" style={{ height: "500px" }}>
             <div className="headlineContainer">
-              <h1 className="headline">
-                Do You Know Your Flood Score?
-              </h1>
+              <h1 className="headline">Do You Know Your Flood Score?</h1>
               <h2 className="headline subtitle">
                 The Most Accurate Flood Risk Assessment for Home Owners
               </h2>
             </div>
-            {/* <AutoSuggest
-            theme={autoSuggestTheme}
-            onSuggestionSelected={onSuggestionSelected}
-            inputProps={{ id: 'homeAddressSuggest' }}
-            firebase={firebase}
-          /> */}
           </div>
         </Container>
       </Parallax>
       <div className="container2">
-        <div className="autosuggestWrapper">
-          <Container>
-            <AutoSuggest
-              theme={autoSuggestTheme}
-              onSuggestionSelected={onSuggestionSelected}
-              inputProps={{ id: 'homeAddressSuggest' }}
-              firebase={firebase}
-            />
-          </Container>
-        </div>
-        <h1 className="video-title">
-          Why You Should Know Your Flood Score
-        </h1>
+        <Container className="autosuggestWrapper">
+          <AutoSuggest
+            theme={autoSuggestTheme}
+            onSuggestionSelected={onSuggestionSelected}
+            inputProps={{ id: "homeAddressSuggest" }}
+            firebase={firebase}
+          />
+        </Container>
+        <h1 className="video-title">Why You Should Know Your Flood Score</h1>
       </div>
       <div className="video">
         <ReactPlayer
           url="https://www.youtube.com/watch?v=Dvr7wFUX1wU"
-          width="748px"
+          width="747px"
+          height="420px"
+          playing={true}
+          light={true}
         />
       </div>
       <CheckMarks />
@@ -82,7 +73,7 @@ function Home ({ history }) {
         testimonialList={TESTIMONIAL_LIST}
       />
     </>
-  )
+  );
 }
 
 export default Home

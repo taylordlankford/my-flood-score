@@ -33,7 +33,6 @@
 
 .headlineWrapper {
   margin: 0 auto;
-  /* max-width: 1120px; */
 }
 
 .headlineContainer {
@@ -41,12 +40,6 @@
   flex-direction: column;
   padding-top: 50px;
   padding-bottom: 50px;
-  /*
-  padding-top: 50px;
-  margin: 0 -1.6rem;
-  padding: 5rem 10rem;
-  width: 84%;
-   */
 }
 
 .container img{
@@ -90,10 +83,11 @@
 }
 
 .video {
-  justify-content: center;
-  background-color: #f4f4f4;
-  display: flex;
   padding-top: 15px;
+  justify-content: center;
+  display: flex;
+  background-color: #f4f4f4;
+  border: 4px solid #f4f4f4;
 }
 
 .video-title {
@@ -103,9 +97,6 @@
   text-align: center;
   margin: 0;
   padding-bottom: 20px;
-}
-
-.subheadings{
 }
 
 #homeAddressSuggest::-webkit-input-placeholder { /* Chrome/Opera/Safari */
