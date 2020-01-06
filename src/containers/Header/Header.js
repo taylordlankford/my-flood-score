@@ -114,10 +114,10 @@ const Header = ({ firestoreUser }) => {
     e.preventDefault()
     let hasOffsetY = document.body.scrollTop > 20 || document.documentElement.scrollTop > 20
 
-    if (hasOffsetY) {
-      shrinkHeader()
-    } else {
-      // At the top
+    shrinkHeader()
+
+    // At the top
+    if (hasOffsetY == false) {
       normalizeHeader();
     }
 
