@@ -53,7 +53,7 @@ const SecondRowWrapper = styled.div`
   padding-bottom: 10px;
   border-bottom: 10px solid #0d238e;
   height: 70px;
-  transition: all 0.3s;
+  transition: all 0.5ms;
   transition-timing-function: linear;
 
   &:hover {
