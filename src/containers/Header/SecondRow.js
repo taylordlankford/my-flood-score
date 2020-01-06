@@ -18,7 +18,7 @@ const SecondRow = () => (
       <span style={{ paddingLeft: "6px "}}>Discover</span>
     </Link>
     <Link to={ROUTES.COMPARE} className="links2">
-      <img src={Compare} className={'links2logo'} alt="compare" />
+      <img style={{ width: "70px" }}src={Compare} className={'links2logo'} alt="compare" />
       <span style={{ paddingLeft: "6px" }}>Compare</span>
     </Link>
     <Link to={ROUTES.EXAMINE} className="links2">
@@ -49,10 +49,10 @@ const SecondRowContainer = styled.div`
 const SecondRowWrapper = styled.div`
   margin: auto 0;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 20px;
   padding-bottom: 10px;
   border-bottom: 10px solid #0d238e;
-  height: 70px;
+  height: 90px;
   transition: all 0.5ms;
   transition-timing-function: linear;
 
@@ -63,8 +63,8 @@ const SecondRowWrapper = styled.div`
     text-decoration: none !important;
   }
 
-  @media (min-width: 750px) and (max-width: 1004px) {
-    height: 100px;
+  @media (min-width: 750px) and (max-width: 1024px) {
+    height: 120px;
   }
 
   @media (min-width: 625px) and (max-width: 825px) {
