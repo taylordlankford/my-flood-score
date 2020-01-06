@@ -9,7 +9,8 @@ import MFS_Logo from "../../assets/images/MFS_Logo.png";
 import CartDropdown from "./CartDropdown/CartDropdown";
 import { IoMdClose } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
-import styled from "styled-components";
+
+import * as Nav from './StyledComponents'
 
 const Header = ({ firestoreUser }) => {
   const { history } = useReactRouter()
@@ -161,13 +162,13 @@ const Header = ({ firestoreUser }) => {
   const NavbarToggler = () => (
     <>
       {showMobileNav == true ? (
-        <MobileNavToggler onClick={e => toggleMobileNav(e)}>
+        <Nav.MobileNavToggler onClick={e => toggleMobileNav(e)}>
           <IoMdClose size={48} style={{ margin: "0" }} />
-        </MobileNavToggler>
+        </Nav.MobileNavToggler>
       ) : (
-        <MobileNavToggler onClick={e => toggleMobileNav(e)}>
+        <Nav.MobileNavToggler onClick={e => toggleMobileNav(e)}>
           <MdMenu size={48} style={{ margin: "0" }} />
-        </MobileNavToggler>
+        </Nav.MobileNavToggler>
       )}
     </>
   );
@@ -199,78 +200,78 @@ const Header = ({ firestoreUser }) => {
     <>
       {/* Mobile Navigation */}
       {showMobileNav == true ? (
-        <MobileNav id="mobileNav">
-          <MobileNavContainer>
-            <MobileNavList style={{ listStyleType: "none" }}>
-              <MobileNavListItem>
+        <Nav.MobileNav id="mobileNav">
+          <Nav.MobileNavContainer>
+            <Nav.MobileNavList style={{ listStyleType: "none" }}>
+              <Nav.MobileNavListItem>
                 <Link onClick={e => gotolink(e, ROUTES.HOME)}>Home</Link>
-              </MobileNavListItem>
-              <MobileNavListItem>
+              </Nav.MobileNavListItem>
+              <Nav.MobileNavListItem>
                 <Link onClick={e => gotolink(e, ROUTES.HOME)}>About</Link>
-              </MobileNavListItem>
-              <MobileNavListItem>
+              </Nav.MobileNavListItem>
+              <Nav.MobileNavListItem>
                 <Link onClick={e => gotolink(e, ROUTES.DISCOVER_HOMEOWNER)}>
                   Get Your FREE Flood Score
                 </Link>
-              </MobileNavListItem>
+              </Nav.MobileNavListItem>
               {firestoreUser ? (
                 <>
-                  <MobileNavListItem>
+                  <Nav.MobileNavListItem>
                     <Link onClick={e => gotolink(e, ROUTES.ACCOUNT_DASHBOARD)}>
                       Hi, {firestoreUser.firstName}
                     </Link>
-                  </MobileNavListItem>
-                  <MobileNavListItem>
+                  </Nav.MobileNavListItem>
+                  <Nav.MobileNavListItem>
                     <CartDropdown />
-                  </MobileNavListItem>
+                  </Nav.MobileNavListItem>
                 </>
               ) : (
                 <>
-                  <MobileNavListItem>
+                  <Nav.MobileNavListItem>
                     <Link onClick={e => gotolink(e, ROUTES.SIGN_IN)}>
                       Login
                     </Link>
-                  </MobileNavListItem>
-                  <MobileNavListItem>
+                  </Nav.MobileNavListItem>
+                  <Nav.MobileNavListItem>
                     <Link onClick={e => gotolink(e, ROUTES.CHECKOUT_FREE)}>
                       Sign Up
                     </Link>
-                  </MobileNavListItem>
-                  <MobileNavListItem>
+                  </Nav.MobileNavListItem>
+                  <Nav.MobileNavListItem>
                     <CartDropdown />
-                  </MobileNavListItem>
+                  </Nav.MobileNavListItem>
                 </>
               )}
-            </MobileNavList>
-          </MobileNavContainer>
-        </MobileNav>
+            </Nav.MobileNavList>
+          </Nav.MobileNavContainer>
+        </Nav.MobileNav>
       ) : (
         <></>
       )}
 
       {/* Non-mobile Navigation */}
       {lgBreakpoint == true ? (
-        <Nav id="nav">
-          <NavContainer>
-            <NavBrand>
+        <Nav.Nav id="nav">
+          <Nav.NavContainer>
+            <Nav.NavBrand>
               <Link to={ROUTES.HOME}>
                 <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="MFS" />
               </Link>
-            </NavBrand>
-            <MobileNavItems id="mobile-nav-items">
+            </Nav.NavBrand>
+            <Nav.MobileNavItems id="mobile-nav-items">
               <NavbarToggler />
-            </MobileNavItems>
-          </NavContainer>
-        </Nav>
+            </Nav.MobileNavItems>
+          </Nav.NavContainer>
+        </Nav.Nav>
       ) : (
-        <Nav id="nav">
-          <NavContainer>
-            <NavBrand>
+        <Nav.Nav id="nav">
+          <Nav.NavContainer>
+            <Nav.NavBrand>
               <Link to={ROUTES.HOME}>
                 <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="MFS" />
               </Link>
-            </NavBrand>
-            <NavMenuItems id="nav-items">
+            </Nav.NavBrand>
+            <Nav.NavMenuItems id="nav-items">
               <Link to={ROUTES.HOME} className="header-link">
                 Home
               </Link>
@@ -298,92 +299,12 @@ const Header = ({ firestoreUser }) => {
                   <CartDropdown />
                 </>
               )}
-            </NavMenuItems>
-          </NavContainer>
-        </Nav>
+            </Nav.NavMenuItems>
+          </Nav.NavContainer>
+        </Nav.Nav>
       )}
     </>
   );
 };
-
-/* Styled Components */
-
- /**
-  * Normal navigation
-  */
-const Nav = styled.div`
-  margin: 0 auto;
-  padding: 0;
-  width: 100%;
-  position: fixed;
-  /* border-bottom: 2px solid #0d238e; */
-  background-color: #ffffff;
-  font-weight: 500;
-  z-index: 999;
-`;
-
-const NavContainer = styled.div`
-  margin: 0 auto;
-  max-width: 1080px;
-  padding-left: 20px;
-  padding-right: 20px;
-  text-align: right;
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-`
-
-const NavBrand = styled.div`
-  text-align: left;
-`
-
-const NavMenuItems = styled.div`
-  text-align: right;
-`;
-
- /**
-  * Mobile navigation
-  */
-const MobileNav = styled.div`
-  margin: 0 auto;
-  min-height: 100vh;
-  width: 100%;
-  z-index: 999;
-  position: fixed;
-  background-color: #ffffff;
-`;
-
-const MobileNavContainer = styled.div`
-  padding-top: 200px;
-  z-index: 999;
-  text-align: center;
-`;
-
-const MobileNavItems = styled.div`
-  /* padding-top: 18px; */
-`
-
-const MobileNavList = styled.ul`
-  list-style-type: none;
-`;
-
-const MobileNavListItem = styled.li`
-  font-size: 28px;
-  font-weight: 600;
-  color: #666666;
-  padding-bottom: 50px;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const MobileNavToggler = styled.span`
-  color: #666666;
-
-  &:hover {
-    cursor: pointer;
-    color: #0d238e;
-  }
-`;
 
 export default Header;
