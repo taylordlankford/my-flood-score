@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const SecondRowContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, auto);
-  grid-gap: 50px;
+  /* grid-template-columns: repeat(5, auto); */
+  grid-template-columns: repeat(auto-fit, minmax(100px, auto)) ;
+  grid-gap: 10px;
   margin: 0 auto;
   max-width: 1080px;
   padding-left: 20px;
@@ -27,7 +28,7 @@ export const SecondRowWrapper = styled.div`
     text-decoration: none !important;
   }
 
-  @media (min-width: 750px) and (max-width: 1029px) {
+  @media (min-width: 750px) and (max-width: 1079px) {
     height: 120px;
   }
 
@@ -36,7 +37,7 @@ export const SecondRowWrapper = styled.div`
   }
 
   @media (min-width: 409px) and (max-width: 705px) {
-    height: 160px;
+    height: 280px;
   }
 `;
 
