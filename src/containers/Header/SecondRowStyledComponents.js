@@ -29,14 +29,14 @@ export const SecondRowWrapper = styled.div`
   }
 
   @media (min-width: 750px) and (max-width: 1079px) {
-    height: 120px;
+    height: 100px;
   }
 
-  @media (min-width: 625px) and (max-width: 855px) {
-    height: 160px;
+  @media (min-width: 642px) and (max-width: 855px) {
+    height: 140px;
   }
 
-  @media (min-width: 409px) and (max-width: 705px) {
+  @media (min-width: 409px) and (max-width: 641px) {
     height: 280px;
   }
 `;

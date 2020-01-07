@@ -11,6 +11,7 @@ import { IoMdClose } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
 
 import * as Nav from './HeaderStyledComponents';
+import MobileNavMenu from './MobileNavMenu';
 
 const Header = ({ firestoreUser }) => {
   const { history } = useReactRouter()
@@ -18,7 +19,7 @@ const Header = ({ firestoreUser }) => {
   // Constants
   const MOBILE_BREAKPOINT = 1080
   const SHRINK_BREAKPOINT = 10
-  const TRANSITION_TIME   = 0.4
+  const TRANSITION_TIME   = 0.3
   const TIMING_FUNCTION   = 'ease-in-out'
 
   // States
@@ -197,55 +198,12 @@ const Header = ({ firestoreUser }) => {
   return (
     <>
       {/* Mobile Navigation */}
-      {showMobileNav == true ? (
-        <Nav.MobileNav id="mobileNav">
-          <Nav.MobileNavContainer>
-            <Nav.MobileNavList style={{ listStyleType: "none" }}>
-              <Nav.MobileNavListItem>
-                <Link onClick={e => gotolink(e, ROUTES.HOME)}>Home</Link>
-              </Nav.MobileNavListItem>
-              <Nav.MobileNavListItem>
-                <Link onClick={e => gotolink(e, ROUTES.HOME)}>About</Link>
-              </Nav.MobileNavListItem>
-              <Nav.MobileNavListItem>
-                <Link onClick={e => gotolink(e, ROUTES.DISCOVER_HOMEOWNER)}>
-                  Get Your FREE Flood Score
-                </Link>
-              </Nav.MobileNavListItem>
-              {firestoreUser ? (
-                <>
-                  <Nav.MobileNavListItem>
-                    <Link onClick={e => gotolink(e, ROUTES.ACCOUNT_DASHBOARD)}>
-                      Hi, {firestoreUser.firstName}
-                    </Link>
-                  </Nav.MobileNavListItem>
-                  <Nav.MobileNavListItem onClick={() => setShowMobileNav(false)}>
-                    <CartDropdown />
-                  </Nav.MobileNavListItem>
-                </>
-              ) : (
-                <>
-                  <Nav.MobileNavListItem>
-                    <Link onClick={e => gotolink(e, ROUTES.SIGN_IN)}>
-                      Login
-                    </Link>
-                  </Nav.MobileNavListItem>
-                  <Nav.MobileNavListItem>
-                    <Link onClick={e => gotolink(e, ROUTES.CHECKOUT_FREE)}>
-                      Sign Up
-                    </Link>
-                  </Nav.MobileNavListItem>
-                  <Nav.MobileNavListItem onClick={() => setShowMobileNav(false)}>
-                    <CartDropdown />
-                  </Nav.MobileNavListItem>
-                </>
-              )}
-            </Nav.MobileNavList>
-          </Nav.MobileNavContainer>
-        </Nav.MobileNav>
-      ) : (
-        <></>
-      )}
+      <MobileNavMenu
+        firestoreUser={firestoreUser}
+        showMobileNav={showMobileNav}
+        setShowMobileNav={setShowMobileNav}
+        gotolink={gotolink}
+      />
 
       {/* Non-mobile Navigation */}
       {lgBreakpoint == true ? (
