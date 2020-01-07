@@ -10,7 +10,7 @@ import CartDropdown from "./CartDropdown/CartDropdown";
 import { IoMdClose } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
 
-import * as Nav from './StyledComponents'
+import * as Nav from './HeaderStyledComponents';
 
 const Header = ({ firestoreUser }) => {
   const { history } = useReactRouter()
@@ -18,7 +18,7 @@ const Header = ({ firestoreUser }) => {
   // Constants
   const MOBILE_BREAKPOINT = 1080
   const SHRINK_BREAKPOINT = 10
-  const TRANSITION_TIME   = 0.2
+  const TRANSITION_TIME   = 0.4
   const TIMING_FUNCTION   = 'ease-in-out'
 
   // States
@@ -219,7 +219,7 @@ const Header = ({ firestoreUser }) => {
                       Hi, {firestoreUser.firstName}
                     </Link>
                   </Nav.MobileNavListItem>
-                  <Nav.MobileNavListItem>
+                  <Nav.MobileNavListItem onClick={() => setShowMobileNav(false)}>
                     <CartDropdown />
                   </Nav.MobileNavListItem>
                 </>
@@ -235,7 +235,7 @@ const Header = ({ firestoreUser }) => {
                       Sign Up
                     </Link>
                   </Nav.MobileNavListItem>
-                  <Nav.MobileNavListItem>
+                  <Nav.MobileNavListItem onClick={() => setShowMobileNav(false)}>
                     <CartDropdown />
                   </Nav.MobileNavListItem>
                 </>

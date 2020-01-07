@@ -120,25 +120,6 @@ a:active {
   border-color: black;
 }
 
-.links2 {
-  color: #55B96A;
-  font-weight: bold;
-  font-size: 18px;
-  text-decoration: none;
-  margin-right: 20px;
-  margin-left: 20px;
-}
-
-.links2:hover {
-  color: #66de80 !important;
-  cursor: pointer;
-}
-
-.links2logo {
-  width: 50px;
-  height: 50px;
-}
-
 .headerBottom {
   width: 100%;
   border-bottom: 8px;

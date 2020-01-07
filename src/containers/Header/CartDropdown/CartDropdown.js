@@ -49,7 +49,7 @@ const CartDropdown = (props) => {
         <div style={{ display: 'none' }}></div>
         :
         dropdownVisible && (
-          <CSSTransition in={dropdownVisible} classNames="cartdropdown-menu">
+          <CSSTransition timeout={500} in={dropdownVisible} classNames="cartdropdown-menu">
             <CartDropdownContent
               addedItems={addedItems}
               total={total}
