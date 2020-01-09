@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from "react";
 import useReactRouter from "use-react-router";
-import { Link } from "react-router-dom";
-import * as ROUTES from "../../routes/constants/routes";
-
 import "./Header.css";
-import MFS_Logo from "../../assets/images/MFS_Logo.png";
-
-import CartDropdown from "./CartDropdown/CartDropdown";
 import { IoMdClose } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
-
 import * as Nav from './HeaderStyledComponents';
 import MobileNavMenu from './MobileNavMenu';
+import { normalizeHeader, shrinkHeader } from './NavAnimations';
+import MainNav from './MainNav'
 
-const Header = ({ firestoreUser }) => {
+const Header = ({ firestoreUser, loading }) => {
   const { history } = useReactRouter()
 
   // Constants
   const MOBILE_BREAKPOINT = 1080
   const SHRINK_BREAKPOINT = 10
-  const TRANSITION_TIME   = 0.3
-  const TIMING_FUNCTION   = 'ease-in-out'
 
   // States
   const [lgBreakpoint, setLgBreakpoint]   = useState(window.innerWidth < MOBILE_BREAKPOINT)
@@ -47,74 +40,6 @@ const Header = ({ firestoreUser }) => {
       } else {
         nav.style.borderBottom = "2px solid #0d238e";
       }
-    }
-  }
-
-  /**
-   * Shrink the Header
-   */
-  const shrinkHeader = () => {
-    let nav            = document.getElementById("nav")
-    let navItems       = document.getElementById("nav-items")
-    let mobileNavItems = document.getElementById("mobile-nav-items")
-    let logo           = document.getElementById("logo")
-
-    if (nav != null) {
-      nav.style.height = "60px"
-      nav.style.transition = `all ${TRANSITION_TIME}s`
-      nav.style.transitionTimingFunction = `${TIMING_FUNCTION}`;
-    }
-
-    if (navItems != null) {
-      navItems.style.paddingTop = "15px";
-      navItems.style.transition = `all ${TRANSITION_TIME}s`
-      navItems.style.transitionTimingFunction = `${TIMING_FUNCTION}`
-    }
-
-    if (logo != null) {
-      logo.style.top = "-10px";
-      logo.style.transition = `all ${TRANSITION_TIME}s`
-      logo.style.transitionTimingFunction = `${TIMING_FUNCTION}`;
-    }
-
-    if (mobileNavItems != null) {
-      mobileNavItems.style.paddingTop = "5px"
-      mobileNavItems.style.transition = `all ${TRANSITION_TIME}s`
-      mobileNavItems.style.transitionTimingFunction = `${TIMING_FUNCTION}`;
-    }
-  }
-
-  /**
-   * Normalize the Header Nav style
-   */
-  const normalizeHeader = () => {
-    let nav            = document.getElementById("nav")
-    let navItems       = document.getElementById("nav-items")
-    let mobileNavItems = document.getElementById("mobile-nav-items")
-    let logo           = document.getElementById("logo")
-
-    if (nav != null) {
-      nav.style.height = "80px";
-      nav.style.transition = `all ${TRANSITION_TIME}s`
-      nav.style.transitionTimingFunction = `${TIMING_FUNCTION}`
-    }
-
-    if (navItems != null) {
-      navItems.style.paddingTop = "26px";
-      navItems.style.transition = `all ${TRANSITION_TIME}s`
-      navItems.style.transitionTimingFunction = `${TIMING_FUNCTION}`;
-    }
-
-    if (logo != null) {
-      logo.style.top = "0";
-      logo.style.transition = `all ${TRANSITION_TIME}s`;
-      logo.style.transitionTimingFunction = `${TIMING_FUNCTION}`
-    }
-
-    if (mobileNavItems != null) {
-      mobileNavItems.style.paddingTop = "16px"
-      mobileNavItems.style.transition = `all ${TRANSITION_TIME}s`;
-      mobileNavItems.style.transitionTimingFunction = `${TIMING_FUNCTION}`;
     }
   }
 
@@ -206,59 +131,13 @@ const Header = ({ firestoreUser }) => {
       />
 
       {/* Non-mobile Navigation */}
-      {lgBreakpoint == true ? (
-        <Nav.Nav id="nav">
-          <Nav.NavContainer>
-            <Nav.NavBrand>
-              <Link to={ROUTES.HOME}>
-                <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="MFS" />
-              </Link>
-            </Nav.NavBrand>
-            <Nav.MobileNavItems id="mobile-nav-items">
-              <NavbarToggler />
-            </Nav.MobileNavItems>
-          </Nav.NavContainer>
-        </Nav.Nav>
-      ) : (
-        <Nav.Nav id="nav">
-          <Nav.NavContainer>
-            <Nav.NavBrand>
-              <Link to={ROUTES.HOME}>
-                <img src={MFS_Logo} className="MFS-Logo" id="logo" alt="MFS" />
-              </Link>
-            </Nav.NavBrand>
-            <Nav.NavMenuItems id="nav-items">
-              <Link to={ROUTES.HOME} className="header-link">
-                Home
-              </Link>
-              <Link to={ROUTES.HOME} className="header-link">
-                About
-              </Link>
-              <Link to={ROUTES.DISCOVER_HOMEOWNER} className="header-link">
-                Get Your FREE Flood Score
-              </Link>
-              {firestoreUser ? (
-                <>
-                  <Link to={ROUTES.ACCOUNT_DASHBOARD} className="header-link">
-                    Hi, {firestoreUser.firstName}
-                  </Link>
-                  <CartDropdown />
-                </>
-              ) : (
-                <>
-                  <Link to={ROUTES.SIGN_IN} className="header-link">
-                    Login
-                  </Link>
-                  <Link to={ROUTES.CHECKOUT_FREE} className="header-link">
-                    Sign Up
-                  </Link>
-                  <CartDropdown />
-                </>
-              )}
-            </Nav.NavMenuItems>
-          </Nav.NavContainer>
-        </Nav.Nav>
-      )}
+      <MainNav
+        firestoreUser={firestoreUser}
+        loading={loading}
+        history={history}
+        lgBreakpoint={lgBreakpoint}
+        NavbarToggler={NavbarToggler}
+      />
     </>
   );
 };
