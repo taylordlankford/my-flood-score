@@ -136,6 +136,7 @@ class ScrollToTop extends React.Component {
 
 const GlobalWrapper = styled.div`
   padding-top: 80px;
+  min-height: 100vh;
 `
 
 const ScrollToTopWithRouter = withRouter(ScrollToTop)
