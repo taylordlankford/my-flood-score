@@ -45,9 +45,8 @@ import Report from './containers/Reports/Report'
 
 import Account from './containers/Account/Account'
 
-// import * as ROUTES from './constants/routes'
 import * as ROUTES from './routes/constants/routes'
-import { useFirestoreUser, useStateValue} from './hooks'
+import { useFirestoreUser, useStateValue, useFirebase } from './hooks'
 import './App.css'
 import styled from "styled-components";
 
@@ -55,6 +54,8 @@ const App = () => {
   const [{ user, error }, dispatch] = useStateValue()
   const userData = useFirestoreUser()
   const { firestoreUser, loading } = userData
+  const firebase = useFirebase()
+  const authUser = firebase.auth.currentUser
 
   if (user !== firestoreUser) {
     dispatch({
@@ -66,7 +67,7 @@ const App = () => {
   return (
     <Router>
       <ScrollToTopWithRouter>
-        <Header firestoreUser={firestoreUser} loading={loading} />
+        <Header firestoreUser={firestoreUser} loading={loading} authUser={authUser} />
         {error && <Alert className="sticky error" variant={'danger'}>{error}</Alert>}
 
         <Route

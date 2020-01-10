@@ -1,7 +1,6 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import * as ROUTES from "../../routes/constants/routes";
-import * as Nav from './HeaderStyledComponents';
+import * as Nav from './StyledComponents/Header';
 import CartDropdown from "./CartDropdown/CartDropdown";
 
 const MobileNavMenu = (props) => {

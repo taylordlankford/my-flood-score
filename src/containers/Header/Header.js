@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import useReactRouter from "use-react-router";
-import "./Header.css";
 import { IoMdClose } from "react-icons/io";
 import { MdMenu } from "react-icons/md";
-import * as Nav from './HeaderStyledComponents';
+import * as Nav from './StyledComponents/Header';
 import MobileNavMenu from './MobileNavMenu';
 import { normalizeHeader, shrinkHeader } from './NavAnimations';
 import MainNav from './MainNav'
 
-const Header = ({ firestoreUser, loading }) => {
+const Header = ({ firestoreUser, loading, authUser }) => {
   const { history } = useReactRouter()
 
   // Constants
@@ -137,6 +136,7 @@ const Header = ({ firestoreUser, loading }) => {
         history={history}
         lgBreakpoint={lgBreakpoint}
         NavbarToggler={NavbarToggler}
+        authUser={authUser}
       />
     </>
   );
