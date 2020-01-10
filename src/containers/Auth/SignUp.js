@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import useReactRouter from 'use-react-router'
 import { Link } from 'react-router-dom'
-
 import * as ROUTES from '../../routes/constants/routes'
 import { useFirebase } from '../../hooks'
-
 import Container from 'react-bootstrap/Container'
 
 const SignUpPage = () => {
@@ -32,6 +30,16 @@ const SignUpPage = () => {
         console.log('on signUp authUser:', authUser)
         firebase.doSignInWithEmailAndPassword(email, passwordOne)
         .then(data => {
+          // Update display name
+          let currentUser = firebase.auth().currentUser;
+          currentUser.updateProfile({
+            displayName: firstName
+          }).then(() => {
+            console.log('Successfully updated display name.')
+          }).catch(error => {
+            console.log(error)
+          })
+
           const authUser = data.user
           console.log('authUser after sing in', authUser)
           const collection = 'users'

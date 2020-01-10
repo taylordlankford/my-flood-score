@@ -17,6 +17,7 @@ import Fire from './fire'
 import { FirebaseContext, StateProvider } from './hooks'
 import cartReducer from './redux/reducers/cartReducer'
 import notification from './redux/reducers/notification'
+import userReducer from './redux/reducers/userReducer'
 
 
 WebFont.load({
@@ -33,9 +34,9 @@ const persistConfig = {
   storage
 }
 
-const combinedReducers = combineReducers({ cartReducer, notification});
+const combinedReducers = combineReducers({ cartReducer, notification, userReducer});
 const persistedReducer = persistReducer(persistConfig, combinedReducers)
-const store = createStore(persistedReducer);
+const store = createStore(persistedReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 const persistor = persistStore(store)
 
 

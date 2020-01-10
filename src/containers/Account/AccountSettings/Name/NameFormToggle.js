@@ -4,8 +4,9 @@ import { Container, LinkPrimary } from "../../../../StyledComponents/StyledCompo
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import NameForm from "./NameForm";
+import { update } from "../../../../redux/actions/userActions";
 import { pushSuccess, pushWarning } from "../../../../redux/actions/notificationActions";
-import { useFirebase } from "../../../../hooks"
+// import { useFirebase } from "../../../../hooks"
 
 const NameFormToggle = props => {
   const [showNameForm, setShowNameForm] = useState(false);
@@ -40,6 +41,7 @@ const NameFormToggle = props => {
       displayName: updatedUser.firstName
     }).then(() => {
      dispatch(pushSuccess("Successfully updated name."));
+     dispatch(update())
     }).catch(error => {
      dispatch(pushWarning('', error));
     })

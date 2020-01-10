@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import * as ROUTES from "../../routes/constants/routes";
 import * as Nav from './StyledComponents/Header';
 import MFS_Logo from "../../assets/images/MFS_Logo.png";
 import CartDropdown from "./CartDropdown/CartDropdown";
 import styled from "styled-components";
+import UserDisplayName from '../../components/UserDisplayName/UserDisplayName';
 
 const MainNav = (props) => {
   const {
@@ -15,14 +16,6 @@ const MainNav = (props) => {
     authUser
   } = props
 
-  const [userPlaceholder, setUserPlaceholder] = useState('')
-
-  useEffect(() => {
-    if (authUser != null) {
-      setUserPlaceholder(`Hi, ${authUser.displayName}`)
-    }
-  })
-  
   return (
     <>
       {lgBreakpoint == true ? (
@@ -57,14 +50,11 @@ const MainNav = (props) => {
                   </>
                 ) : (
                     <></>
-                  )}
+                )}
                 {(loading == false && firestoreUser != null) ? (
-                  <A onClick={() => history.push(ROUTES.ACCOUNT_DASHBOARD)}>
-                    {userPlaceholder}
-                  </A>
+                  <UserDisplayName />
                 ) : (
-                  <>
-                  </>
+                  <></>
                 )}
                 <CartDropdown />
               </Nav.NavMenuItems>
