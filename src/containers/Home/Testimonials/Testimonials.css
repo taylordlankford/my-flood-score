@@ -11,7 +11,7 @@
 }
 
 .carousel-container {
-  padding-top: 30px;
+  padding-top: 10px;
   border-color: #55B96A;
   color: #ffffff;
   top: 0;
@@ -35,12 +35,13 @@
 
 .carousel-item {
   text-align: center;
-
 }
 
 .carousel-item-container {
   margin: 0 auto;
   max-width: 840px;
+  font-size: 19px;
+  font-weight: 500;
 }
 
 .carousel-caption-header {

@@ -4,7 +4,8 @@ import { Container, LinkPrimary } from "../../../../StyledComponents/StyledCompo
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import NameForm from "./NameForm";
-import { pushSuccess } from "../../../../redux/actions/notificationActions";
+import { pushSuccess, pushWarning } from "../../../../redux/actions/notificationActions";
+import { useFirebase } from "../../../../hooks"
 
 const NameFormToggle = props => {
   const [showNameForm, setShowNameForm] = useState(false);
@@ -28,8 +29,21 @@ const NameFormToggle = props => {
       lastName
     };
 
+    // Update the Firestore User
     props.firebase.doFirestoreSet("users", firestoreUser.uid, updatedUser);
+
+    // Update the Auth User
+    let user = props.firebase.auth.currentUser;
     const currentUser = firestoreUser;
+
+    user.updateProfile({
+      displayName: updatedUser.firstName
+    }).then(() => {
+     dispatch(pushSuccess("Successfully updated name."));
+    }).catch(error => {
+     dispatch(pushWarning('', error));
+    })
+
     dispatch(pushSuccess("Successfully updated name.", currentUser));
     setShowNameForm(false);
   };

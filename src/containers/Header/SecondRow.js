@@ -14,7 +14,7 @@ import {
   ServiceLink,
   ServiceImg,
   ServiceName
-} from './SecondRowStyledComponents'
+} from './StyledComponents/SecondRow'
 
 const SecondRow = () => {
   const { history } = useReactRouter()
