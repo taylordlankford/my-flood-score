@@ -1,49 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import useReactRouter from "use-react-router";
 import { useSelector } from 'react-redux'
 import * as ROUTES from '../../routes/constants/routes'
 import styled from 'styled-components'
-import { useFirebase, useFirestoreUser } from '../../hooks'
 
-const UserDisplayName = () => {
+const UserDisplayName = (props) => {
+  const { displayName } = props.authUser
   const { history } = useReactRouter()
-  const firebase = useFirebase()
-  const userData = useFirestoreUser()
-  const { firestoreUser } = userData
-  const userReducer = useSelector(state => state.userReducer)
-  const [displayName, setDisplayName] = useState(``)
-
-  useEffect(() => {
-    console.log('firestore user: ', firestoreUser)
-    console.log('firebase user: ', firebase.auth.currentUser)
-
-    if (userReducer.update == true) {
-      updateDisplayName()
-    } else {
-      setDisplayName(`Hi, ${firebase.auth.currentUser.displayName}`)
-    }
-
-    // Only re-mount when we detect change on the firestoreUser or the redux
-    // action changes.
-  }, [firebase, firestoreUser, userReducer])
-
-  const updateDisplayName = () => {
-    let currentUser = firebase.auth.currentUser
-    if (currentUser!= null && firestoreUser != null) {
-      currentUser.updateProfile({
-        displayName: firestoreUser.firstName
-      }).then(() => {
-        setDisplayName(`Hi, ${currentUser.displayName}`)
-        console.log('success')
-      }).catch(error => {
-        console.log(error)
-      })
-    }
-  }
 
   return (
     <A onClick={() => history.push(ROUTES.ACCOUNT_DASHBOARD)}>
-      {displayName}
+      {`Hi, ${displayName}`}
     </A>
   )
 }

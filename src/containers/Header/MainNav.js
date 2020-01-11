@@ -5,20 +5,19 @@ import MFS_Logo from "../../assets/images/MFS_Logo.png";
 import CartDropdown from "./CartDropdown/CartDropdown";
 import styled from "styled-components";
 import UserDisplayName from '../../components/UserDisplayName/UserDisplayName';
+import { useFirebaseAuthentication } from '../../hooks'
 
 const MainNav = (props) => {
   const {
-    firestoreUser,
-    loading,
     history,
     lgBreakpoint,
     NavbarToggler,
-    authUser
   } = props
 
+  const authUser = useFirebaseAuthentication()
   return (
     <>
-      {lgBreakpoint == true ? (
+      {lgBreakpoint === true ? (
         <Nav.Nav id="nav">
           <Nav.NavContainer>
             <Nav.NavBrand>
@@ -43,7 +42,7 @@ const MainNav = (props) => {
                 <A onClick={() => history.push(ROUTES.HOME)}>Home</A>
                 <A onClick={() => history.push(ROUTES.HOME)}>About</A>
                 <A onClick={() => history.push(ROUTES.DISCOVER_HOMEOWNER)}>Get Your FREE Flood Score</A>
-                {(loading == false && firestoreUser == null) ? (
+                {(authUser === 'null') ? (
                   <>
                     <A onClick={() => history.push(ROUTES.SIGN_IN)}>Login</A>
                     <A onClick={() => history.push(ROUTES.CHECKOUT_FREE)}>Sign Up</A>
@@ -51,8 +50,8 @@ const MainNav = (props) => {
                 ) : (
                     <></>
                 )}
-                {(loading == false && firestoreUser != null) ? (
-                  <UserDisplayName />
+                {(authUser !== null && authUser !== 'null') ? (
+                  <UserDisplayName authUser={authUser} />
                 ) : (
                   <></>
                 )}

@@ -51,7 +51,7 @@ export const useFirebaseAuthentication = () => {
         authUser => {
           authUser
             ? setAuthUser(authUser)
-            : setAuthUser(null)
+            : setAuthUser('null')
         },
      )
      return () => {
@@ -65,7 +65,7 @@ export const useFirebaseAuthentication = () => {
 export const useFirestoreUser = () => {
   const authUser = useFirebaseAuthentication()
   const firebase = useFirebase()
-  const uid = authUser ? authUser.uid : null
+  const uid = (authUser !== null && authUser !== 'null') ? authUser.uid : null
   // initialize our default state
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)

@@ -7,7 +7,7 @@ import MobileNavMenu from './MobileNavMenu';
 import { normalizeHeader, shrinkHeader } from './NavAnimations';
 import MainNav from './MainNav'
 
-const Header = ({ firestoreUser, loading, authUser }) => {
+const Header = ({ firestoreUser }) => {
   const { history } = useReactRouter()
 
   // Constants
@@ -131,12 +131,11 @@ const Header = ({ firestoreUser, loading, authUser }) => {
 
       {/* Non-mobile Navigation */}
       <MainNav
-        firestoreUser={firestoreUser}
-        loading={loading}
+        // firestoreUser={firestoreUser}
+        // loading={loading}
         history={history}
         lgBreakpoint={lgBreakpoint}
         NavbarToggler={NavbarToggler}
-        authUser={authUser}
       />
     </>
   );
