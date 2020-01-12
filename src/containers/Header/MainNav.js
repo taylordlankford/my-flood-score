@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import * as ROUTES from "../../routes/constants/routes";
 import * as Nav from './StyledComponents/Header';
 import MFS_Logo from "../../assets/images/MFS_Logo.png";
@@ -6,6 +6,8 @@ import CartDropdown from "./CartDropdown/CartDropdown";
 import styled from "styled-components";
 import UserDisplayName from '../../components/UserDisplayName/UserDisplayName';
 import { useFirebaseAuthentication } from '../../hooks'
+import { useDispatch } from 'react-redux'
+import { update } from '../../redux/actions/userActions'
 
 const MainNav = (props) => {
   const {
@@ -14,7 +16,16 @@ const MainNav = (props) => {
     NavbarToggler,
   } = props
 
+  const dispatch = useDispatch()
   const authUser = useFirebaseAuthentication()
+
+  useEffect(() => {
+    // Ensures the redux displayName won't be null.
+    if (authUser != null) {
+      dispatch(update(authUser.displayName))
+    }
+  }, [authUser])
+
   return (
     <>
       {lgBreakpoint === true ? (
@@ -42,19 +53,20 @@ const MainNav = (props) => {
                 <A onClick={() => history.push(ROUTES.HOME)}>Home</A>
                 <A onClick={() => history.push(ROUTES.HOME)}>About</A>
                 <A onClick={() => history.push(ROUTES.DISCOVER_HOMEOWNER)}>Get Your FREE Flood Score</A>
+                {console.log(authUser)}
                 {(authUser === 'null') ? (
                   <>
                     <A onClick={() => history.push(ROUTES.SIGN_IN)}>Login</A>
                     <A onClick={() => history.push(ROUTES.CHECKOUT_FREE)}>Sign Up</A>
                   </>
                 ) : (
-                    <></>
+                  <><UserDisplayName authUser={authUser} /></>
                 )}
-                {(authUser !== null && authUser !== 'null') ? (
+                {/*(authUser !== null && authUser !== 'null') ? (
                   <UserDisplayName authUser={authUser} />
                 ) : (
                   <></>
-                )}
+                )*/}
                 <CartDropdown />
               </Nav.NavMenuItems>
             </Nav.NavContainer>

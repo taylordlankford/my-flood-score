@@ -30,16 +30,6 @@ const SignUpPage = () => {
         console.log('on signUp authUser:', authUser)
         firebase.doSignInWithEmailAndPassword(email, passwordOne)
         .then(data => {
-          // Update display name
-          let currentUser = firebase.auth().currentUser;
-          currentUser.updateProfile({
-            displayName: firstName
-          }).then(() => {
-            console.log('Successfully updated display name.')
-          }).catch(error => {
-            console.log(error)
-          })
-
           const authUser = data.user
           console.log('authUser after sing in', authUser)
           const collection = 'users'

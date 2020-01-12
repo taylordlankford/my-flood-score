@@ -7,8 +7,12 @@ import { userInitState } from '../userInitState'
 const userReducer = (state = userInitState, action) => {
   switch (action.type) {
     case UPDATE: {
-      let update = true
-      return { update }
+      let prevState = state
+      let displayName = action.displayName
+      return {
+        ...prevState,
+        displayName
+      }
     }
     default: 
       return state

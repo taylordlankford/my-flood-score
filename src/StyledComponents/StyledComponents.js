@@ -2,6 +2,33 @@
 // For components that are commonly used throughout the application.
 import styled from "styled-components";
 
+export const HeaderLink = styled.span`
+  padding-top: 10px;
+  margin: 18px;
+  text-decoration: none;
+  color: #666666;
+  font-size: 18px;
+
+  &:link {
+    text-decoration: none;
+  }
+
+  &:visited {
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: #0d238e;
+    transition: 0.5s !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+  }
+
+  &:active {
+    text-decoration: underline;
+  }
+`
+
 export const SubscriptionNotice = styled.div`
   margin-top: 20px;
   padding: 20px;
