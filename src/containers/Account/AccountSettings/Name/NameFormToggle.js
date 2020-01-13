@@ -6,7 +6,6 @@ import Col from "react-bootstrap/Col";
 import NameForm from "./NameForm";
 import { update } from "../../../../redux/actions/userActions";
 import { pushSuccess, pushWarning } from "../../../../redux/actions/notificationActions";
-// import { useFirebase } from "../../../../hooks"
 
 const NameFormToggle = props => {
   const [showNameForm, setShowNameForm] = useState(false);
@@ -34,14 +33,14 @@ const NameFormToggle = props => {
     props.firebase.doFirestoreSet("users", firestoreUser.uid, updatedUser);
 
     // Update the Auth User
-    let user = props.firebase.auth.currentUser;
+    let authUser = props.firebase.auth.currentUser;
     const currentUser = firestoreUser;
 
-    user.updateProfile({
+    authUser.updateProfile({
       displayName: updatedUser.firstName
     }).then(() => {
      dispatch(pushSuccess("Successfully updated name."));
-     dispatch(update())
+     dispatch(update(authUser.displayName))
     }).catch(error => {
      dispatch(pushWarning('', error));
     })
