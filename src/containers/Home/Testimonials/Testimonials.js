@@ -23,7 +23,7 @@ export default function Testimonials(props) {
       contentClassName="parallax-content"
       bgImage={TestimonialImage}
       bgImageAlt="testimonial-image"
-      strength={1000}>
+      strength={500}>
       <div className="carousel-wrapper">
         <TestimonialTitle testimonialTitle={testimonialTitle} />
         <TestimonialCaption

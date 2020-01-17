@@ -47,3 +47,6 @@ export const EDIT_ACCOUNT_SETTINGS = "/account/edit-account-settings";
 export const ACCOUNT_REPORTS = "/account/reports";
 export const GET_REPORT = "/get-report";
 export const REPORT = "/report";
+
+export const SEARCH_ELIGIBILITY = "/search-eligibility"
+export const ELIGIBILITY_RECOMMENDATION = "/elgibility-recommendation"

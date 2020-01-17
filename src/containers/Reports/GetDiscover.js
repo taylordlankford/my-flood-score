@@ -37,7 +37,7 @@ const GetDiscover = (props) => {
     setAddress(newValue)
   }
 
-  const handleGetReport = async () => {
+  const handleGetReport = async () =>{
     // get the address's propertyRef
     const properties = await firebase.doFirestoreAddressRefGet(address)
     // create report

@@ -45,6 +45,9 @@ import Report from './containers/Reports/Report'
 
 import Account from './containers/Account/Account'
 
+import Eligibility from './containers/Eligibilty/Eligibility'
+import Recommendation from './containers/Eligibilty/Recommendation/Recommendation'
+
 import * as ROUTES from './routes/constants/routes'
 import { useFirestoreUser, useFirebaseAuthentication, useStateValue, useFirebase } from './hooks'
 import './App.css'
@@ -108,6 +111,9 @@ const App = () => {
 
                 <Route path={ROUTES.ACCOUNT} component={Account} />
 
+                <Route path={ROUTES.SEARCH_ELIGIBILITY} component={Eligibility} />
+                <Route path={ROUTES.ELIGIBILITY_RECOMMENDATION} component={Recommendation} />
+
                 <Route render={() => <div>Not Found</div>} />
               </Switch>
             </GlobalWrapper>
@@ -134,7 +140,9 @@ class ScrollToTop extends React.Component {
   }
 }
 
-const GlobalWrapper = styled.div`
+const GlobalWrapper = styled.div.attrs({
+  id: 'global-wrapper'
+})`
   padding-top: 80px;
   min-height: 100vh;
 `

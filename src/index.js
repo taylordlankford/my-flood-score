@@ -25,6 +25,7 @@ WebFont.load({
     families: [
       'Montserrat:400,500,600,700,800', 'sans-serif',
       'Montserrat+Alternates:400,500,600,700', 'sans-serif',
+      'Merriweather:300,300i,400,400i,700,700i,900,900i', 'serif',
     ]
   }
 });
