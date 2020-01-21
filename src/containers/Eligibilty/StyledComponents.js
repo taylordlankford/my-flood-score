@@ -5,7 +5,7 @@ export const ParallaxWrapper = styled.div`
 
 export const ParallaxContainer = styled.div`
   min-height: 100vh;
-  padding-top: 50px;
+  padding-top: 60px;
   padding-bottom: 50px;
   margin: 0 auto;
   max-width: 1080px;
@@ -14,27 +14,32 @@ export const ParallaxContainer = styled.div`
 
 export const MainTitle = styled.div`
   color: #ffffff;
-  font-family: 'Merriweather', serif;
-  font-size: 78px;
-  font-weight: 100;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 54px;
+  font-weight: 600;
   text-transform: capitalize;
   line-height: 1.2em;
   text-align: center;
+  margin: 0 auto;
+  max-width: 920px;
 `
 
 export const Subtitle = styled.div`
   color: #ffffff;
   font-size: 22px;
+  font-weight: 500;
   text-align: center;
   padding-top: 40px;
   margin: 0 auto;
-  max-width: 620px;
+  max-width: 820px;
   padding-bottom: 60px;
 `
 
 export const AutoSuggestWrapper = styled.div`
   display: grid;
   grid-template-columns: 9fr 1fr;
+  padding-left: 50px;
+  padding-right: 50px;
 `
 
 export const AutoSuggestContainer = styled.div`

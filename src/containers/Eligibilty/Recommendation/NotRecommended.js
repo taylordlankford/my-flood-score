@@ -2,12 +2,11 @@ import React from 'react'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
-import { FaCheck } from 'react-icons/fa'
 import * as S from './StyledComponents'
 import ExamineSvg from '../../../assets/images/Examine.svg'
-import CategoryPills from './CategoryPills'
+import { FaCheck } from 'react-icons/fa'
 
-const Low = (props) => {
+const NotRecommended = (props) => {
   const {
     getLOMARecommendation,
     LOMARating,
@@ -20,16 +19,15 @@ const Low = (props) => {
     <>
       <div style={{ paddingBottom: "40px" }}>
         <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
-          This property has a “low” likelihood of benefiting from a Letter of Map Amendment.
+          It is not recommended to pursue a Letter of Map Amendment for this property
         </h3>
       </div>
       <Row sm={12}>
         <Col sm={6}>
           <hr style={{ border: "3px solid #C7AE4A", marginBottom: "40px" }} />
-          <CategoryPills
-            getLOMARecommendation={getLOMARecommendation}
-            LOMARating={LOMARating}
-          />
+          <div style={{ margin: "0 auto", maxWidth: "140px" }}>
+            <S.NotRecommendedBlock>Not Recommended</S.NotRecommendedBlock>
+          </div>
           <InfoBox
             selectedAddress={selectedAddress}
             propertyData={propertyData}
@@ -69,7 +67,7 @@ const InfoBox = ({ selectedAddress, propertyData }) => {
     <div style={{ paddingBottom: "20px", paddingTop: "20px" }}>
       <ul style={{ listStyleType: "none" }}>
         <li style={{ marginBottom: "20px" }}><FaCheck />PROPERTY ADDRESS: {selectedAddress}</li>
-        <li style={{ marginBottom: "20px" }}><FaCheck />FEMA FLOOD ZONE: {propertyData.FEMA_ZONE.stringValue.slice(0, 2)}</li>
+        <li style={{ marginBottom: "20px" }}><FaCheck />FEMA FLOOD ZONE: {propertyData.FEMA_ZONE.stringValue.slice(0, 1)}</li>
         <li style={{ marginBottom: "20px" }}><FaCheck />LIKELIHOOD YOU ARE WRONGLY MAPPED: LOW</li>
         <li style={{ marginBottom: "20px" }}>
           <FaCheck />BASIS OF THIS DETERMINATION:
@@ -82,39 +80,6 @@ const InfoBox = ({ selectedAddress, propertyData }) => {
     </div>
   );
 }
-
-/*
-const ZoneBox = ({ LOMACategory, femaZone }) => {
-  return (
-    <Row sm={12}>
-      <Col sm={6}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', marginBottom: '10px' }}>
-          <div style={{ border: '1px solid #666666', padding: '10px 20px 10px 20px', backgroundColor: '#d0d8f5' }}>
-            Flood Risk
-          </div>
-          <div style={{ backgroundColor: '#9FE6A7', height: '38px', marginTop: '2px', border: '1px solid #666666', borderLeft: 'none', padding: '10px 10px 10px 10px', textAlign: 'center' }}>
-            {LOMACategory === 'N/A' ? 'Low' : 'Low'}
-          </div>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr' }}>
-          <div style={{ border: '1px solid #666666', padding: '10px 20px 10px 20px', backgroundColor: '#d0d8f5' }}>
-            FEMA Flood Zone
-          </div>
-          <div style={{ backgroundColor: '#9FE6A7', height: '38px', marginTop: '2px', border: '1px solid #666666', borderLeft: 'none', padding: '10px 10px 10px 10px', textAlign: 'center' }}>
-            {femaZone.slice(0, 1)}
-          </div>
-        </div>
-      </Col>
-      <Col sm={6}>
-        <p>
-          Located in a FEMA low-risk flood zone, <b>Zone X</b>, an area of minimal
-          flooding. Flooding is unlikely in the 100-year rainfall event. Flood
-          insurance for this property would most likely <b>NOT</b> be required.
-        </p>
-      </Col>
-    </Row>
-  )
-} */
 
 const LearnMoreBox = ({ title, text, disclaimer, img }) => {
   return (
@@ -143,7 +108,7 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              <Button style={{ backgroundColor: "#C7AE4A" }}>Learn More</Button>
+              <Button style={{ backgroundColor: "#C7AE4A" }}><span style={{ color: "#000" }}>Learn More</span></Button>
             </a>
           </div>
         </Col>
@@ -176,7 +141,7 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              <Button style={{ backgroundColor: "#C7AE4A" }}>Learn More</Button>
+              <Button style={{ backgroundColor: "#C7AE4A" }}><span style={{ color: "#000" }}>Learn More</span></Button>
             </a>
           </div>
         </Col>
@@ -185,4 +150,4 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
   );
 }
 
-export default Low
+export default NotRecommended

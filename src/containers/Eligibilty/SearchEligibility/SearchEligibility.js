@@ -23,9 +23,10 @@ const SearchEligibility = () => {
   const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
     console.log('selected', suggestion)
     if (firestoreUser) {
-      history.push(ROUTES.ELIGIBILITY_RECOMMENDATION, { selected: suggestion })
+      // history.push(ROUTES.ELIGIBILITY_RECOMMENDATION, { selected: suggestion })
+      history.push(ROUTES.SCREENING, { selected: suggestion })
     } else {
-      history.push(ROUTES.ELIGIBILITY_RECOMMENDATION, { selected: suggestion })
+      history.push(ROUTES.SCREENING, { selected: suggestion })
     }
   }
 
@@ -42,7 +43,7 @@ const SearchEligibility = () => {
       </AutoSuggestContainer>
       <div>
         <IframeSearchBtn>
-          Search
+          Proceed 
         </IframeSearchBtn>
       </div>
     </AutoSuggestWrapper>
