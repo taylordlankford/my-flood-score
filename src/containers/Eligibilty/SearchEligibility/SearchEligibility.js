@@ -1,32 +1,46 @@
-import React, { useState } from 'react'
-import * as ROUTES from '../../../routes/constants/routes'
-import useReactRouter from 'use-react-router'
+import React, { useEffect, useState } from "react";
+import * as ROUTES from "../../../routes/constants/routes";
+import useReactRouter from "use-react-router";
 import {
   menuStyle,
   autosuggestTheme,
   AutoSuggestWrapper,
   AutoSuggestContainer,
   IframeSearchBtn
-} from '../StyledComponents'
-import AutoSuggest from '../../../components/AutoSuggest/AutoSuggest'
-import { useFirestoreUser, useFirebase } from '../../../hooks'
+} from "../StyledComponents";
+import AutoSuggest from "../../../components/AutoSuggest/AutoSuggest";
+import { useFirestoreUser, useFirebase } from "../../../hooks";
 
 const SearchEligibility = () => {
   // Hooks
-  const { history } = useReactRouter()
-  const { firestoreUser } = useFirestoreUser()
-  const firebase = useFirebase()
+  const { history } = useReactRouter();
+  const { firestoreUser } = useFirestoreUser();
+  const firebase = useFirebase();
 
   // States
-  const [selectedSuggestion, setSelectedSuggestion] = useState('')
+  const [selectedAddress, setSelectedAddress] = useState("");
+
+  useEffect(() => {
+  })
 
   const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
-    console.log('selected', suggestion)
+    console.log("selected", suggestion);
+    setSelectedAddress(suggestion)
+    console.log("Selected Address ==> ", selectedAddress)
+    // if (firestoreUser) {
+    //   // history.push(ROUTES.ELIGIBILITY_RECOMMENDATION, { selected: suggestion })
+    //   history.push(ROUTES.SCREENING, { selected: suggestion });
+    // } else {
+    //   history.push(ROUTES.SCREENING, { selected: suggestion });
+    // }
+  };
+
+  const handleOnClick = (e) => {
     if (firestoreUser) {
       // history.push(ROUTES.ELIGIBILITY_RECOMMENDATION, { selected: suggestion })
-      history.push(ROUTES.SCREENING, { selected: suggestion })
+      history.push(ROUTES.SCREENING, { selected: selectedAddress });
     } else {
-      history.push(ROUTES.SCREENING, { selected: suggestion })
+      history.push(ROUTES.SCREENING, { selected: selectedAddress });
     }
   }
 
@@ -42,12 +56,10 @@ const SearchEligibility = () => {
         />
       </AutoSuggestContainer>
       <div>
-        <IframeSearchBtn>
-          Proceed 
-        </IframeSearchBtn>
+        <IframeSearchBtn onClick={e => handleOnClick(e)}>Proceed</IframeSearchBtn>
       </div>
     </AutoSuggestWrapper>
-  )
-}
+  );
+};
 
-export default SearchEligibility
+export default SearchEligibility;
