@@ -11,7 +11,8 @@ import sampleComparePDF1 from '../../../assets/pdfs/sample-snapshot-double-compa
 import sampleComparePDF2 from '../../../assets/pdfs/sample-snapshot-single-compare.pdf'
 import sampleCompare from '../../../assets/images/sample-snapshot.jpg'
 import SecondRow from '../../Header/SecondRow'
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../routes/constants/routes'
+// import * as ROUTES from '../../../constants/routes'
 
 import CompareOptions from '../../Options/CompareOptions'
 

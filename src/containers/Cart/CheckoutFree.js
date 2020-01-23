@@ -10,7 +10,8 @@ import Col from 'react-bootstrap/Col'
 import Alert from 'react-bootstrap/Alert'
 
 import './Cart.css'
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 import { useFirebase, useStateValue } from '../../hooks'
 
 import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
@@ -265,7 +266,7 @@ const CheckoutFree = (props) => {
   const [orderComplete, setOrderComplete] = useState(false)
   return (
   <div>
-    <Container style={{ 'marginTop': '64px' }}>
+    <Container style={{ 'paddingTop': '64px' }}>
       <Row>
         <Col>
           <h3 style={{ color: '#0D238E', fontWeight: 'bold', margin: '0 0 1.5rem' }} >Sign Up</h3>

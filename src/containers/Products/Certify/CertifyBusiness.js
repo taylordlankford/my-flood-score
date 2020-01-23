@@ -1,26 +1,18 @@
 import React from 'react'
-import useReactRouter from 'use-react-router'
-import styled from 'styled-components'
+import { connect } from 'react-redux'
+import '../Products.css'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-
-import '../Products.css'
-import Certificate from '../../../assets/images/Certificate.svg'
-
 import ProductBox from '../../../components/Product/ProductBox' 
 import Details from '../../../components/Product/Details'
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../routes/constants/routes'
+import Certificate from '../../../assets/images/Certificate.svg'
 
-const CertifyBusiness = () => {
-  const { history } = useReactRouter()
+const CertifyBusiness = (props) => {
+  const { items } = props
   const data = {
-    title: "Certify – Business",
-    price: {
-      type: 'Month',
-      amount: 10.00,
-    },
     category: {
       name: "Business",
       link: ROUTES.CERTIFY_BUSINESS,
@@ -35,52 +27,41 @@ const CertifyBusiness = () => {
         link: ROUTES.CERTIFY_BUSINESS
       },
     ],
-  } // end Product Box Data
+  }
+
   const tabData = [
     {
       title: "Description",
       data: {
         bullets: [
-          (<LI key="1">Flood Score</LI>),
-          (<LI key="2">Latest and Best Available Flood modeling</LI>),
-          (<LI key="3">FEMA Flone Zone category</LI>),
+          (<li className="tab-data-list" key="1">Flood Score</li>),
+          (<li className="tab-data-list" key="2">Latest and Best Available Flood modeling</li>),
+          (<li className="tab-data-list" key="3">FEMA Flone Zone category</li>),
         ]
       }
     }
   ] // end Tab Data
+
   return (
-  <div>
-    <Container style={{ 'marginTop': '64px' }}>
+    <Container style={{ paddingTop: '64px' }}>
       <Row>
         <Col sm={8}>
           <ProductBox
-            handleAddToCart={() => history.push(ROUTES.CHECKOUT)}
-            title={data.title}
+            item={items[9]}
             category={data.category}
             breadcrumb={data.breadcrumb}
-            price={data.price}
-            img={Certificate}
-          />
+            img={Certificate} />
           <Details
-            tabData={tabData}
-          />
+            tabData={tabData} />
         </Col>
         <Col sm={4}>
           {/* Side Bar */}
         </Col>
       </Row>
     </Container>
-  </div>
   )
 }
 
-const LI = styled.li`
-  color: #666666;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 35px;
-  margin-left: 16px;
-`;
+const mapStateToProps = (state) => ({ items: state.cartReducer.items })
 
-export default CertifyBusiness
+export default connect(mapStateToProps)(CertifyBusiness)

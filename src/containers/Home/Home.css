@@ -33,18 +33,13 @@
 
 .headlineWrapper {
   margin: 0 auto;
-  max-width: 1120px;
 }
 
 .headlineContainer {
   position: absolute;
   flex-direction: column;
   padding-top: 50px;
-  /*
-  margin: 0 -1.6rem;
-  padding: 5rem 10rem;
-  width: 84%;
-   */
+  padding-bottom: 50px;
 }
 
 .container img{
@@ -87,15 +82,21 @@
   max-width: 720px;
 }
 
-.video{
-  justify-content: center;
-  background-color: #f4f4f4;
-  display: flex;
-  margin-bottom: 40px;
+.video {
   padding-top: 15px;
+  justify-content: center;
+  display: flex;
+  background-color: #f4f4f4;
+  border: 4px solid #f4f4f4;
 }
 
-.subheadings{
+.video-title {
+  font-size: 28px;
+  font-weight: 700 !important;
+  color: #0d238e;
+  text-align: center;
+  margin: 0;
+  padding-bottom: 20px;
 }
 
 #homeAddressSuggest::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -112,4 +113,30 @@
 
 #homeAddressSuggest:-moz-placeholder { /* Firefox 18- */
   color: #3b3b3b;
+}
+
+.right-product-title {
+  text-transform: uppercase;
+  padding-right: 100px;
+  text-align: left;
+  font-weight: 700 !important;
+  color: #0d238e;
+}
+
+.left-product-title {
+  text-transform: uppercase;
+  padding-left: 100px;
+  text-align: right;
+  font-weight: 700 !important;
+  color: #0d238e;
+}
+
+.check-marks {
+  color: #55b96a;
+  margin: 0 auto;
+  display: block;
+}
+
+.check-marks:hover {
+  fill: #55b96a !important;
 }

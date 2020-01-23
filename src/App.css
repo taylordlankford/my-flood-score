@@ -1,13 +1,41 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .bold {
   font-weight: bold;
 }
 .italic {
   font-style: italic;
 }
-.main {
-  /* padding-left: 6em;
-  padding-right: 6em; */
+
+/* Headers */
+h2 {
+  color: #0d238e;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
 }
+h3 {
+  color: #0d238e;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+h4 {
+  color: #0d238e;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+h5 {
+  color: #0d238e;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+h6 {
+  color: #0d238e;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+
 
 /* primary button  */
 .btn-primary {
@@ -31,6 +59,9 @@
 .btn-primary:not(:disabled):not(.disabled):active:focus {
   background-color: #66de80;
   box-shadow: none;
+}
+.btn-primary:disabled {
+  background-color: #c4c4c4!important;
 }
 .btn-primary:focus {
   background-color: #66de80;
@@ -87,4 +118,8 @@
   width: 90%;
   top: 5px;
   margin: 5px auto;
+}
+/* For pagination tabel on orders and other pages  */
+.react-bootstrap-table-pagination-list-hidden {
+  display: none;
 }

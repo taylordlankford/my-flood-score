@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 
 import './Reports.css'
 
@@ -19,8 +20,8 @@ import Red_House from '../../assets/images/Red_House.svg'
 import MFS_Text_Logo from '../../assets/images/MFS_Text_Logo.svg'
 
 
-import * as ROUTES from '../../constants/routes'
-import Button from 'react-bootstrap/Button'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 
 const range = [
   {
@@ -72,22 +73,71 @@ const getRiskRange = (score) => {
 const LearnMoreBox = ({ title, description, img, link, extra }) => (
   <Container className="learnMoreBox">
     <Row>
-      <Col sm={9}>
+      <Col xs={9}>
         <h3>{title}</h3>
         <p>
           {description}
         </p>
         <p className="italic" style={{ lineHeight: '8px' }}>{extra}</p>
       </Col>
-      <Col style={{ display: 'grid' }} sm={3}>
-        <img src={img} alt={title} />
-        <Button className="learnMoreButton" href={link}>Learn More</Button>
+      <Col xs={3}>
+        <Container>
+          <Row>
+            <img src={img} alt={title} />
+          </Row>
+          <Row>
+            <Button className="learnMoreButton" href={link}>Learn More</Button>
+          </Row>
+        </Container>
       </Col>
     </Row>
   </Container>
 )
 
 const DiscoverReport = (props) => {
+  const { report } = props
+  const [property, setProperty] = useState(null)
+
+  useEffect(() => {
+    getAllData()
+}, [])
+
+const getAllData = async () => {
+  const { property } = report
+  const propertyData = await getPropertyData(property)
+  setProperty(propertyData)
+}
+
+const getPropertyData = async (propertyRef) => {
+  const doc = await propertyRef.get()
+  if (doc.exists) {
+    return await doc.data()
+  } else {
+    return 'not found'
+  }
+}
+
+const getLOMARecommendation = (property) => {
+  if (property.LOMA === 0) {
+    return 'N/A'
+  } else if (property.LOMA === 1) {
+    return 'Low'
+  } else if (property.LOMA === 2) {
+    return 'Medium'
+  } else if (property.LOMA === 3) {
+    return 'High'
+  } else {
+    return 'N/A'
+  }
+}
+
+if (!property) {
+  return 'loading...'
+}
+if (property === "not found") {
+  return 'No Report Found'
+}
+
   const {
     MFS,
     PROP_ADD,
@@ -96,10 +146,13 @@ const DiscoverReport = (props) => {
     PROP_ZIP,
     SGE,
     FEMA_BFE,
-  } = props
+  } = property
+
   return (
     <div id="reportContainer">
-      <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>Your FREE Discover Report</h3>
+      <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>
+        Discover Report
+      </h3>
       <div className="reportContainer">
         <div className="reportHeader">
           <img src={MFS_Logo} alt="logo" />
@@ -117,8 +170,8 @@ const DiscoverReport = (props) => {
                 <p>{PROP_ADD}<br />{PROP_CITY}, {PROP_STATE} {PROP_ZIP}</p>
                 {/* <p>{props.PROP_ADD}</p> */}
               </Col>
-              <Col>
-                <FloodScoreGauge MFS={MFS} />
+              <Col style={{ left: '100px' }}>
+                <FloodScoreGauge MFS={MFS} index={0} />
               </Col>
             </Row>
           </Container>
@@ -134,14 +187,14 @@ const DiscoverReport = (props) => {
             title="My flood snapshot"
             description="Compare your property's score with that of property another, identify key flood influencers, see how your score compares to your community."
             img={Compare}
-            link={ROUTES.HOME}
+            link={ROUTES.COMPARE}
             extra={null}
           />
           <LearnMoreBox
             title="My flood Analysis Memo"
             description="Your detailed flood risk analysis. Floodplain maps, building and structure impacts, and flood insurance premium estimates"
             img={Examine}
-            link={ROUTES.HOME}
+            link={ROUTES.EXAMINE}
             extra="A 5-page report thoroughly reviewing your flood risk!"
           />
           {(MFS < 25) &&
@@ -149,7 +202,7 @@ const DiscoverReport = (props) => {
               title="My flood Safe Certificate"
               description="My flood Safe Certificate is certified by our Professional Water Resource Engineers"
               img={Certificate}
-              link={ROUTES.HOME}
+              link={ROUTES.CERTIFY}
               extra="Recommended for MyFloodScores less than 25"
             />
           }
@@ -157,12 +210,12 @@ const DiscoverReport = (props) => {
             title="Letter of Map Amendment (LOMA)"
             description="Reduce or Eliminate your flood insurance premium through a FEMA Approved Letter of Map Amendment"
             img={Reduce_Eliminate}
-            link={ROUTES.HOME}
+            link={ROUTES.REDUCE}
             extra={
               <span className="LOMACat">
-                <span className={(SGE - FEMA_BFE > 2) ? "LOMASelect" : undefined} style={{ backgroundColor: '#00B366' }}>High</span>
-                <span className={(SGE - FEMA_BFE > 1 && SGE - FEMA_BFE <= 2) ? "LOMASelect" : undefined} style={{ backgroundColor: '#FED220' }}>Medium</span>
-                <span className={(SGE - FEMA_BFE > -1.5 && SGE - FEMA_BFE <= 1) ? "LOMASelect" : undefined} style={{ backgroundColor: '#FF605F' }}>Low</span>
+                <span className={(getLOMARecommendation(property) === 'High') ? "LOMASelect" : undefined} style={{ backgroundColor: '#00B366' }}>High</span>
+                <span className={(getLOMARecommendation(property) === 'Medium') ? "LOMASelect" : undefined} style={{ backgroundColor: '#FED220' }}>Medium</span>
+                <span className={(getLOMARecommendation(property) === 'Low' || getLOMARecommendation(property) === 'N/A') ? "LOMASelect" : undefined} style={{ backgroundColor: '#FF605F' }}>Low</span>
               </span>
             }
           />

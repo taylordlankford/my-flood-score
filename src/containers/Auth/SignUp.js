@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import useReactRouter from 'use-react-router'
 import { Link } from 'react-router-dom'
-
-import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
 import { useFirebase } from '../../hooks'
-
+import Container from 'react-bootstrap/Container'
 
 const SignUpPage = () => {
   const firebase = useFirebase()
@@ -51,7 +50,7 @@ const SignUpPage = () => {
   }
 
   return (
-    <div>
+    <Container>
       <h1 className="authHeader">SignUp</h1>
       <form onSubmit={onSubmit}>
         <input
@@ -95,7 +94,7 @@ const SignUpPage = () => {
 
         {error && <p>{error.message}</p>}
       </form>
-    </div>
+    </Container>
   )
 }
 

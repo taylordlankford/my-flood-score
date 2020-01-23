@@ -40,7 +40,8 @@ class FloodScoreGauge extends React.Component {
         chart: {
           id: 'apexchart-example',
           type: 'radialBar',
-          offsetY: -20,
+          // offsetY: -20,
+          // offsetX: -131,
           animations: {
             enabled: false,
           }
@@ -73,7 +74,7 @@ class FloodScoreGauge extends React.Component {
                   }
               },
               track: {
-                  show: false,
+                  show: true,
                   startAngle: undefined,
                   endAngle: undefined,
                   background: '#f2f2f2',
@@ -124,7 +125,7 @@ class FloodScoreGauge extends React.Component {
         fill: {
           colors: ['#f2f2f2'],
           // colors: ['#FF0000'],
-          opacity: 0,
+          opacity: 1,
         },
         labels: ['Average Results'],
       }, // end options
@@ -138,7 +139,7 @@ class FloodScoreGauge extends React.Component {
 }
 
   componentDidMount() {
-    const series = document.getElementsByClassName('apexcharts-series')[0]
+    const series = document.getElementsByClassName('apexcharts-series')[this.props.index]
     const path = series.querySelector("path");
     const pathOrig = path.getAttributeNode("d").nodeValue
     var containerDiv = path.closest("div[class='col']")
@@ -151,7 +152,7 @@ class FloodScoreGauge extends React.Component {
     transform = transform.replace("matrix", '').replace(')', '').replace('(', '');
     transform = transform.split(', ')
     const translateX = transform[4]
-    const margLeft = parseInt(translateX) + 10
+    const margLeft = parseInt(translateX) - 121
 
     const pathOrigs = pathOrig.split(" ");
     var droplet = document.createElement("IMG");
@@ -164,15 +165,15 @@ class FloodScoreGauge extends React.Component {
 
     //reportContainer
     setTimeout(() => {
-      var reportHtml = document.getElementById('reportContainer')
-      html2canvas(reportHtml)
-        .then((canvas) => {
-          const imgData = canvas.toDataURL('image/png');
-          console.log('imgData', imgData)
-          const pdf = new jsPDF();
-          pdf.addImage(imgData, 'PNG', 0, 0);
-          pdf.save("download.pdf");
-        })
+      // var reportHtml = document.getElementById('reportContainer')
+      // html2canvas(reportHtml)
+      //   .then((canvas) => {
+      //     const imgData = canvas.toDataURL('image/png');
+      //     console.log('imgData', imgData)
+      //     const pdf = new jsPDF();
+      //     pdf.addImage(imgData, 'PNG', 0, 0);
+      //     pdf.save("download.pdf");
+      //   })
     }, 300);
 
     //reportContainer
@@ -209,8 +210,10 @@ class FloodScoreGauge extends React.Component {
     } = this.state
     return (
       <div>
-        <Chart options={options} series={series} type="radialBar" width={500} height={320} />
-        <img style={{ opacity: '1', position: 'absolute', top: '3px', left: '131px', width: '240px' }} src={MFS_Graphic} width={250} height={160} />
+        <div style={{ position: 'relative', left: '-131px', top: '-20px' }}>
+          <Chart options={options} series={series} type="radialBar" width={500} height={320} />
+        </div>
+        <img style={{ opacity: '1', position: 'absolute', top: '3px' }} src={MFS_Graphic} width={240} height={160} />
       </div>
     )
   }

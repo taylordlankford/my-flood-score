@@ -1,0 +1,59 @@
+.acct-sidebar {
+  border: 1px solid #eeeeee;
+  line-height: 24px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#logout-link {
+  color: #55B96A;
+  font-weight: 500;
+}
+
+#logout-link:hover {
+  color: #66de80;
+  cursor: pointer;
+}
+
+b {
+  color: #666666;
+}
+
+.list-group-item {
+  padding: 0 1.25rem 0.75rem 0;
+  border: 0;
+}
+
+svg {
+  vertical-align: center;
+  margin-right: 10px;
+}
+
+svg:hover {
+  fill: #666666;
+}
+
+/* Side Bar Link Variations */
+.active-icon {
+  color: #666666 !important;
+}
+
+.active-link {
+  font-weight: 600 !important;
+  color: #666666 !important;
+}
+
+.inactive-icon {
+  color: #c4c4c4 !important;
+}
+
+.inactive-link {
+  font-weight: 500 !important;
+  color: #55B96A !important;
+}
+
+.inactive-link:hover {
+  color: #66de80 !important;
+  cursor: pointer !important;
+}
+/* EOF Side Bar Link Variations */

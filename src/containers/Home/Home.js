@@ -4,71 +4,76 @@ import './Home.css'
 import backgroundImage from '../../assets/images/Background-Image.jpg'
 import ReactPlayer from 'react-player'
 import { Parallax } from "react-parallax"
-import { useFirebase } from '../../hooks'
+import { useFirebase, useFirestoreUser } from '../../hooks'
 
 import SecondRow from '../Header/SecondRow'
 import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 import CheckMarks from './CheckMarks'
+import Products from './Products/Products'
 import Testimonials from './Testimonials/Testimonials'
 
 // Data
 import { TESTIMONIAL_TITLE, TESTIMONIAL_LIST } from './Testimonials/TestimonialData'
-import * as ROUTES from '../../constants/routes'
+// import * as ROUTES from '../../constants/routes'
+import * as ROUTES from '../../routes/constants/routes'
+import Container from "react-bootstrap/Container"
 
 function Home ({ history }) {
   const firebase = useFirebase()
+  const { firestoreUser } = useFirestoreUser()
 
   const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
     console.log('selected', suggestion)
-    history.push(ROUTES.CHECKOUT_FREE, { selected: suggestion })
+    if (firestoreUser) {
+      history.push(ROUTES.GET_REPORT, { selected: suggestion })
+    } else {
+      history.push(ROUTES.CHECKOUT_FREE, { selected: suggestion })
+    }
   }
 
   return (
     <>
       <SecondRow />
       <Parallax bgImage={backgroundImage} strength={500}>
-        <div className="headlineWrapper" style={{ height: '500px' }}>
-          <div className="headlineContainer">
-            <h1 className="headline">
-              Do You Know Your Flood Score?
-            </h1>
-            <h2 className="headline subtitle">
-              The Most Accurate Flood Risk Assessment for Home Owners
-            </h2>
+        <Container>
+          <div className="headlineWrapper" style={{ height: "500px" }}>
+            <div className="headlineContainer">
+              <h1 className="headline">Do You Know Your Flood Score?</h1>
+              <h2 className="headline subtitle">
+                The Most Accurate Flood Risk Assessment for Home Owners
+              </h2>
+            </div>
           </div>
-          {/* <AutoSuggest
-            theme={autoSuggestTheme}
-            onSuggestionSelected={onSuggestionSelected}
-            inputProps={{ id: 'homeAddressSuggest' }}
-            firebase={firebase}
-          /> */}
-        </div>
+        </Container>
       </Parallax>
       <div className="container2">
-        <div className="autosuggestWrapper">
+        <Container className="autosuggestWrapper">
           <AutoSuggest
             theme={autoSuggestTheme}
             onSuggestionSelected={onSuggestionSelected}
-            inputProps={{ id: 'homeAddressSuggest' }}
+            inputProps={{ id: "homeAddressSuggest" }}
             firebase={firebase}
           />
-        </div>
-        <h1 style={{  color: "#0d238e", textAlign: 'center', margin: 0 }}> Why You Should Know Your Flood Score</h1>
+        </Container>
+        <h1 className="video-title">Why You Should Know Your Flood Score</h1>
       </div>
       <div className="video">
         <ReactPlayer
           url="https://www.youtube.com/watch?v=Dvr7wFUX1wU"
-          className="react-player"
-          width="50%"
+          width="747px"
+          height="420px"
+          playing={true}
+          light={true}
         />
       </div>
       <CheckMarks />
+      <Products />
       <Testimonials
         testimonialTitle={TESTIMONIAL_TITLE}
         testimonialList={TESTIMONIAL_LIST}
       />
     </>
-  )
+  );
 }
 
 export default Home

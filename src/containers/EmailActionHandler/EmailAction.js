@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import qs from 'qs'
 
 import ResetPassword from './ResetPassword'
@@ -13,9 +13,11 @@ const EmailAction = ({ match, location, history }) => {
 
   const [email, setEmail] = useState('')
   const [error, setError] = useState(null)
-  const [ran, setRan] = useState(false)
   const [recoverEmailSuccess, setRecoverEmailSuccess] = useState(false)
   const [property, setProperty] = useState(false)
+  const [report, setReport] = useState(null)
+  const [emailVerified, setEmailVerified] = useState(false)
+  const [ran, setRan] = useState(false)
 
   const params = qs.parse(location.search, { ignoreQueryPrefix: true });
   console.log('params', params)
@@ -27,27 +29,49 @@ const EmailAction = ({ match, location, history }) => {
   } = params
   const actionCode = oobCode
 
-  if (!ran) {
+  useEffect(() => {
     switch (mode) {
       case 'resetPassword':
         // Display reset password handler and UI.
         handleResetPassword(actionCode, continueUrl, lang);
-        setRan(true)
-        break;
+        break
       case 'recoverEmail':
         // Display email recovery handler and UI.
         handleRecoverEmail(actionCode, lang);
-        setRan(true)
-        break;
+        break
       case 'verifyEmail':
         // Display email verification handler and UI.
         handleVerifyEmail(actionCode, continueUrl, lang);
-        setRan(true)
-        break;
+        break
       default:
         // Error: invalid mode.
-        setRan(true)
     }
+  }, [])
+
+  useEffect(() => {
+    if (!firestoreUser.loading && emailVerified && !ran) {
+      // create report
+      createReport()
+      setRan(true)
+    }
+  }, [firestoreUser.loading])
+
+  const createReport = async () => {
+    const categoryId = 'discover'
+    const createdAt = new Date()
+    const setReportObj = {
+      createdAt,
+      property: firestoreUser.firestoreUser.propertyRef,
+      categoryId,
+      uid: firestoreUser.firestoreUser.uid,
+    }
+    const reportRef = await firebase.doFirestoreAdd("reports", setReportObj)
+    setReport(setReportObj)
+    // Add to firestoreUser and decrease inventory
+    const updateObj = {
+      reports: firebase.app.firestore.FieldValue.arrayUnion({ categoryId, createdAt, reportRef, free: true }),
+    }
+    await firebase.doFirestoreUpdate("users", firestoreUser.firestoreUser.uid, updateObj)
   }
 
   function handleResetPassword(actionCode, continueUrl, lang) {
@@ -105,6 +129,7 @@ const EmailAction = ({ match, location, history }) => {
     firebase.doApplyActionCode(actionCode).then(function(resp) {
       console.log('resp', resp)
       console.log('email address has been verified')
+      setEmailVerified(true)
       // Check if user has used free credit
 
       // TODO: Display a confirmation message to the user.
@@ -122,23 +147,23 @@ const EmailAction = ({ match, location, history }) => {
   }
 
 
-  // if (error !== null) {
-  //   return <h2>{error}</h2>
-  // }  // TODO: Uncomment
-  if (!property && !firestoreUser.loading) {
-    firestoreUser.firestoreUser.propertyRef.get().then(function(doc) {
-      if (doc.exists) {
-          console.log("property Document data:", doc.data());
-          setProperty(doc.data())
-      } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-      }
-    }).catch(function(error) {
-        console.log("Error getting document:", error)
-        setError(error.messsage)
-    })
+  if (error !== null) {
+    return <h2>{error}</h2>
   }
+  // if (!property && !firestoreUser.loading) {
+  //   firestoreUser.firestoreUser.propertyRef.get().then(function(doc) {
+  //     if (doc.exists) {
+  //         console.log("property Document data:", doc.data());
+  //         setProperty(doc.data())
+  //     } else {
+  //         // doc.data() will be undefined in this case
+  //         console.log("No such document!");
+  //     }
+  //   }).catch(function(error) {
+  //       console.log("Error getting document:", error)
+  //       setError(error.messsage)
+  //   })
+  // }
   if (mode === 'resetPassword') {
     return <ResetPassword history={history} email={email} setEmail={setEmail} actionCode={actionCode} />
   }
@@ -148,8 +173,13 @@ const EmailAction = ({ match, location, history }) => {
     )
   }
 
-  if (mode === 'verifyEmail' && property) {
-    return <DiscoverReport {...property} />
+  if (mode === 'verifyEmail' && report) {
+    return (
+      <>
+        <h3 className="authHeader" style={{ textAlign: 'center', fontWeight: 'bold', color: '#595959' }}>Your FREE Discover Report</h3>
+        <DiscoverReport report={report} firebase={firebase} />
+      </>
+    )
   } else if (mode === 'verifyEmail') {
     return 'verifying email.'
   } 

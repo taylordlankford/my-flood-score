@@ -9,11 +9,16 @@
   min-width: 400px;
   /* margin: 0 auto; */
 }
+
 .authHeader {
-  margin: 33px 0;
+  padding: 33px 0;
 }
 
 .authContainer {
   margin: 0 auto;
   max-width: 1000px;
+}
+
+.form-control {
+  font-weight: 500 !important;
 }

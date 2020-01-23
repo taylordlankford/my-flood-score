@@ -1,0 +1,9 @@
+.acct-container {
+  min-height: 100vh;
+  padding: 64px 0;
+}
+
+.dashboard {
+  font-weight: 500 !important;
+  color: #666666;
+}

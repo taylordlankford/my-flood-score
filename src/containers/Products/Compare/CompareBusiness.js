@@ -1,26 +1,19 @@
 import React from 'react'
-import useReactRouter from 'use-react-router'
-import styled from 'styled-components'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-
 import '../Products.css'
 import Compare from '../../../assets/images/Compare.svg'
-
 import ProductBox from '../../../components/Product/ProductBox' 
 import Details from '../../../components/Product/Details'
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../routes/constants/routes'
 
-const CompareBusiness = () => {
-  const { history } = useReactRouter()
+import { connect } from 'react-redux'
+
+const CompareBusiness = (props) => {
+  const { items } = props
   const data = {
-    title: "Compare – Business",
-    price: {
-      type: 'Month',
-      amount: 60.00,
-    },
     category: {
       name: "Business",
       link: ROUTES.COMPARE_BUSINESS,
@@ -35,40 +28,38 @@ const CompareBusiness = () => {
         link: ROUTES.COMPARE_BUSINESS
       },
     ],
-  } // end Product Box Data
+  }
+
   const tabData = [
     {
       title: "Description",
       data: {
         bullets: [
-          (<LI key="0">Up to 50 Properties/Month</LI>),
-          (<LI key="1">Flood Score</LI>),
-          (<LI key="2">Latest and Best Available Flood modeling</LI>),
-          (<LI key="3">FEMA Flone Zone category</LI>),
-          (<LI key="3">Flood Comparisons – Zip Code / Subdivision</LI>),
-          (<LI key="3">Flood comparison against other properties</LI>),
-          (<LI key="3">Flood map of property and Flood Zone</LI>),
-          (<LI key="3">Structure level and BFE level</LI>),
-          (<LI key="3">Key Flood Factors</LI>),
-          (<LI key="4">Action points / recommendations</LI>),
-          (<LI key="5">LOMA Recommendations</LI>),
+          (<li className="tab-data-list" key="0">Up to 50 Properties/Month</li>),
+          (<li className="tab-data-list" key="1">Flood Score</li>),
+          (<li className="tab-data-list" key="2">Latest and Best Available Flood modeling</li>),
+          (<li className="tab-data-list" key="3">FEMA Flone Zone category</li>),
+          (<li className="tab-data-list" key="3">Flood Comparisons – Zip Code / Subdivision</li>),
+          (<li className="tab-data-list" key="3">Flood comparison against other properties</li>),
+          (<li className="tab-data-list" key="3">Flood map of property and Flood Zone</li>),
+          (<li className="tab-data-list" key="3">Structure level and BFE level</li>),
+          (<li className="tab-data-list" key="3">Key Flood Factors</li>),
+          (<li className="tab-data-list" key="4">Action points / recommendations</li>),
+          (<li className="tab-data-list" key="5">LOMA Recommendations</li>),
         ]
       }
     }
   ] // end Tab Data
+
   return (
-  <div>
-    <Container style={{ 'marginTop': '64px' }}>
+    <Container style={{ paddingTop: '64px' }}>
       <Row>
         <Col sm={8}>
           <ProductBox
-            handleAddToCart={() => history.push(ROUTES.CHECKOUT)}
-            title={data.title}
+            item={items[5]}
             category={data.category}
-            breadcrumb={data.breadcrumb}
-            price={data.price}
-            img={Compare}
-          />
+            breadcrumb={data.breadcrumb} 
+            img={Compare} />
           <Details
             tabData={tabData}
           />
@@ -78,17 +69,9 @@ const CompareBusiness = () => {
         </Col>
       </Row>
     </Container>
-  </div>
   )
 }
 
-const LI = styled.li`
-  color: #666666;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 35px;
-  margin-left: 16px;
-`;
+const mapStateToProps = (state) => ({ items: state.cartReducer.items })
 
-export default CompareBusiness
+export default connect(mapStateToProps)(CompareBusiness)

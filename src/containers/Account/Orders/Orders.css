@@ -1,0 +1,148 @@
+.col-title {
+  color: #666666;
+}
+
+.table-header {
+  text-align: left;
+}
+
+#table-actions {
+  text-align: right;
+}
+
+.table {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 500 !important;
+  color: #666666 !important;
+}
+
+.table th {
+  font-weight: 500 !important;
+  color: #c4c4c4 !important;
+}
+
+.table tr {
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.table td {
+  padding-top: 10px;
+}
+
+#order-status {
+  font-weight: 700 !important;
+}
+
+.order-number {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  color: #55B96A !important;
+}
+
+.order-number:hover {
+  font-weight: 600 !important;
+  color: #66de80 !important;
+}
+
+.order-action {
+  color: #666666 !important;
+  background-color: #c4c4c4 !important;
+}
+
+.order-action:hover {
+  color: #ffffff !important;
+  background-color: #66de80 !important;
+  cursor: pointer !important;
+}
+
+#printer-icon {
+  color: #666666;
+  height: 28px;
+  width: 28px;
+}
+
+#printer-icon:hover {
+  cursor: pointer !important;
+  fill: #d4d4dd;
+  transition: 0.3s;
+}
+
+.view-action {
+  background-color: #c4c4c4!important;
+}
+
+.view-action:hover {
+  background-color: #66de80 !important;
+}
+.view-action:disabled:hover {
+  background-color: #d9d9d9 !important;
+}
+
+.card-body {
+  padding: 20px 50px 20px 50px !important;
+}
+.noWrap {
+  white-space: nowrap;
+}
+
+/* 
+ * react-bootstrap-table-next library caret is not working out of the box with
+ * our bootstrap version. These styles make the carets work.
+ */
+
+ th, td {
+   text-align: left;
+ }
+
+ .sortable:hover {
+   cursor: pointer;
+ }
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-top: 4px solid \9;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.dropup, .dropdown {
+  position: relative;
+}
+
+.dropup .caret, .navbar-fixed-bottom .dropdown .caret {
+  border-top: 0;
+  border-bottom: 4px dashed;
+  border-bottom: 4px solid \9;
+  content: "";
+}
+
+.page-link {
+  background-color: #dddddd !important;
+  color: #ffffff;
+}
+
+.page-link:hover {
+  background-color: #d4d4d4 !important;
+  color: #ffffff;
+}
+
+.page-item.active .page-link {
+  border: 1px solid #d4d4d4 !important;
+  background-color: #d4d4d4 !important;
+  color: #ffffff !important;
+  transition: all 0.5s !important;
+  font-weight: 700;
+}
+
+.react-bootstrap-table-pagination-list {
+  padding-left: 200px;
+}
+
+#pageDropDown {
+  display: none;
+}

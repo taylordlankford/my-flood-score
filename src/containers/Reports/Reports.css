@@ -1,11 +1,16 @@
 .reportContainer {
   margin: 0 auto;
-  width: 62%;
+  /* width: 62%; */
+  width: 794px;
 }
 .reportHeader {
   background-color: #D8E2F3;
-  box-shadow: 0px 1px 2px #989898, 0px 2px 5px #cccccc;
+  box-shadow: 0px 1px 2px hsl(0, 0%, 60%), 0px 2px 5px #cccccc;
   padding-left: 20px;
+  width: 806px;
+  left: -6px;
+  position: relative;
+  z-index: -1;
 }
 .reportHeader img {
   position: relative;
@@ -16,20 +21,23 @@
 }
 .learnMoreBox img {
   position: relative;
-  height: 45%;
   margin: 0 auto;
+  width: 70%;
+  height: 100%;
+  padding: 15px;
 }
 .learnMoreBox a {
   display: inline-table;
+  font-size: 14px;
   width: 150px;
   margin: 0 auto;
 }
 .reportSection {
   background: #f2f2f2;
-  width: 95%;
+  width: 100%;
   margin: 15px auto;
   box-shadow: 0px 2px 2px #bfbfbf;
-  padding: 5px;
+  padding: 10px;
 }
 .little-house {
   position: relative;
@@ -72,4 +80,22 @@
   font-size: 21px !important;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border: 1px solid #ffffff;
+}
+
+.AdditinalInfoBoxes {
+  position: relative;
+  height: 40px;
+  border: 1px solid black;
+  text-align: center;
+  display : flex;
+  align-items : center;
+  justify-content: center;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.compareFirstSectionRow {
+  position: relative;
+  width: 49%;
+  display: inline-flex;
+  min-width: 280px;
 }
