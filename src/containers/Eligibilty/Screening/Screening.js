@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import useReactRouter from 'use-react-router'
 import * as ROUTES from '../../../routes/constants/routes'
 import { Parallax } from 'react-parallax'
@@ -23,7 +23,7 @@ const Screening = (props) => {
   const [phone, setPhone] = useState("");
 
   useEffect(() => {
-    hideSiteContainers()
+    hideSiteContainers();
 
     let isAddressSelected =
       typeof selected !== "undefined" || selected !== null;
@@ -39,8 +39,6 @@ const Screening = (props) => {
     if (name !== "" || email !== "" || phone !== "") {
       setIsInvalid(false)
     }
-
-    return () => {}
   })
 
   const addNffUser = async (collection, setObj) => {

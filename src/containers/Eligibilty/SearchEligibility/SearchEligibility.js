@@ -56,7 +56,9 @@ const SearchEligibility = () => {
         />
       </AutoSuggestContainer>
       <div>
-        <IframeSearchBtn onClick={e => handleOnClick(e)}>Proceed</IframeSearchBtn>
+        <IframeSearchBtn onClick={e => handleOnClick(e)}>
+          Proceed
+        </IframeSearchBtn>
       </div>
     </AutoSuggestWrapper>
   );

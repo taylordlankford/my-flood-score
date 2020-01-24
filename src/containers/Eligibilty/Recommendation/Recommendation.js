@@ -16,11 +16,11 @@ import { useFirebase } from '../../../hooks'
 
 const Recommendation = (props) => {
   const { history, location, match } = props
-  const { selected } = location.state
+  const { address } = location.state
   const firebase = useFirebase()
 
   // States
-  const [selectedAddress, setSelectedAddress] = useState((selected != null) ? selected : '')
+  const [selectedAddress, setSelectedAddress] = useState((address != null) ? address : '')
   const [propertyData, setPropertyData] = useState(null)
   const [LOMARating, setLOMARating] = useState("")
 

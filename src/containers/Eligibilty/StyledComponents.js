@@ -4,12 +4,13 @@ export const ParallaxWrapper = styled.div`
 `
 
 export const ParallaxContainer = styled.div`
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  min-height: 640px;
   padding-top: 60px;
   padding-bottom: 50px;
   margin: 0 auto;
   max-width: 1080px;
-  overflow: scroll;
+  overflow: auto;
 `
 
 export const MainTitle = styled.div`
@@ -35,11 +36,15 @@ export const Subtitle = styled.div`
   padding-bottom: 60px;
 `
 
+/* AutoSuggest Styles */
+
 export const AutoSuggestWrapper = styled.div`
   display: grid;
   grid-template-columns: 9fr 1fr;
   padding-left: 50px;
   padding-right: 50px;
+  margin: 0 auto;
+  max-width: 920px;
 `
 
 export const AutoSuggestContainer = styled.div`
@@ -56,25 +61,20 @@ export const IframeSearchBtn = styled.button`
     color: white !important;
     cursor: pointer;
     background-color: #55b96a;
-    background-image: linear-gradient(
-      90deg,
-      transparent 0%,
-      transparent 50%,
-      rgba(0, 0, 0, 0.2) 50%
-    );
     font-size: 0.94rem;
     font-weight: 700;
-    /* border-radius: 5px; */
-    /* display: inline-block; */
+    border: 1px solid #55b96a;
     border: none;
     padding: 0.62rem 1.25rem;
     text-decoration: none;
     text-transform: uppercase;
     background-size: 230%;
     transition: all 0.4s;
+    z-index: 999;
   }
 
   &:hover {
+    background-color: #4ca25e;
     background-position: 100%;
     color: white;
   }
@@ -102,7 +102,6 @@ export const menuStyle = {
   padding: '2px 0',
   fontSize: '90%',
   position: 'fixed',
-  overflow: 'auto',
   maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
   zIndex: '999',
 }
@@ -118,17 +117,24 @@ export const autosuggestTheme = {
   containerOpen: {
     width: '100%',
     backgroundColor: '#FFFFFF',
+    zIndex: '999',
     position: 'relative',
   },
 
   input: {
-    margin: '0 auto',
+    fontWeight: '500',
+    color: "#666666",
     width: '100%',
-    padding: '10px 10px 10px 10px',
+    padding: '10px 40px 10px 40px',
+    height: '3rem',
+    border: 'none',
   },
 
   inputOpen: {
-    padding: '10px 10px 10px 10px',
+    fontWeight: '500',
+    color: "#666666",
+    padding: '10px 40px 10px 40px',
+    border: 'none',
   },
 
   inputFocused: {
@@ -136,20 +142,31 @@ export const autosuggestTheme = {
   },
 
   suggestionsContainer: {
+    maxHeight: '300px',
     margin: '0',
     padding: '0',
-    overflow: 'scroll',
+    /* overflow: 'scroll', */
     zIndex: '999',
   },
 
+  /**
+   * Position absolute here will not push the containers underneath down.
+   */
   suggestionsContainerOpen: {
     width: '100%',
-    overflow: 'scroll',
+    /* overflow: 'scroll', */
     zIndex: '999',
+    backgroundColor: '#fff',
+    position: 'absolute'
   },
 
   suggestionsList: {
     listStyleType: 'none',
+    borderTop: '1px solid #eee',
+    paddingRight: '40px',
+    /* overflow: 'scroll', */
+    paddingBottom: '10px',
+    marginBottom: '0'
   },
 
   suggestion: {
@@ -160,6 +177,7 @@ export const autosuggestTheme = {
 
   suggestionHighlighted: {
     backgroundColor: '#eeeeee',
+    fontWeight: '600',
   },
 
   suggestionFirst: {},
