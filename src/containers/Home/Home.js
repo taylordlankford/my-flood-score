@@ -34,7 +34,7 @@ function Home ({ history }) {
   return (
     <>
       <SecondRow />
-      <Parallax bgImage={backgroundImage} strength={500}>
+      <Parallax bgImage={backgroundImage} strength={600}>
         <Container>
           <div className="headlineWrapper" style={{ height: "500px" }}>
             <div className="headlineContainer">
@@ -67,6 +67,7 @@ function Home ({ history }) {
         />
       </div>
       <CheckMarks />
+      {/*<iframe src="http://localhost:3000/search-eligibility" style={{ width: "100%", minHeight: "100vh", border: "none" }}></iframe> */}
       <Products />
       <Testimonials
         testimonialTitle={TESTIMONIAL_TITLE}

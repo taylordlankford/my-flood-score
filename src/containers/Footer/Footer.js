@@ -227,7 +227,9 @@ const FlexItem2 = styled.div`
 	}
 `;
 
-const Section2 = styled.section`
+const Section2 = styled.section.attrs({
+  id: 'footer'
+})`
   margin: 0 auto;
   max-width: 1120px;
   text-align: center;
@@ -242,7 +244,9 @@ const Section2 = styled.section`
 	}
 `;
 
-const Section3 = styled.section`
+const Section3 = styled.section.attrs({
+  id: 'copyright-section'
+})`
 	text-align: center;
 	padding: 2rem 0;
 `;

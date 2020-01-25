@@ -119,8 +119,10 @@ class AutoSuggest extends React.Component {
       autocomplete: "new-password",
     };
 
+    console.log(this.props)
+
     // Finally, render it!
-    console.log('theme', theme)
+    // console.log('theme', theme)
     return (
       <Autosuggest
         {...this.props}
