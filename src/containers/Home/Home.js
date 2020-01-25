@@ -67,7 +67,7 @@ function Home ({ history }) {
         />
       </div>
       <CheckMarks />
-      <iframe src="http://localhost:3000/search-eligibility" style={{ width: "100%", minHeight: "100vh", border: "none" }}></iframe>
+      {/*<iframe src="http://localhost:3000/search-eligibility" style={{ width: "100%", minHeight: "100vh", border: "none" }}></iframe> */}
       <Products />
       <Testimonials
         testimonialTitle={TESTIMONIAL_TITLE}
