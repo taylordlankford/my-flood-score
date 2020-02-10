@@ -68,10 +68,13 @@ function Home ({ history }) {
           light={true}
         />
       </div>
-      <Eligibility />
       <CheckMarks />
       <Products />
-      {/* }<iframe src="http://localhost:3000/search-eligibility" /> */}
+      {window.location.hostname === "https://flood-score.firebaseapp.com" ? (
+        <iframe src="https://flood-score.firebaseapp.com/search-eligibility" />
+      ) : (
+        <iframe src="http://localhost:3000/search-eligibility" />
+      )}
       <Testimonials
         testimonialTitle={TESTIMONIAL_TITLE}
         testimonialList={TESTIMONIAL_LIST}
