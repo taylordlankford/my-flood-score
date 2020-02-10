@@ -1,39 +1,50 @@
-import React, { useState, useEffect } from 'react'
-import { Parallax } from 'react-parallax'
-import './styles.css'
-import BgImg from '../../../assets/images/nff-bg-image.jpg'
-import * as S from './StyledComponents'
+import React, { useState, useEffect } from "react";
+import { Parallax } from "react-parallax";
+import "./styles.css";
+import BgImg from "../../../assets/images/nff-bg-image.jpg";
+import * as S from "./StyledComponents";
 
+import Faq from "./Faq";
+import High from "./High";
+import Medium from "./Medium";
+import Low from "./Low";
+import NotRecommended from "./NotRecommended";
 
-import Faq from './Faq'
-import High from './High'
-import Medium from './Medium'
-import Low from './Low'
-import NotRecommended from './NotRecommended'
-
-import { hideSiteContainers } from '../helpers'
-import { useFirebase } from '../../../hooks'
+import { hideSiteContainers } from "../helpers";
+import { useFirebase, useFirebaseStorage } from "../../../hooks";
 
 const Recommendation = (props) => {
-  const { history, location, match } = props
-  const { address } = location.state
-  const firebase = useFirebase()
+  const { history, location, match } = props;
+  const { address } = location.state;
+  const firebase = useFirebase();
 
-  // States
-  const [selectedAddress, setSelectedAddress] = useState((address != null) ? address : '')
-  const [propertyData, setPropertyData] = useState(null)
-  const [LOMARating, setLOMARating] = useState("")
+  const [selectedAddress, setSelectedAddress] = useState((address != null) ? address : '');
+  const [propertyData, setPropertyData] = useState(null);
+  const [LOMARating, setLOMARating] = useState("");
+  const [NFFID, setNFFID] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
 
   useEffect(() => {
     hideSiteContainers()
 
     if (selectedAddress != null || selectedAddress !== '') {
-      // console.log(firebase)
       console.log('Address => ', selectedAddress)
       setSelectedAddress(selectedAddress)
       getPropertyRef(selectedAddress)
+      getImg();
     }
-  }, [])
+  }, [selectedAddress, NFFID])
+
+  /**
+   * Get Image
+   */
+  const getImg = () => {
+    if (NFFID !== "" || NFFID !== null) {
+      firebase.getDownloadURL(NFFID).then(url => {
+        setImgUrl(url);
+      });
+    }
+  };
 
   /**
    * Get the data from the selected address.
@@ -42,17 +53,15 @@ const Recommendation = (props) => {
     await firebase.doFirestoreAddressRefGet(selectedAddress).then(properties => {
       const property = properties[0]
       if (typeof property.id != 'undefined') {
-        console.log('id => ', property.id)
+        setNFFID(property.id)
         firebase.doFirestoreWhereGet('properties', 'NFF_ID', '==', property.id).then(data => {
-          // console.log('DOC DATA => ', data.docs[0]._document.proto.fields)
           if (typeof data.docs[0]._document.proto.fields != 'undefined') {
             const propertyData = data.docs[0]._document.proto.fields
             const { LOMA } = propertyData
             setLOMARating(LOMA)
-            console.log("LOMA => ", LOMA)
-            console.log('propertyData => ', propertyData)
             setPropertyData(propertyData)
-            // setPropertyData(data.docs[0]._document.proto.fields)
+            const { NFF_ID } = propertyData
+            setNFFID(NFF_ID.stringValue)
           }
         })
       }
@@ -82,8 +91,8 @@ const Recommendation = (props) => {
    * Render different descriptions based on category.
    */
   const LOMARecommendations = ({ propertyData, LOMACategory }) => {
-    // console.log('PROPERTY DATA => ', propertyData)
     const { FEMA_ZONE } = propertyData
+
     switch (LOMARating.integerValue) {
       case '0':
         return <NotRecommended
@@ -111,6 +120,7 @@ const Recommendation = (props) => {
           femaZone={FEMA_ZONE}
           selectedAddress={selectedAddress}
           propertyData={propertyData}
+          imgUrl={imgUrl}
         />
       case '3':
         return <High
@@ -120,6 +130,7 @@ const Recommendation = (props) => {
           femaZone={FEMA_ZONE}
           selectedAddress={selectedAddress}
           propertyData={propertyData}
+          imgUrl={imgUrl}
         />
       default: {
         return 'N/A'
@@ -133,9 +144,6 @@ const Recommendation = (props) => {
 
   return (
     <S.Wrapper>
-      {/* console.log('PROPERTY DATA => ', propertyData) */}
-      {console.log('PROPERTY RATING => ', LOMARating)}
-
       <Parallax
         contentClassName="recommendation-parallax"
         bgImage={BgImg}

@@ -13,7 +13,8 @@ const High = (props) => {
     LOMACategory,
     femaZone,
     selectedAddress,
-    propertyData
+    propertyData,
+    imgUrl
   } = props
 
   return (
@@ -35,20 +36,20 @@ const High = (props) => {
             selectedAddress={selectedAddress}
             propertyData={propertyData}
           />
+
           <hr style={{ border: "3px solid #C7AE4A" }} />
           <div style={{ textAlign: "center", marginTop: "60px" }}>
             <Button>Finalize LOMA Request</Button>
           </div>
         </Col>
-        <Col sm={6} style={{ border: "1px solid #C7AE4A" }}>
-          <div></div>
-          {/*
-          <LearnMoreBox
-            title="Flood Analysis Memo"
-            text="Learn more about your detailed flood risk. Floodplain maps, building and structure impacts, and flood insurance premium estimates"
-            img={ExamineSvg}
-          />
-          */}
+        <Col sm={6}>
+          {imgUrl ? (
+            <div style={{ border: "1px solid #C7AE4A", padding: "20px" }}>
+              <img src={imgUrl} style={{ height: "100%", width: "100%" }} />
+            </div>
+          ) : (
+            <>Pending...</>
+          )}
         </Col>
       </Row>
       <div
@@ -75,14 +76,31 @@ const InfoBox = ({ selectedAddress, propertyData }) => {
   return (
     <div style={{ paddingBottom: "20px", paddingTop: "20px" }}>
       <ul style={{ listStyleType: "none" }}>
-        <li style={{ marginBottom: "20px" }}><FaCheck />PROPERTY ADDRESS: {selectedAddress}</li>
-        <li style={{ marginBottom: "20px" }}><FaCheck />FEMA FLOOD ZONE: {propertyData.FEMA_ZONE.stringValue.slice(0, 2)}</li>
-        <li style={{ marginBottom: "20px" }}><FaCheck />LIKELIHOOD YOU ARE WRONGLY MAPPED: HIGH</li>
         <li style={{ marginBottom: "20px" }}>
-          <FaCheck />BASIS OF THIS DETERMINATION:
+          <FaCheck />
+          PROPERTY ADDRESS: {selectedAddress}
+        </li>
+        <li style={{ marginBottom: "20px" }}>
+          <FaCheck />
+          FEMA FLOOD ZONE: {propertyData.FEMA_ZONE.stringValue.slice(0, 2)}
+        </li>
+        <li style={{ marginBottom: "20px" }}>
+          <FaCheck />
+          LIKELIHOOD YOU ARE WRONGLY MAPPED: HIGH
+        </li>
+        <li style={{ marginBottom: "20px" }}>
+          <FaCheck />
+          BASIS OF THIS DETERMINATION:
           <ul style={{ listStyleType: "none", fontWeight: "400" }}>
-            <li><FaCheck />FEMA considers this property to be in a high risk flood zone.</li>
-            <li><FaCheck />The elevation of your property appears to be <i>above</i> the flood elevation.</li>
+            <li>
+              <FaCheck />
+              FEMA considers this property to be in a high risk flood zone.
+            </li>
+            <li>
+              <FaCheck />
+              The elevation of your property appears to be <i>above</i> the
+              flood elevation.
+            </li>
           </ul>
         </li>
       </ul>
