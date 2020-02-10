@@ -11,13 +11,13 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   margin: 0 auto;
   max-width: 1440px;
-  min-height: 100vh;
+  min-height: inherit;
   padding: 50px 50px 50px 50px;
+  overflow: scroll;
   /* display: grid; */
   /* grid-template-columns: 3fr 4fr; */
   /* grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); */
   /* grid-gap: 2em; */
-  overflow: scroll;
   /*
   @media(max-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(768px, 1fr));

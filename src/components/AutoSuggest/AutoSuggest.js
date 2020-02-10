@@ -61,13 +61,14 @@ class AutoSuggest extends React.Component {
   }
 
   componentDidMount() {
-    this.props.firebase.doFirestoreCollectionGet("index")
-      .then((index) => {
-        // console.log('index', index)
-        const { addresses } = index[0]
-        console.log('addresses', addresses)
-        this.setState({ addresses })
-      })
+    this.props.firebase.doFirestoreCollectionGet("index").then(index => {
+      // console.log('index', index)
+      const { addresses } = index[0];
+      if (typeof addresses !== "undefined") {
+        // console.log("addresses", addresses);
+        this.setState({ addresses });
+      }
+    });
   }
 
   validateValue = () => {

@@ -16,7 +16,8 @@ const Medium = (props) => {
     LOMACategory,
     femaZone,
     selectedAddress,
-    propertyData
+    propertyData,
+    imgUrl
   } = props
 
   return (
@@ -44,7 +45,13 @@ const Medium = (props) => {
           </div>
         </Col>
         <Col sm={6} style={{ border: "1px solid #C7AE4A" }}>
-          <div></div>
+          {imgUrl ? (
+            <div style={{ border: "1px solid #C7AE4A", padding: "20px" }}>
+              <img src={imgUrl} style={{ height: "100%", width: "100%" }} />
+            </div>
+          ) : (
+            <>Pending...</>
+          )}
           {/*
           <LearnMoreBox
             title="Flood Analysis Memo"

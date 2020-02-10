@@ -123,3 +123,15 @@ h6 {
 .react-bootstrap-table-pagination-list-hidden {
   display: none;
 }
+
+/**
+ * IFRAME
+ */
+iframe {
+  width: 100%;
+  min-height: 1280px; 
+  /* height: 1440px; */
+  border: none;
+  margin: 0;
+  padding: 0;
+}
