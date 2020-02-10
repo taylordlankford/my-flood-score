@@ -12,6 +12,8 @@ import CheckMarks from './CheckMarks'
 import Products from './Products/Products'
 import Testimonials from './Testimonials/Testimonials'
 
+import Eligibility from "../Eligibilty/Eligibility";
+
 // Data
 import { TESTIMONIAL_TITLE, TESTIMONIAL_LIST } from './Testimonials/TestimonialData'
 // import * as ROUTES from '../../constants/routes'
@@ -66,9 +68,10 @@ function Home ({ history }) {
           light={true}
         />
       </div>
+      <Eligibility />
       <CheckMarks />
       <Products />
-      <iframe src="http://localhost:3000/search-eligibility" />
+      {/* }<iframe src="http://localhost:3000/search-eligibility" /> */}
       <Testimonials
         testimonialTitle={TESTIMONIAL_TITLE}
         testimonialList={TESTIMONIAL_LIST}
