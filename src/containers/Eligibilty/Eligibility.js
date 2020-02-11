@@ -29,7 +29,7 @@ const Eligibility = props => {
   const [selectedAddress, setSelectedAddress] = useState("");
 
   useEffect(() => {
-    hideSiteContainers();
+    // hideSiteContainers();
   });
 
   const onSuggestionSelected = (

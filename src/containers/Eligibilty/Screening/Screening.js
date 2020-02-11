@@ -23,7 +23,7 @@ const Screening = props => {
   const [exists, setExists] = useState(false);
 
   useEffect(() => {
-    hideSiteContainers();
+    // hideSiteContainers();
     let isAddressSelected = typeof selected !== "undefined" || selected !== null;
 
     if (name !== "" || email !== "" || phone !== "") {
