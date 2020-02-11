@@ -70,11 +70,7 @@ function Home ({ history }) {
       </div>
       <CheckMarks />
       <Products />
-      {window.location.hostname === "https://flood-score.firebaseapp.com" ? (
-        <iframe src="https://flood-score.firebaseapp.com/search-eligibility" />
-      ) : (
-        <iframe src="http://localhost:3000/search-eligibility" />
-      )}
+      <iframe src="https://flood-score.firebaseapp.com/search-eligibility" />
       <Testimonials
         testimonialTitle={TESTIMONIAL_TITLE}
         testimonialList={TESTIMONIAL_LIST}
