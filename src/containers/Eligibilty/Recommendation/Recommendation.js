@@ -14,8 +14,8 @@ import { hideSiteContainers } from "../helpers";
 import { useFirebase, useFirebaseStorage } from "../../../hooks";
 
 const Recommendation = (props) => {
-  const { history, location, match } = props;
-  const { address } = location.state;
+  // const { address } = location.state;
+  const { address } = props
   const firebase = useFirebase();
 
   const [selectedAddress, setSelectedAddress] = useState((address != null) ? address : '');
@@ -25,7 +25,7 @@ const Recommendation = (props) => {
   const [imgUrl, setImgUrl] = useState("");
 
   useEffect(() => {
-    hideSiteContainers()
+    // hideSiteContainers()
 
     if (selectedAddress != null || selectedAddress !== '') {
       console.log('Address => ', selectedAddress)
