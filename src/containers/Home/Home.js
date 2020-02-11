@@ -59,6 +59,7 @@ function Home ({ history }) {
         </Container>
         <h1 className="video-title">Why You Should Know Your Flood Score</h1>
       </div>
+      <Eligibility />
       <div className="video">
         <ReactPlayer
           url="https://www.youtube.com/watch?v=Dvr7wFUX1wU"
@@ -68,7 +69,6 @@ function Home ({ history }) {
           light={true}
         />
       </div>
-      <Eligibility />
       <CheckMarks />
       <Products />
       <iframe
