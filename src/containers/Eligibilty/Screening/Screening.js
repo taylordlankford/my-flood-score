@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import useReactRouter from "use-react-router";
-import * as ROUTES from "../../../routes/constants/routes";
 import { Parallax } from "react-parallax";
 import styled from "styled-components";
 import * as S from "../StyledComponents";
@@ -13,9 +11,9 @@ import Button from "react-bootstrap/Button";
 import { useFirebase } from "../../../hooks";
 
 const Screening = props => {
-  const { history } = useReactRouter();
   const firebase = useFirebase();
-  const { selected } = props.location.state;
+  // const { selected } = props.location.state;
+  const { selected, setShowRecommendation } = props;
 
   const [address, setAddress] = useState("");
   const [isInvalid, setIsInvalid] = useState(true);
@@ -26,47 +24,21 @@ const Screening = props => {
 
   useEffect(() => {
     hideSiteContainers();
-    // validateScreening();
+    let isAddressSelected = typeof selected !== "undefined" || selected !== null;
 
-    let isAddressSelected =
-      typeof selected !== "undefined" || selected !== null;
-
-    if (isAddressSelected) {
-      setAddress(selected);
-      console.log("address from component => ", address);
-    } else {
-      history.push(ROUTES.SEARCH_ELIGIBILITY);
-    }
-
-    // if (exists) {
-    //   history.push(ROUTES.ELIGIBILITY_RECOMMENDATION, { address });
-    // }
-
-    // Valid forms if empty
     if (name !== "" || email !== "" || phone !== "") {
       setIsInvalid(false);
     }
   });
 
-  // const validateScreening = async () => {
-  //   await firebase
-  //     .doFirestoreWhereGet("nff_users", "name", "==", name)
-  //     .then(querySnapshot => {
-  //       if (querySnapshot.docs != null || querySnapshot.docs !== "undefined") {
-  //         setExists(true);
-  //       }
-  //     });
-  // };
-
   const addNffUser = async (collection, setObj) => {
     await firebase.doFirestoreAdd(collection, setObj).then(res => {
-      history.push(ROUTES.ELIGIBILITY_RECOMMENDATION, { address });
+      setShowRecommendation(true)
     });
   };
 
   const handleOnClick = e => {
     e.preventDefault();
-
     const nffUser = { name, email, phone };
     console.log(nffUser);
     addNffUser("nff_users", nffUser);

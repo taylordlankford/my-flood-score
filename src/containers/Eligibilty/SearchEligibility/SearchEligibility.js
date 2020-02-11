@@ -11,11 +11,12 @@ import {
 import AutoSuggest from "../../../components/AutoSuggest/AutoSuggest";
 import { useFirestoreUser, useFirebase } from "../../../hooks";
 
-const SearchEligibility = () => {
+const SearchEligibility = props => {
   // Hooks
   const { history } = useReactRouter();
   const { firestoreUser } = useFirestoreUser();
   const firebase = useFirebase();
+  const { handleOnClick } = { props }
 
   // States
   const [selectedAddress, setSelectedAddress] = useState("");
@@ -27,22 +28,7 @@ const SearchEligibility = () => {
     console.log("selected", suggestion);
     setSelectedAddress(suggestion)
     console.log("Selected Address ==> ", selectedAddress)
-    // if (firestoreUser) {
-    //   // history.push(ROUTES.ELIGIBILITY_RECOMMENDATION, { selected: suggestion })
-    //   history.push(ROUTES.SCREENING, { selected: suggestion });
-    // } else {
-    //   history.push(ROUTES.SCREENING, { selected: suggestion });
-    // }
   };
-
-  const handleOnClick = (e) => {
-    if (firestoreUser) {
-      // history.push(ROUTES.ELIGIBILITY_RECOMMENDATION, { selected: suggestion })
-      history.push(ROUTES.SCREENING, { selected: selectedAddress });
-    } else {
-      history.push(ROUTES.SCREENING, { selected: selectedAddress });
-    }
-  }
 
   return (
     <AutoSuggestWrapper>

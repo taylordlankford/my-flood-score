@@ -14,8 +14,8 @@ import { hideSiteContainers } from "../helpers";
 import { useFirebase, useFirebaseStorage } from "../../../hooks";
 
 const Recommendation = (props) => {
-  const { history, location, match } = props;
-  const { address } = location.state;
+  // const { address } = location.state;
+  const { address } = props
   const firebase = useFirebase();
 
   const [selectedAddress, setSelectedAddress] = useState((address != null) ? address : '');
