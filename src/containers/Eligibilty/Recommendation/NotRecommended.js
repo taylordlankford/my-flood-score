@@ -58,7 +58,7 @@ const NotRecommended = (props) => {
           <a
             href="https://www.nofloodflorida.com/loma/"
             rel="noopener noreferrer"
-            target="_blank"
+            target="_top"
           >
             LOMA
           </a>
@@ -113,7 +113,7 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
             <a
               href=" https://www.nofloodflorida.com/fam/"
               rel="noopener noreferrer"
-              target="_blank"
+              target="_top"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>
                 <span style={{ color: "#000" }}>Learn More</span>
@@ -148,7 +148,7 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
             <a
               href="https://www.nofloodflorida.com/loma/"
               rel="noopener noreferrer"
-              target="_blank"
+              target="_top"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>
                 <span style={{ color: "#000" }}>Learn More</span>

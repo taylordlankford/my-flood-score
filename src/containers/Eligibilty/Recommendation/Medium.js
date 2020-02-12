@@ -44,7 +44,7 @@ const Medium = (props) => {
             <a
               href="https://www.nofloodflorida.com/orderloma/"
               rel="noopener noreferrer"
-              target="_blank"
+              target="_top"
             >
               <Button>Finalize LOMA Request</Button>
             </a>
@@ -82,7 +82,7 @@ const Medium = (props) => {
           <a
             href="https://www.nofloodflorida.com/loma/"
             rel="noopener noreferrer"
-            target="_blank"
+            target="_top"
           >
             LOMA
           </a>

@@ -20,7 +20,8 @@ const Low = (props) => {
     <>
       <div style={{ paddingBottom: "40px" }}>
         <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
-          This property has a “low” likelihood of benefiting from a Letter of Map Amendment.
+          This property has a “low” likelihood of benefiting from a Letter of
+          Map Amendment.
         </h3>
       </div>
       <Row sm={12}>
@@ -56,7 +57,13 @@ const Low = (props) => {
       >
         Learn more about the LOMA by visiting our{" "}
         <u>
-          <a href="https://www.nofloodflorida.com/loma/">LOMA</a>
+          <a
+            href="https://www.nofloodflorida.com/loma/"
+            rel="noopener noreferrer"
+            target="_top"
+          >
+            LOMA
+          </a>
         </u>{" "}
         page or <span style={{ color: "#000" }}>Call 813-213-0641</span>
       </div>
@@ -141,7 +148,7 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
             <a
               href=" https://www.nofloodflorida.com/fam/"
               rel="noopener noreferrer"
-              target="_blank"
+              target="_top"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>Learn More</Button>
             </a>
@@ -174,7 +181,7 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
             <a
               href="https://www.nofloodflorida.com/loma/"
               rel="noopener noreferrer"
-              target="_blank"
+              target="_top"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>Learn More</Button>
             </a>
