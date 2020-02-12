@@ -23,11 +23,11 @@ const Screening = props => {
   const [exists, setExists] = useState(false);
 
   useEffect(() => {
-    if (
-      window.location.href ===
-        "https://flood-score.firebaseapp.com/search-eligibility" ||
-      window.location.href === "http://localhost:3001/search-eligibility"
-    ) {
+    let hideSurrounding =
+      window.location.href === "https://flood-score.firebaseapp.com/search-eligibility" ||
+      window.location.href === "http://localhost:3001/search-eligibility";
+
+    if (hideSurrounding) {
       hideSiteContainers();
     }
 
