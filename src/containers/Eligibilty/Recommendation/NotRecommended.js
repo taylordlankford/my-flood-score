@@ -147,8 +147,8 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
           <div style={{ textAlign: "center", paddingTop: "70px" }}>
             <a
               href="https://www.nofloodflorida.com/loma/"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>
                 <span style={{ color: "#000" }}>Learn More</span>
