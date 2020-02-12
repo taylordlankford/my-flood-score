@@ -54,9 +54,9 @@ const NotRecommended = (props) => {
       >
         Learn more about the LOMA by visiting our{" "}
         <u>
-          <a href="#">LOMA</a>
+          <a href="https://www.nofloodflorida.com/loma/">LOMA</a>
         </u>{" "}
-        page or <span style={{ color: "#000" }}>Call 1-800-LOMA-NFF</span>
+        page or <span style={{ color: "#000" }}>Call 813-213-0641</span>
       </div>
     </>
   );
@@ -103,12 +103,10 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
             <img src={img} style={{ height: "100px", width: "100px" }} />
           </div>
           <div style={{ textAlign: "center" }}>
-            <a
-              href="https://www.nofloodflorida.com/orderloma/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <Button style={{ backgroundColor: "#C7AE4A" }}><span style={{ color: "#000" }}>Learn More</span></Button>
+            <a href=" https://www.nofloodflorida.com/fam/">
+              <Button style={{ backgroundColor: "#C7AE4A" }}>
+                <span style={{ color: "#000" }}>Learn More</span>
+              </Button>
             </a>
           </div>
         </Col>
@@ -136,12 +134,10 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
         </Col>
         <Col lg={4}>
           <div style={{ textAlign: "center", paddingTop: "70px" }}>
-            <a
-              href="https://www.nofloodflorida.com/orderloma/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <Button style={{ backgroundColor: "#C7AE4A" }}><span style={{ color: "#000" }}>Learn More</span></Button>
+            <a href="https://www.nofloodflorida.com/loma/">
+              <Button style={{ backgroundColor: "#C7AE4A" }}>
+                <span style={{ color: "#000" }}>Learn More</span>
+              </Button>
             </a>
           </div>
         </Col>
