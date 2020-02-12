@@ -25,7 +25,7 @@ const Recommendation = (props) => {
   const [imgUrl, setImgUrl] = useState("");
 
   useEffect(() => {
-    // hideSiteContainers()
+    hideSiteContainers()
 
     if (selectedAddress != null || selectedAddress !== '') {
       console.log('Address => ', selectedAddress)
