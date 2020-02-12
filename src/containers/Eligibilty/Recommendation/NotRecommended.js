@@ -56,9 +56,9 @@ const NotRecommended = (props) => {
         Learn more about the LOMA by visiting our{" "}
         <u>
           <a
-            href="https://www.nofloodflorida.com/loma/"
-            rel="noopener noreferrer"
             target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.nofloodflorida.com/loma/"
           >
             LOMA
           </a>
@@ -111,9 +111,9 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
           </div>
           <div style={{ textAlign: "center" }}>
             <a
-              href=" https://www.nofloodflorida.com/fam/"
-              rel="noopener noreferrer"
               target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.nofloodflorida.com/fam/"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>
                 <span style={{ color: "#000" }}>Learn More</span>
@@ -146,9 +146,9 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
         <Col lg={4}>
           <div style={{ textAlign: "center", paddingTop: "70px" }}>
             <a
-              href="https://www.nofloodflorida.com/loma/"
-              rel="noopener noreferrer"
               target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.nofloodflorida.com/loma/"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>
                 <span style={{ color: "#000" }}>Learn More</span>
