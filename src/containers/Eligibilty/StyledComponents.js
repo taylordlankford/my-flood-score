@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const ParallaxWrapper = styled.div`
+  overflow: hidden;
 `
 
 export const ParallaxContainer = styled.div`

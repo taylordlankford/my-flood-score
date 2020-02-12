@@ -16,7 +16,8 @@ export const Container = styled.div`
   max-width: 1440px;
   /* min-height: inherit; */
   padding: 50px 50px 50px 50px;
-  overflow: scroll;
+  overflow: hidden;
+  /* overflow: scroll; */
   /* display: grid; */
   /* grid-template-columns: 3fr 4fr; */
   /* grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); */
