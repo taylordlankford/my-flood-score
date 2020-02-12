@@ -9,6 +9,7 @@ export const ParallaxContainer = styled.div`
   padding-top: 60px;
   padding-bottom: 50px;
   margin: 0 auto;
+  margin-top: 80px;
   max-width: 1080px;
   overflow: auto;
 `
