@@ -57,8 +57,8 @@ const NotRecommended = (props) => {
         <u>
           <a
             href="https://www.nofloodflorida.com/loma/"
-            rel="noopener noreferrer"
             target="_blank"
+            rel="noopener noreferrer"
           >
             LOMA
           </a>
@@ -111,9 +111,9 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
           </div>
           <div style={{ textAlign: "center" }}>
             <a
-              href="https://www.nofloodflorida.com/fam/"
-              rel="noopener noreferrer"
+              href=" https://www.nofloodflorida.com/fam/"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>
                 <span style={{ color: "#000" }}>Learn More</span>
@@ -147,8 +147,8 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
           <div style={{ textAlign: "center", paddingTop: "70px" }}>
             <a
               href="https://www.nofloodflorida.com/loma/"
-              rel="noopener noreferrer"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>
                 <span style={{ color: "#000" }}>Learn More</span>
