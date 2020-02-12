@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
+  height: 100%;
   margin-top: 80px;
   font-family: 'Helvetica', sans-serif;
   line-height: 1.5em;
@@ -10,9 +11,10 @@ export const Wrapper = styled.div`
 `
 
 export const Container = styled.div`
+  height: max-content;
   margin: 0 auto;
   max-width: 1440px;
-  min-height: inherit;
+  /* min-height: inherit; */
   padding: 50px 50px 50px 50px;
   overflow: scroll;
   /* display: grid; */
