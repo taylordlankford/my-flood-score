@@ -23,8 +23,16 @@ const Screening = props => {
   const [exists, setExists] = useState(false);
 
   useEffect(() => {
-    hideSiteContainers();
-    let isAddressSelected = typeof selected !== "undefined" || selected !== null;
+    if (
+      window.location.href ===
+        "https://flood-score.firebaseapp.com/search-eligibility" ||
+      window.location.href === "http://localhost:3001/search-eligibility"
+    ) {
+      hideSiteContainers();
+    }
+
+    let isAddressSelected =
+      typeof selected !== "undefined" || selected !== null;
 
     if (name !== "" || email !== "" || phone !== "") {
       setIsInvalid(false);
@@ -33,7 +41,7 @@ const Screening = props => {
 
   const addNffUser = async (collection, setObj) => {
     await firebase.doFirestoreAdd(collection, setObj).then(res => {
-      setShowRecommendation(true)
+      setShowRecommendation(true);
     });
   };
 

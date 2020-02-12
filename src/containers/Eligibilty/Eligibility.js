@@ -29,7 +29,13 @@ const Eligibility = props => {
   const [selectedAddress, setSelectedAddress] = useState("");
 
   useEffect(() => {
-    hideSiteContainers();
+      if (
+        window.location.href ===
+          "https://flood-score.firebaseapp.com/search-eligibility" ||
+      window.location.href === "http://localhost:3001/search-eligibility"
+      ) {
+        hideSiteContainers();
+      }
   });
 
   const onSuggestionSelected = (

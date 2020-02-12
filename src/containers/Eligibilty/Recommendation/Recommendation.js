@@ -25,7 +25,14 @@ const Recommendation = (props) => {
   const [imgUrl, setImgUrl] = useState("");
 
   useEffect(() => {
-    hideSiteContainers()
+    let hideSurrounding =
+      window.location.href ===
+        "https://flood-score.firebaseapp.com/search-eligibility" ||
+      window.location.href === "http://localhost:3001/search-eligibility"
+
+    if (hideSurrounding) {
+      hideSiteContainers()
+    }
 
     if (selectedAddress != null || selectedAddress !== '') {
       console.log('Address => ', selectedAddress)
