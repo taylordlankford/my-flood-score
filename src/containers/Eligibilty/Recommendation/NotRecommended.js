@@ -19,7 +19,8 @@ const NotRecommended = (props) => {
     <>
       <div style={{ paddingBottom: "40px" }}>
         <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
-          It is not recommended to pursue a Letter of Map Amendment for this property
+          It is not recommended to pursue a Letter of Map Amendment for this
+          property
         </h3>
       </div>
       <Row sm={12}>
@@ -54,7 +55,13 @@ const NotRecommended = (props) => {
       >
         Learn more about the LOMA by visiting our{" "}
         <u>
-          <a href="https://www.nofloodflorida.com/loma/">LOMA</a>
+          <a
+            href="https://www.nofloodflorida.com/loma/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            LOMA
+          </a>
         </u>{" "}
         page or <span style={{ color: "#000" }}>Call 813-213-0641</span>
       </div>
@@ -103,7 +110,11 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
             <img src={img} style={{ height: "100px", width: "100px" }} />
           </div>
           <div style={{ textAlign: "center" }}>
-            <a href=" https://www.nofloodflorida.com/fam/">
+            <a
+              href=" https://www.nofloodflorida.com/fam/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <Button style={{ backgroundColor: "#C7AE4A" }}>
                 <span style={{ color: "#000" }}>Learn More</span>
               </Button>
@@ -134,7 +145,11 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
         </Col>
         <Col lg={4}>
           <div style={{ textAlign: "center", paddingTop: "70px" }}>
-            <a href="https://www.nofloodflorida.com/loma/">
+            <a
+              href="https://www.nofloodflorida.com/loma/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <Button style={{ backgroundColor: "#C7AE4A" }}>
                 <span style={{ color: "#000" }}>Learn More</span>
               </Button>

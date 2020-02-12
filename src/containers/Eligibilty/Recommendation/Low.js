@@ -138,7 +138,11 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
             <img src={img} style={{ height: "100px", width: "100px" }} />
           </div>
           <div style={{ textAlign: "center" }}>
-            <a href=" https://www.nofloodflorida.com/fam/">
+            <a
+              href=" https://www.nofloodflorida.com/fam/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <Button style={{ backgroundColor: "#C7AE4A" }}>Learn More</Button>
             </a>
           </div>
@@ -167,7 +171,11 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
         </Col>
         <Col lg={4}>
           <div style={{ textAlign: "center", paddingTop: "70px" }}>
-            <a href="https://www.nofloodflorida.com/loma/">
+            <a
+              href="https://www.nofloodflorida.com/loma/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <Button style={{ backgroundColor: "#C7AE4A" }}>Learn More</Button>
             </a>
           </div>

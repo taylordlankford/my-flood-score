@@ -41,7 +41,11 @@ const Medium = (props) => {
           />
           <hr style={{ border: "3px solid #C7AE4A" }} />
           <div style={{ textAlign: "center", marginTop: "60px" }}>
-            <a href="https://www.nofloodflorida.com/orderloma/">
+            <a
+              href="https://www.nofloodflorida.com/orderloma/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <Button>Finalize LOMA Request</Button>
             </a>
           </div>
@@ -75,7 +79,13 @@ const Medium = (props) => {
       >
         Learn more about the LOMA by visiting our{" "}
         <u>
-          <a href="https://www.nofloodflorida.com/loma/">LOMA</a>
+          <a
+            href="https://www.nofloodflorida.com/loma/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            LOMA
+          </a>
         </u>{" "}
         page or <span style={{ color: "#000" }}>Call 813-213-0641</span>
       </div>
