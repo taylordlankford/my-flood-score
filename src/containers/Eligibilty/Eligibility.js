@@ -31,7 +31,7 @@ const Eligibility = props => {
   useEffect(() => {
     let hideSurrounding =
       window.location.href === "https://flood-score.firebaseapp.com/search-eligibility" ||
-      window.location.href === "http://localhost:3001/search-eligibility";
+      window.location.href === "http://localhost:3000/search-eligibility";
 
     if (hideSurrounding) {
       hideSiteContainers();
@@ -48,7 +48,7 @@ const Eligibility = props => {
   };
 
   const handleOnClick = e => {
-    e.preventDefault();
+    // e.preventDefault();
     setShowSearch(false);
     setShowScreening(true);
   };

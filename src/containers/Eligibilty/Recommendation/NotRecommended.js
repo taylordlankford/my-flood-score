@@ -1,19 +1,19 @@
-import React from 'react'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
-import Button from 'react-bootstrap/Button'
-import * as S from './StyledComponents'
-import ExamineSvg from '../../../assets/images/Examine.svg'
-import { FaCheck } from 'react-icons/fa'
+import React from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import * as S from "./StyledComponents";
+import ExamineSvg from "../../../assets/images/Examine.svg";
+import InfoBox from "./InfoBox";
 
-const NotRecommended = (props) => {
+const NotRecommended = props => {
   const {
     getLOMARecommendation,
     LOMARating,
     LOMACategory,
     selectedAddress,
     propertyData
-  } = props
+  } = props;
 
   return (
     <>
@@ -35,7 +35,7 @@ const NotRecommended = (props) => {
           />
           <hr style={{ border: "3px solid #C7AE4A" }} />
         </Col>
-        <Col sm={6} style={{ border: "1px solid #C7AE4A" }}>
+        <Col sm={6}>
           <LearnMoreBox
             title="Flood Analysis Memo"
             text="Learn more about your detailed flood risk. Floodplain maps, building and structure impacts, and flood insurance premium estimates"
@@ -67,26 +67,26 @@ const NotRecommended = (props) => {
       </div>
     </>
   );
-}
+};
 
-const InfoBox = ({ selectedAddress, propertyData }) => {
-  return (
-    <div style={{ paddingBottom: "20px", paddingTop: "20px" }}>
-      <ul style={{ listStyleType: "none" }}>
-        <li style={{ marginBottom: "20px" }}><FaCheck />PROPERTY ADDRESS: {selectedAddress}</li>
-        <li style={{ marginBottom: "20px" }}><FaCheck />FEMA FLOOD ZONE: {propertyData.FEMA_ZONE.stringValue.slice(0, 1)}</li>
-        <li style={{ marginBottom: "20px" }}><FaCheck />LIKELIHOOD YOU ARE WRONGLY MAPPED: LOW</li>
-        <li style={{ marginBottom: "20px" }}>
-          <FaCheck />BASIS OF THIS DETERMINATION:
-          <ul style={{ listStyleType: "none", fontWeight: "400" }}>
-            <li><FaCheck />FEMA considers this property to be in a low risk flood zone.</li>
-            <li><FaCheck />The elevation of your property appears to be <i>below</i> the flood elevation.</li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  );
-}
+// const InfoBox = ({ selectedAddress, propertyData }) => {
+//   return (
+//     <div style={{ paddingBottom: "20px", paddingTop: "20px" }}>
+//       <ul style={{ listStyleType: "none" }}>
+//         <li style={{ marginBottom: "20px" }}><FaCheck />PROPERTY ADDRESS: {selectedAddress}</li>
+//         <li style={{ marginBottom: "20px" }}><FaCheck />FEMA FLOOD ZONE: {propertyData.FEMA_ZONE.stringValue.slice(0, 1)}</li>
+//         <li style={{ marginBottom: "20px" }}><FaCheck />LIKELIHOOD YOU ARE WRONGLY MAPPED: LOW</li>
+//         <li style={{ marginBottom: "20px" }}>
+//           <FaCheck />BASIS OF THIS DETERMINATION:
+//           <ul style={{ listStyleType: "none", fontWeight: "400" }}>
+//             <li><FaCheck />FEMA considers this property to be in a low risk flood zone.</li>
+//             <li><FaCheck />The elevation of your property appears to be <i>below</i> the flood elevation.</li>
+//           </ul>
+//         </li>
+//       </ul>
+//     </div>
+//   );
+// }
 
 const LearnMoreBox = ({ title, text, disclaimer, img }) => {
   return (
@@ -159,6 +159,6 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
       </Row>
     </>
   );
-}
+};
 
-export default NotRecommended
+export default NotRecommended;

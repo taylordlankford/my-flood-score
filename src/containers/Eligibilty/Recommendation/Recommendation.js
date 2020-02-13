@@ -4,6 +4,9 @@ import "./styles.css";
 import BgImg from "../../../assets/images/nff-bg-image.jpg";
 import * as S from "./StyledComponents";
 
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 import Faq from "./Faq";
 import High from "./High";
 import Medium from "./Medium";
@@ -27,7 +30,7 @@ const Recommendation = (props) => {
   useEffect(() => {
     let hideSurrounding =
       window.location.href === "https://flood-score.firebaseapp.com/search-eligibility" ||
-      window.location.href === "http://localhost:3001/search-eligibility"
+      window.location.href === "http://localhost:3000/search-eligibility"
 
     if (hideSurrounding) {
       hideSiteContainers()
@@ -156,11 +159,14 @@ const Recommendation = (props) => {
         strength={200}
       >
         <S.Container>
-          <LOMARecommendations propertyData={propertyData} LOMACategory={getLOMARecommendation(LOMARating)} />
+          <LOMARecommendations
+            propertyData={propertyData}
+            LOMACategory={getLOMARecommendation(LOMARating)}
+          />
         </S.Container>
       </Parallax>
     </S.Wrapper>
-  )
+  );
 }
 
 export default Recommendation

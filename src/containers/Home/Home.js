@@ -36,7 +36,7 @@ function Home ({ history }) {
   return (
     <>
       <SecondRow />
-      <Eligibility />
+      {/* <Eligibility /> */}
       <Parallax bgImage={backgroundImage} strength={600}>
         <Container>
           <div className="headlineWrapper" style={{ height: "500px" }}>
@@ -71,10 +71,12 @@ function Home ({ history }) {
       </div>
       <CheckMarks />
       <Products />
+      {/*
       <iframe
         src="https://flood-score.firebaseapp.com/search-eligibility"
         style={{ minHeight: "1440px", width: "100%" }}
       />
+      */}
       <Testimonials
         testimonialTitle={TESTIMONIAL_TITLE}
         testimonialList={TESTIMONIAL_LIST}

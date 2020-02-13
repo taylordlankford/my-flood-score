@@ -43,6 +43,7 @@ export const Subtitle = styled.div`
 export const AutoSuggestWrapper = styled.div`
   display: grid;
   grid-template-columns: 9fr 1fr;
+  /* grid-template-columns: minmax(min-content, 400px); */
   padding-left: 50px;
   padding-right: 50px;
   margin: 0 auto;

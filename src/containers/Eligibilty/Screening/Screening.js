@@ -25,7 +25,7 @@ const Screening = props => {
   useEffect(() => {
     let hideSurrounding =
       window.location.href === "https://flood-score.firebaseapp.com/search-eligibility" ||
-      window.location.href === "http://localhost:3001/search-eligibility";
+      window.location.href === "http://localhost:3000/search-eligibility";
 
     if (hideSurrounding) {
       hideSiteContainers();
@@ -97,6 +97,7 @@ const Screening = props => {
                   onChange={e => handlePhoneInput(e)}
                 />
               </Form.Group>
+              <br />
               <Button
                 disabled={isInvalid}
                 variant="primary"

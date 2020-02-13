@@ -110,10 +110,13 @@ export const CategoryWrapper = styled.div`
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1rem;
+  grid-gap: 1.5rem;
   margin-bottom: 20px;
+  padding-left: 18px;
+  /*
   padding-left: 64px;
   padding-right: 64px;
+  */
 `
 
 export const HighBlock = styled.div`
