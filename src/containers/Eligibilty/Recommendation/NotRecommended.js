@@ -91,11 +91,11 @@ const NotRecommended = props => {
 const LearnMoreBox = ({ title, text, disclaimer, img }) => {
   return (
     <>
-      <Row lg={12} style={{ paddingTop: "20px" }}>
-        <Col lg={8}>
+      <Row sm={12} style={{ paddingTop: "20px" }}>
+        <Col sm={8}>
           <div>
             <h4 style={{ color: "#fff" }}>{title}</h4>
-            <div style={{ paddingBottom: "45px" }}>
+            <div>
               <p>{text}</p>
             </div>
             <div>
@@ -105,8 +105,8 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
             </div>
           </div>
         </Col>
-        <Col lg={4}>
-          <div style={{ textAlign: "center", paddingBottom: "30px" }}>
+        <Col sm={4}>
+          <div style={{ textAlign: "center" }}>
             <img src={img} style={{ height: "100px", width: "100px" }} />
           </div>
           <div style={{ textAlign: "center" }}>
@@ -122,11 +122,11 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
           </div>
         </Col>
       </Row>
-      <Row lg={12} style={{ paddingTop: "20px" }}>
-        <Col lg={8}>
+      <Row sm={12} style={{ paddingTop: "20px" }}>
+        <Col sm={8}>
           <div>
             <h4 style={{ color: "#fff" }}>Elevation Certificate</h4>
-            <div style={{ paddingBottom: "45px" }}>
+            <div>
               <p>
                 Elevation Certificate An Elevation Certificate is used to define
                 key elevations around your property. If you do not already have
@@ -143,8 +143,11 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
             </div>
           </div>
         </Col>
-        <Col lg={4}>
-          <div style={{ textAlign: "center", paddingTop: "70px" }}>
+        <Col sm={4}>
+          {/* Place holder div for future img */}
+          <div style={{ textAlign: "center", height: "100px", width: "100px" }}>
+          </div>
+          <div style={{ textAlign: "center" }}>
             <a
               href="https://www.nofloodflorida.com/loma/"
               target="_blank"
