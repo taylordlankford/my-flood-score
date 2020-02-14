@@ -17,7 +17,7 @@ export const ParallaxContainer = styled.div`
   min-height: 100vh !important;
   /* min-height: 640px; */
   /* height: 760px; */
-  padding-top: 140px;
+  padding-top: 150px;
   padding-bottom: 50px;
   margin: 0 auto;
   margin-top: 80px;
