@@ -11,6 +11,8 @@ import {
   AutoSuggestContainer,
   IframeSearchBtn
 } from "./StyledComponents";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import AutoSuggest from "../../components/AutoSuggest/AutoSuggest";
 import { useFirestoreUser, useFirebase } from "../../hooks";
 
@@ -29,7 +31,13 @@ const Eligibility = props => {
   const [selectedAddress, setSelectedAddress] = useState("");
 
   useEffect(() => {
-    // hideSiteContainers();
+    let hideSurrounding =
+      window.location.href === "https://flood-score.firebaseapp.com/search-eligibility" ||
+      window.location.href === "http://localhost:3000/search-eligibility";
+
+    if (hideSurrounding) {
+      hideSiteContainers();
+    }
   });
 
   const onSuggestionSelected = (
@@ -42,7 +50,7 @@ const Eligibility = props => {
   };
 
   const handleOnClick = e => {
-    e.preventDefault();
+    // e.preventDefault();
     setShowSearch(false);
     setShowScreening(true);
   };
@@ -95,29 +103,35 @@ const IFrameLanding = props => {
           <S.Subtitle>
             Let’s take the first step together and help you save thousands on
             your flood insurance.{" "}
-            <a href="https://www.nofloodflorida.com/orderloma/">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.nofloodflorida.com/orderloma/"
+            >
               <span style={{ fontWeight: "700", color: "#C7AE4A" }}>
                 Find out if you qualify for a Letter of Map Amendment!
               </span>{" "}
             </a>
           </S.Subtitle>
           {/* }<SearchEligibility /> */}
-          <AutoSuggestWrapper>
-            <AutoSuggestContainer>
-              <AutoSuggest
-                autocomplete="off"
-                theme={autosuggestTheme}
-                onSuggestionSelected={onSuggestionSelected}
-                inputProps={{ id: "homeAddressSuggest" }}
-                firebase={firebase}
-              />
-            </AutoSuggestContainer>
-            <div>
-              <IframeSearchBtn onClick={e => handleOnClick(e)}>
-                Proceed
-              </IframeSearchBtn>
-            </div>
-          </AutoSuggestWrapper>
+          <div style={{ paddingLeft: "10px", paddingRight: "10px" }}>
+            <Row xs={12} style={{ margin: "0 auto", maxWidth: "800px" }}>
+              <Col xs={10} style={{ padding: "0", margin: "0" }}>
+                <AutoSuggest
+                  autocomplete="off"
+                  theme={autosuggestTheme}
+                  onSuggestionSelected={onSuggestionSelected}
+                  inputProps={{ id: "homeAddressSuggest" }}
+                  firebase={firebase}
+                />
+              </Col>
+              <Col xs={2} style={{ padding: "0", margin: "0" }}>
+                <IframeSearchBtn onClick={e => handleOnClick(e)}>
+                  Proceed
+                </IframeSearchBtn>
+              </Col>
+            </Row>
+          </div>
           );
           <HeaderContainer>
             <p style={{ margin: "0 auto", maxWidth: "400px" }}>
@@ -138,7 +152,7 @@ const IFrameLanding = props => {
 const HeaderContainer = styled.div`
   text-align: center;
   color: #fff;
-  padding-top: 100px;
+  padding-top: 40px;
   font-size: 20px;
   font-weight: 500;
   line-height: 1.5em;

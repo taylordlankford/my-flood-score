@@ -1,18 +1,29 @@
 import styled from 'styled-components'
 
+export const ScreeningWrapper = styled.div`
+  min-height: 100vh !important;
+  overflow: hidden !important;
+  background-color: #EDEDED;
+  margin: 0 auto;
+`
+
 export const ParallaxWrapper = styled.div`
+  /* overflow: hidden; */
+  overflow: inherit !important;
+  background-color: #EDEDED;
 `
 
 export const ParallaxContainer = styled.div`
-  /* min-height: 100vh; */
-  min-height: 640px;
-  padding-top: 60px;
+  min-height: 100vh !important;
+  /* min-height: 640px; */
+  /* height: 760px; */
+  padding-top: 150px;
   padding-bottom: 50px;
   margin: 0 auto;
+  margin-top: 80px;
   max-width: 1080px;
   overflow: auto;
 `
-
 export const MainTitle = styled.div`
   color: #ffffff;
   font-family: 'Helvetica', sans-serif;
@@ -41,6 +52,7 @@ export const Subtitle = styled.div`
 export const AutoSuggestWrapper = styled.div`
   display: grid;
   grid-template-columns: 9fr 1fr;
+  grid-template-columns: minmax(min-content, 400px);
   padding-left: 50px;
   padding-right: 50px;
   margin: 0 auto;
@@ -56,6 +68,7 @@ export const IframeSearchBtn = styled.button`
   &,
   &:link,
   &:visited {
+    width: 100%;
     height: 48px;
     text-align: center !important;
     color: white !important;
@@ -65,7 +78,7 @@ export const IframeSearchBtn = styled.button`
     font-weight: 700;
     border: 1px solid #55b96a;
     border: none;
-    padding: 0.62rem 1.25rem;
+    /* padding: 0.62rem 1.25rem; */
     text-decoration: none;
     text-transform: uppercase;
     background-size: 230%;

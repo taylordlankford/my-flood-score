@@ -71,10 +71,12 @@ function Home ({ history }) {
       </div>
       <CheckMarks />
       <Products />
+      {/*
       <iframe
         src="https://flood-score.firebaseapp.com/search-eligibility"
         style={{ minHeight: "1440px", width: "100%" }}
       />
+      */}
       <Testimonials
         testimonialTitle={TESTIMONIAL_TITLE}
         testimonialList={TESTIMONIAL_LIST}

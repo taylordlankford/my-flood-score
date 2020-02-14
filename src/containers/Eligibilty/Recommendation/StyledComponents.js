@@ -1,20 +1,38 @@
 import styled from 'styled-components'
 
+export const ResultsContainer = styled.div`
+ padding: 30px 0 30px 0;
+`
+
+export const ImgContainer = styled.div`
+  padding-top: 20px;
+  @media only screen and (max-width: 970px) {
+    padding-top: 50px;
+  }
+`;
+
 export const Wrapper = styled.div`
+  /* height: 1440px; */
+  margin-top: 80px;
   font-family: 'Helvetica', sans-serif;
   line-height: 1.5em;
   font-size: 14px;
   font-weight: 600;
   color: #fff;
+  min-height: 100vh;
+  overflow: inherit !important; 
 `
 
 export const Container = styled.div`
+  min-height: 100vh !important;
+  /* height: max-content; */
   margin: 0 auto;
   max-width: 1440px;
-  min-height: inherit;
+  /* min-height: inherit; */
   padding: 50px 50px 50px 50px;
-  overflow: scroll;
-  /* display: grid; */
+  overflow: hidden;
+  /* overflow: scroll; */
+  display: grid;
   /* grid-template-columns: 3fr 4fr; */
   /* grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); */
   /* grid-gap: 2em; */
@@ -104,12 +122,16 @@ export const CategoryWrapper = styled.div`
   font-size: 21px;
   color: #000000;
   text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 1rem;
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  /* grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  grid-gap: 1.5rem;
   margin-bottom: 20px;
+  padding-left: 18px;
+  /*
   padding-left: 64px;
   padding-right: 64px;
+  */
 `
 
 export const HighBlock = styled.div`

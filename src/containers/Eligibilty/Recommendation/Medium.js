@@ -1,13 +1,20 @@
-import React from 'react'
-import * as S from './StyledComponents'
-import styled from 'styled-components'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
-import ExamineSvg from '../../../assets/images/Examine.svg'
-import { FaCheck, FaCentercode } from 'react-icons/fa'
-import { PrimaryBtn, TransitionBtn } from '../../../StyledComponents/StyledComponents'
-import CategoryPills from './CategoryPills'
+import React, { useState } from "react";
+import * as S from "./StyledComponents";
+import styled from "styled-components";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+// import ExamineSvg from "../../../assets/images/Examine.svg";
+// import { FaCheck, FaCentercode } from "react-icons/fa";
+// import {
+//   PrimaryBtn,
+//   TransitionBtn
+// } from "../../../StyledComponents/StyledComponents";
+// import Recommendation from "./Recommendation";
+import CategoryPills from "./CategoryPills";
+import InfoBox from "./InfoBox";
+import ImgLightbox from "./ImgLightbox";
+import RecommendationFooter from "./RecommendationFooter"
 
 const Medium = (props) => {
   const {
@@ -20,38 +27,54 @@ const Medium = (props) => {
     imgUrl
   } = props
 
+  const [modalShow, setModalShow] = useState(false);
+
   return (
-    <MediumWrapper>
-      <div style={{ paddingBottom: "40px" }}>
-        <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
-          CONGRATULATIONS! This property has a “medium” likelihood of benefiting
-          from a Letter of Map Amendment.
-        </h3>
-      </div>
-      <Row sm={12}>
-        <Col sm={6}>
-          <hr style={{ border: "3px solid #C7AE4A", marginBottom: "40px" }} />
-          <CategoryPills
-            getLOMARecommendation={getLOMARecommendation}
-            LOMARating={LOMARating}
-          />
-          <InfoBox
-            selectedAddress={selectedAddress}
-            propertyData={propertyData}
-          />
-          <hr style={{ border: "3px solid #C7AE4A" }} />
-          <div style={{ textAlign: "center", marginTop: "60px" }}>
-            <Button>Finalize LOMA Request</Button>
-          </div>
-        </Col>
-        <Col sm={6} style={{ border: "1px solid #C7AE4A" }}>
-          {imgUrl ? (
-            <div style={{ border: "1px solid #C7AE4A", padding: "20px" }}>
-              <img src={imgUrl} style={{ height: "100%", width: "100%" }} />
-            </div>
-          ) : (
-            <>Pending...</>
-          )}
+    <>
+      <ImgLightbox
+        imgUrl={imgUrl}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+      <MediumWrapper>
+        <div style={{ paddingBottom: "40px" }}>
+          <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
+            CONGRATULATIONS! This property has a “medium” likelihood of
+            benefiting from a Letter of Map Amendment.
+          </h3>
+        </div>
+        <Row sm={12}>
+          <Col sm={6}>
+            <hr
+              style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
+            />
+            <S.ResultsContainer>
+              <CategoryPills
+                getLOMARecommendation={getLOMARecommendation}
+                LOMARating={LOMARating}
+              />
+              <InfoBox
+                selectedAddress={selectedAddress}
+                propertyData={propertyData}
+              />
+            </S.ResultsContainer>
+            <hr
+              style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
+            />
+          </Col>
+          <Col lg={6}>
+            {imgUrl ? (
+              <S.ImgContainer>
+                <img
+                  src={imgUrl}
+                  style={{ cursor: "pointer", height: "100%", width: "100%" }}
+                  onClick={() => setModalShow(true)}
+                />
+              </S.ImgContainer>
+            ) : (
+              <>Pending...</>
+            )}
+          </Col>
           {/*
           <LearnMoreBox
             title="Flood Analysis Memo"
@@ -59,28 +82,28 @@ const Medium = (props) => {
             img={ExamineSvg}
           />
           */}
-        </Col>
-      </Row>
-      <div
-        style={{
-          fontSize: "20px",
-          backgroundColor: "#C7AE4A",
-          color: "#fff",
-          marginTop: "60px",
-          padding: "2px 40px 2px 40px",
-          textAlign: "center"
-        }}
-      >
-        Learn more about the LOMA by visiting our{" "}
-        <u>
-          <a href="#">LOMA</a>
-        </u>{" "}
-        page or <span style={{ color: "#000" }}>Call 1-800-LOMA-NFF</span>
-      </div>
-    </MediumWrapper>
+        </Row>
+        <Row lg={12} style={{ paddingTop: "40px" }}>
+          <Col lg={6}>
+            <div style={{ textAlign: "center" }}>
+              <a
+                href="https://www.nofloodflorida.com/orderloma/"
+                rel="noopener noreferrer"
+                target="_top"
+              >
+                <Button>Finalize LOMA Request</Button>
+              </a>
+            </div>
+          </Col>
+          <Col lg={6}></Col>
+        </Row>
+        <RecommendationFooter />
+      </MediumWrapper>
+    </>
   );
 }
 
+/*
 const InfoBox = ({ selectedAddress, propertyData }) => {
   return (
     <div style={{ paddingBottom: "20px", paddingTop: "20px" }}>
@@ -99,6 +122,7 @@ const InfoBox = ({ selectedAddress, propertyData }) => {
     </div>
   );
 }
+*/
 
 /*
 const LearnMoreBox = ({ title, text, img }) => {

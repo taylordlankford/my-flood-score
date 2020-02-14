@@ -8,6 +8,8 @@ import {
   AutoSuggestContainer,
   IframeSearchBtn
 } from "../StyledComponents";
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 import AutoSuggest from "../../../components/AutoSuggest/AutoSuggest";
 import { useFirestoreUser, useFirebase } from "../../../hooks";
 

@@ -6,6 +6,7 @@ import { FaCheck } from 'react-icons/fa'
 import * as S from './StyledComponents'
 import ExamineSvg from '../../../assets/images/Examine.svg'
 import CategoryPills from './CategoryPills'
+import RecommendationFooter from "./RecommendationFooter"
 
 const Low = (props) => {
   const {
@@ -20,21 +21,28 @@ const Low = (props) => {
     <>
       <div style={{ paddingBottom: "40px" }}>
         <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
-          This property has a “low” likelihood of benefiting from a Letter of Map Amendment.
+          This property has a “low” likelihood of benefiting from a Letter of
+          Map Amendment.
         </h3>
       </div>
       <Row sm={12}>
         <Col sm={6}>
-          <hr style={{ border: "3px solid #C7AE4A", marginBottom: "40px" }} />
-          <CategoryPills
-            getLOMARecommendation={getLOMARecommendation}
-            LOMARating={LOMARating}
+          <hr
+            style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
           />
-          <InfoBox
-            selectedAddress={selectedAddress}
-            propertyData={propertyData}
+          <S.ResultsContainer>
+            <CategoryPills
+              getLOMARecommendation={getLOMARecommendation}
+              LOMARating={LOMARating}
+            />
+            <InfoBox
+              selectedAddress={selectedAddress}
+              propertyData={propertyData}
+            />
+          </S.ResultsContainer>
+          <hr
+            style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
           />
-          <hr style={{ border: "3px solid #C7AE4A" }} />
         </Col>
         <Col sm={6} style={{ border: "1px solid #C7AE4A" }}>
           <LearnMoreBox
@@ -56,9 +64,15 @@ const Low = (props) => {
       >
         Learn more about the LOMA by visiting our{" "}
         <u>
-          <a href="#">LOMA</a>
+          <a
+            href="https://www.nofloodflorida.com/loma/"
+            rel="noopener noreferrer"
+            target="_top"
+          >
+            LOMA
+          </a>
         </u>{" "}
-        page or <span style={{ color: "#000" }}>Call 1-800-LOMA-NFF</span>
+        page or <span style={{ color: "#000" }}>Call 813-213-0641</span>
       </div>
     </>
   );
@@ -139,9 +153,9 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
           </div>
           <div style={{ textAlign: "center" }}>
             <a
-              href="https://www.nofloodflorida.com/orderloma/"
+              href=" https://www.nofloodflorida.com/fam/"
               rel="noopener noreferrer"
-              target="_blank"
+              target="_top"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>Learn More</Button>
             </a>
@@ -172,9 +186,9 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
         <Col lg={4}>
           <div style={{ textAlign: "center", paddingTop: "70px" }}>
             <a
-              href="https://www.nofloodflorida.com/orderloma/"
+              href="https://www.nofloodflorida.com/loma/"
               rel="noopener noreferrer"
-              target="_blank"
+              target="_top"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>Learn More</Button>
             </a>

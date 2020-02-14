@@ -23,8 +23,16 @@ const Screening = props => {
   const [exists, setExists] = useState(false);
 
   useEffect(() => {
-    // hideSiteContainers();
-    let isAddressSelected = typeof selected !== "undefined" || selected !== null;
+    let hideSurrounding =
+      window.location.href === "https://flood-score.firebaseapp.com/search-eligibility" ||
+      window.location.href === "http://localhost:3000/search-eligibility";
+
+    if (hideSurrounding) {
+      hideSiteContainers();
+    }
+
+    let isAddressSelected =
+      typeof selected !== "undefined" || selected !== null;
 
     if (name !== "" || email !== "" || phone !== "") {
       setIsInvalid(false);
@@ -33,7 +41,7 @@ const Screening = props => {
 
   const addNffUser = async (collection, setObj) => {
     await firebase.doFirestoreAdd(collection, setObj).then(res => {
-      setShowRecommendation(true)
+      setShowRecommendation(true);
     });
   };
 
@@ -55,7 +63,7 @@ const Screening = props => {
   }
 
   return (
-    <S.ParallaxWrapper>
+    <S.ScreeningWrapper>
       <Parallax contentClassName="parallax-bg" strength={200}>
         <S.ParallaxContainer>
           <div style={{ paddingBottom: "20px" }}>
@@ -63,51 +71,47 @@ const Screening = props => {
               You are one step away from getting your FREE screening results!
             </H3>
           </div>
-          <Row sm={12}>
-            <Col sm={7}></Col>
-            <Col sm={5}>
-              <FormWrapper>
-                <Form>
-                  <Form.Group>
-                    <Form.Label style={{ color: "#fff" }}>Name</Form.Label>
-                    <Form.Control
-                      type="name"
-                      placeholder="Name"
-                      onChange={e => setName(e.target.value)}
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label style={{ color: "#fff" }}>Email</Form.Label>
-                    <Form.Control
-                      type="email"
-                      placeholder="Email"
-                      onChange={e => setEmail(e.target.value)}
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label style={{ color: "#fff" }}>Phone</Form.Label>
-                    <Form.Control
-                      type="number"
-                      placeholder="Phone"
-                      onChange={e => handlePhoneInput(e)}
-                    />
-                  </Form.Group>
-                  <Button
-                    disabled={isInvalid}
-                    variant="primary"
-                    type="submit"
-                    style={{ backgroundColor: "#C7AE4A", width: "100%" }}
-                    onClick={e => handleOnClick(e)}
-                  >
-                    <span style={{ color: "#000" }}>Submit Request</span>
-                  </Button>
-                </Form>
-              </FormWrapper>
-            </Col>
-          </Row>
+          <FormWrapper>
+            <Form>
+              <Form.Group>
+                <Form.Label style={{ color: "#fff" }}>Name</Form.Label>
+                <Form.Control
+                  type="name"
+                  placeholder="Name"
+                  onChange={e => setName(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label style={{ color: "#fff" }}>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Email"
+                  onChange={e => setEmail(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label style={{ color: "#fff" }}>Phone</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Phone"
+                  onChange={e => handlePhoneInput(e)}
+                />
+              </Form.Group>
+              <br />
+              <Button
+                disabled={isInvalid}
+                variant="primary"
+                type="submit"
+                style={{ backgroundColor: "#C7AE4A", width: "100%" }}
+                onClick={e => handleOnClick(e)}
+              >
+                <span style={{ color: "#000" }}>Submit Request</span>
+              </Button>
+            </Form>
+          </FormWrapper>
         </S.ParallaxContainer>
       </Parallax>
-    </S.ParallaxWrapper>
+    </S.ScreeningWrapper>
   );
 };
 
@@ -122,6 +126,8 @@ const H3 = styled.div`
 const FormWrapper = styled.div`
   background-color: #201a40;
   padding: 20px;
+  margin: 0 auto;
+  max-width: 930px;
 `;
 
 export default Screening;
