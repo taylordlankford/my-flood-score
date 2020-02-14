@@ -7,29 +7,46 @@ const InfoBox = ({ selectedAddress, propertyData }) => {
     <InfoBoxWrapper>
       <div>
         <FaCheck />
-        PROPERTY ADDRESS: {selectedAddress}
+        <span style={{ fontWeight: "700", fontSize: "18px", marginRight: "20px" }}>
+          Property Address:
+        </span>
+        <span style={{ fontWeight: "500" }}>{selectedAddress}</span>
       </div>
       <div>
         <FaCheck />
-        FEMA FLOOD ZONE: {propertyData.FEMA_ZONE.stringValue.slice(0, 2)}
+        <span style={{ fontWeight: "700", fontSize: "18px", marginRight: "20px" }}>
+          FEMA Flood Zone
+        </span>
+        <span style={{ fontWeight: "500" }}>
+          {propertyData.FEMA_ZONE.stringValue.slice(0, 2).slice(0, -1)}
+        </span>
       </div>
       <div>
         <FaCheck />
-        LIKELIHOOD YOU ARE WRONGLY MAPPED: HIGH
+        <span style={{ fontWeight: "700", fontSize: "18px", marginRight: "20px" }}>
+          Likelihood you are wrongly mapped:
+        </span>
+        <span style={{ fontWeight: "500" }}>HIGH</span>
       </div>
       <div>
         <FaCheck />
-        BASIS OF THIS DETERMINATION:
+        <span style={{ fontWeight: "700", fontSize: "18px" }}>
+          Basis of this determination:
+        </span>
       </div>
       <BasisOfDetermination>
         <div>
           <FaCheck />
-          FEMA considers this property to be in a high risk flood zone.
+          <span style={{ fontWeight: "500" }}>
+            FEMA considers this property to be in a high risk flood zone.
+          </span>
         </div>
         <div>
           <FaCheck />
-          The elevation of your property appears to be <i>above</i> the flood
-          elevation.
+          <span style={{ fontWeight: "500" }}>
+            The elevation of your property appears to be <i>above</i> the flood
+            elevation.
+          </span>
         </div>
       </BasisOfDetermination>
     </InfoBoxWrapper>

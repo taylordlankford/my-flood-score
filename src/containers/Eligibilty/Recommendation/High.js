@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import CategoryPills from "./CategoryPills";
 import InfoBox from "./InfoBox";
 import ImgLightbox from "./ImgLightbox";
+import RecommendationFooter from "./RecommendationFooter"
 
 const High = (props) => {
   const {
@@ -51,7 +52,7 @@ const High = (props) => {
           </Col>
           <Col lg={6}>
             {imgUrl ? (
-              <div style={{ paddingTop: "14px" }}>
+              <div style={{ paddingTop: "30px" }}>
                 <img
                   src={imgUrl}
                   style={{ cursor: "pointer", height: "100%", width: "100%" }}
@@ -63,9 +64,9 @@ const High = (props) => {
             )}
           </Col>
         </Row>
-        <Row lg={12}>
+        <Row lg={12} style={{ paddingTop: "20px" }}>
           <Col lg={6}>
-            <div style={{ textAlign: "center", marginTop: "60px" }}>
+            <div style={{ textAlign: "center" }}>
               <a
                 href="https://www.nofloodflorida.com/orderloma/"
                 rel="noopener noreferrer"
@@ -77,28 +78,7 @@ const High = (props) => {
           </Col>
           <Col lg={6}></Col>
         </Row>
-        <div
-          style={{
-            fontSize: "20px",
-            backgroundColor: "#C7AE4A",
-            color: "#fff",
-            marginTop: "60px",
-            padding: "2px 40px 2px 40px",
-            textAlign: "center"
-          }}
-        >
-          Learn more about the LOMA by visiting our{" "}
-          <u>
-            <a
-              href="https://www.nofloodflorida.com/loma/"
-              rel="noopener noreferrer"
-              target="_top"
-            >
-              LOMA
-            </a>
-          </u>{" "}
-          page or <span style={{ color: "#000" }}>Call 813-213-0641</span>
-        </div>
+        <RecommendationFooter />
       </HighWrapper>
     </>
   );

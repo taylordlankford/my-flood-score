@@ -6,6 +6,7 @@ import { FaCheck } from 'react-icons/fa'
 import * as S from './StyledComponents'
 import ExamineSvg from '../../../assets/images/Examine.svg'
 import CategoryPills from './CategoryPills'
+import RecommendationFooter from "./RecommendationFooter"
 
 const Low = (props) => {
   const {

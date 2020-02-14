@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import * as S from "./StyledComponents";
 import ExamineSvg from "../../../assets/images/Examine.svg";
 import InfoBox from "./InfoBox";
+import RecommendationFooter from "./RecommendationFooter"
 
 const NotRecommended = props => {
   const {
@@ -23,9 +24,9 @@ const NotRecommended = props => {
           property
         </h3>
       </div>
-      <Row sm={12}>
+      <Row lg={12} style={{ paddingTop: "20px" }}>
         <Col sm={6}>
-          <hr style={{ border: "3px solid #C7AE4A", marginBottom: "40px" }} />
+          <hr style={{ border: "3px solid #C7AE4A" }} />
           <div style={{ margin: "0 auto", maxWidth: "140px" }}>
             <S.NotRecommendedBlock>Not Recommended</S.NotRecommendedBlock>
           </div>
@@ -43,28 +44,7 @@ const NotRecommended = props => {
           />
         </Col>
       </Row>
-      <div
-        style={{
-          fontSize: "20px",
-          backgroundColor: "#C7AE4A",
-          color: "#fff",
-          marginTop: "60px",
-          padding: "2px 40px 2px 40px",
-          textAlign: "center"
-        }}
-      >
-        Learn more about the LOMA by visiting our{" "}
-        <u>
-          <a
-            href="https://www.nofloodflorida.com/loma/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LOMA
-          </a>
-        </u>{" "}
-        page or <span style={{ color: "#000" }}>Call 813-213-0641</span>
-      </div>
+      <RecommendationFooter />
     </>
   );
 };
@@ -128,7 +108,7 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
             <h4 style={{ color: "#fff" }}>Elevation Certificate</h4>
             <div>
               <p>
-                Elevation Certificate An Elevation Certificate is used to define
+                An Elevation Certificate is used to define
                 key elevations around your property. If you do not already have
                 one, No Flood Florida can help you obtain an Elevation
                 Certificate from a Survey partner. We will also evaluate
