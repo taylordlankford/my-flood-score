@@ -1,7 +1,15 @@
 import styled from 'styled-components'
 
+export const ScreeningWrapper = styled.div`
+  min-height: 100vh !important;
+  overflow: hidden !important;
+  background-color: #EDEDED;
+  margin: 0 auto;
+`
+
 export const ParallaxWrapper = styled.div`
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow: inherit !important;
   background-color: #EDEDED;
 `
 
@@ -16,7 +24,6 @@ export const ParallaxContainer = styled.div`
   max-width: 1080px;
   overflow: auto;
 `
-
 export const MainTitle = styled.div`
   color: #ffffff;
   font-family: 'Helvetica', sans-serif;

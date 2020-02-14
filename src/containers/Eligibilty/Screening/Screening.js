@@ -63,7 +63,7 @@ const Screening = props => {
   }
 
   return (
-    <S.ParallaxWrapper>
+    <S.ScreeningWrapper>
       <Parallax contentClassName="parallax-bg" strength={200}>
         <S.ParallaxContainer>
           <div style={{ paddingBottom: "20px" }}>
@@ -111,7 +111,7 @@ const Screening = props => {
           </FormWrapper>
         </S.ParallaxContainer>
       </Parallax>
-    </S.ParallaxWrapper>
+    </S.ScreeningWrapper>
   );
 };
 
