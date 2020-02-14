@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  height: 1440px;
+  /* height: 1440px; */
+  min-height: 100vh;
   margin-top: 80px;
   font-family: 'Helvetica', sans-serif;
   line-height: 1.5em;

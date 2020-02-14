@@ -6,9 +6,9 @@ export const ParallaxWrapper = styled.div`
 `
 
 export const ParallaxContainer = styled.div`
-  /* min-height: 100vh; */
+  min-height: 100vh;
   /* min-height: 640px; */
-  height: 760px;
+  /* height: 760px; */
   padding-top: 60px;
   padding-bottom: 50px;
   margin: 0 auto;
