@@ -17,7 +17,7 @@ const NotRecommended = props => {
   } = props;
 
   return (
-    <>
+    <div>
       <div style={{ paddingBottom: "40px" }}>
         <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
           It is not recommended to pursue a Letter of Map Amendment for this
@@ -50,8 +50,10 @@ const NotRecommended = props => {
           />
         </Col>
       </Row>
+      <div style={{ paddingTop: "20px" }}>
       <RecommendationFooter />
-    </>
+      </div>
+    </div>
   );
 };
 

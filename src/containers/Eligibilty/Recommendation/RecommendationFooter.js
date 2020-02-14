@@ -8,8 +8,9 @@ const RecommendationFooter = () => {
         fontSize: "20px",
         backgroundColor: "#C7AE4A",
         color: "#fff",
-        padding: "2px 40px 2px 40px",
-        textAlign: "center"
+        padding: "4px 40px 4px 40px",
+        textAlign: "center",
+        height: "max-content"
       }}
     >
       Learn more about the LOMA by visiting our{" "}
