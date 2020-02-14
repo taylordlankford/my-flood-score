@@ -2,11 +2,13 @@ import styled from 'styled-components'
 
 export const ParallaxWrapper = styled.div`
   overflow: hidden;
+  background-color: #EDEDED;
 `
 
 export const ParallaxContainer = styled.div`
   /* min-height: 100vh; */
-  min-height: 640px;
+  /* min-height: 640px; */
+  height: 760px;
   padding-top: 60px;
   padding-bottom: 50px;
   margin: 0 auto;
@@ -43,7 +45,7 @@ export const Subtitle = styled.div`
 export const AutoSuggestWrapper = styled.div`
   display: grid;
   grid-template-columns: 9fr 1fr;
-  /* grid-template-columns: minmax(min-content, 400px); */
+  grid-template-columns: minmax(min-content, 400px);
   padding-left: 50px;
   padding-right: 50px;
   margin: 0 auto;
@@ -59,6 +61,7 @@ export const IframeSearchBtn = styled.button`
   &,
   &:link,
   &:visited {
+    width: 100%;
     height: 48px;
     text-align: center !important;
     color: white !important;
@@ -68,7 +71,7 @@ export const IframeSearchBtn = styled.button`
     font-weight: 700;
     border: 1px solid #55b96a;
     border: none;
-    padding: 0.62rem 1.25rem;
+    /* padding: 0.62rem 1.25rem; */
     text-decoration: none;
     text-transform: uppercase;
     background-size: 230%;
