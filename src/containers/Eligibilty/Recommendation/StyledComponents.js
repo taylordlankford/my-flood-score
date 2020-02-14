@@ -2,17 +2,18 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   /* height: 1440px; */
-  min-height: 100vh;
   margin-top: 80px;
   font-family: 'Helvetica', sans-serif;
   line-height: 1.5em;
   font-size: 14px;
   font-weight: 600;
   color: #fff;
+  min-height: 100vh;
 `
 
 export const Container = styled.div`
-  height: max-content;
+  min-height: 100vh;
+  /* height: max-content; */
   margin: 0 auto;
   max-width: 1440px;
   /* min-height: inherit; */

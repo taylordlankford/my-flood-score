@@ -1,6 +1,7 @@
 export const hideSiteContainers = () => {
   const globalWrapper = document.getElementById("global-wrapper");
   globalWrapper.style.paddingTop = "0px";
+  globalWrapper.style.marginTop = "0px";
   globalWrapper.style.minHeight = "auto";
 
   const nav = document.getElementById("nav");
