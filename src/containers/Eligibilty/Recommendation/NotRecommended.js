@@ -26,15 +26,21 @@ const NotRecommended = props => {
       </div>
       <Row lg={12} style={{ paddingTop: "20px" }}>
         <Col sm={6}>
-          <hr style={{ border: "3px solid #C7AE4A" }} />
-          <div style={{ margin: "0 auto", maxWidth: "140px" }}>
-            <S.NotRecommendedBlock>Not Recommended</S.NotRecommendedBlock>
-          </div>
-          <InfoBox
-            selectedAddress={selectedAddress}
-            propertyData={propertyData}
+          <hr
+            style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
           />
-          <hr style={{ border: "3px solid #C7AE4A" }} />
+          <S.ResultsContainer>
+            <div style={{ margin: "0 auto", maxWidth: "140px" }}>
+              <S.NotRecommendedBlock>Not Recommended</S.NotRecommendedBlock>
+            </div>
+            <InfoBox
+              selectedAddress={selectedAddress}
+              propertyData={propertyData}
+            />
+          </S.ResultsContainer>
+          <hr
+            style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
+          />
         </Col>
         <Col sm={6}>
           <LearnMoreBox

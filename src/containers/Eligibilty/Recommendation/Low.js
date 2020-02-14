@@ -27,16 +27,22 @@ const Low = (props) => {
       </div>
       <Row sm={12}>
         <Col sm={6}>
-          <hr style={{ border: "3px solid #C7AE4A", marginBottom: "40px" }} />
-          <CategoryPills
-            getLOMARecommendation={getLOMARecommendation}
-            LOMARating={LOMARating}
+          <hr
+            style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
           />
-          <InfoBox
-            selectedAddress={selectedAddress}
-            propertyData={propertyData}
+          <S.ResultsContainer>
+            <CategoryPills
+              getLOMARecommendation={getLOMARecommendation}
+              LOMARating={LOMARating}
+            />
+            <InfoBox
+              selectedAddress={selectedAddress}
+              propertyData={propertyData}
+            />
+          </S.ResultsContainer>
+          <hr
+            style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
           />
-          <hr style={{ border: "3px solid #C7AE4A" }} />
         </Col>
         <Col sm={6} style={{ border: "1px solid #C7AE4A" }}>
           <LearnMoreBox

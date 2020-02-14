@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import * as S from "./StyledComponents";
 import styled from "styled-components";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -38,27 +39,32 @@ const High = (props) => {
         </div>
         <Row lg={12}>
           <Col lg={6}>
-            <hr style={{ border: "3px solid #C7AE4A", marginBottom: "40px" }} />
-            <CategoryPills
-              getLOMARecommendation={getLOMARecommendation}
-              LOMARating={LOMARating}
+            <hr
+              style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
             />
-            <InfoBox
-              selectedAddress={selectedAddress}
-              propertyData={propertyData}
+            <S.ResultsContainer>
+              <CategoryPills
+                getLOMARecommendation={getLOMARecommendation}
+                LOMARating={LOMARating}
+              />
+              <InfoBox
+                selectedAddress={selectedAddress}
+                propertyData={propertyData}
+              />
+            </S.ResultsContainer>
+            <hr
+              style={{ margin: "0", padding: "0", border: "3px solid #C7AE4A" }}
             />
-
-            <hr style={{ border: "3px solid #C7AE4A" }} />
           </Col>
           <Col lg={6}>
             {imgUrl ? (
-              <div style={{ paddingTop: "30px" }}>
+              <S.ImgContainer>
                 <img
                   src={imgUrl}
                   style={{ cursor: "pointer", height: "100%", width: "100%" }}
                   onClick={() => setModalShow(true)}
                 />
-              </div>
+              </S.ImgContainer>
             ) : (
               <>Pending...</>
             )}

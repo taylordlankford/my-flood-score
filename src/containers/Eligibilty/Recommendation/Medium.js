@@ -10,11 +10,11 @@ import Button from "react-bootstrap/Button";
 //   PrimaryBtn,
 //   TransitionBtn
 // } from "../../../StyledComponents/StyledComponents";
+// import Recommendation from "./Recommendation";
 import CategoryPills from "./CategoryPills";
 import InfoBox from "./InfoBox";
 import ImgLightbox from "./ImgLightbox";
 import RecommendationFooter from "./RecommendationFooter"
-import Recommendation from "./Recommendation";
 
 const Medium = (props) => {
   const {
@@ -45,26 +45,32 @@ const Medium = (props) => {
         </div>
         <Row sm={12}>
           <Col sm={6}>
-            <hr style={{ border: "3px solid #C7AE4A", marginBottom: "20px" }} />
-            <CategoryPills
-              getLOMARecommendation={getLOMARecommendation}
-              LOMARating={LOMARating}
+            <hr
+              style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
             />
-            <InfoBox
-              selectedAddress={selectedAddress}
-              propertyData={propertyData}
+            <S.ResultsContainer>
+              <CategoryPills
+                getLOMARecommendation={getLOMARecommendation}
+                LOMARating={LOMARating}
+              />
+              <InfoBox
+                selectedAddress={selectedAddress}
+                propertyData={propertyData}
+              />
+            </S.ResultsContainer>
+            <hr
+              style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
             />
-            <hr style={{ border: "3px solid #C7AE4A" }} />
           </Col>
           <Col lg={6}>
             {imgUrl ? (
-              <div style={{ paddingTop: "30px" }}>
+              <S.ImgContainer>
                 <img
                   src={imgUrl}
                   style={{ cursor: "pointer", height: "100%", width: "100%" }}
                   onClick={() => setModalShow(true)}
                 />
-              </div>
+              </S.ImgContainer>
             ) : (
               <>Pending...</>
             )}

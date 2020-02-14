@@ -1,5 +1,16 @@
 import styled from 'styled-components'
 
+export const ResultsContainer = styled.div`
+ padding: 30px 0 30px 0;
+`
+
+export const ImgContainer = styled.div`
+  padding-top: 20px;
+  @media only screen and (max-width: 970px) {
+    padding-top: 50px;
+  }
+`;
+
 export const Wrapper = styled.div`
   /* height: 1440px; */
   margin-top: 80px;
