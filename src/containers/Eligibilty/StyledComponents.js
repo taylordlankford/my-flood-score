@@ -6,7 +6,7 @@ export const ParallaxWrapper = styled.div`
 `
 
 export const ParallaxContainer = styled.div`
-  min-height: 100vh;
+  min-height: 100vh !important;
   /* min-height: 640px; */
   /* height: 760px; */
   padding-top: 60px;

@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 `
 
 export const Container = styled.div`
-  min-height: 100vh;
+  min-height: 100vh !important;
   /* height: max-content; */
   margin: 0 auto;
   max-width: 1440px;
@@ -20,7 +20,7 @@ export const Container = styled.div`
   padding: 50px 50px 50px 50px;
   overflow: hidden;
   /* overflow: scroll; */
-  /* display: grid; */
+  display: grid;
   /* grid-template-columns: 3fr 4fr; */
   /* grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); */
   /* grid-gap: 2em; */
@@ -110,8 +110,9 @@ export const CategoryWrapper = styled.div`
   font-size: 21px;
   color: #000000;
   text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  /* grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
   grid-gap: 1.5rem;
   margin-bottom: 20px;
   padding-left: 18px;

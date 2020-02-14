@@ -37,7 +37,7 @@ const High = (props) => {
           </h3>
         </div>
         <Row lg={12}>
-          <Col lg={6} col-lg-push-6>
+          <Col lg={6}>
             <hr style={{ border: "3px solid #C7AE4A", marginBottom: "40px" }} />
             <CategoryPills
               getLOMARecommendation={getLOMARecommendation}
@@ -64,7 +64,7 @@ const High = (props) => {
             )}
           </Col>
         </Row>
-        <Row lg={12} style={{ paddingTop: "20px" }}>
+        <Row lg={12} style={{ paddingTop: "40px" }}>
           <Col lg={6}>
             <div style={{ textAlign: "center" }}>
               <a

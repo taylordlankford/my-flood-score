@@ -77,7 +77,7 @@ const Medium = (props) => {
           />
           */}
         </Row>
-        <Row lg={12} style={{ paddingTop: "20px" }}>
+        <Row lg={12} style={{ paddingTop: "40px" }}>
           <Col lg={6}>
             <div style={{ textAlign: "center" }}>
               <a
