@@ -12,4 +12,7 @@ export const hideSiteContainers = () => {
 
   const copyrightSection = document.getElementById("copyright-section");
   copyrightSection.style.display = "none";
+
+  const body = document.getElementsByTagName("body");
+  body[0].style.backgroundColor = "#EDEDED";
 };
