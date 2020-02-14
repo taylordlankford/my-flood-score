@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   font-weight: 600;
   color: #fff;
   min-height: 100vh;
+  overflow: inherit !important; 
 `
 
 export const Container = styled.div`
