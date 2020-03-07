@@ -36,7 +36,7 @@ function Home ({ history }) {
   return (
     <>
       <SecondRow />
-      <Eligibility />
+      {/* <Eligibility /> */}
       <Parallax bgImage={backgroundImage} strength={600}>
         <Container>
           <div className="headlineWrapper" style={{ height: "500px" }}>

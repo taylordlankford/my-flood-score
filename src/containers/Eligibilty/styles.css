@@ -1,6 +1,6 @@
 .parallax-bg {
   /* background: linear-gradient(0deg,rgba(60, 46, 89, 0.91),rgba(60, 46, 89, 0.91)), url('../../assets/images/nff-bg-image.jpg'); */
-  background: linear-gradient(0deg,rgba(50, 35, 73, 0.91),rgba(50, 35, 73, 0.91)), url('../../assets/images/nff-bg-image.jpg');
+  background: linear-gradient(0deg,rgba(22, 22, 63, 0.90),rgba(22, 22, 63, 0.90)), url('../../assets/images/nff-bg-image.jpg');
   background-size: cover;
   z-index: 999;
 }

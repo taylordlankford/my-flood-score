@@ -26,7 +26,7 @@ const InfoBox = ({ selectedAddress, propertyData }) => {
         <span style={{ fontWeight: "700", fontSize: "18px", marginRight: "20px" }}>
           Likelihood you are wrongly mapped:
         </span>
-        <span style={{ fontWeight: "500" }}>HIGH</span>
+        <span style={{ fontWeight: "500" }}>N/A</span>
       </div>
       <div>
         <FaCheck />
