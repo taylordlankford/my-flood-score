@@ -8,21 +8,30 @@ import Button from "react-bootstrap/Button";
 import CategoryPills from "./CategoryPills";
 import InfoBox from "./InfoBox";
 import ImgLightbox from "./ImgLightbox";
-import RecommendationFooter from "./RecommendationFooter"
-import ImgSpinner from "./ImgSpinner"
+import RecommendationFooter from "./RecommendationFooter";
+import ImgSpinner from "./ImgSpinner";
 
-const High = (props) => {
+const High = props => {
   const {
-    getLOMARecommendation,
     LOMARating,
     LOMACategory,
     femaZone,
     selectedAddress,
     propertyData,
     imgUrl
-  } = props
+  } = props;
 
   const [modalShow, setModalShow] = useState(false);
+  const [basisOfDetermination, setBasisOfDetermination] = useState([
+    {
+      id: 1,
+      info: "FEMA considers this property to be in a high risk flood zone."
+    },
+    {
+      id: 2,
+      info: "The elevation of your property appears to be above the flood elevation." 
+    }
+  ])
 
   return (
     <>
@@ -44,14 +53,12 @@ const High = (props) => {
               style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
             />
             <S.ResultsContainer>
-              <CategoryPills
-                getLOMARecommendation={getLOMARecommendation}
-                LOMARating={LOMARating}
-              />
+              <CategoryPills LOMARating={LOMARating} />
               <InfoBox
                 selectedAddress={selectedAddress}
                 propertyData={propertyData}
                 suggestion="High"
+                basisOfDetermination={basisOfDetermination}
               />
             </S.ResultsContainer>
             <hr
@@ -69,7 +76,7 @@ const High = (props) => {
               </S.ImgContainer>
             ) : (
               <ImgSpinner />
-              )}
+            )}
           </Col>
         </Row>
         <Row lg={12} style={{ paddingTop: "40px" }}>
@@ -90,11 +97,11 @@ const High = (props) => {
       </HighWrapper>
     </>
   );
-}
+};
 
 const HighWrapper = styled.div`
   font-size: 16px;
   line-height: 1.5em;
-`
+`;
 
-export default High
+export default High;

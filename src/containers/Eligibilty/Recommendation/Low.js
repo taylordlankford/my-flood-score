@@ -1,21 +1,26 @@
-import React from 'react'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
-import Button from 'react-bootstrap/Button'
-import { FaCheck } from 'react-icons/fa'
-import * as S from './StyledComponents'
-import ExamineSvg from '../../../assets/images/Examine.svg'
-import CategoryPills from './CategoryPills'
-import RecommendationFooter from "./RecommendationFooter"
+import React, { useState } from "react";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import { FaCheck } from "react-icons/fa";
+import * as S from "./StyledComponents";
+import ExamineSvg from "../../../assets/images/Examine.svg";
+import CategoryPills from "./CategoryPills";
+import InfoBox from "./InfoBox";
+import RecommendationFooter from "./RecommendationFooter";
 
-const Low = (props) => {
-  const {
-    getLOMARecommendation,
-    LOMARating,
-    LOMACategory,
-    selectedAddress,
-    propertyData
-  } = props
+const Low = props => {
+  const { LOMARating, LOMACategory, selectedAddress, propertyData } = props;
+  const [basisOfDetermination, setBasisOfDetermination] = useState([
+    {
+      id: 1,
+      info: "FEMA considers this property to be in a high risk flood zone."
+    },
+    {
+      id: 2,
+      info: "The elevation of your property appears to be below the flood elevation."
+    }
+  ])
 
   return (
     <>
@@ -31,14 +36,12 @@ const Low = (props) => {
             style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
           />
           <S.ResultsContainer>
-            <CategoryPills
-              getLOMARecommendation={getLOMARecommendation}
-              LOMARating={LOMARating}
-            />
+            <CategoryPills LOMARating={LOMARating} />
             <InfoBox
               selectedAddress={selectedAddress}
               propertyData={propertyData}
               suggestion="Low"
+              basisOfDetermination={basisOfDetermination}
             />
           </S.ResultsContainer>
           <hr
@@ -77,59 +80,45 @@ const Low = (props) => {
       </div>
     </>
   );
-}
+};
 
+/*
 const InfoBox = ({ selectedAddress, propertyData }) => {
   return (
     <div style={{ paddingBottom: "20px", paddingTop: "20px" }}>
       <ul style={{ listStyleType: "none" }}>
-        <li style={{ marginBottom: "20px" }}><FaCheck />PROPERTY ADDRESS: {selectedAddress}</li>
-        <li style={{ marginBottom: "20px" }}><FaCheck />FEMA FLOOD ZONE: {propertyData.FEMA_ZONE.stringValue.slice(0, 2)}</li>
-        <li style={{ marginBottom: "20px" }}><FaCheck />LIKELIHOOD YOU ARE WRONGLY MAPPED: LOW</li>
         <li style={{ marginBottom: "20px" }}>
-          <FaCheck />BASIS OF THIS DETERMINATION:
+          <FaCheck />
+          PROPERTY ADDRESS: {selectedAddress}
+        </li>
+        <li style={{ marginBottom: "20px" }}>
+          <FaCheck />
+          FEMA FLOOD ZONE: {propertyData.FEMA_ZONE.stringValue.slice(0, 2)}
+        </li>
+        <li style={{ marginBottom: "20px" }}>
+          <FaCheck />
+          LIKELIHOOD YOU ARE WRONGLY MAPPED: LOW
+        </li>
+        <li style={{ marginBottom: "20px" }}>
+          <FaCheck />
+          BASIS OF THIS DETERMINATION:
           <ul style={{ listStyleType: "none", fontWeight: "400" }}>
-            <li><FaCheck />FEMA considers this property to be in a low risk flood zone.</li>
-            <li><FaCheck />The elevation of your property appears to be <i>below</i> the flood elevation.</li>
+            <li>
+              <FaCheck />
+              FEMA considers this property to be in a low risk flood zone.
+            </li>
+            <li>
+              <FaCheck />
+              The elevation of your property appears to be <i>below</i> the
+              flood elevation.
+            </li>
           </ul>
         </li>
       </ul>
     </div>
   );
-}
-
-/*
-const ZoneBox = ({ LOMACategory, femaZone }) => {
-  return (
-    <Row sm={12}>
-      <Col sm={6}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', marginBottom: '10px' }}>
-          <div style={{ border: '1px solid #666666', padding: '10px 20px 10px 20px', backgroundColor: '#d0d8f5' }}>
-            Flood Risk
-          </div>
-          <div style={{ backgroundColor: '#9FE6A7', height: '38px', marginTop: '2px', border: '1px solid #666666', borderLeft: 'none', padding: '10px 10px 10px 10px', textAlign: 'center' }}>
-            {LOMACategory === 'N/A' ? 'Low' : 'Low'}
-          </div>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr' }}>
-          <div style={{ border: '1px solid #666666', padding: '10px 20px 10px 20px', backgroundColor: '#d0d8f5' }}>
-            FEMA Flood Zone
-          </div>
-          <div style={{ backgroundColor: '#9FE6A7', height: '38px', marginTop: '2px', border: '1px solid #666666', borderLeft: 'none', padding: '10px 10px 10px 10px', textAlign: 'center' }}>
-            {femaZone.slice(0, 1)}
-          </div>
-        </div>
-      </Col>
-      <Col sm={6}>
-        <p>
-          Located in a FEMA low-risk flood zone, <b>Zone X</b>, an area of minimal
-          flooding. Flooding is unlikely in the 100-year rainfall event. Flood
-          insurance for this property would most likely <b>NOT</b> be required.
-        </p>
-      </Col>
-    </Row>
-  )
-} */
+};
+*/
 
 const LearnMoreBox = ({ title, text, disclaimer, img }) => {
   return (
@@ -198,6 +187,6 @@ const LearnMoreBox = ({ title, text, disclaimer, img }) => {
       </Row>
     </>
   );
-}
+};
 
-export default Low
+export default Low;

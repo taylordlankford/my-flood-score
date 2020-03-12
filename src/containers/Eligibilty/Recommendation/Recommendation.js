@@ -5,18 +5,13 @@ import "./styles.css";
 import BgImg from "../../../assets/images/nff-bg-image.jpg";
 import * as S from "./StyledComponents";
 
-import Faq from "./Faq";
-import High from "./High";
-import Medium from "./Medium";
-import Low from "./Low";
-import NotRecommended from "./NotRecommended";
 import Loading from "./Loading";
+import LOMARecommendations from "./LOMARecommendations";
 
 import { hideSiteContainers } from "../helpers";
 import { useFirebase } from "../../../hooks";
 
 const Recommendation = props => {
-  // const { address } = location.state;
   const { address } = props;
   const firebase = useFirebase();
 
@@ -25,155 +20,69 @@ const Recommendation = props => {
   );
   const [propertyData, setPropertyData] = useState(null);
   const [LOMARating, setLOMARating] = useState("");
-  const [NFFID, setNFFID] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [femaZone, setFemaZone] = useState("");
 
   useEffect(() => {
+    let iframeUrl = "https://flood-score.firebaseapp.com/search-eligibility";
+    let localhostUrl = "http://localhost:3000/search-eligibility";
     let hideSurrounding =
-      window.location.href ===
-      "https://flood-score.firebaseapp.com/search-eligibility" ||
-      window.location.href === "http://localhost:3000/search-eligibility";
+      window.location.href === iframeUrl ||
+      window.location.href === localhostUrl;
 
     if (hideSurrounding) {
       hideSiteContainers();
     }
+  }, []);
 
-    if (selectedAddress != null || selectedAddress !== "") {
-      setSelectedAddress(selectedAddress);
-      getPropertyRef(selectedAddress).then(data => {
-        const { propertyData, LOMA, id } = data;
-        setPropertyData(propertyData);
-        setLOMARating(LOMA);
-        setNFFID(id);
-        getImg();
+  useEffect(() => {
+    setSelectedAddress(selectedAddress);
+    getPropertyData(selectedAddress).then(data => {
+      console.log("data", data);
+      const { propertyData, LOMA, id, FEMA_ZONE } = data;
+      getImg(id).then(url => {
+        setImgUrl(url)
       })
-    }
-  }, [selectedAddress, NFFID, imgUrl]);
+      setPropertyData(propertyData);
+      setLOMARating(LOMA);
+      setFemaZone(FEMA_ZONE);
+    });
+  }, [selectedAddress, imgUrl]);
 
   /**
    * Get Image
    */
-  const getImg = () => {
-    if (NFFID !== "" || NFFID !== null) {
-      firebase.getDownloadURL(NFFID).then(url => {
-        setImgUrl(url);
+  const getImg = nff_id => {
+    return new Promise((resolve, reject) => {
+      firebase.getDownloadURL(nff_id).then(url => {
+        if (url !== null || typeof url !== "undefined") {
+          resolve(url)
+        }
       });
-    }
+    })
   };
 
   /**
    * Gets all the data needed for the rest of the children component needs.
    */
-  const getPropertyRef = async selectedAddress => {
+  const getPropertyData = async selectedAddress => {
     return new Promise((resolve, reject) => {
       firebase.doFirestoreAddressRefGet(selectedAddress).then(properties => {
         const propertyDoc = properties[0];
         const { id } = propertyDoc;
         if (typeof id !== "undefined") {
-          setNFFID(id);
           firebase.doFirestoreDocGet("properties", id).then(data => {
             const propertyData = data;
             const { LOMA } = propertyData;
             resolve({ propertyData, LOMA, id });
           });
-          // firebase.doFirestoreWhereGet('properties', 'NFF_ID', '==', id).then(data => {
-          //   if (typeof data.docs[0]._document.proto.fields != 'undefined') {
-          //     const propertyData = data.docs[0]._document.proto.fields
-          //     const { LOMA } = propertyData
-          //     setLOMARating(LOMA)
-          //     setPropertyData(propertyData)
-          //     const { NFF_ID } = propertyData
-          //     setNFFID(NFF_ID.stringValue)
-          //   }
-          // })
         }
       });
     });
   };
 
-  /**
-   * Get the correct LOMA category.
-   */
-  const getLOMARecommendation = LOMARating => {
-    console.log("LOMARating => ", LOMARating);
-    switch (LOMARating) {
-      case 0:
-        return "n/a";
-      case 1:
-        return "Low";
-      case 2:
-        return "Medium";
-      case 3:
-        return "High";
-      default: {
-        return "n/a";
-      }
-    }
-  };
-
-  /**
-   * Render different descriptions based on category.
-   */
-  const LOMARecommendations = ({ propertyData, LOMACategory }) => {
-    const { FEMA_ZONE } = propertyData;
-
-    switch (LOMARating) {
-      case 0:
-        return (
-          <NotRecommended
-            getLOMARecommendation={getLOMARecommendation}
-            LOMARating={LOMARating}
-            LOMACategory={LOMACategory}
-            femaZone={FEMA_ZONE}
-            selectedAddress={selectedAddress}
-            propertyData={propertyData}
-          />
-        );
-      case 1:
-        return (
-          <Low
-            getLOMARecommendation={getLOMARecommendation}
-            LOMARating={LOMARating}
-            LOMACategory={LOMACategory}
-            femaZone={FEMA_ZONE}
-            selectedAddress={selectedAddress}
-            propertyData={propertyData}
-          />
-        );
-      case 2:
-        return (
-          <Medium
-            getLOMARecommendation={getLOMARecommendation}
-            LOMARating={LOMARating}
-            LOMACategory={LOMACategory}
-            femaZone={FEMA_ZONE}
-            selectedAddress={selectedAddress}
-            propertyData={propertyData}
-            imgUrl={imgUrl}
-          />
-        );
-      case 3:
-        return (
-          <High
-            getLOMARecommendation={getLOMARecommendation}
-            LOMARating={LOMARating}
-            LOMACategory={LOMACategory}
-            femaZone={FEMA_ZONE}
-            selectedAddress={selectedAddress}
-            propertyData={propertyData}
-            imgUrl={imgUrl}
-          />
-        );
-      default: {
-        return "N/A";
-      }
-    }
-  };
-
   if (propertyData == null) {
-    return (
-      <Loading />
-    )
+    return <Loading />;
   }
 
   return (
@@ -181,12 +90,15 @@ const Recommendation = props => {
       <Parallax
         contentClassName="recommendation-parallax"
         bgImage={BgImg}
-        strength={200}
+        strength={400}
       >
         <S.Container>
           <LOMARecommendations
             propertyData={propertyData}
-            LOMACategory={getLOMARecommendation(LOMARating)}
+            LOMARating={LOMARating}
+            femaZone={femaZone}
+            selectedAddress={selectedAddress}
+            imgUrl={imgUrl}
           />
         </S.Container>
       </Parallax>
