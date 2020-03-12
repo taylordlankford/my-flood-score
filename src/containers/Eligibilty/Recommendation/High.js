@@ -9,6 +9,7 @@ import CategoryPills from "./CategoryPills";
 import InfoBox from "./InfoBox";
 import ImgLightbox from "./ImgLightbox";
 import RecommendationFooter from "./RecommendationFooter"
+import ImgSpinner from "./ImgSpinner"
 
 const High = (props) => {
   const {
@@ -50,6 +51,7 @@ const High = (props) => {
               <InfoBox
                 selectedAddress={selectedAddress}
                 propertyData={propertyData}
+                suggestion="High"
               />
             </S.ResultsContainer>
             <hr
@@ -66,8 +68,8 @@ const High = (props) => {
                 />
               </S.ImgContainer>
             ) : (
-              <>Pending...</>
-            )}
+              <ImgSpinner />
+              )}
           </Col>
         </Row>
         <Row lg={12} style={{ paddingTop: "40px" }}>

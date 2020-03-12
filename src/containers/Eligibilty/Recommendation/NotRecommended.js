@@ -36,6 +36,7 @@ const NotRecommended = props => {
             <InfoBox
               selectedAddress={selectedAddress}
               propertyData={propertyData}
+              suggestion="Not Recommended"
             />
           </S.ResultsContainer>
           <hr

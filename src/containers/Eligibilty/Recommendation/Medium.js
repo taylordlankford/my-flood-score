@@ -56,6 +56,7 @@ const Medium = (props) => {
               <InfoBox
                 selectedAddress={selectedAddress}
                 propertyData={propertyData}
+                suggestion="Medium"
               />
             </S.ResultsContainer>
             <hr

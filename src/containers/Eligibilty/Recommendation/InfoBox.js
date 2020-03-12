@@ -2,9 +2,10 @@ import React from "react";
 import { FaCheck } from "react-icons/fa";
 import styled from "styled-components";
 
-const InfoBox = ({ selectedAddress, propertyData }) => {
+const InfoBox = ({ selectedAddress, propertyData, suggestion }) => {
   return (
     <InfoBoxWrapper>
+      {console.log('PROPERTY DATA => ', propertyData)}
       <div>
         <FaCheck />
         <span style={{ fontWeight: "700", fontSize: "18px", marginRight: "20px" }}>
@@ -18,7 +19,8 @@ const InfoBox = ({ selectedAddress, propertyData }) => {
           FEMA Flood Zone
         </span>
         <span style={{ fontWeight: "500" }}>
-          {propertyData.FEMA_ZONE.stringValue.slice(0, 2).slice(0, -1)}
+          {propertyData.FEMA_ZONE}
+          {/*propertyData.FEMA_ZONE.stringValue.slice(0, 2).slice(0, -1)*/}
         </span>
       </div>
       <div>
@@ -26,7 +28,7 @@ const InfoBox = ({ selectedAddress, propertyData }) => {
         <span style={{ fontWeight: "700", fontSize: "18px", marginRight: "20px" }}>
           Likelihood you are wrongly mapped:
         </span>
-        <span style={{ fontWeight: "500" }}>N/A</span>
+        <span style={{ fontWeight: "500" }}>{suggestion}</span>
       </div>
       <div>
         <FaCheck />
