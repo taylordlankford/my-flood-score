@@ -2,6 +2,7 @@
   /* background: linear-gradient(0deg,rgba(243, 243, 243, 0.60),rgba(243, 243, 243, 0.60)); */
   /* background: linear-gradient(0deg,rgba(50, 35, 73, 0.91),rgba(50, 35, 73, 0.91)); */
   background: linear-gradient(0deg,rgba(22, 22, 63, 0.90),rgba(22, 22, 63, 0.90)), url('../../../assets/images/nff-bg-image.jpg');
+  background-size: cover;
 }
 
 .category-pill-wrapper {
@@ -27,4 +28,36 @@
     margin: 0 auto;
     max-width: 360px;
   }
+}
+
+#recommendation-spinner {
+  color: #fff !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 50%;
+  left: 50%;
+}
+
+#img-spinner {
+  color: #fff !important;
+  display: inline-block;
+  top: 100;
+  bottom: 0;
+  right: 50;
+  left: 50;
+}
+
+.spinner-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(0deg,rgba(22, 22, 63, 0.90),rgba(22, 22, 63, 0.90)), url('../../../assets/images/nff-bg-image.jpg');
+  background-size: cover;
+}
+
+.spinner-container {
+  position: fixed !important;
+  top: 100;
+  bottom: 100;
+  left: 100;
+  right: 100;
 }

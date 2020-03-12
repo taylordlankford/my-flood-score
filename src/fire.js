@@ -28,23 +28,25 @@ class Fire {
   /**
    * Firebase Storage API
    */
-  getDownloadURL = nffid => {
-    let bucketName = "gs://loma-hillsborough/";
-    let fileName = "LOMA_" + nffid + ".jpg";
-    console.log('FULL URL: ', fileName)
+  getDownloadURL = async nffid => {
+    return new Promise((resolve, reject) => {
+      let bucketName = "gs://loma-hillsborough/";
+      let fileName = "LOMA_" + nffid + ".jpg";
+      console.log('FULL URL: ', fileName)
 
-    let storage = this.app.storage();
-    let storageRef = storage.ref();
+      let storage = this.app.storage();
+      let storageRef = storage.ref();
 
-    return storageRef
-      .child(fileName)
-      .getDownloadURL()
-      .then(url => {
-        return url;
-      })
-      .catch(error => {
-        console.log("Error: ", error);
-      });
+      storageRef
+        .child(fileName)
+        .getDownloadURL()
+        .then(url => {
+          resolve(url)
+        })
+        .catch(error => {
+          console.log("Error: ", error);
+        });
+    })
   };
 
   // *** Auth API ***
@@ -80,10 +82,10 @@ class Fire {
       .collection(collection)
       .doc(doc)
       .update(updateObj)
-      .then(function() {
+      .then(function () {
         console.log("Document successfully updated!");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
       });
@@ -93,14 +95,14 @@ class Fire {
     return this.db
       .collection(collection)
       .add(setObj)
-      .then(function(docRef) {
+      .then(function (docRef) {
         console.log("Document written with ID: ", docRef.id);
         if (callback) {
           callback();
         }
         return docRef;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error("Error adding document: ", error);
         return error;
       });
@@ -111,11 +113,11 @@ class Fire {
       .collection(collection)
       .doc(doc)
       .set(setObj)
-      .then(function() {
+      .then(function () {
         console.log("Document successfully written!");
         callback();
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.error("Error writing document: ", error);
       });
   };
@@ -136,15 +138,15 @@ class Fire {
       .where("PROP_ADD", "==", propAdd)
       .where("PROP_ZIP", "==", propZip)
       .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
           // doc.data() is never undefined for query doc snapshots
           console.log(doc.id, " => ", doc.data());
           documents.push(doc.ref);
         });
         return documents;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("Error getting documents: ", error);
       });
   };
@@ -178,15 +180,15 @@ class Fire {
     return this.db
       .collection(collection)
       .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
           // doc.data() is never undefined for query doc snapshots
           console.log(doc.id, " => ", doc.data());
           documents.push(doc.data());
         });
         return documents;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("Error getting documents: ", error);
       });
   };
@@ -205,7 +207,7 @@ class Fire {
           return "No such document!";
         }
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("Error getting documents: ", error);
         return error;
       });

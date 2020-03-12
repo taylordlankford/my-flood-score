@@ -38,6 +38,7 @@ const Low = (props) => {
             <InfoBox
               selectedAddress={selectedAddress}
               propertyData={propertyData}
+              suggestion="Low"
             />
           </S.ResultsContainer>
           <hr

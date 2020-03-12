@@ -2,10 +2,11 @@ export const hideSiteContainers = () => {
   const globalWrapper = document.getElementById("global-wrapper");
   globalWrapper.style.paddingTop = "0px";
   globalWrapper.style.marginTop = "0px";
-  globalWrapper.style.minHeight = "auto";
+  globalWrapper.style.minHeight = "100vh";
 
   const nav = document.getElementById("nav");
   nav.style.display = "none";
+  nav.style.clear = "both"
 
   const footer = document.getElementById("footer");
   footer.style.display = "none";
