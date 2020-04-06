@@ -1,11 +1,22 @@
 import styled from 'styled-components'
 
-export const ScreeningWrapper = styled.div`
-  min-height: 100vh !important;
-  overflow: hidden !important;
-  background-color: #EDEDED;
-  margin: 0 auto;
+/**
+ * Styled Components
+ */
+
+export const SubtitleLink = styled.a`
+ font-weight: 700;
+ color: #C7AE4A;
 `
+
+export const HeaderContainer = styled.div`
+  text-align: center;
+  color: #fff;
+  padding-top: 40px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.5em;
+`;
 
 export const ParallaxWrapper = styled.div`
   /* overflow: hidden; */
@@ -24,6 +35,7 @@ export const ParallaxContainer = styled.div`
   max-width: 1080px;
   overflow: auto;
 `
+
 export const MainTitle = styled.div`
   color: #ffffff;
   font-family: 'Helvetica', sans-serif;
@@ -106,95 +118,3 @@ export const IframeSearchBtn = styled.button`
     outline: none;
   }
 `;
-
-/* Auto Suggest Theme Styles */
-export const menuStyle = {
-  borderRadius: '3px',
-  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
-  background: 'rgba(255, 255, 255, 0.9)',
-  padding: '2px 0',
-  fontSize: '90%',
-  position: 'fixed',
-  maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
-  zIndex: '999',
-}
-
-export const autosuggestTheme = {
-  container: {
-    width: '100%',
-    color: '#666666',
-    fontWeight: '500',
-    position: 'relative',
-  },
-
-  containerOpen: {
-    width: '100%',
-    backgroundColor: '#FFFFFF',
-    zIndex: '999',
-    position: 'relative',
-  },
-
-  input: {
-    fontWeight: '500',
-    color: "#666666",
-    width: '100%',
-    padding: '10px 40px 10px 40px',
-    height: '3rem',
-    border: 'none',
-  },
-
-  inputOpen: {
-    fontWeight: '500',
-    color: "#666666",
-    padding: '10px 40px 10px 40px',
-    border: 'none',
-  },
-
-  inputFocused: {
-    outline: 'none',
-  },
-
-  suggestionsContainer: {
-    maxHeight: '300px',
-    margin: '0',
-    padding: '0',
-    /* overflow: 'scroll', */
-    zIndex: '999',
-  },
-
-  /**
-   * Position absolute here will not push the containers underneath down.
-   */
-  suggestionsContainerOpen: {
-    width: '100%',
-    /* overflow: 'scroll', */
-    zIndex: '999',
-    backgroundColor: '#fff',
-    position: 'absolute'
-  },
-
-  suggestionsList: {
-    listStyleType: 'none',
-    borderTop: '1px solid #eee',
-    paddingRight: '40px',
-    /* overflow: 'scroll', */
-    paddingBottom: '10px',
-    marginBottom: '0'
-  },
-
-  suggestion: {
-    paddingTop: '4px',
-    paddingBottom: '4px',
-    cursor: 'pointer',
-  },
-
-  suggestionHighlighted: {
-    backgroundColor: '#eeeeee',
-    fontWeight: '600',
-  },
-
-  suggestionFirst: {},
-  sectionContainer: {},
-  sectionContainerFirst: {},
-  sectionTitle: {},
-}

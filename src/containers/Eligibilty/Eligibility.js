@@ -1,44 +1,51 @@
 import React, { useEffect, useState } from "react";
-import { Parallax } from "react-parallax";
-import BgImg from "../../assets/images/nff-bg-image.jpg";
-import * as S from "./StyledComponents";
-import styled from "styled-components";
-import "./styles.css";
-import {
-  menuStyle,
-  autosuggestTheme,
-  AutoSuggestWrapper,
-  AutoSuggestContainer,
-  IframeSearchBtn
-} from "./StyledComponents";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import AutoSuggest from "../../components/AutoSuggest/AutoSuggest";
 import { useFirestoreUser, useFirebase } from "../../hooks";
 
+/* Styles */
+import "./styles.css";
+import { Parallax } from "react-parallax";
+// import BgImg from "../../assets/images/nff-bg-image.jpg";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import {
+  ParallaxWrapper,
+  ParallaxContainer,
+  MainTitle,
+  Subtitle,
+  SubtitleLink,
+  IframeSearchBtn,
+  HeaderContainer,
+  SelectInput,
+  Option
+} from "./styled-eligibility"
+
+/* Components */
+import AutoSuggest from "../../components/AutoSuggest/AutoSuggest";
 import Screening from "./Screening/Screening";
 import Recommendation from "./Recommendation/Recommendation";
-
 import { hideSiteContainers } from "./helpers";
 
 const Eligibility = props => {
-  const { firestoreUser } = useFirestoreUser();
+  /* Hooks */
   const firebase = useFirebase();
+  // const { firestoreUser } = useFirestoreUser();
 
+  /* States */
   const [showSearch, setShowSearch] = useState(true);
   const [showScreening, setShowScreening] = useState(false);
   const [showRecommendation, setShowRecommendation] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
 
+  const pubDomain = "https://flood-score.firebaseapp.com/search-eligibility"
+  const devDomain = "http://localhost:3000/search-eligibility"
+
   useEffect(() => {
-    let hideSurrounding =
-      window.location.href === "https://flood-score.firebaseapp.com/search-eligibility" ||
-      window.location.href === "http://localhost:3000/search-eligibility";
+    let hideSurrounding = window.location.href === pubDomain || window.location.href === devDomain;
 
     if (hideSurrounding) {
       hideSiteContainers();
     }
-  });
+  }, []);
 
   const onSuggestionSelected = (
     event,
@@ -50,14 +57,11 @@ const Eligibility = props => {
   };
 
   const handleOnClick = e => {
-    // e.preventDefault();
     setShowSearch(false);
     setShowScreening(true);
   };
 
-  /**
-   * Render recommendation
-   */
+  /* Render recommendation */
   if (showRecommendation) {
     return (
       <Recommendation address={selectedAddress} />
@@ -65,9 +69,7 @@ const Eligibility = props => {
   }
 
 
-  /**
-   * Render screening component
-   */
+  /* Render screening component */
   if (showScreening) {
     return (
       <Screening
@@ -77,9 +79,7 @@ const Eligibility = props => {
     );
   }
 
-  /**
-   * Render IFrame Landing
-   */
+  /* Render IFrame Landing */
   if (showSearch) {
     return (
       <IFrameLanding
@@ -94,26 +94,23 @@ const Eligibility = props => {
 const IFrameLanding = props => {
   const { onSuggestionSelected, firebase, handleOnClick } = props;
   return (
-    <S.ParallaxWrapper>
+    <ParallaxWrapper>
       <Parallax contentClassName="parallax-bg" strength={200}>
-        <S.ParallaxContainer>
-          <S.MainTitle>
-            Best Available Technology & Flood Risk Models
-          </S.MainTitle>
-          <S.Subtitle>
+        <ParallaxContainer>
+          <MainTitle>
+            Best Available Technology <br /> & Flood Risk Models
+          </MainTitle>
+          <Subtitle>
             Let’s take the first step together and help you save thousands on
             your flood insurance.{" "}
-            <a
+            <SubtitleLink
               target="_blank"
               rel="noopener noreferrer"
               href="https://www.nofloodflorida.com/orderloma/"
             >
-              <span style={{ fontWeight: "700", color: "#C7AE4A" }}>
                 Find out if you qualify for a Letter of Map Amendment!
-              </span>{" "}
-            </a>
-          </S.Subtitle>
-          {/* }<SearchEligibility /> */}
+            </SubtitleLink>
+          </Subtitle>
           <div style={{ paddingLeft: "10px", paddingRight: "10px" }}>
             <Row xs={12} style={{ margin: "0 auto", maxWidth: "800px" }}>
               <Col xs={10} style={{ padding: "0", margin: "0" }}>
@@ -143,19 +140,102 @@ const IFrameLanding = props => {
               screening.
             </p>
           </HeaderContainer>
-        </S.ParallaxContainer>
+        </ParallaxContainer>
       </Parallax>
-    </S.ParallaxWrapper>
+    </ParallaxWrapper>
   );
 };
 
-const HeaderContainer = styled.div`
-  text-align: center;
-  color: #fff;
-  padding-top: 40px;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1.5em;
-`;
-
 export default Eligibility;
+
+/* Auto Suggest Theme Styles */
+const menuStyle = {
+  borderRadius: '3px',
+  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
+  background: 'rgba(255, 255, 255, 0.9)',
+  padding: '2px 0',
+  fontSize: '90%',
+  position: 'fixed',
+  maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
+  zIndex: '999',
+}
+
+const autosuggestTheme = {
+  container: {
+    width: '100%',
+    color: '#666666',
+    fontWeight: '500',
+    position: 'relative',
+  },
+
+  containerOpen: {
+    width: '100%',
+    backgroundColor: '#FFFFFF',
+    zIndex: '999',
+    position: 'relative',
+  },
+
+  input: {
+    fontWeight: '500',
+    color: "#666666",
+    width: '100%',
+    padding: '10px 40px 10px 40px',
+    height: '3rem',
+    border: 'none',
+  },
+
+  inputOpen: {
+    fontWeight: '500',
+    color: "#666666",
+    padding: '10px 40px 10px 40px',
+    border: 'none',
+  },
+
+  inputFocused: {
+    outline: 'none',
+  },
+
+  suggestionsContainer: {
+    maxHeight: '300px',
+    margin: '0',
+    padding: '0',
+    /* overflow: 'scroll', */
+    zIndex: '999',
+  },
+
+  /**
+   * Position absolute here will not push the containers underneath down.
+   */
+  suggestionsContainerOpen: {
+    width: '100%',
+    /* overflow: 'scroll', */
+    zIndex: '999',
+    backgroundColor: '#fff',
+    position: 'absolute'
+  },
+
+  suggestionsList: {
+    listStyleType: 'none',
+    borderTop: '1px solid #eee',
+    paddingRight: '40px',
+    /* overflow: 'scroll', */
+    paddingBottom: '10px',
+    marginBottom: '0'
+  },
+
+  suggestion: {
+    paddingTop: '4px',
+    paddingBottom: '4px',
+    cursor: 'pointer',
+  },
+
+  suggestionHighlighted: {
+    backgroundColor: '#eeeeee',
+    fontWeight: '600',
+  },
+
+  suggestionFirst: {},
+  sectionContainer: {},
+  sectionContainerFirst: {},
+  sectionTitle: {},
+}
