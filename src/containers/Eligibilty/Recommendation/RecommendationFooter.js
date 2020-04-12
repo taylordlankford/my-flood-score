@@ -1,18 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components"
 
 const RecommendationFooter = () => {
+  const [phoneNumber] = useState("813-213-0641")
+
   return (
-    <div
-      style={{
-        marginTop: "40px",
-        fontSize: "20px",
-        backgroundColor: "#C7AE4A",
-        color: "#fff",
-        padding: "4px 40px 4px 40px",
-        textAlign: "center",
-        height: "max-content"
-      }}
-    >
+    <FooterWrapper>
       Learn more about the LOMA by visiting our{" "}
       <u>
         <a
@@ -23,9 +16,19 @@ const RecommendationFooter = () => {
           LOMA
         </a>
       </u>{" "}
-      page or <span style={{ color: "#000" }}>Call 813-213-0641</span>
-    </div>
+      page or <span style={{ color: "#000" }}>call {phoneNumber}</span>
+    </FooterWrapper>
   );
 };
 
 export default RecommendationFooter;
+
+const FooterWrapper = styled.div`
+  margin-top: 40px;
+  font-size: 20px;
+  background-color: #C7AE4A;
+  color: #fff;
+  padding: 4px 40px 4px 40px;
+  text-align: center;
+  height: max-content;
+`

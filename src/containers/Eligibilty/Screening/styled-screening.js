@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const ScreeningTitle = styled.div`
+ padding-bottom: 20px;
+`
+
 export const ScreeningWrapper = styled.div`
   min-height: 100vh !important;
   overflow: hidden !important;

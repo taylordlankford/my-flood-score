@@ -19,7 +19,7 @@ const ImgLightbox = props => {
           />
         </div>
       ) : (
-        <>Pending...</>
+        <>Loading...</>
       )}
     </Modal>
   );

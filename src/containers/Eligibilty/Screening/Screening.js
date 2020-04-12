@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useFirebase } from "../../../hooks";
+import { useDomains } from "../eligibility-hooks";
 
 /* Styles */
 import "../styles.css";
 import { Parallax } from "react-parallax";
-import { ScreeningWrapper, ParallaxContainer, H3, FormWrapper } from "./styled-screening";
+import { ScreeningTitle, ScreeningWrapper, ParallaxContainer, H3, FormWrapper } from "./styled-screening";
 
 /* Components */
 import Form from "react-bootstrap/Form";
@@ -13,6 +14,7 @@ import { hideSiteContainers } from "../helpers";
 
 const Screening = props => {
   const firebase = useFirebase();
+  const { pubDomain, devDomain } = useDomains();
   // const { selected } = props.location.state;
   const { selected, setShowRecommendation } = props;
 
@@ -22,9 +24,6 @@ const Screening = props => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [exists, setExists] = useState(false);
-
-  const pubDomain = "https://flood-score.firebaseapp.com/search-eligibility"
-  const devDomain = "http://localhost:3000/search-eligibility"
 
   useEffect(() => {
     let hideSurrounding = window.location.href === pubDomain || window.location.href === devDomain;
@@ -38,7 +37,7 @@ const Screening = props => {
     if (name !== "" || email !== "" || phone !== "") {
       setIsInvalid(false);
     }
-  }, []);
+  }, [name, email, phone]);
 
   const addNffUser = async (collection, setObj) => {
     await firebase.doFirestoreAdd(collection, setObj).then(res => {
@@ -67,11 +66,11 @@ const Screening = props => {
     <ScreeningWrapper>
       <Parallax contentClassName="parallax-bg" strength={200}>
         <ParallaxContainer>
-          <div style={{ paddingBottom: "20px" }}>
+          <ScreeningTitle>
             <H3>
               You are one step away from getting your FREE screening results!
             </H3>
-          </div>
+          </ScreeningTitle>
           <FormWrapper>
             <Form>
               <Form.Group>

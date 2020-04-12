@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import * as S from "./StyledComponents";
+import { ResultsContainer } from "./StyledComponents";
 import styled from "styled-components";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,7 +9,7 @@ import CategoryPills from "./CategoryPills";
 import InfoBox from "./InfoBox";
 import ImgLightbox from "./ImgLightbox";
 import RecommendationFooter from "./RecommendationFooter";
-import ImgSpinner from "./ImgSpinner";
+import FloodRiskMap from "./FloodRiskMap";
 
 const High = props => {
   const {
@@ -29,7 +29,7 @@ const High = props => {
     },
     {
       id: 2,
-      info: "The elevation of your property appears to be above the flood elevation." 
+      info: "The elevation of your property appears to be above the flood elevation."
     }
   ])
 
@@ -52,7 +52,7 @@ const High = props => {
             <hr
               style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
             />
-            <S.ResultsContainer>
+            <ResultsContainer>
               <CategoryPills LOMARating={LOMARating} />
               <InfoBox
                 selectedAddress={selectedAddress}
@@ -60,23 +60,13 @@ const High = props => {
                 suggestion="High"
                 basisOfDetermination={basisOfDetermination}
               />
-            </S.ResultsContainer>
+            </ResultsContainer>
             <hr
               style={{ margin: "0", padding: "0", border: "3px solid #C7AE4A" }}
             />
           </Col>
           <Col lg={6}>
-            {imgUrl ? (
-              <S.ImgContainer>
-                <img
-                  src={imgUrl}
-                  style={{ cursor: "pointer", height: "100%", width: "100%" }}
-                  onClick={() => setModalShow(true)}
-                />
-              </S.ImgContainer>
-            ) : (
-              <ImgSpinner />
-            )}
+            <FloodRiskMap imgUrl={imgUrl} setModalShow={setModalShow} />
           </Col>
         </Row>
         <Row lg={12} style={{ paddingTop: "40px" }}>

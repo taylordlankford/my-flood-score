@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useFirestoreUser, useFirebase } from "../../hooks";
+import { useFirebase } from "../../hooks";
+import { useDomains } from "./eligibility-hooks";
 
 /* Styles */
 import "./styles.css";
@@ -15,8 +16,6 @@ import {
   SubtitleLink,
   IframeSearchBtn,
   HeaderContainer,
-  SelectInput,
-  Option
 } from "./styled-eligibility"
 
 /* Components */
@@ -25,19 +24,15 @@ import Screening from "./Screening/Screening";
 import Recommendation from "./Recommendation/Recommendation";
 import { hideSiteContainers } from "./helpers";
 
-const Eligibility = props => {
-  /* Hooks */
+const Eligibility = () => {
   const firebase = useFirebase();
+  const { pubDomain, devDomain } = useDomains();
   // const { firestoreUser } = useFirestoreUser();
 
-  /* States */
   const [showSearch, setShowSearch] = useState(true);
   const [showScreening, setShowScreening] = useState(false);
   const [showRecommendation, setShowRecommendation] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
-
-  const pubDomain = "https://flood-score.firebaseapp.com/search-eligibility"
-  const devDomain = "http://localhost:3000/search-eligibility"
 
   useEffect(() => {
     let hideSurrounding = window.location.href === pubDomain || window.location.href === devDomain;
@@ -56,7 +51,7 @@ const Eligibility = props => {
     console.log("Selected Address ==> ", selectedAddress);
   };
 
-  const handleOnClick = e => {
+  const handleOnClick = () => {
     setShowSearch(false);
     setShowScreening(true);
   };
@@ -108,7 +103,7 @@ const IFrameLanding = props => {
               rel="noopener noreferrer"
               href="https://www.nofloodflorida.com/orderloma/"
             >
-                Find out if you qualify for a Letter of Map Amendment!
+              Find out if you qualify for a Letter of Map Amendment!
             </SubtitleLink>
           </Subtitle>
           <div style={{ paddingLeft: "10px", paddingRight: "10px" }}>
