@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import * as S from "./StyledComponents";
+import { ResultsContainer } from "./StyledComponents";
 import styled from "styled-components";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,21 +8,30 @@ import Button from "react-bootstrap/Button";
 import CategoryPills from "./CategoryPills";
 import InfoBox from "./InfoBox";
 import ImgLightbox from "./ImgLightbox";
-import RecommendationFooter from "./RecommendationFooter"
-import ImgSpinner from "./ImgSpinner"
+import RecommendationFooter from "./RecommendationFooter";
+import FloodRiskMap from "./FloodRiskMap";
 
-const High = (props) => {
+const High = props => {
   const {
-    getLOMARecommendation,
     LOMARating,
     LOMACategory,
     femaZone,
     selectedAddress,
     propertyData,
     imgUrl
-  } = props
+  } = props;
 
   const [modalShow, setModalShow] = useState(false);
+  const [basisOfDetermination, setBasisOfDetermination] = useState([
+    {
+      id: 1,
+      info: "FEMA considers this property to be in a high risk flood zone."
+    },
+    {
+      id: 2,
+      info: "The elevation of your property appears to be above the flood elevation."
+    }
+  ])
 
   return (
     <>
@@ -43,33 +52,21 @@ const High = (props) => {
             <hr
               style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
             />
-            <S.ResultsContainer>
-              <CategoryPills
-                getLOMARecommendation={getLOMARecommendation}
-                LOMARating={LOMARating}
-              />
+            <ResultsContainer>
+              <CategoryPills LOMARating={LOMARating} />
               <InfoBox
                 selectedAddress={selectedAddress}
                 propertyData={propertyData}
                 suggestion="High"
+                basisOfDetermination={basisOfDetermination}
               />
-            </S.ResultsContainer>
+            </ResultsContainer>
             <hr
               style={{ margin: "0", padding: "0", border: "3px solid #C7AE4A" }}
             />
           </Col>
           <Col lg={6}>
-            {imgUrl ? (
-              <S.ImgContainer>
-                <img
-                  src={imgUrl}
-                  style={{ cursor: "pointer", height: "100%", width: "100%" }}
-                  onClick={() => setModalShow(true)}
-                />
-              </S.ImgContainer>
-            ) : (
-              <ImgSpinner />
-              )}
+            <FloodRiskMap imgUrl={imgUrl} setModalShow={setModalShow} />
           </Col>
         </Row>
         <Row lg={12} style={{ paddingTop: "40px" }}>
@@ -90,11 +87,11 @@ const High = (props) => {
       </HighWrapper>
     </>
   );
-}
+};
 
 const HighWrapper = styled.div`
   font-size: 16px;
   line-height: 1.5em;
-`
+`;
 
-export default High
+export default High;

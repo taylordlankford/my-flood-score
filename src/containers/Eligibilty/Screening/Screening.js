@@ -1,17 +1,20 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Parallax } from "react-parallax";
-import styled from "styled-components";
-import * as S from "../StyledComponents";
+import React, { useEffect, useState } from "react";
+import { useFirebase } from "../../../hooks";
+import { useDomains } from "../eligibility-hooks";
+
+/* Styles */
 import "../styles.css";
-import { hideSiteContainers } from "../helpers";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Parallax } from "react-parallax";
+import { ScreeningTitle, ScreeningWrapper, ParallaxContainer, H3, FormWrapper } from "./styled-screening";
+
+/* Components */
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useFirebase } from "../../../hooks";
+import { hideSiteContainers } from "../helpers";
 
 const Screening = props => {
   const firebase = useFirebase();
+  const { pubDomain, devDomain } = useDomains();
   // const { selected } = props.location.state;
   const { selected, setShowRecommendation } = props;
 
@@ -23,21 +26,18 @@ const Screening = props => {
   const [exists, setExists] = useState(false);
 
   useEffect(() => {
-    let hideSurrounding =
-      window.location.href === "https://flood-score.firebaseapp.com/search-eligibility" ||
-      window.location.href === "http://localhost:3000/search-eligibility";
+    let hideSurrounding = window.location.href === pubDomain || window.location.href === devDomain;
 
     if (hideSurrounding) {
       hideSiteContainers();
     }
 
-    let isAddressSelected =
-      typeof selected !== "undefined" || selected !== null;
+    let isAddressSelected = typeof selected !== "undefined" || selected !== null;
 
     if (name !== "" || email !== "" || phone !== "") {
       setIsInvalid(false);
     }
-  });
+  }, [name, email, phone]);
 
   const addNffUser = async (collection, setObj) => {
     await firebase.doFirestoreAdd(collection, setObj).then(res => {
@@ -63,14 +63,14 @@ const Screening = props => {
   }
 
   return (
-    <S.ScreeningWrapper>
+    <ScreeningWrapper>
       <Parallax contentClassName="parallax-bg" strength={200}>
-        <S.ParallaxContainer>
-          <div style={{ paddingBottom: "20px" }}>
+        <ParallaxContainer>
+          <ScreeningTitle>
             <H3>
               You are one step away from getting your FREE screening results!
             </H3>
-          </div>
+          </ScreeningTitle>
           <FormWrapper>
             <Form>
               <Form.Group>
@@ -109,25 +109,10 @@ const Screening = props => {
               </Button>
             </Form>
           </FormWrapper>
-        </S.ParallaxContainer>
+        </ParallaxContainer>
       </Parallax>
-    </S.ScreeningWrapper>
+    </ScreeningWrapper>
   );
 };
-
-const H3 = styled.div`
-  color: #fff;
-  text-align: center;
-  font-weight: "600";
-  font-size: 32px;
-  font-family: Helvetica;
-`;
-
-const FormWrapper = styled.div`
-  background-color: #201a40;
-  padding: 20px;
-  margin: 0 auto;
-  max-width: 930px;
-`;
 
 export default Screening;

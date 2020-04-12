@@ -2,7 +2,10 @@ import React from "react";
 import { FaCheck } from "react-icons/fa";
 import styled from "styled-components";
 
-const InfoBox = ({ selectedAddress, propertyData, suggestion }) => {
+const InfoBox = (props) => {
+  const { selectedAddress, propertyData, suggestion, basisOfDetermination } = props
+  { console.log('NA: ', basisOfDetermination) }
+
   return (
     <InfoBoxWrapper>
       {console.log('PROPERTY DATA => ', propertyData)}
@@ -37,19 +40,15 @@ const InfoBox = ({ selectedAddress, propertyData, suggestion }) => {
         </span>
       </div>
       <BasisOfDetermination>
-        <div>
-          <FaCheck />
-          <span style={{ fontWeight: "500" }}>
-            FEMA considers this property to be in a high risk flood zone.
-          </span>
-        </div>
-        <div>
-          <FaCheck />
-          <span style={{ fontWeight: "500" }}>
-            The elevation of your property appears to be <i>above</i> the flood
-            elevation.
-          </span>
-        </div>
+        {basisOfDetermination.map((item, idx) => (
+          <div key={idx}>
+            <FaCheck />
+            <span style={{ fontWeight: "500" }}>
+              {item.info}
+            </span>
+          </div>
+        ))
+        }
       </BasisOfDetermination>
     </InfoBoxWrapper>
   );
