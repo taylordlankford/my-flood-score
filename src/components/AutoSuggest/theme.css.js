@@ -22,7 +22,8 @@ export default {
     boxShadow: '0px 1px 4px grey',
   },
   suggestionsContainer: {
-    background: 'white',
+    textAlign: 'left',
+    background: 'red',
     margin: '0 auto',
     width: '50%',
     position: 'relative',

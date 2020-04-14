@@ -80,6 +80,7 @@
 .autosuggestWrapper {
   margin: 0 auto;
   max-width: 720px;
+  text-align: center;
 }
 
 .video {

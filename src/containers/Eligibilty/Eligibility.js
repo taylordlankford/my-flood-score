@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useFirebase } from "../../hooks";
 import { useDomains } from "./eligibility-hooks";
 
@@ -33,6 +33,7 @@ const Eligibility = () => {
   const [showScreening, setShowScreening] = useState(false);
   const [showRecommendation, setShowRecommendation] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
+  const [selectedCounty, setSelectedCounty] = useState(null);
 
   useEffect(() => {
     let hideSurrounding = window.location.href === pubDomain || window.location.href === devDomain;
@@ -46,10 +47,12 @@ const Eligibility = () => {
     event,
     { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
   ) => {
-    console.log("selected", suggestion);
     setSelectedAddress(suggestion);
-    console.log("Selected Address ==> ", selectedAddress);
-  };
+  }
+
+  function updateParentCountyState(county) {
+    setSelectedCounty(county)
+  }
 
   const handleOnClick = () => {
     setShowSearch(false);
@@ -59,7 +62,7 @@ const Eligibility = () => {
   /* Render recommendation */
   if (showRecommendation) {
     return (
-      <Recommendation address={selectedAddress} />
+      <Recommendation county={selectedCounty} address={selectedAddress} />
     )
   }
 
@@ -79,15 +82,17 @@ const Eligibility = () => {
     return (
       <IFrameLanding
         onSuggestionSelected={onSuggestionSelected}
+        updateParentCountyState={updateParentCountyState}
         firebase={firebase}
         handleOnClick={handleOnClick}
+        selectedCounty={selectedCounty}
       />
     );
   }
 };
 
 const IFrameLanding = props => {
-  const { onSuggestionSelected, firebase, handleOnClick } = props;
+  const { onSuggestionSelected, updateParentCountyState, firebase, handleOnClick } = props
   return (
     <ParallaxWrapper>
       <Parallax contentClassName="parallax-bg" strength={200}>
@@ -106,22 +111,26 @@ const IFrameLanding = props => {
               Find out if you qualify for a Letter of Map Amendment!
             </SubtitleLink>
           </Subtitle>
-          <div style={{ paddingLeft: "10px", paddingRight: "10px" }}>
+          <div style={{ paddingLeft: "10px", paddingRight: "10px", textAlign: 'center' }}>
             <Row xs={12} style={{ margin: "0 auto", maxWidth: "800px" }}>
-              <Col xs={10} style={{ padding: "0", margin: "0" }}>
+              <Col xs={10} style={{ padding: "0", margin: "0", margin: '0 auto' }}>
                 <AutoSuggest
                   autocomplete="off"
                   theme={autosuggestTheme}
+                  countySelectStyles={countySelectStyles}
+                  updateParentCountyState={updateParentCountyState}
                   onSuggestionSelected={onSuggestionSelected}
-                  inputProps={{ id: "homeAddressSuggest" }}
+                  inputProps={{ id: "eligibilityAddressSuggest" }}
                   firebase={firebase}
+                  showProceedButton={true}
+                  handleProceedButton={e => handleOnClick(e)}
                 />
               </Col>
-              <Col xs={2} style={{ padding: "0", margin: "0" }}>
-                <IframeSearchBtn onClick={e => handleOnClick(e)}>
-                  Proceed
-                </IframeSearchBtn>
-              </Col>
+                {/* <Col xs={2} style={{ padding: "0", margin: "0", top: '27px' }}>
+                  <IframeSearchBtn onClick={e => handleOnClick(e)}>
+                    Proceed
+                  </IframeSearchBtn>
+                </Col> */}
             </Row>
           </div>
           );
@@ -161,6 +170,7 @@ const autosuggestTheme = {
     color: '#666666',
     fontWeight: '500',
     position: 'relative',
+    top: '6px',
   },
 
   containerOpen: {
@@ -196,6 +206,7 @@ const autosuggestTheme = {
     padding: '0',
     /* overflow: 'scroll', */
     zIndex: '999',
+    textAlign: 'left',
   },
 
   /**
@@ -233,4 +244,12 @@ const autosuggestTheme = {
   sectionContainer: {},
   sectionContainerFirst: {},
   sectionTitle: {},
+}
+
+const countySelectStyles = {
+  position: 'relative',
+  margin: '0 auto',
+  top: '-40px',
+  marginBottom: '-40px',
+  width: '50%',
 }

@@ -7,23 +7,30 @@ export const useDomains = () => {
   return { pubDomain, devDomain }
 }
 
-export const useGetPropertyData = address => {
+export const useGetPropertyData = (county, address) => {
   const firebase = useFirebase();
   const [docData, setDocData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [id, setId] = useState(null);
 
   useEffect(() => {
-    firebase.doFirestoreAddressRefGet(address).then(properties => {
-      const propertyDoc = properties[0];
-      const { id } = propertyDoc;
-      if (typeof id !== "undefined") {
-        firebase.doFirestoreDocGet("properties", id).then(data => {
-          setDocData(data)
-          setLoading(false);
-          setId(id)
-        });
-      }
+    firebase.doFirestoreAddressRefGet(county, address).then(properties => {
+      const propertyDoc = properties[0]
+      const { id } = propertyDoc
+      console.log('in useGetPropertyData hook, propertyDoc:', propertyDoc)
+      propertyDoc.get().then(data => {
+        setDocData(data)
+        setLoading(false);
+        setId(id)
+      })
+      // const { id } = propertyDoc;
+      // if (typeof id !== "undefined") {
+      //   firebase.doFirestoreDocGet("properties", id).then(data => {
+      //     setDocData(data)
+      //     setLoading(false);
+      //     setId(id)
+      //   });
+      // }
     });
 
   }, [address, firebase])
@@ -34,13 +41,13 @@ export const useGetPropertyData = address => {
   }
 }
 
-export const useGetImg = address => {
+export const useGetImg = (county, address) => {
   const firebase = useFirebase();
   const [imgUrlData, setImgUrlData] = useState(null)
   const [imgLoading, setImgLoading] = useState(true)
 
   useEffect(() => {
-    firebase.doFirestoreAddressRefGet(address).then(properties => {
+    firebase.doFirestoreAddressRefGet(county, address).then(properties => {
       const propertyDoc = properties[0];
       const { id } = propertyDoc;
 

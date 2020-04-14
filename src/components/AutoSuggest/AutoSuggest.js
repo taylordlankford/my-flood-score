@@ -1,5 +1,9 @@
 import React from 'react'
 import Autosuggest from 'react-autosuggest'
+import Form from 'react-bootstrap/Form'
+import Spinner from 'react-bootstrap/Spinner'
+import styled from 'styled-components'
+import Col from 'react-bootstrap/Col'
 
 import { FaLeaf } from 'react-icons/fa'
 // import { withRouter } from 'react-router'
@@ -57,18 +61,16 @@ class AutoSuggest extends React.Component {
       suggestions: [],
       addresses: [],
       addInputClass: false,
+      selectedCounty: '',
+      loadingCounty: false,
     };
   }
 
   componentDidMount() {
-    this.props.firebase.doFirestoreCollectionGet("index").then(index => {
-      // console.log('index', index)
-      const { addresses } = index[0];
-      if (typeof addresses !== "undefined") {
-        // console.log("addresses", addresses);
-        this.setState({ addresses });
-      }
-    });
+    const { countyStartingValue } = this.props
+    if (countyStartingValue) {
+      this.handleCountySelected(countyStartingValue)
+    }
   }
 
   validateValue = () => {
@@ -103,6 +105,34 @@ class AutoSuggest extends React.Component {
     });
   };
 
+  handleCountySelected = (county) => {
+    if (county === '') {
+      this.setState({ loadingCounty: false, selectedCounty: '' })
+      try { this.props.updateParentCountyState('none') } catch (err) {}
+      return
+    }
+    this.setState({ loadingCounty: true, selectedCounty: county })
+    this.props.firebase.db.collection('properties').doc('Florida')
+      .collection('counties').doc(county)
+      .collection('zipCodes')
+      .get()
+      .then((querySnapshot) => {
+        let addresses = [];
+        querySnapshot.forEach(function(doc) {
+            // addresses.push(doc.data().addresses)
+            addresses = [ ...addresses, ...doc.data().addresses ]
+        })
+        if (typeof addresses !== "undefined") {
+          // console.log("addresses", addresses);
+          this.setState({ addresses, loadingCounty: false })
+          try { this.props.updateParentCountyState(county) } catch (err) {}
+        } else {
+          this.setState({ loadingCounty: false })
+          try { this.props.updateParentCountyState(county) } catch (err) {}
+        }
+      })
+  }
+
   // onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
   //   const { history } = this.props
   //   console.log('selected', suggestion)
@@ -110,32 +140,118 @@ class AutoSuggest extends React.Component {
   // }
 
   render() {
-    const { value, suggestions } = this.state;
+    const {
+      value,
+      suggestions,
+      selectedCounty,
+      loadingCounty,
+    } = this.state
+    const {
+      countySelectStyles,
+      countyStartingValue,
+      showProceedButton,
+      handleProceedButton,
+    } = this.props
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: 'Enter your address',
       value,
       onChange: this.onChange,
-      autocomplete: "new-password",
+      autoComplete: "new-password",
     };
 
-    console.log(this.props)
 
     // Finally, render it!
     // console.log('theme', theme)
     return (
-      <Autosuggest
-        {...this.props}
-        suggestions={suggestions.slice(0,10)}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        inputProps={{ ...inputProps, ...this.props.inputProps }}
-      />
+      <>
+        <Form
+          style={countySelectStyles}
+        >
+          <Form.Group controlId="exampleForm.SelectCustom">
+            <Form.Control
+              as="select"
+              custom
+              onChange={e => this.handleCountySelected(e.target.value)  }
+              style={{ backgroundColor: 'white' }}
+              defaultValue={countyStartingValue}
+              name="county"
+            >
+              <option value='' >Select Your County...</option>
+              <option value='Hillsborough' >Hillsborough</option>
+            </Form.Control>
+          </Form.Group>
+        </Form>
+        {loadingCounty &&
+          <Spinner animation="border" role="status" style={{ ...countySelectStyles, width: '2rem' }}>
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        }
+        {selectedCounty !== '' && !loadingCounty &&
+          <Autosuggest
+            {...this.props}
+            suggestions={suggestions.slice(0,10)}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            inputProps={{ ...inputProps, ...this.props.inputProps }}
+          />
+        }
+        {(selectedCounty !== '' && !loadingCounty && showProceedButton) && (
+          <div xs={2} style={{ position: 'relative', padding: "0", margin: "0", top: '-42px', float: 'right' }}>
+            <IframeSearchBtn onClick={e => handleProceedButton(e)}>
+              Proceed
+            </IframeSearchBtn>
+          </div>
+        )}
+      </>
     );
   }
 }
 
 export default AutoSuggest
+
+export const IframeSearchBtn = styled.button`
+  &,
+  &:link,
+  &:visited {
+    width: 100%;
+    height: 48px;
+    text-align: center !important;
+    color: white !important;
+    cursor: pointer;
+    background-color: #55b96a;
+    font-size: 0.94rem;
+    font-weight: 700;
+    border: 1px solid #55b96a;
+    border: none;
+    /* padding: 0.62rem 1.25rem; */
+    text-decoration: none;
+    text-transform: uppercase;
+    background-size: 230%;
+    transition: all 0.4s;
+    z-index: 999;
+  }
+
+  &:hover {
+    background-color: #4ca25e;
+    background-position: 100%;
+    color: white;
+  }
+
+  &:active {
+    outline: none;
+    transform: scale(0.9);
+  }
+
+  &:disabled {
+    background-color: #d4d4d4;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
