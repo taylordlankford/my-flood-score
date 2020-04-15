@@ -23,8 +23,14 @@ import AutoSuggest from '../../components/AutoSuggest/AutoSuggest'
 const BillingDetails = (props) => {
   // const [error, setError] = useState(null)
   const [{ error }, dispatch] = useStateValue()
-  const { firebase, selected, setOrderLoading, setOrderComplete } = props
-  console.log('selected', selected)
+  const { firebase, history, selected, setOrderLoading, setOrderComplete } = props
+  let selectedCounty
+  try {
+    selectedCounty = history.location.state.selectedCounty
+  } catch (err) {
+    selectedCounty = ''
+  }
+  console.log('selectedCounty', selectedCounty)
   const autoSuggestRef = React.createRef()
   try {
     document.getElementsByName("streetAddress1")[0].value = selected
@@ -52,6 +58,7 @@ const BillingDetails = (props) => {
       var e = form.elements[i];
       order[e.name] = e.value
     }
+    order.county = autoSuggestRef.current.state.selectedCounty
     console.log('order', order)
     firebase
       .doCreateUserWithEmailAndPassword(order.email, order.password)
@@ -127,6 +134,7 @@ const BillingDetails = (props) => {
           theme={autoSuggestTheme}
           // onSuggestionSelected={onSuggestionSelected}
           startingValue={selected}
+          countyStartingValue={selectedCounty}
           inputProps={{ name: 'streetAddress1' }}
           firebase={firebase}
         />
@@ -134,7 +142,6 @@ const BillingDetails = (props) => {
       {/* <AutoSuggest theme={autoSuggestTheme} firebase={firebase} /> */}
 
       
-
       <Form.Group controlId="billingAddress2">
         <Form.Control name="streetAddress2" placeholder="Apartment, suite, unit etc. (optional)" />
       </Form.Group>

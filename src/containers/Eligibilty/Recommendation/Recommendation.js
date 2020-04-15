@@ -10,10 +10,10 @@ import { useDomains, useGetPropertyData, useGetImg } from "../eligibility-hooks"
 // import { useFirebase } from "../../../hooks";
 
 const Recommendation = props => {
-  const { address } = props;
+  const { address, county } = props;
   const { pubDomain, devDomain } = useDomains();
-  const { docData, loading } = useGetPropertyData(address);
-  const { imgUrlData, imgLoading } = useGetImg(address);
+  const { docData, loading } = useGetPropertyData(county, address);
+  const { imgUrlData, imgLoading } = useGetImg(county, address);
 
   // const { LOMA, id, FEMA_ZONE } = propertyData;
   // const firebase = useFirebase();

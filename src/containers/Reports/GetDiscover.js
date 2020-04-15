@@ -37,9 +37,10 @@ const GetDiscover = (props) => {
     setAddress(newValue)
   }
 
-  const handleGetReport = async () =>{
+  const handleGetReport = async () => {
+    const { selectedCounty } = autoSuggestRef.current.state
     // get the address's propertyRef
-    const properties = await firebase.doFirestoreAddressRefGet(address)
+    const properties = await firebase.doFirestoreAddressRefGet(selectedCounty, address)
     // create report
     const createdAt = new Date()
     const setReportObj = {

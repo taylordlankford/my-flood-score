@@ -122,29 +122,21 @@ class Fire {
       });
   };
 
-  doFirestoreAddressRefGet = address => {
-    console.log("doing firestore compound where get");
-    const splitAddress = address.split(",");
-    const propAdd = splitAddress[0];
-    let propZip = splitAddress[splitAddress.length - 1];
-    propZip = propZip.trim();
-    propZip = Number(propZip);
-
-    console.log("propAdd", propAdd);
-    console.log("propZip", propZip);
-    const documents = [];
+  doFirestoreAddressRefGet = (county, address) => {
+    const documents = []
     return this.db
-      .collection("properties")
-      .where("PROP_ADD", "==", propAdd)
-      .where("PROP_ZIP", "==", propZip)
+      .collection("properties").doc('Florida')
+      .collection('counties').doc(county)
+      .collection('properties')
+      .where("FULL_ADD", "==", address)
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
+          // console.log(doc.id, " => ", doc.data())
           documents.push(doc.ref);
         });
-        return documents;
+        return documents
       })
       .catch(function(error) {
         console.log("Error getting documents: ", error);

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Home.css'
 
 import backgroundImage from '../../assets/images/Background-Image.jpg'
@@ -23,14 +23,20 @@ import Container from "react-bootstrap/Container"
 function Home ({ history }) {
   const firebase = useFirebase()
   const { firestoreUser } = useFirestoreUser()
+  const [selectedCounty, setSelectedCounty] = useState('')
 
   const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
-    console.log('selected', suggestion)
+    console.log('pushing selectedCounty', selectedCounty)
     if (firestoreUser) {
-      history.push(ROUTES.GET_REPORT, { selected: suggestion })
+      history.push(ROUTES.GET_REPORT, { selected: suggestion, selectedCounty })
     } else {
-      history.push(ROUTES.CHECKOUT_FREE, { selected: suggestion })
+      history.push(ROUTES.CHECKOUT_FREE, { selected: suggestion, selectedCounty })
     }
+  }
+
+  const updateParentCountyState = (county) => {
+    console.log('updating county to:', county)
+    setSelectedCounty(county)
   }
 
   return (
@@ -53,6 +59,8 @@ function Home ({ history }) {
         <Container className="autosuggestWrapper">
           <AutoSuggest
             theme={autoSuggestTheme}
+            countySelectStyles={countySelectStyles}
+            updateParentCountyState={updateParentCountyState}
             onSuggestionSelected={onSuggestionSelected}
             inputProps={{ id: "homeAddressSuggest" }}
             firebase={firebase}
@@ -122,6 +130,7 @@ const autoSuggestTheme = {
     margin: '0 auto',
     width: '100%',
     position: 'relative',
+    textAlign: 'left',
   },
   suggestionsContainerOpen: {
     boxShadow: '0px 1px 4px grey',
@@ -152,4 +161,11 @@ const autoSuggestTheme = {
   },
   sectionContainerFirst: {},
   sectionTitle: {},
+}
+
+const countySelectStyles = {
+  position: 'relative',
+  top: '-260px',
+  width: '50%',
+  margin: '0 auto',
 }
