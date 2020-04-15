@@ -18,19 +18,11 @@ export const useGetPropertyData = (county, address) => {
       const propertyDoc = properties[0]
       const { id } = propertyDoc
       console.log('in useGetPropertyData hook, propertyDoc:', propertyDoc)
-      propertyDoc.get().then(data => {
-        setDocData(data)
+      propertyDoc.get().then(doc => {
+        setDocData(doc.data())
         setLoading(false);
         setId(id)
       })
-      // const { id } = propertyDoc;
-      // if (typeof id !== "undefined") {
-      //   firebase.doFirestoreDocGet("properties", id).then(data => {
-      //     setDocData(data)
-      //     setLoading(false);
-      //     setId(id)
-      //   });
-      // }
     });
 
   }, [address, firebase])
