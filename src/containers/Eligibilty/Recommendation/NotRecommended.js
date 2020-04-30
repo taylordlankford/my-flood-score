@@ -45,7 +45,7 @@ const NotRecommended = props => {
             <InfoBox
               selectedAddress={selectedAddress}
               propertyData={propertyData}
-              suggestion="Not Recommended"
+              suggestion="N/A"
               basisOfDetermination={basisOfDetermination}
             />
           </S.ResultsContainer>

@@ -34,6 +34,9 @@ export const useGetPropertyData = (county, address) => {
 }
 
 export const useGetImg = (county, address) => {
+  console.log('useGetImg')
+  console.log('county:', county)
+  console.log('address:', address)
   const firebase = useFirebase();
   const [imgUrlData, setImgUrlData] = useState(null)
   const [imgLoading, setImgLoading] = useState(true)
@@ -44,7 +47,7 @@ export const useGetImg = (county, address) => {
       const { id } = propertyDoc;
 
       if (typeof id !== "undefined") {
-        firebase.getDownloadURL(id).then(url => {
+        firebase.getDownloadURL(county, id).then(url => {
           if (url !== null || url !== undefined) {
             setImgUrlData(url)
             setImgLoading(false)

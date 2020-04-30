@@ -33,6 +33,7 @@ const Recommendation = props => {
   }, [pubDomain, devDomain]);
 
   useEffect(() => {
+    console.log('in useeffect docData:', docData)
     if (docData !== null || docData !== undefined) {
       let data = { ...docData }
       const { FEMA_ZONE } = data;
