@@ -19,6 +19,12 @@ const GetDiscover = (props) => {
     getNewInventory,
     selected,
   } = props
+  let selectedCounty
+  try {
+    selectedCounty = history.location.state.selectedCounty
+  } catch (err) {
+    selectedCounty = ''
+  }
   const categoryId = 'discover'
   const [validAddress, setValidAddress] = useState((selected) ? true : false)
   const [address, setAddress] = useState((selected) ? selected : "")
@@ -73,6 +79,7 @@ const GetDiscover = (props) => {
               theme={autoSuggestTheme}
               onSuggestionSelected={onSuggestionSelected}
               startingValue={address}
+              countyStartingValue={selectedCounty}
               inputProps={{ id: 'requestAddressSuggest' }}
               firebase={firebase}
               inputProps={{

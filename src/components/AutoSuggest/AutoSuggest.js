@@ -3,7 +3,7 @@ import Autosuggest from 'react-autosuggest'
 import Form from 'react-bootstrap/Form'
 import Spinner from 'react-bootstrap/Spinner'
 import styled from 'styled-components'
-import Col from 'react-bootstrap/Col'
+// import Col from 'react-bootstrap/Col'
 
 import { FaLeaf } from 'react-icons/fa'
 // import { withRouter } from 'react-router'
@@ -61,16 +61,36 @@ class AutoSuggest extends React.Component {
       suggestions: [],
       addresses: [],
       addInputClass: false,
+      countyOptions: [{ value: '', label: 'Select Your County...' }],
       selectedCounty: '',
+      loadingCountyOptions: true,
       loadingCounty: false,
     };
   }
 
   componentDidMount() {
     const { countyStartingValue } = this.props
+    this.getAvaliableCounties()
     if (countyStartingValue) {
       this.handleCountySelected(countyStartingValue)
     }
+  }
+
+  getAvaliableCounties = () => {
+    this.props.firebase.db.collection('properties').doc('Florida').collection('counties')
+    .where("active", "==", true)
+    .get()
+    .then((querySnapshot) => {
+        const countyOptions = [{ value: '', label: 'Select Your County...' }]
+        querySnapshot.forEach(function(doc) {
+            const { label } = doc.data()
+            countyOptions.push({ value: doc.id, label: label ? label : doc.id })
+        })
+        this.setState({ countyOptions, loadingCountyOptions: false })
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    })
   }
 
   validateValue = () => {
@@ -143,8 +163,10 @@ class AutoSuggest extends React.Component {
     const {
       value,
       suggestions,
+      countyOptions,
       selectedCounty,
       loadingCounty,
+      loadingCountyOptions,
     } = this.state
     const {
       countySelectStyles,
@@ -162,8 +184,22 @@ class AutoSuggest extends React.Component {
     };
 
 
-    // Finally, render it!
-    // console.log('theme', theme)
+    // This is all dummy while it loads up the county options real
+    if (loadingCountyOptions) {
+      return (
+          <Form.Group controlId="fake" style={ countySelectStyles }>
+            <Form.Control
+              as="select"
+              custom
+              style={{ backgroundColor: 'white' }}
+              name="countyFake"
+            >
+              <option value='fake'>Select Your County...</option>
+            </Form.Control>
+          </Form.Group>
+      )
+    }
+
     return (
       <>
         <Form
@@ -178,8 +214,9 @@ class AutoSuggest extends React.Component {
               defaultValue={countyStartingValue}
               name="county"
             >
-              <option value='' >Select Your County...</option>
-              <option value='Hillsborough' >Hillsborough</option>
+              {countyOptions.map((county) => (
+                <option value={county.value} >{county.label}</option>
+              ))}
             </Form.Control>
           </Form.Group>
         </Form>

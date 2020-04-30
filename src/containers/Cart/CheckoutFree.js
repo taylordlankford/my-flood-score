@@ -30,7 +30,6 @@ const BillingDetails = (props) => {
   } catch (err) {
     selectedCounty = ''
   }
-  console.log('selectedCounty', selectedCounty)
   const autoSuggestRef = React.createRef()
   try {
     document.getElementsByName("streetAddress1")[0].value = selected
