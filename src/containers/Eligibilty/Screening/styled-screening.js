@@ -35,5 +35,5 @@ export const FormWrapper = styled.div`
   background-color: #201a40;
   padding: 20px;
   margin: 0 auto;
-  max-width: 930px;
+  max-width: 720px;
 `;

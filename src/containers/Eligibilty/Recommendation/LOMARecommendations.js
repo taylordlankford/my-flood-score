@@ -11,13 +11,13 @@ import NotRecommended from "./NotRecommended";
 const LOMARecommendations = props => {
   const { LOMARating } = props;
   switch (LOMARating) {
-    case 0:
+    case "0":
       return <NotRecommended {...props} />;
-    case 1:
+    case "1":
       return <Low {...props} />;
-    case 2:
+    case "2":
       return <Medium {...props} />;
-    case 3:
+    case "3":
       return <High {...props} />;
     default: {
       return "N/A";
