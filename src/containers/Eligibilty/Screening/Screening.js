@@ -69,8 +69,10 @@ const Screening = props => {
    */
   const addNffUser = async (collection, setObj) => {
     await firebase.doFirestoreAdd(collection, setObj).then(res => {
+      firebase.doSendEmailNotification();
       setShowRecommendation(true);
-    });
+      // Ideally, send email notifcation here.
+    })
   };
 
   /**

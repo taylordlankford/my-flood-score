@@ -2,6 +2,10 @@
 const functions = require('firebase-functions');
 const stripe = require('stripe')('sk_test_M0Jraaox3nxaCBqlPMEwC4pk')
 const endpointSecret = 'whsec_t52NtsSu7255jYT9BnQVnui6qnkLPzMt'
+const nodemailer = require('nodemailer');
+
+require('dotenv').config()
+const { SENDER_EMAIL, SENDER_PASSWORD } = process.env
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -74,7 +78,7 @@ const getNewInventory = (inventory, order) => {
     let quantAdded = false
     for (let j = 0; j < inventory.length; j++) {
       const inven = inventory[j]
-      if (orderedItem.categoryId === inven.categoryId ) {
+      if (orderedItem.categoryId === inven.categoryId) {
         inventory[j].quantity = inven.quantity + (orderedItem.quantity * orderedItem.numInventory)
         quantAdded = true
         break
@@ -105,7 +109,7 @@ const addUser = (data, context) => {
   return properties.get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-          userDetails.propertyRef = propertiesRef.doc(doc.id)
+        userDetails.propertyRef = propertiesRef.doc(doc.id)
       })
       // eslint-disable-next-line promise/no-nesting
       return admin.firestore().collection("users").doc(uid).set(
@@ -157,7 +161,7 @@ const paymentIntentSucceeded = async (request, response) => {
       }
       // check if user already a customer or needs to be created
       const userRef = admin.firestore().collection("users").doc(paymentIntent.metadata.uid)
-      userRef.get().then( async (doc) => {
+      userRef.get().then(async (doc) => {
         if (doc.exists) {
           const data = doc.data()
           console.log('Document data:', data)
@@ -231,7 +235,7 @@ const paymentIntentSucceeded = async (request, response) => {
           return
         }
       }).catch((error) => {
-          console.log("Error getting document:", error);
+        console.log("Error getting document:", error);
       })
       break;
     }
@@ -272,10 +276,10 @@ const invoicePaymentSucceeded = async (request, response) => {
         order.items.push(newObj)
       })
       console.log('order:', order)
-      const { uid } =  invoice.lines.data[0].metadata
+      const { uid } = invoice.lines.data[0].metadata
       console.log('uid', uid)
       const userRef = admin.firestore().collection("users").doc(uid)
-      userRef.get().then( async (doc) => {
+      userRef.get().then(async (doc) => {
         if (doc.exists) {
           const data = doc.data()
           console.log('Document data:', data)
@@ -291,9 +295,9 @@ const invoicePaymentSucceeded = async (request, response) => {
           return 'doc not found'
         }
       })
-      .catch((error => {
-        console.log('userReg.get error', error)
-      }))
+        .catch((error => {
+          console.log('userReg.get error', error)
+        }))
       break
     }
     case 'invoice.payment_failed': {
@@ -320,7 +324,7 @@ const createCustomer = (data, context) => {
       await userRef.set({
         customerId: cus.id,
       }, { merge: true })
-      .catch((error) => { console.log('error:', error) })
+        .catch((error) => { console.log('error:', error) })
       return cus
     } catch (err) {
       console.log('creating customer error:', err)
@@ -467,6 +471,45 @@ const deleteCustomer = async (data, context) => {
   });
 }
 
+/**
+ * Email notifcation for new screening data.
+ */
+
+// async..await is not allowed in global scope, must use a wrapper
+const sendEmailNotification = async () => {
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+  let testAccount = await nodemailer.createTestAccount()
+
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: testAccount.user, // generated ethereal user
+      pass: testAccount.pass // generated ethereal password
+    }
+  })
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '"Test MFS" <foo@example.com>', // sender address
+    to: "bar@example.com, baz@example.com", // list of receivers
+    subject: "New screening entry.", // Subject line
+    text: "Someone new has entered their information.", // plain text body
+    html: "<b>Someone new has entered their information.</b>", // html body
+  })
+
+  console.log("Message sent: %s", info.messageId);
+  // => Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  // => Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // => Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+}
+
+exports.sendEmailNotification = functions.https.onCall(sendEmailNotification)
 exports.addUser = functions.https.onCall(addUser)
 exports.createPaymentIntent = functions.https.onCall(createPaymentIntent)
 exports.createSubscription = functions.https.onCall(createSubscription)

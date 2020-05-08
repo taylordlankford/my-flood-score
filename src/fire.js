@@ -283,6 +283,14 @@ class Fire {
     const deleteCustomer = this.functions.httpsCallable("deleteCustomer");
     return await deleteCustomer({ customerId });
   };
+
+  /**
+   * Send email notifcaiton
+   */
+  doSendEmailNotification = async () => {
+    const sendEmailNotification = this.functions.httpsCallable("sendEmailNotification");
+    return await sendEmailNotification();
+  }
 }
 
 export default Fire;
