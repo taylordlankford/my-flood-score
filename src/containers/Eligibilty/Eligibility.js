@@ -61,6 +61,9 @@ const Eligibility = () => {
 
   /* Render recommendation */
   if (showRecommendation) {
+    console.log('showing recommendation')
+    console.log('selectedCounty:', selectedCounty)
+    console.log('selectedAddress:', selectedAddress)
     return (
       <Recommendation county={selectedCounty} address={selectedAddress} />
     )
@@ -252,4 +255,5 @@ const countySelectStyles = {
   top: '-40px',
   marginBottom: '-40px',
   width: '50%',
+  color: 'white'
 }

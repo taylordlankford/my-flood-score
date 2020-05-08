@@ -26,7 +26,6 @@ function Home ({ history }) {
   const [selectedCounty, setSelectedCounty] = useState('')
 
   const onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
-    console.log('pushing selectedCounty', selectedCounty)
     if (firestoreUser) {
       history.push(ROUTES.GET_REPORT, { selected: suggestion, selectedCounty })
     } else {

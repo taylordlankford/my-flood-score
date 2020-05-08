@@ -28,19 +28,15 @@ class Fire {
   /**
    * Firebase Storage API
    */
-  getDownloadURL = async nffid => {
+  getDownloadURL = async (county, nffid) => {
     return new Promise((resolve, reject) => {
-      let bucketName = "gs://loma-hillsborough/";
-      let fileName = "LOMA_" + nffid + ".jpg";
-      console.log("FULL URL: ", fileName);
-
       let storage = this.app.storage();
-      let storageRef = storage.ref();
+      var gsReference = storage.refFromURL(`gs://lomas/Florida/${county}/LOMA_${nffid}.jpg`)
 
-      storageRef
-        .child(fileName)
+      gsReference
         .getDownloadURL()
         .then(url => {
+          console.log('resolved url:', url)
           resolve(url);
         })
         .catch(error => {

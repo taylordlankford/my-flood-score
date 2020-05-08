@@ -53,7 +53,6 @@ const MainNav = (props) => {
                 <A onClick={() => history.push(ROUTES.HOME)}>Home</A>
                 <A onClick={() => history.push(ROUTES.HOME)}>About</A>
                 <A onClick={() => history.push(ROUTES.DISCOVER_HOMEOWNER)}>Get Your FREE Flood Score</A>
-                {console.log(authUser)}
                 {(authUser === 'null') ? (
                   <>
                     <A onClick={() => history.push(ROUTES.SIGN_IN)}>Login</A>

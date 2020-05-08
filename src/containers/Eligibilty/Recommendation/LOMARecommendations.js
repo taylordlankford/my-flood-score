@@ -10,6 +10,7 @@ import NotRecommended from "./NotRecommended";
  */
 const LOMARecommendations = props => {
   const { LOMARating } = props;
+  
   switch (LOMARating) {
     case "0":
       return <NotRecommended {...props} />;

@@ -104,7 +104,7 @@ const addUser = (data, context) => {
   const propertiesRef = admin.firestore()
     .collection("properties").doc('Florida')
     .collection('counties').doc(county)
-    .collection(properties)
+    .collection('properties')
   const properties = propertiesRef.where("FULL_ADD", "==", streetAddress1)
   return properties.get()
     .then((querySnapshot) => {
