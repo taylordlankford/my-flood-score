@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const ScreeningTitle = styled.div`
- padding-bottom: 20px;
+  padding-bottom: 20px;
+  margin: 0 auto;
+  max-width: 720px;
 `
 
 export const ScreeningWrapper = styled.div`
@@ -35,5 +37,5 @@ export const FormWrapper = styled.div`
   background-color: #201a40;
   padding: 20px;
   margin: 0 auto;
-  max-width: 720px;
+  max-width: 660px;
 `;

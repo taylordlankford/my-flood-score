@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFirebase } from "../../../hooks";
 import { useDomains } from "../eligibility-hooks";
-import Input from 'react-phone-number-input/input';
+// import Input from 'react-phone-number-input/input';
 import Form from "react-formal"
 import { object, string, number } from "yup";
 
@@ -19,7 +19,7 @@ import {
 
 /* Components */
 // import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import { hideSiteContainers } from "../helpers";
 // import { isValidPhoneNumber } from "react-phone-number-input";
 
@@ -29,8 +29,8 @@ const Screening = props => {
   // const { selected } = props.location.state;
   const { selected, setShowRecommendation } = props;
 
-  const [address, setAddress] = useState("")
-  const [isInvalid, setIsInvalid] = useState(false)
+  // const [address, setAddress] = useState("")
+  // const [isInvalid, setIsInvalid] = useState(false)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
@@ -93,13 +93,13 @@ const Screening = props => {
         <ParallaxContainer>
           <ScreeningTitle>
             <H3>
-              You are one step away from getting your FREE screening results!
+              You are one step away from getting your <b style={{ color: "#fff" }}>FREE</b> screening results!
             </H3>
           </ScreeningTitle>
           <FormWrapper>
             <Form schema={modelSchema} defaultValue={modelSchema.default()} onSubmit={e => handleOnSubmit(e)}>
               <div>
-                <label style={{ display: "inline-block", fontWeight: "500", color: "#fff", paddingRight: "10px" }}>Name</label>
+                <FormLabel>Name</FormLabel>
                 <Form.Message
                   autocomplete="off"
                   for={['name.fullName']}
@@ -114,7 +114,7 @@ const Screening = props => {
                 />
                 <br />
 
-                <label style={{ display: "inline-block", fontWeight: "500", color: "#fff", paddingRight: "10px" }}>Email</label>
+                <FormLabel>Email</FormLabel>
                 <Form.Message
                   for={['email.email']}
                   className="validation-error"
@@ -129,7 +129,7 @@ const Screening = props => {
                 />
                 <br />
 
-                <label style={{ display: "inline-block", fontWeight: "500", color: "#fff", paddingRight: "10px" }}>Phone</label>
+                <FormLabel>Phone</FormLabel>
                 <Form.Message
                   for={['phone.phone']}
                   className="validation-error"
@@ -161,6 +161,9 @@ const Screening = props => {
 
 export default Screening;
 
+/**
+ * Styles
+ */
 const formFieldStyles = {
   display: "block",
   width: "100%",
@@ -175,6 +178,14 @@ const formFieldStyles = {
   borderRadius: ".25rem",
   transition: "border-color .15s ease-in-out, box-shadow .15s ease-in-out",
 }
+
+const FormLabel = styled.label`
+ display: inline-block;
+ font-weight: 500;
+ color: #fff;
+ padding-right: 10px;
+`
+
 const SubmitBtn = styled.button`
   font-weight: 600;
   padding: .375rem .75rem;
