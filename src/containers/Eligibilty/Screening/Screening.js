@@ -3,7 +3,11 @@ import { useFirebase } from "../../../hooks";
 import { useDomains } from "../eligibility-hooks";
 // import Input from 'react-phone-number-input/input';
 import Form from "react-formal"
-import { object, string, number } from "yup";
+import * as Yup from "yup";
+
+import "react-phone-number-input/style.css";
+import PhoneInput, { formatPhoneNumber, formatPhoneNumberIntl, isValidPhoneNumber } from 'react-phone-number-input'
+import "./screening-styles.css";
 
 /* Styles */
 import styled from "styled-components";
@@ -21,6 +25,8 @@ import {
 // import Form from "react-bootstrap/Form";
 // import Button from "react-bootstrap/Button";
 import { hideSiteContainers } from "../helpers";
+import nodemailer from "nodemailer";
+import { ROW_SELECT_MULTIPLE } from "react-bootstrap-table-next";
 // import { isValidPhoneNumber } from "react-phone-number-input";
 
 const Screening = props => {
@@ -33,6 +39,8 @@ const Screening = props => {
   // const [isInvalid, setIsInvalid] = useState(false)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
+  const [value, setValue] = useState()
+  // const [phoneValue, setPhoneValue] = useState("")
   const [phone, setPhone] = useState("")
   const [exists, setExists] = useState(false)
 
@@ -40,16 +48,21 @@ const Screening = props => {
    * Model Schema
    * Used for validating form fields.
    */
-  const modelSchema = object({
-    name: object({
-      fullName: string().required('*required'),
-    }),
-    email: object({
-      email: string().required('*required').email('Email address must be in correct format.')
-    }),
-    phone: object({
-      phone: string().required('*required')
-    }),
+  // const phoneNumberPattern = /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/
+  // const phoneNumberPattern = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/
+  const modelSchema = Yup.object({
+    name: Yup.string().required('Required').min(2, 'Too short'),
+    email: Yup.string().required('Required').email('Wrong format')
+    // email: object({
+    //   email: string()
+    //     .required('*required')
+    //     .email('email address must be in correct format.')
+    // }),
+    // phone: object({
+    //   phone: string()
+    //     .required('*required')
+    //     .matches(phoneNumberPattern, 'phone number must be in correct format.')
+    // }),
   })
 
   /**
@@ -62,27 +75,38 @@ const Screening = props => {
     }
 
     let isAddressSelected = typeof selected !== "undefined" || selected !== null;
-  }, [name, email, phone]);
+  }, []);
 
   /**
    * Adds the screening data to firebase.
    */
   const addNffUser = async (collection, setObj) => {
     await firebase.doFirestoreAdd(collection, setObj).then(res => {
-      firebase.doSendEmailNotification();
+      // firebase.doSendEmailNotification();
       setShowRecommendation(true);
       // Ideally, send email notifcation here.
+      // sendEmailNotification()
     })
   };
+
+  const handlePhoneNumber = value => {
+    console.log('phone value: ', value)
+    setPhone(value)
+  }
 
   /**
    * Handle form submit
    */
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = e => {
     console.log('event: ', e)
-    const { name, email, phone } = e
-    const nffUser = { name, email, phone };
-    addNffUser("nff_users", nffUser);
+    console.log('phone', phone)
+    // const { name, email } = e
+    // const nffUser = { name, email, phone};
+    // console.log('nffUser: ', nffUser);
+
+    // const { name, email, phone } = e
+    // const nffUser = { name, email, phone };
+    // addNffUser("nff_users", nffUser);
   }
 
   if (exists) {
@@ -104,46 +128,56 @@ const Screening = props => {
                 <FormLabel>Name</FormLabel>
                 <Form.Message
                   autocomplete="off"
-                  for={['name.fullName']}
+                  for={['name']}
                   className="validation-error"
-                  style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }}
-                />
+                  style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }} />
                 <Form.Field
-                  name="name.fullName"
-                  placeholder="Name"
+                  name="name"
+                  placeholder="Enter your name"
+                  value={name}
                   onChange={e => setName(e.target.value)}
-                  style={formFieldStyles}
-                />
+                  style={formFieldStyles} />
                 <br />
 
                 <FormLabel>Email</FormLabel>
                 <Form.Message
-                  for={['email.email']}
+                  for={['email']}
                   className="validation-error"
-                  style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }}
-                />
+                  style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }} />
                 <Form.Field
                   autocomplete="off"
-                  name="email.email"
-                  placeholder="Email"
+                  name="email"
+                  placeholder="Enter your email"
+                  value={email}
                   onChange={e => setEmail(e.target.value)}
-                  style={formFieldStyles}
-                />
+                  style={formFieldStyles} />
                 <br />
 
                 <FormLabel>Phone</FormLabel>
+                <PhoneInput
+                  addInternationalOption={false}
+                  name="phone"
+                  defaultCountry="US"
+                  placeholder="Enter phone number"
+                  value={value}
+                  onChange={value => handlePhoneNumber(value)} 
+                  error={value ? (isValidPhoneNumber(value) ? undefined : 'Invalid phone number') : 'Phone number required'} />
+
+                {/*
+                Old Phone
                 <Form.Message
-                  for={['phone.phone']}
+                  for={['phone']}
                   className="validation-error"
                   style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }}
                 />
                 <Form.Field
                   autocomplete="off"
-                  name="phone.phone"
+                  name="phone"
                   placeholder="Phone"
                   onChange={e => setPhone(e.target.value)}
                   style={formFieldStyles}
                 />
+                */}
               </div>
 
               <br />
