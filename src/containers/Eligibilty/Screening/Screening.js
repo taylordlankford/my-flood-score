@@ -6,7 +6,7 @@ import Form from "react-formal"
 import * as Yup from "yup";
 
 import "react-phone-number-input/style.css";
-import PhoneInput, { formatPhoneNumber, formatPhoneNumberIntl, isValidPhoneNumber } from 'react-phone-number-input'
+// import PhoneInput, { formatPhoneNumber, isValidPhoneNumber } from 'react-phone-number-input'
 import "./screening-styles.css";
 
 /* Styles */
@@ -36,33 +36,19 @@ const Screening = props => {
   const { selected, setShowRecommendation } = props;
 
   // const [address, setAddress] = useState("")
-  // const [isInvalid, setIsInvalid] = useState(false)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-  const [value, setValue] = useState()
-  // const [phoneValue, setPhoneValue] = useState("")
-  const [phone, setPhone] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
   const [exists, setExists] = useState(false)
 
   /**
    * Model Schema
    * Used for validating form fields.
    */
-  // const phoneNumberPattern = /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/
-  // const phoneNumberPattern = /^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/
   const modelSchema = Yup.object({
     name: Yup.string().required('Required').min(2, 'Too short'),
-    email: Yup.string().required('Required').email('Wrong format')
-    // email: object({
-    //   email: string()
-    //     .required('*required')
-    //     .email('email address must be in correct format.')
-    // }),
-    // phone: object({
-    //   phone: string()
-    //     .required('*required')
-    //     .matches(phoneNumberPattern, 'phone number must be in correct format.')
-    // }),
+    email: Yup.string().required('Required').email('Wrong format'),
+    phoneNumber: Yup.string().required('Required')
   })
 
   /**
@@ -74,14 +60,20 @@ const Screening = props => {
       hideSiteContainers();
     }
 
-    let isAddressSelected = typeof selected !== "undefined" || selected !== null;
-  }, []);
+    // let isAddressSelected = typeof selected !== "undefined" || selected !== null;
+  }, [name, email, phoneNumber]);
+
+  useEffect(() => {
+    const phoneInputElement = document.getElementById('phoneNumber');
+    phoneInputElement.addEventListener('keydown', enforceFormat);
+    phoneInputElement.addEventListener('keyup', formatToPhone);
+  }, [phoneNumber])
 
   /**
    * Adds the screening data to firebase.
    */
   const addNffUser = async (collection, setObj) => {
-    await firebase.doFirestoreAdd(collection, setObj).then(res => {
+    await firebase.doFirestoreAdd(collection, setObj).then(() => {
       // firebase.doSendEmailNotification();
       setShowRecommendation(true);
       // Ideally, send email notifcation here.
@@ -89,24 +81,14 @@ const Screening = props => {
     })
   };
 
-  const handlePhoneNumber = value => {
-    console.log('phone value: ', value)
-    setPhone(value)
-  }
-
   /**
    * Handle form submit
    */
   const handleOnSubmit = e => {
-    console.log('event: ', e)
-    console.log('phone', phone)
-    // const { name, email } = e
-    // const nffUser = { name, email, phone};
-    // console.log('nffUser: ', nffUser);
-
-    // const { name, email, phone } = e
-    // const nffUser = { name, email, phone };
-    // addNffUser("nff_users", nffUser);
+    const { phoneNumber, email, name } = e
+    let phone = normalizePhoneNumber(phoneNumber)
+    const nffUser = { name, email, phone };
+    addNffUser("nff_users", nffUser);
   }
 
   if (exists) {
@@ -124,61 +106,50 @@ const Screening = props => {
           </ScreeningTitle>
           <FormWrapper>
             <Form schema={modelSchema} defaultValue={modelSchema.default()} onSubmit={e => handleOnSubmit(e)}>
-              <div>
-                <FormLabel>Name</FormLabel>
-                <Form.Message
-                  autocomplete="off"
-                  for={['name']}
-                  className="validation-error"
-                  style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }} />
-                <Form.Field
-                  name="name"
-                  placeholder="Enter your name"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  style={formFieldStyles} />
-                <br />
+              <FormLabel>Name</FormLabel>
+              <Form.Message
+                autocomplete="off"
+                for={['name']}
+                className="validation-error"
+                style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }} />
+              <Form.Field
+                name="name"
+                placeholder="Enter your name"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                style={formFieldStyles} />
+              <br />
 
-                <FormLabel>Email</FormLabel>
-                <Form.Message
-                  for={['email']}
-                  className="validation-error"
-                  style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }} />
-                <Form.Field
-                  autocomplete="off"
-                  name="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  style={formFieldStyles} />
-                <br />
+              <FormLabel>Email</FormLabel>
+              <Form.Message
+                for={['email']}
+                className="validation-error"
+                style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }} />
+              <Form.Field
+                autocomplete="off"
+                name="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                style={formFieldStyles} />
+              <br />
 
-                <FormLabel>Phone</FormLabel>
-                <PhoneInput
-                  addInternationalOption={false}
-                  name="phone"
-                  defaultCountry="US"
-                  placeholder="Enter phone number"
-                  value={value}
-                  onChange={value => handlePhoneNumber(value)} 
-                  error={value ? (isValidPhoneNumber(value) ? undefined : 'Invalid phone number') : 'Phone number required'} />
-
-                {/*
-                Old Phone
-                <Form.Message
-                  for={['phone']}
-                  className="validation-error"
-                  style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }}
-                />
-                <Form.Field
-                  autocomplete="off"
-                  name="phone"
-                  placeholder="Phone"
-                  onChange={e => setPhone(e.target.value)}
-                  style={formFieldStyles}
-                />
-                */}
-              </div>
+              <FormLabel>Phone</FormLabel>
+              <Form.Message
+                for={['phoneNumber']}
+                className="validation-error"
+                style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }}
+              />
+              <Form.Field
+                id="phoneNumber"
+                autocomplete="off"
+                name="phoneNumber"
+                placeholder="Enter your phone number"
+                value={phoneNumber}
+                onChange={setPhoneNumber}
+                // onChange={e => handlePhoneNumber(e.target.value)}
+                style={formFieldStyles}
+              />
 
               <br />
               <br />
@@ -196,6 +167,58 @@ const Screening = props => {
 };
 
 export default Screening;
+
+const isNumericInput = (event) => {
+  const key = event.keyCode;
+  return ((key >= 48 && key <= 57) || // Allow number line
+    (key >= 96 && key <= 105) // Allow number pad
+  );
+};
+
+const isModifierKey = (event) => {
+  const key = event.keyCode;
+  return (event.shiftKey === true || key === 35 || key === 36) || // Allow Shift, Home, End
+    (key === 8 || key === 9 || key === 13 || key === 46) || // Allow Backspace, Tab, Enter, Delete
+    (key > 36 && key < 41) || // Allow left, up, right, down
+    (
+      // Allow Ctrl/Command + A,C,V,X,Z
+      (event.ctrlKey === true || event.metaKey === true) &&
+      (key === 65 || key === 67 || key === 86 || key === 88 || key === 90)
+    )
+};
+
+const enforceFormat = (event) => {
+  // Input must be of a valid number format or a modifier key, and not longer than ten digits
+  if (!isNumericInput(event) && !isModifierKey(event)){
+    event.preventDefault();
+  }
+};
+
+const formatToPhone = (event) => {
+  if (isModifierKey(event)) {return;}
+
+  // I am lazy and don't like to type things more than once
+  const target = event.target;
+  const input = event.target.value.replace(/\D/g,'').substring(0,10); // First ten digits of input only
+  const zip = input.substring(0,3);
+  const middle = input.substring(3,6);
+  const last = input.substring(6,10);
+
+  if (input.length > 6){target.value = `(${zip}) ${middle} - ${last}`;}
+  else if (input.length > 3){target.value = `(${zip}) ${middle}`;}
+  else if (input.length > 0){target.value = `(${zip}`;}
+};
+
+const normalizePhoneNumber = (phoneNumber) => {
+  let normalizedPhoneNumber = phoneNumber
+    .replace(/\(/g, "")
+    .replace(/\)/g, "")
+    .replace(/-/g, "")
+    .replace(/ /g, "")
+
+  return normalizedPhoneNumber
+}
+
 
 /**
  * Styles
