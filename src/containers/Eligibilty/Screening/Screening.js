@@ -25,7 +25,7 @@ import {
 // import Form from "react-bootstrap/Form";
 // import Button from "react-bootstrap/Button";
 import { hideSiteContainers } from "../helpers";
-import nodemailer from "nodemailer";
+// import nodemailer from "nodemailer";
 import { ROW_SELECT_MULTIPLE } from "react-bootstrap-table-next";
 // import { isValidPhoneNumber } from "react-phone-number-input";
 
@@ -48,7 +48,7 @@ const Screening = props => {
   const modelSchema = Yup.object({
     name: Yup.string().required('Required').min(2, 'Too short'),
     email: Yup.string().required('Required').email('Wrong format'),
-    phoneNumber: Yup.string().required('Required')
+    phoneNumber: Yup.string().required('Required').length(16, '10 digit phone number required')
   })
 
   /**
@@ -74,10 +74,8 @@ const Screening = props => {
    */
   const addNffUser = async (collection, setObj) => {
     await firebase.doFirestoreAdd(collection, setObj).then(() => {
-      // firebase.doSendEmailNotification();
       setShowRecommendation(true);
-      // Ideally, send email notifcation here.
-      // sendEmailNotification()
+      firebase.doSendEmailNotification();
     })
   };
 
@@ -86,6 +84,7 @@ const Screening = props => {
    */
   const handleOnSubmit = e => {
     const { phoneNumber, email, name } = e
+    console.log('length: ', phoneNumber.length)
     let phone = normalizePhoneNumber(phoneNumber)
     const nffUser = { name, email, phone };
     addNffUser("nff_users", nffUser);
@@ -204,17 +203,16 @@ const formatToPhone = (event) => {
   const middle = input.substring(3,6);
   const last = input.substring(6,10);
 
-  if (input.length > 6){target.value = `(${zip}) ${middle} - ${last}`;}
+  if (input.length > 6) { target.value = `(${zip}) ${middle} - ${last}`; }
   else if (input.length > 3){target.value = `(${zip}) ${middle}`;}
   else if (input.length > 0){target.value = `(${zip}`;}
 };
 
 const normalizePhoneNumber = (phoneNumber) => {
-  let normalizedPhoneNumber = phoneNumber
-    .replace(/\(/g, "")
-    .replace(/\)/g, "")
-    .replace(/-/g, "")
-    .replace(/ /g, "")
+  let normalizedPhoneNumber = phoneNumber.replace(/\(/g, "")
+                                         .replace(/\)/g, "")
+                                         .replace(/-/g, "")
+                                         .replace(/ /g, "")
 
   return normalizedPhoneNumber
 }
