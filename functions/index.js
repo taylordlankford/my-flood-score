@@ -5,11 +5,7 @@ const endpointSecret = 'whsec_t52NtsSu7255jYT9BnQVnui6qnkLPzMt'
 const nodemailer = require('nodemailer')
 const smtpTransport = require('nodemailer-smtp-transport')
 
-const cors = require('cors')({ origin: true });
-
 require('dotenv').config()
-
-// const { SENDER_EMAIL, SENDER_PASSWORD } = process.env
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -478,42 +474,72 @@ const deleteCustomer = async (data, context) => {
 /**
  * Email notifcation for new screening data.
  */
-const sendEmailNotification = async () => {
-  const { SENDER_EMAIL, SENDER_PASSWORD } = process.env
-  const sesAccessKey                      = SENDER_EMAIL;
-  const sesSecretKey                      = SENDER_PASSWORD;
+const sendEmailNotification = async (nffUser) => {
+  const { name, email, phone } = nffUser
+  const htmlBody = `
+  <html>
+    <div class="global-wrapper">
+      <div class="header">
+        <h1>NoFloodFlorida</h1>
+      </div>
+      <div class="body">
+        <div>
+          <h3>New nff screening entry</h3>
+        </div>
+        <div>
+          <strong>name: </strong>${name}
+        </div>
+        <div>
+          <strong>email: </strong>${email}
+        </div>
+        <div>
+          <strong>phone: </strong>${phone}
+        </div>
+      </div>
+    </div>
 
-  let transporter = nodemailer.createTransport(smtpTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    service: 'gmail',
-    secure: true,
-    pool: true,
-    auth: {
-      user: sesAccessKey,
-      pass: sesSecretKey
-    }
-  }));
+    <style>
+      .global-wrapper {
+      }
 
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: '"Test MFS" <kowitdev@gmail.com>', // sender address
-    to: "kowitkarunas@gmail.com", // list of receivers
-    subject: "Test Email from kowitdev", // Subject line
-    text: "Someone new has entered their information.", // plain text body
-    html: "<b>Someone new has entered their information.</b>"
-  })
+      .header {
+        margin: 0 auto;
+        width: 100%;
+        padding: 20px;
+      }
 
-  console.log("Message sent: %s", info.messageId);
-  // => Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+      .body {
+        margin: 0 auto;
+        width: 100%; 
+        height: 100%;
+        padding: 20px;
+      }
+    </style>
+  </html>
+  `
 
-  // => Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  // => Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  const API_KEY = process.env.API_KEY
+  const SENDER_EMAIL = process.env.SENDER_EMAIL
+  const RECEIVER_EMAIL = process.env.RECEIVER_EMAIL
+  const DOMAIN = process.env.DOMAIN
+  const mailgun = require("mailgun-js");
+  const mg = mailgun({ apiKey: API_KEY, domain: DOMAIN });
+  const data = {
+    from: SENDER_EMAIL,
+    to: RECEIVER_EMAIL,
+    subject: 'New screening submission entry.',
+    text: 'New screening submission entry.',
+    html: htmlBody,
+  };
 
-  transporter.close()
+  mg.messages().send(data, (error, body) => {
+    console.log(body);
+  });
 }
 
+/**
+ * Exports
+ */
 exports.sendEmailNotification              = functions.https.onCall(sendEmailNotification)
 exports.addUser                            = functions.https.onCall(addUser)
 exports.createPaymentIntent                = functions.https.onCall(createPaymentIntent)

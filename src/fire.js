@@ -283,9 +283,9 @@ class Fire {
   /**
    * Send email notifcaiton
    */
-  doSendEmailNotification = async () => {
+  doSendEmailNotification = async (nffUser) => {
     const sendEmailNotification = this.functions.httpsCallable("sendEmailNotification");
-    return await sendEmailNotification();
+    return await sendEmailNotification(nffUser);
   }
 }
 
