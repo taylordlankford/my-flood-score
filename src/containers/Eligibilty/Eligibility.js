@@ -61,9 +61,6 @@ const Eligibility = () => {
 
   /* Render recommendation */
   if (showRecommendation) {
-    console.log('showing recommendation')
-    console.log('selectedCounty:', selectedCounty)
-    console.log('selectedAddress:', selectedAddress)
     return (
       <Recommendation county={selectedCounty} address={selectedAddress} />
     )
@@ -127,7 +124,9 @@ const IFrameLanding = props => {
                   firebase={firebase}
                   showProceedButton={true}
                   handleProceedButton={e => handleOnClick(e)}
+                  showStats
                 />
+                }
               </Col>
                 {/* <Col xs={2} style={{ padding: "0", margin: "0", top: '27px' }}>
                   <IframeSearchBtn onClick={e => handleOnClick(e)}>
@@ -138,10 +137,7 @@ const IFrameLanding = props => {
           </div>
           );
           <HeaderContainer>
-            <p style={{ margin: "0 auto", maxWidth: "400px" }}>
-              Over 650,000 properties analyzed!
-            </p>
-            <p style={{ margin: "0 auto", maxWidth: "720px" }}>
+            <p style={{ margin: "-20px auto", maxWidth: "720px" }}>
               Can’t find your property?{" "}
               <u style={{ color: "#007bff" }}>Contact us</u> for a custom
               screening.
