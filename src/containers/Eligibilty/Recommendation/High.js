@@ -10,6 +10,7 @@ import InfoBox from "./InfoBox";
 import ImgLightbox from "./ImgLightbox";
 import RecommendationFooter from "./RecommendationFooter";
 import FloodRiskMap from "./FloodRiskMap";
+import BottomMenu from "./BottomMenu/BottomMenu.js";
 
 const High = props => {
   const {
@@ -43,7 +44,7 @@ const High = props => {
       <HighWrapper>
         <div style={{ paddingBottom: "40px" }}>
           <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
-            CONGRATULATIONS! This property has a “High” likelihood of benefiting
+            CONGRATULATIONS! <br />This property has a “High” likelihood of benefiting
             from a Letter of Map Amendment.
           </h3>
         </div>
@@ -67,8 +68,10 @@ const High = props => {
           </Col>
           <Col lg={6}>
             <FloodRiskMap imgUrl={imgUrl} setModalShow={setModalShow} />
+            {/* <SearchAnotherProperty /> */}
           </Col>
         </Row>
+        {/*
         <Row lg={12} style={{ paddingTop: "40px" }}>
           <Col lg={6}>
             <div style={{ textAlign: "center" }}>
@@ -83,6 +86,26 @@ const High = props => {
           </Col>
           <Col lg={6}></Col>
         </Row>
+        */}
+        {/*
+        <Row lg={12}>
+          <Col lg={6}>
+            <div style={{ textAlign: "center", paddingTop: "20px" }}>
+              <a
+                href="https://www.nofloodflorida.com/orderloma/"
+                rel="noopener noreferrer"
+                target="_top"
+              >
+                <Button>Finalize LOMA Request</Button>
+              </a>
+            </div>
+          </Col>
+          <Col lg={6}>
+            <SearchAnotherProperty />
+          </Col>
+        </Row>
+        */}
+        <BottomMenu />
         <RecommendationFooter />
       </HighWrapper>
     </>

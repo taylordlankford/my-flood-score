@@ -36,6 +36,7 @@ const Screening = props => {
   const { selected, setShowRecommendation } = props;
 
   // const [address, setAddress] = useState("")
+  const [nffUserData, setNffUserData] = useState({})
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
@@ -59,23 +60,41 @@ const Screening = props => {
     if (hideSurrounding) {
       hideSiteContainers();
     }
-
     // let isAddressSelected = typeof selected !== "undefined" || selected !== null;
   }, [name, email, phoneNumber]);
 
+  /**
+   * Skip the screening form if their data is stored in the session.
+   */
   useEffect(() => {
     const phoneInputElement = document.getElementById('phoneNumber');
     phoneInputElement.addEventListener('keydown', enforceFormat);
     phoneInputElement.addEventListener('keyup', formatToPhone);
   }, [phoneNumber])
 
+  useEffect(() => {
+    const name = window.sessionStorage.getItem('name')
+    const email = window.sessionStorage.getItem('email')
+    const phone = window.sessionStorage.getItem('phone')
+    const cacheExists = name !== null || email !== null || phone !== null
+    if (cacheExists) {
+      setShowRecommendation(true)
+    }
+  })
+
   /**
    * Adds the screening data to firebase.
+   * Sends email notifcation when new nffuser entry is added to firebase.
    */
   const addNffUser = async (collection, setObj) => {
+    const { name, email, phone } = setObj
     await firebase.doFirestoreAdd(collection, setObj).then(() => {
       setShowRecommendation(true);
-      firebase.doSendEmailNotification(setObj);
+      // Temporary store the screening entries with the session.
+      window.sessionStorage.setItem("name", `${name}`)
+      window.sessionStorage.setItem("email", `${email}`)
+      window.sessionStorage.setItem("phone", `${phone}`)
+      // firebase.doSendEmailNotification(setObj);
     })
   };
 
@@ -86,6 +105,7 @@ const Screening = props => {
     const { phoneNumber, email, name } = e
     console.log('length: ', phoneNumber.length)
     let phone = normalizePhoneNumber(phoneNumber)
+    setNffUserData({ name, email, phone })
     const nffUser = { name, email, phone };
     addNffUser("nff_users", nffUser);
   }

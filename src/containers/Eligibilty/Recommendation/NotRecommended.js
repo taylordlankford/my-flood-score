@@ -29,8 +29,7 @@ const NotRecommended = props => {
     <div>
       <div style={{ paddingBottom: "40px" }}>
         <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
-          It is not recommended to pursue a Letter of Map Amendment for this
-          property
+          Congratulations, this property is in a low risk flood zone. It is not recommended to pursue a Letter of Map Amendment for this property
         </h3>
       </div>
       <Row lg={12} style={{ paddingTop: "20px" }}>

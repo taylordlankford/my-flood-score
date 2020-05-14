@@ -3,8 +3,11 @@ import { FaCheck } from "react-icons/fa";
 import styled from "styled-components";
 
 const InfoBox = (props) => {
-  const { selectedAddress, propertyData, suggestion, basisOfDetermination } = props
-  { console.log('NA: ', basisOfDetermination) }
+  const { 
+    selectedAddress, 
+    propertyData, 
+    suggestion, 
+    basisOfDetermination } = props
 
   return (
     <InfoBoxWrapper>
@@ -19,7 +22,7 @@ const InfoBox = (props) => {
       <div>
         <FaCheck />
         <span style={{ fontWeight: "700", fontSize: "18px", marginRight: "20px" }}>
-          FEMA Flood Zone
+          FEMA Flood Zone:
         </span>
         <span style={{ fontWeight: "500" }}>
           {propertyData.FEMA_ZONE}
@@ -54,6 +57,8 @@ const InfoBox = (props) => {
   );
 };
 
+export default InfoBox;
+
 const InfoBoxWrapper = styled.div`
   padding-bottom: 20px;
   padding-top: 20px;
@@ -66,5 +71,3 @@ const BasisOfDetermination = styled.div`
   grid-gap: 4px;
   padding-left: 40px;
 `
-
-export default InfoBox;
