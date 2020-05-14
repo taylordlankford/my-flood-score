@@ -1,7 +1,11 @@
 /* eslint-disable promise/no-nesting */
-const functions = require('firebase-functions');
+const functions = require('firebase-functions')
 const stripe = require('stripe')('sk_test_M0Jraaox3nxaCBqlPMEwC4pk')
 const endpointSecret = 'whsec_t52NtsSu7255jYT9BnQVnui6qnkLPzMt'
+const nodemailer = require('nodemailer')
+const smtpTransport = require('nodemailer-smtp-transport')
+
+require('dotenv').config()
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -74,7 +78,7 @@ const getNewInventory = (inventory, order) => {
     let quantAdded = false
     for (let j = 0; j < inventory.length; j++) {
       const inven = inventory[j]
-      if (orderedItem.categoryId === inven.categoryId ) {
+      if (orderedItem.categoryId === inven.categoryId) {
         inventory[j].quantity = inven.quantity + (orderedItem.quantity * orderedItem.numInventory)
         quantAdded = true
         break
@@ -105,7 +109,7 @@ const addUser = (data, context) => {
   return properties.get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-          userDetails.propertyRef = propertiesRef.doc(doc.id)
+        userDetails.propertyRef = propertiesRef.doc(doc.id)
       })
       // eslint-disable-next-line promise/no-nesting
       return admin.firestore().collection("users").doc(uid).set(
@@ -157,7 +161,7 @@ const paymentIntentSucceeded = async (request, response) => {
       }
       // check if user already a customer or needs to be created
       const userRef = admin.firestore().collection("users").doc(paymentIntent.metadata.uid)
-      userRef.get().then( async (doc) => {
+      userRef.get().then(async (doc) => {
         if (doc.exists) {
           const data = doc.data()
           console.log('Document data:', data)
@@ -231,7 +235,7 @@ const paymentIntentSucceeded = async (request, response) => {
           return
         }
       }).catch((error) => {
-          console.log("Error getting document:", error);
+        console.log("Error getting document:", error);
       })
       break;
     }
@@ -272,10 +276,10 @@ const invoicePaymentSucceeded = async (request, response) => {
         order.items.push(newObj)
       })
       console.log('order:', order)
-      const { uid } =  invoice.lines.data[0].metadata
+      const { uid } = invoice.lines.data[0].metadata
       console.log('uid', uid)
       const userRef = admin.firestore().collection("users").doc(uid)
-      userRef.get().then( async (doc) => {
+      userRef.get().then(async (doc) => {
         if (doc.exists) {
           const data = doc.data()
           console.log('Document data:', data)
@@ -291,9 +295,9 @@ const invoicePaymentSucceeded = async (request, response) => {
           return 'doc not found'
         }
       })
-      .catch((error => {
-        console.log('userReg.get error', error)
-      }))
+        .catch((error => {
+          console.log('userReg.get error', error)
+        }))
       break
     }
     case 'invoice.payment_failed': {
@@ -320,7 +324,7 @@ const createCustomer = (data, context) => {
       await userRef.set({
         customerId: cus.id,
       }, { merge: true })
-      .catch((error) => { console.log('error:', error) })
+        .catch((error) => { console.log('error:', error) })
       return cus
     } catch (err) {
       console.log('creating customer error:', err)
@@ -467,18 +471,88 @@ const deleteCustomer = async (data, context) => {
   });
 }
 
-exports.addUser = functions.https.onCall(addUser)
-exports.createPaymentIntent = functions.https.onCall(createPaymentIntent)
-exports.createSubscription = functions.https.onCall(createSubscription)
-exports.getSubscriptions = functions.https.onCall(getSubscriptions)
-exports.cancelSubscription = functions.https.onCall(cancelSubscription)
-exports.getPaymentMethod = functions.https.onCall(getPaymentMethod)
-exports.getPaymentMethods = functions.https.onCall(getPaymentMethods)
-exports.attachPaymentMethod = functions.https.onCall(attachPaymentMethod)
-exports.detatchPaymentMethod = functions.https.onCall(detatchPaymentMethod)
-exports.createCustomer = functions.https.onCall(createCustomer)
-exports.getCustomer = functions.https.onCall(getCustomer)
-exports.deleteCustomer = functions.https.onCall(deleteCustomer)
+/**
+ * Email notifcation for new screening data.
+ */
+const sendEmailNotification = async (nffUser) => {
+  const { name, email, phone } = nffUser
+  const htmlBody = `
+  <html>
+    <div class="global-wrapper">
+      <div class="header">
+        <h1>NoFloodFlorida</h1>
+      </div>
+      <div class="body">
+        <div>
+          <h3>New nff screening entry</h3>
+        </div>
+        <div>
+          <strong>name: </strong>${name}
+        </div>
+        <div>
+          <strong>email: </strong>${email}
+        </div>
+        <div>
+          <strong>phone: </strong>${phone}
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .global-wrapper {
+      }
+
+      .header {
+        margin: 0 auto;
+        width: 100%;
+        padding: 20px;
+      }
+
+      .body {
+        margin: 0 auto;
+        width: 100%; 
+        height: 100%;
+        padding: 20px;
+      }
+    </style>
+  </html>
+  `
+
+  const API_KEY = process.env.API_KEY
+  const SENDER_EMAIL = process.env.SENDER_EMAIL
+  const RECEIVER_EMAIL = process.env.RECEIVER_EMAIL
+  const DOMAIN = process.env.DOMAIN
+  const mailgun = require("mailgun-js");
+  const mg = mailgun({ apiKey: API_KEY, domain: DOMAIN });
+  const data = {
+    from: SENDER_EMAIL,
+    to: RECEIVER_EMAIL,
+    subject: 'New screening submission entry.',
+    text: 'New screening submission entry.',
+    html: htmlBody,
+  };
+
+  mg.messages().send(data, (error, body) => {
+    console.log(body);
+  });
+}
+
+/**
+ * Exports
+ */
+exports.sendEmailNotification              = functions.https.onCall(sendEmailNotification)
+exports.addUser                            = functions.https.onCall(addUser)
+exports.createPaymentIntent                = functions.https.onCall(createPaymentIntent)
+exports.createSubscription                 = functions.https.onCall(createSubscription)
+exports.getSubscriptions                   = functions.https.onCall(getSubscriptions)
+exports.cancelSubscription                 = functions.https.onCall(cancelSubscription)
+exports.getPaymentMethod                   = functions.https.onCall(getPaymentMethod)
+exports.getPaymentMethods                  = functions.https.onCall(getPaymentMethods)
+exports.attachPaymentMethod                = functions.https.onCall(attachPaymentMethod)
+exports.detatchPaymentMethod               = functions.https.onCall(detatchPaymentMethod)
+exports.createCustomer                     = functions.https.onCall(createCustomer)
+exports.getCustomer                        = functions.https.onCall(getCustomer)
+exports.deleteCustomer                     = functions.https.onCall(deleteCustomer)
 exports.updateCustomerDefaultPaymentMethod = functions.https.onCall(updateCustomerDefaultPaymentMethod)
-exports.paymentIntentSucceeded = functions.https.onRequest(paymentIntentSucceeded)
-exports.invoicePaymentSucceeded = functions.https.onRequest(invoicePaymentSucceeded)
+exports.paymentIntentSucceeded             = functions.https.onRequest(paymentIntentSucceeded)
+exports.invoicePaymentSucceeded            = functions.https.onRequest(invoicePaymentSucceeded)

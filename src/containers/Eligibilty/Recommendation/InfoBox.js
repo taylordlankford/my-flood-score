@@ -8,7 +8,7 @@ const InfoBox = (props) => {
 
   return (
     <InfoBoxWrapper>
-      {console.log('PROPERTY DATA => ', propertyData)}
+      {/* console.log('PROPERTY DATA => ', propertyData) */}
       <div>
         <FaCheck />
         <span style={{ fontWeight: "700", fontSize: "18px", marginRight: "20px" }}>
