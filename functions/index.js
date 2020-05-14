@@ -1,15 +1,11 @@
 /* eslint-disable promise/no-nesting */
-const functions = require('firebase-functions')
+const functions = require('firebase-functions');
 const stripe = require('stripe')('sk_test_M0Jraaox3nxaCBqlPMEwC4pk')
 const endpointSecret = 'whsec_t52NtsSu7255jYT9BnQVnui6qnkLPzMt'
-const nodemailer = require('nodemailer')
-const smtpTransport = require('nodemailer-smtp-transport')
-
-const cors = require('cors')({ origin: true });
+const nodemailer = require('nodemailer');
 
 require('dotenv').config()
-
-// const { SENDER_EMAIL, SENDER_PASSWORD } = process.env
+const { SENDER_EMAIL, SENDER_PASSWORD } = process.env
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -478,30 +474,31 @@ const deleteCustomer = async (data, context) => {
 /**
  * Email notifcation for new screening data.
  */
-const sendEmailNotification = async () => {
-  const { SENDER_EMAIL, SENDER_PASSWORD } = process.env
-  const sesAccessKey                      = SENDER_EMAIL;
-  const sesSecretKey                      = SENDER_PASSWORD;
 
-  let transporter = nodemailer.createTransport(smtpTransport({
-    host: 'smtp.gmail.com',
+// async..await is not allowed in global scope, must use a wrapper
+const sendEmailNotification = async () => {
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+  let testAccount = await nodemailer.createTestAccount()
+
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
     port: 587,
-    service: 'gmail',
-    secure: true,
-    pool: true,
+    secure: false, // true for 465, false for other ports
     auth: {
-      user: sesAccessKey,
-      pass: sesSecretKey
+      user: testAccount.user, // generated ethereal user
+      pass: testAccount.pass // generated ethereal password
     }
-  }));
+  })
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"Test MFS" <kowitdev@gmail.com>', // sender address
-    to: "kowitkarunas@gmail.com", // list of receivers
-    subject: "Test Email from kowitdev", // Subject line
+    from: '"Test MFS" <foo@example.com>', // sender address
+    to: "bar@example.com, baz@example.com", // list of receivers
+    subject: "New screening entry.", // Subject line
     text: "Someone new has entered their information.", // plain text body
-    html: "<b>Someone new has entered their information.</b>"
+    html: "<b>Someone new has entered their information.</b>", // html body
   })
 
   console.log("Message sent: %s", info.messageId);
@@ -510,23 +507,21 @@ const sendEmailNotification = async () => {
   // => Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // => Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-
-  transporter.close()
 }
 
-exports.sendEmailNotification              = functions.https.onCall(sendEmailNotification)
-exports.addUser                            = functions.https.onCall(addUser)
-exports.createPaymentIntent                = functions.https.onCall(createPaymentIntent)
-exports.createSubscription                 = functions.https.onCall(createSubscription)
-exports.getSubscriptions                   = functions.https.onCall(getSubscriptions)
-exports.cancelSubscription                 = functions.https.onCall(cancelSubscription)
-exports.getPaymentMethod                   = functions.https.onCall(getPaymentMethod)
-exports.getPaymentMethods                  = functions.https.onCall(getPaymentMethods)
-exports.attachPaymentMethod                = functions.https.onCall(attachPaymentMethod)
-exports.detatchPaymentMethod               = functions.https.onCall(detatchPaymentMethod)
-exports.createCustomer                     = functions.https.onCall(createCustomer)
-exports.getCustomer                        = functions.https.onCall(getCustomer)
-exports.deleteCustomer                     = functions.https.onCall(deleteCustomer)
+exports.sendEmailNotification = functions.https.onCall(sendEmailNotification)
+exports.addUser = functions.https.onCall(addUser)
+exports.createPaymentIntent = functions.https.onCall(createPaymentIntent)
+exports.createSubscription = functions.https.onCall(createSubscription)
+exports.getSubscriptions = functions.https.onCall(getSubscriptions)
+exports.cancelSubscription = functions.https.onCall(cancelSubscription)
+exports.getPaymentMethod = functions.https.onCall(getPaymentMethod)
+exports.getPaymentMethods = functions.https.onCall(getPaymentMethods)
+exports.attachPaymentMethod = functions.https.onCall(attachPaymentMethod)
+exports.detatchPaymentMethod = functions.https.onCall(detatchPaymentMethod)
+exports.createCustomer = functions.https.onCall(createCustomer)
+exports.getCustomer = functions.https.onCall(getCustomer)
+exports.deleteCustomer = functions.https.onCall(deleteCustomer)
 exports.updateCustomerDefaultPaymentMethod = functions.https.onCall(updateCustomerDefaultPaymentMethod)
-exports.paymentIntentSucceeded             = functions.https.onRequest(paymentIntentSucceeded)
-exports.invoicePaymentSucceeded            = functions.https.onRequest(invoicePaymentSucceeded)
+exports.paymentIntentSucceeded = functions.https.onRequest(paymentIntentSucceeded)
+exports.invoicePaymentSucceeded = functions.https.onRequest(invoicePaymentSucceeded)
