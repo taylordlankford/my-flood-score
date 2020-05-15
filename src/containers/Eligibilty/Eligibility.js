@@ -4,10 +4,12 @@ import { useDomains } from "./eligibility-hooks";
 
 /* Styles */
 import "./styles.css";
-import { Parallax } from "react-parallax";
+// import { Parallax } from "react-parallax";
 // import BgImg from "../../assets/images/nff-bg-image.jpg";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 import {
   ParallaxWrapper,
   ParallaxContainer,
@@ -22,6 +24,7 @@ import {
 import AutoSuggest from "../../components/AutoSuggest/AutoSuggest";
 import Screening from "./Screening/Screening";
 import Recommendation from "./Recommendation/Recommendation";
+import ContactUsForm from "./ContactUsForm"
 import { hideSiteContainers } from "./helpers";
 
 const Eligibility = () => {
@@ -34,6 +37,8 @@ const Eligibility = () => {
   const [showRecommendation, setShowRecommendation] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState("");
   const [selectedCounty, setSelectedCounty] = useState(null);
+  const [showContactModal, setShowContactModal] = useState(false)
+
 
   useEffect(() => {
     let hideSurrounding = window.location.href === pubDomain || window.location.href === devDomain;
@@ -48,6 +53,14 @@ const Eligibility = () => {
     { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }
   ) => {
     setSelectedAddress(suggestion);
+  }
+
+  function handleCloseContactForm() {
+    console.log('hanlde close')
+    setShowContactModal(false)
+  }
+  function handleShowContactForm() {
+    setShowContactModal(true)
   }
 
   function updateParentCountyState(county) {
@@ -86,16 +99,29 @@ const Eligibility = () => {
         firebase={firebase}
         handleOnClick={handleOnClick}
         selectedCounty={selectedCounty}
+        showContactModal={showContactModal}
+        handleShowContactForm={handleShowContactForm}
+        handleCloseContactForm={handleCloseContactForm}
       />
     );
   }
 };
 
 const IFrameLanding = props => {
-  const { onSuggestionSelected, updateParentCountyState, firebase, handleOnClick } = props
+  const {
+    onSuggestionSelected,
+    updateParentCountyState,
+    firebase,
+    handleOnClick,
+    showContactModal,
+    handleShowContactForm,
+    handleCloseContactForm,
+  } = props
+  
+
   return (
     <ParallaxWrapper>
-      <Parallax contentClassName="parallax-bg" strength={200}>
+      <div className="parallax-bg"> {/* removed Parallax because for some reason modal would not work */}
         <ParallaxContainer>
           <MainTitle>
             Best Available Technology <br /> & Flood Risk Models
@@ -135,16 +161,16 @@ const IFrameLanding = props => {
                 </Col> */}
             </Row>
           </div>
-          );
           <HeaderContainer>
-            <p style={{ margin: "-20px auto", maxWidth: "720px" }}>
-              Can’t find your property?{" "}
-              <u style={{ color: "#007bff" }}>Contact us</u> for a custom
-              screening.
-            </p>
-          </HeaderContainer>
+          <p style={{ margin: "-20px auto", maxWidth: "720px" }}>
+            Can’t find your property?{" "}
+            <u style={{ color: "#007bff", cursor: 'pointer' }} onClick={handleShowContactForm}>Contact us</u> for a custom
+            screening.
+          </p>
+          <ContactUsForm show={showContactModal} handleClose={handleCloseContactForm} firebase={firebase} />
+        </HeaderContainer>
         </ParallaxContainer>
-      </Parallax>
+      </div>
     </ParallaxWrapper>
   );
 };

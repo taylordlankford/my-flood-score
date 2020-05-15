@@ -55,7 +55,7 @@ import './App.css'
 import styled from "styled-components";
 
 const App = () => {
-  const [{ user, error }, dispatch] = useStateValue()
+  const [{ user, error, successMessage }, dispatch] = useStateValue()
   const userData = useFirestoreUser()
   const { firestoreUser, loading } = userData
 
@@ -71,7 +71,8 @@ const App = () => {
     <Router>
       <ScrollToTopWithRouter>
         <Header firestoreUser={firestoreUser} loading={loading} />
-        {error && <Alert className="sticky error" variant={'danger'}>{error}</Alert>}
+        {error && <Alert className="sticky error" variant='danger'>{error}</Alert>}
+        {successMessage && <Alert className="sticky error" variant='success' onClose={() => dispatch({ type: 'changeSuccessMessage', successMessage: null })} dismissible>{successMessage}</Alert>}
 
         <Route
           render={({ location }) => (

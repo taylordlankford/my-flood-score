@@ -3,6 +3,7 @@ export const initialState = {
   theme: { primary: 'green' },
   user: null,
   error: null,
+  successMessage: null,
 }
 
 const StateReducer = (state, action) => {
@@ -21,6 +22,11 @@ const StateReducer = (state, action) => {
       return {
         ...state,
         error: action.newError
+      }
+    case 'changeSuccessMessage':
+      return {
+        ...state,
+        successMessage: action.newSuccessMessage
       }
       
     default:
