@@ -65,6 +65,7 @@ class AutoSuggest extends React.Component {
       selectedCounty: '',
       loadingCountyOptions: true,
       loadingCounty: false,
+      statsMap: {},
     };
   }
 
@@ -82,11 +83,14 @@ class AutoSuggest extends React.Component {
     .get()
     .then((querySnapshot) => {
         const countyOptions = [{ value: '', label: 'Select Your County...' }]
+        const statsMap = {}
         querySnapshot.forEach(function(doc) {
-            const { label } = doc.data()
+            const countyData = doc.data()
+            const { label } = countyData
             countyOptions.push({ value: doc.id, label: label ? label : doc.id })
+            statsMap[doc.id] = countyData
         })
-        this.setState({ countyOptions, loadingCountyOptions: false })
+        this.setState({ countyOptions, statsMap, loadingCountyOptions: false })
     })
     .catch(function(error) {
         console.log("Error getting documents: ", error);
@@ -132,8 +136,10 @@ class AutoSuggest extends React.Component {
       return
     }
     this.setState({ loadingCounty: true, selectedCounty: county })
-    this.props.firebase.db.collection('properties').doc('Florida')
+    const countyRef = this.props.firebase.db.collection('properties').doc('Florida')
       .collection('counties').doc(county)
+    
+    countyRef
       .collection('zipCodes')
       .get()
       .then((querySnapshot) => {
@@ -167,15 +173,27 @@ class AutoSuggest extends React.Component {
       selectedCounty,
       loadingCounty,
       loadingCountyOptions,
+      statsMap,
     } = this.state
     const {
       countySelectStyles,
       countyStartingValue,
       showProceedButton,
       handleProceedButton,
+      showStats,
     } = this.props
 
-    // Autosuggest will pass through all these props to the input.
+    let PropertiesCount = ''
+    let highMedLOMA = ''
+    try {
+      // set these stats if we have values
+      ({ PropertiesCount, highMedLOMA } = statsMap[selectedCounty])
+      // add commas
+      PropertiesCount = PropertiesCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      highMedLOMA = highMedLOMA.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    } catch (err) {} // nothing to catch
+
+    // Autosuggest will pass all these props to the input.
     const inputProps = {
       placeholder: 'Enter your address',
       value,
@@ -243,12 +261,42 @@ class AutoSuggest extends React.Component {
             </IframeSearchBtn>
           </div>
         )}
+        {showStats && selectedCounty && !loadingCounty && PropertiesCount && highMedLOMA &&
+          <StatisticsDiv>
+            <p><span>{PropertiesCount}</span> Properties Analyzed</p>
+            <p><span>{highMedLOMA}</span> LOMA Opportunities!</p>
+          </StatisticsDiv>
+        }
       </>
     );
   }
 }
 
 export default AutoSuggest
+
+export const StatisticsDiv = styled.div`
+  color: white;
+  font-weight: bold;
+  margin-top: 25px;
+  margin-bottom: -25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  ${'span'} {
+    color: #C7AE4A;
+    animation: fadeInAnimation ease 1s 
+    animation-iteration-count: 1; 
+    animation-fill-mode: forwards; 
+    @keyframes fadeInAnimation { 
+    0% { 
+        opacity: 0; 
+    } 
+    100% { 
+        opacity: 1; 
+     } 
+    }
+  }
+`
 
 export const IframeSearchBtn = styled.button`
   &,
