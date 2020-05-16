@@ -9,21 +9,24 @@ import RecommendationFooter from "./RecommendationFooter";
 
 const NotRecommended = props => {
   const { LOMARating, LOMACategory, selectedAddress, propertyData } = props;
-  const [basisOfDetermination, setBasisOfDetermination] = useState([
+  const [basisOfDetermination] = useState([
     {
       id: 1,
       info: "FEMA considers this property to be in a low risk flood zone, an area of minimal flooding."
     },
     {
       id: 2,
-      info: "Flood insurance for this property would most likely NOT be required."
+      info: "Best Available floodplain modeling considers this as a HIGH-RISK property"
     },
     {
       id: 3,
+      info: "Flood insurance for this property would most likely NOT be required."
+    },
+    {
+      id: 4,
       info: "There is no benefit to submitting a Letter of Map Amendment."
     }
   ])
-
 
   return (
     <div>
@@ -42,6 +45,7 @@ const NotRecommended = props => {
               <S.NotRecommendedBlock>Not Recommended</S.NotRecommendedBlock>
             </div>
             <InfoBox
+              LOMARating={LOMARating}
               selectedAddress={selectedAddress}
               propertyData={propertyData}
               suggestion="N/A"

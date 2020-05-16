@@ -1,13 +1,17 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa";
 import styled from "styled-components";
+import LikelihoodAnalysis from "./LikelihoodAnalysis/LikelihoodAnalysis.js"
+import BasisOfDetermination from "./BasisOfDetermination/BasisOfDetermination"
 
 const InfoBox = (props) => {
   const { 
+    LOMARating,
     selectedAddress, 
     propertyData, 
     suggestion, 
-    basisOfDetermination } = props
+    basisOfDetermination 
+  } = props
 
   return (
     <InfoBoxWrapper>
@@ -31,10 +35,15 @@ const InfoBox = (props) => {
       </div>
       <div>
         <FaCheck />
+        <LikelihoodAnalysis propertyData={propertyData} LOMARating={LOMARating} suggestion={suggestion} />
+        {/*
         <span style={{ fontWeight: "700", fontSize: "18px", marginRight: "20px" }}>
           Likelihood you are wrongly mapped:
         </span>
-        <span style={{ fontWeight: "500" }}>{suggestion}</span>
+        <span style={{ fontWeight: "500" }}>
+          {suggestion === 'N/A' ? <>Not Recommended</> : <>{suggestion}</> }
+        </span>
+        */}
       </div>
       <div>
         <FaCheck />
@@ -42,7 +51,10 @@ const InfoBox = (props) => {
           Basis of this determination:
         </span>
       </div>
-      <BasisOfDetermination>
+      <CompareFemaZoneToBaFldZoneS propertyData={propertyData} />
+      <BasisOfDetermination basisOfDetermination={basisOfDetermination} />
+      {/*
+      <StyledBasisOfDetermination>
         {basisOfDetermination.map((item, idx) => (
           <div key={idx}>
             <FaCheck />
@@ -52,10 +64,26 @@ const InfoBox = (props) => {
           </div>
         ))
         }
-      </BasisOfDetermination>
+      </StyledBasisOfDetermination>
+      */}
     </InfoBoxWrapper>
   );
 };
+
+const CompareFemaZoneToBaFldZoneS = ({ propertyData }) => {
+  const { BA_FLDZONE_S, LOMA } = propertyData
+  const baFldZoneS = parseInt(BA_FLDZONE_S)
+  const loma = parseInt(LOMA)
+
+  console.log('loma ===> ', loma)
+  console.log('baFldZoneS ===> ', baFldZoneS)
+
+  if (loma === 0 && baFldZoneS <= 3) {
+    return "HIGH, property at greater risk than stated by FEMA."
+  } else {
+    return ""
+  }
+}
 
 export default InfoBox;
 
@@ -66,7 +94,7 @@ const InfoBoxWrapper = styled.div`
   grid-gap: 20px;
 `;
 
-const BasisOfDetermination = styled.div`
+const StyledBasisOfDetermination = styled.div`
   display: grid;
   grid-gap: 4px;
   padding-left: 40px;

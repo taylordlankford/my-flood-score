@@ -2,8 +2,6 @@
 const functions = require('firebase-functions')
 const stripe = require('stripe')('sk_test_M0Jraaox3nxaCBqlPMEwC4pk')
 const endpointSecret = 'whsec_t52NtsSu7255jYT9BnQVnui6qnkLPzMt'
-const nodemailer = require('nodemailer')
-const smtpTransport = require('nodemailer-smtp-transport')
 
 require('dotenv').config()
 
@@ -474,6 +472,21 @@ const deleteCustomer = async (data, context) => {
 /**
  * Email notifcation for new screening data.
  */
+const sendEmailNotification = async () => {
+  console.log('Send email notifcation function triggered.')
+
+  // eslint-disable-next-line promise/catch-or-return
+  admin.firestore().collection('nffUsersEmails').add({
+    to: 'kowitkarunas@gmail.com',
+    message: {
+      subject: 'Hello from Firebase!',
+      text: 'This is the plaintext section of the email body.',
+      html: 'This is the <code>HTML</code> section of the email body.',
+  }
+  }).then(() => console.log('Queued email for delivery!'));
+}
+
+/*
 const sendEmailNotification = async (nffUser) => {
   const { name, email, phone } = nffUser
   const htmlBody = `
@@ -536,6 +549,7 @@ const sendEmailNotification = async (nffUser) => {
     console.log(body);
   });
 }
+*/
 
 /**
  * Exports

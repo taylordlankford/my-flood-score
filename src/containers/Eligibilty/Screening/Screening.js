@@ -72,6 +72,11 @@ const Screening = props => {
     phoneInputElement.addEventListener('keyup', formatToPhone);
   }, [phoneNumber])
 
+  /**
+   * Check if cache exist in the session storage. If it exists, we don't need
+   * them to refill out the form. Set setShowRecommendation to true skip to
+   * proceed to recommendations.
+   */
   useEffect(() => {
     const name = window.sessionStorage.getItem('name')
     const email = window.sessionStorage.getItem('email')
@@ -89,12 +94,12 @@ const Screening = props => {
   const addNffUser = async (collection, setObj) => {
     const { name, email, phone } = setObj
     await firebase.doFirestoreAdd(collection, setObj).then(() => {
-      setShowRecommendation(true);
       // Temporary store the screening entries with the session.
       window.sessionStorage.setItem("name", `${name}`)
       window.sessionStorage.setItem("email", `${email}`)
       window.sessionStorage.setItem("phone", `${phone}`)
       // firebase.doSendEmailNotification(setObj);
+      setShowRecommendation(true);
     })
   };
 
@@ -107,6 +112,8 @@ const Screening = props => {
     let phone = normalizePhoneNumber(phoneNumber)
     setNffUserData({ name, email, phone })
     const nffUser = { name, email, phone };
+    console.table(nffUser)
+    // addNffUser("nff_users", nffUser);
     addNffUser("nff_users", nffUser);
   }
 

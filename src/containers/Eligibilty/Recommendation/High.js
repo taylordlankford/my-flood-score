@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { ResultsContainer } from "./StyledComponents";
 import styled from "styled-components";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 import CategoryPills from "./CategoryPills";
 import InfoBox from "./InfoBox";
 import ImgLightbox from "./ImgLightbox";
@@ -56,6 +54,7 @@ const High = props => {
             <ResultsContainer>
               <CategoryPills LOMARating={LOMARating} />
               <InfoBox
+                LOMARating={LOMARating}
                 selectedAddress={selectedAddress}
                 propertyData={propertyData}
                 suggestion="High"
@@ -68,43 +67,8 @@ const High = props => {
           </Col>
           <Col lg={6}>
             <FloodRiskMap imgUrl={imgUrl} setModalShow={setModalShow} />
-            {/* <SearchAnotherProperty /> */}
           </Col>
         </Row>
-        {/*
-        <Row lg={12} style={{ paddingTop: "40px" }}>
-          <Col lg={6}>
-            <div style={{ textAlign: "center" }}>
-              <a
-                href="https://www.nofloodflorida.com/orderloma/"
-                rel="noopener noreferrer"
-                target="_top"
-              >
-                <Button>Finalize LOMA Request</Button>
-              </a>
-            </div>
-          </Col>
-          <Col lg={6}></Col>
-        </Row>
-        */}
-        {/*
-        <Row lg={12}>
-          <Col lg={6}>
-            <div style={{ textAlign: "center", paddingTop: "20px" }}>
-              <a
-                href="https://www.nofloodflorida.com/orderloma/"
-                rel="noopener noreferrer"
-                target="_top"
-              >
-                <Button>Finalize LOMA Request</Button>
-              </a>
-            </div>
-          </Col>
-          <Col lg={6}>
-            <SearchAnotherProperty />
-          </Col>
-        </Row>
-        */}
         <BottomMenu />
         <RecommendationFooter />
       </HighWrapper>

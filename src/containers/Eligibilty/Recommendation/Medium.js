@@ -53,6 +53,7 @@ const Medium = props => {
             <S.ResultsContainer>
               <CategoryPills LOMARating={LOMARating} />
               <InfoBox
+                LOMARating={LOMARating}
                 selectedAddress={selectedAddress}
                 propertyData={propertyData}
                 suggestion="Medium"

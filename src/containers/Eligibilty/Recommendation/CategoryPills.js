@@ -8,13 +8,13 @@ import Col from "react-bootstrap/Col";
 const CategoryPills = ({ LOMARating }) => {
   const getLOMARecommendation = LOMARating => {
     switch (LOMARating) {
-      case 0:
+      case "0":
         return "n/a";
-      case 1:
+      case "1":
         return "Low";
-      case 2:
+      case "2":
         return "Medium";
-      case 3:
+      case "3":
         return "High";
       default: {
         return "n/a";

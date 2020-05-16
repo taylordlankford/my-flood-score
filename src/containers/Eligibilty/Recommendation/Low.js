@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
@@ -14,13 +14,36 @@ const Low = props => {
   const [basisOfDetermination, setBasisOfDetermination] = useState([
     {
       id: 1,
-      info: "FEMA considers this property to be in a high risk flood zone."
+      info: "FEMA considers this property to be in a low risk flood zone."
     },
     {
       id: 2,
       info: "The elevation of your property appears to be below the flood elevation."
+    },
+    {
+      id: 3,
+      info: "Best available floodplain modeling agrees with effective FEMA data" 
     }
   ])
+
+  /**
+   * If the designation remains low (both FEMA_ZONE and BA_FLDZONE_S are low
+   * categories), an additional statement should then be added to the Basis of
+   * this determination, “Best available floodplain modeling agrees with
+   * effective FEMA data
+   */
+  useEffect(() => {
+    const { LOMA, BA_FLDZONE_S } = propertyData;
+    const lomaRating = parseInt(LOMA);
+    const baFldZoneS = parseInt(BA_FLDZONE_S);
+
+    if (lomaRating === 0 && baFldZoneS === 4) {
+      const designationData = { id: 4, info: "Best available floodplain modeling agrees with effective FEMA data" }
+      let newBasisOfDet = basisOfDetermination;
+      newBasisOfDet.push(designationData)
+      setBasisOfDetermination(newBasisOfDet)
+    }
+  }, [basisOfDetermination])
 
   return (
     <>
@@ -38,6 +61,7 @@ const Low = props => {
           <S.ResultsContainer>
             <CategoryPills LOMARating={LOMARating} />
             <InfoBox
+              LOMARating={LOMARating}
               selectedAddress={selectedAddress}
               propertyData={propertyData}
               suggestion="Low"
