@@ -17,8 +17,22 @@ const ContactUsForm = (props) => {
       responses[e.name] = e.value
     }
     responses.timestamp = new Date()
-    console.log('responses', responses)
-    firebase.doFirestoreAdd('contactForm', responses, handleSuccess)
+    const contactFormMessageObj = {
+      to: 'kowitkarunas@gmail.com',
+      template: {
+        name: 'contactFormTemplate',
+        data: {
+          ...responses,
+        }
+      }
+    }
+    // responses.message = {
+    //   text: 'hi',
+    //   subject: 'New Contact Form Submission',
+    //   html: 'hi',
+    // }
+    console.log('contactFormMessageObj:', contactFormMessageObj)
+    firebase.doFirestoreAdd('contactForm', contactFormMessageObj, handleSuccess)
   }
 
   const handleSuccess = () => {
