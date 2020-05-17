@@ -1,8 +1,6 @@
 import React from 'react'
 import * as S from './StyledComponents'
 import { FaCheck } from 'react-icons/fa'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 const Faq = () => {
   return (

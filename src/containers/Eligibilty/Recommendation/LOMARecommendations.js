@@ -1,12 +1,11 @@
 import React from "react";
-import Faq from "./Faq";
-import High from "./High";
+import High from "./High/High";
 import Medium from "./Medium";
-import Low from "./Low";
-import NotRecommended from "./NotRecommended";
+import Low from "./Low/Low";
+import NotRecommended from "./NotRecommended/NotRecommended";
 
 /**
- * Render different descriptions based on category.
+ * Render different descriptions based on LOMA Rating.
  */
 const LOMARecommendations = props => {
   const { LOMARating } = props;
@@ -14,7 +13,7 @@ const LOMARecommendations = props => {
     case '0':
       return <NotRecommended {...props} />;
     case 0:
-    return <NotRecommended {...props} />;
+      return <NotRecommended {...props} />;
     case '1':
       return <Low {...props} />;
     case 1:

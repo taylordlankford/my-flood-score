@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { ResultsContainer } from "./StyledComponents";
+import { ResultsContainer } from "../StyledComponents";
 import styled from "styled-components";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import CategoryPills from "./CategoryPills";
+import CategoryPills from "../CategoryPills";
 import InfoBox from "./InfoBox";
-import ImgLightbox from "./ImgLightbox";
-import RecommendationFooter from "./RecommendationFooter";
-import FloodRiskMap from "./FloodRiskMap";
+import ImgLightbox from "../ImgLightbox";
+import RecommendationFooter from "../RecommendationFooter";
+import FloodRiskMap from "../FloodRiskMap";
+import BottomMenu from "../BottomMenu/BottomMenu";
 
 const High = props => {
   const {
@@ -43,7 +42,7 @@ const High = props => {
       <HighWrapper>
         <div style={{ paddingBottom: "40px" }}>
           <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
-            CONGRATULATIONS! This property has a “High” likelihood of benefiting
+            CONGRATULATIONS! <br />This property has a “High” likelihood of benefiting
             from a Letter of Map Amendment.
           </h3>
         </div>
@@ -55,6 +54,7 @@ const High = props => {
             <ResultsContainer>
               <CategoryPills LOMARating={LOMARating} />
               <InfoBox
+                LOMARating={LOMARating}
                 selectedAddress={selectedAddress}
                 propertyData={propertyData}
                 suggestion="High"
@@ -69,20 +69,7 @@ const High = props => {
             <FloodRiskMap imgUrl={imgUrl} setModalShow={setModalShow} />
           </Col>
         </Row>
-        <Row lg={12} style={{ paddingTop: "40px" }}>
-          <Col lg={6}>
-            <div style={{ textAlign: "center" }}>
-              <a
-                href="https://www.nofloodflorida.com/orderloma/"
-                rel="noopener noreferrer"
-                target="_top"
-              >
-                <Button>Finalize LOMA Request</Button>
-              </a>
-            </div>
-          </Col>
-          <Col lg={6}></Col>
-        </Row>
+        <BottomMenu />
         <RecommendationFooter />
       </HighWrapper>
     </>
