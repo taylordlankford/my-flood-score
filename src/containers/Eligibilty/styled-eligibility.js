@@ -4,7 +4,7 @@ import styled from 'styled-components'
  * Styled Components
  */
 
-export const SubtitleLink = styled.a`
+export const SubtitleEmphasis = styled.span`
  font-weight: 700;
  color: #C7AE4A;
 `

@@ -15,7 +15,7 @@ import {
   ParallaxContainer,
   MainTitle,
   Subtitle,
-  SubtitleLink,
+  SubtitleEmphasis,
   IframeSearchBtn,
   HeaderContainer,
 } from "./styled-eligibility"
@@ -129,13 +129,9 @@ const IFrameLanding = props => {
           <Subtitle>
             Let’s take the first step together and help you save thousands on
             your flood insurance.{" "}
-            <SubtitleLink
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.nofloodflorida.com/orderloma/"
-            >
-              Find out if you qualify for a Letter of Map Amendment!
-            </SubtitleLink>
+            <SubtitleEmphasis>
+              Find out for FREE if your property is eligible.
+            </SubtitleEmphasis>
           </Subtitle>
           <div style={{ paddingLeft: "10px", paddingRight: "10px", textAlign: 'center' }}>
             <Row xs={12} style={{ margin: "0 auto", maxWidth: "800px" }}>

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { ResultsContainer } from "./StyledComponents";
+import { ResultsContainer } from "../StyledComponents";
 import styled from "styled-components";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import CategoryPills from "./CategoryPills";
+import CategoryPills from "../CategoryPills";
 import InfoBox from "./InfoBox";
-import ImgLightbox from "./ImgLightbox";
-import RecommendationFooter from "./RecommendationFooter";
-import FloodRiskMap from "./FloodRiskMap";
-import BottomMenu from "./BottomMenu/BottomMenu.js";
+import ImgLightbox from "../ImgLightbox";
+import RecommendationFooter from "../RecommendationFooter";
+import FloodRiskMap from "../FloodRiskMap";
+import BottomMenu from "../BottomMenu/BottomMenu";
 
 const High = props => {
   const {

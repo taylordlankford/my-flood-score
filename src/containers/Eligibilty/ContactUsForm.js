@@ -17,6 +17,7 @@ const ContactUsForm = (props) => {
       responses[e.name] = e.value
     }
     responses.timestamp = new Date()
+    console.log('responses: ', responses)
     const contactFormMessageObj = {
       to: 'kowitkarunas@gmail.com',
       template: {

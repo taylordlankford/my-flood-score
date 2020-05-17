@@ -4,21 +4,21 @@ const LikelihoodAnalysis = props => {
   const { propertyData, LOMARating, suggestion } = props
   const { FEMA_ZONE, BA_FLDZONE_S } = propertyData;
 
-  console.table(propertyData)
-  console.log('SUGGESTION ==> ', suggestion)
+  // console.table(propertyData)
+  // console.log('SUGGESTION ==> ', suggestion)
 
   const compareZones = () => {
     const femaZone = parseInt(FEMA_ZONE)
     const baFldZoneS = parseInt(BA_FLDZONE_S)
 
     // If FEMA_ZONE is low, but BA_FLDZONE_S is high
-    if (femaZone === 0 && baFldZoneS <= 3) {
-      console.log("HIGH, property at greater risk than stated by FEMA")
-    }
-    if (femaZone === 0 && baFldZoneS === 4) {
-      console.log('LOW')
-      console.log("Best available floodplain modeling agrees with effective FEMA data")
-    }
+    // if (femaZone === 0 && baFldZoneS <= 3) {
+    //   console.log("HIGH, property at greater risk than stated by FEMA")
+    // }
+    // if (femaZone === 0 && baFldZoneS === 4) {
+    //   console.log('LOW')
+    //   console.log("Best available floodplain modeling agrees with effective FEMA data")
+    // }
   }
 
   return (
