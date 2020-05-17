@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useFirebase } from "../../hooks";
 import { useDomains } from "./eligibility-hooks";
 
@@ -8,15 +8,12 @@ import "./styles.css";
 // import BgImg from "../../assets/images/nff-bg-image.jpg";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
 import {
   ParallaxWrapper,
   ParallaxContainer,
   MainTitle,
   Subtitle,
   SubtitleEmphasis,
-  IframeSearchBtn,
   HeaderContainer,
 } from "./styled-eligibility"
 
@@ -27,6 +24,9 @@ import Recommendation from "./Recommendation/Recommendation";
 import ContactUsForm from "./ContactUsForm"
 import { hideSiteContainers } from "./helpers";
 
+/**
+ * Controls the 'flow' of displaying the screeening and various recommendations
+ */
 const Eligibility = () => {
   const firebase = useFirebase();
   const { pubDomain, devDomain } = useDomains();
@@ -39,7 +39,6 @@ const Eligibility = () => {
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [showContactModal, setShowContactModal] = useState(false)
 
-
   useEffect(() => {
     let hideSurrounding = window.location.href === pubDomain || window.location.href === devDomain;
 
@@ -47,6 +46,7 @@ const Eligibility = () => {
       hideSiteContainers();
     }
   }, []);
+
 
   const onSuggestionSelected = (
     event,
@@ -56,7 +56,6 @@ const Eligibility = () => {
   }
 
   function handleCloseContactForm() {
-    console.log('hanlde close')
     setShowContactModal(false)
   }
   function handleShowContactForm() {
@@ -72,22 +71,38 @@ const Eligibility = () => {
     setShowScreening(true);
   };
 
-  /* Render recommendation */
+  /**
+   * Render the recommendations
+   */
   if (showRecommendation) {
     return (
       <Recommendation county={selectedCounty} address={selectedAddress} />
     )
   }
 
-
-  /* Render screening component */
+  /**
+   * Show the screening form if this value is 'true'
+   * Check if the user has filled out the screening form previously in their
+   * browser's session.
+   * 
+   * Skip to recommendations if they're information is cache'd
+   */
   if (showScreening) {
-    return (
-      <Screening
-        selected={selectedAddress}
-        setShowRecommendation={setShowRecommendation}
-      />
-    );
+    const name = window.sessionStorage.getItem('name')
+    const email = window.sessionStorage.getItem('email')
+    const phone = window.sessionStorage.getItem('phone')
+    const cacheExists = name !== null || email !== null || phone !== null
+
+    if (cacheExists) {
+      setShowRecommendation(true)
+    } else {
+      return (
+        <Screening
+          selected={selectedAddress}
+          setShowRecommendation={setShowRecommendation}
+        />
+      );
+    }
   }
 
   /* Render IFrame Landing */
@@ -117,7 +132,7 @@ const IFrameLanding = props => {
     handleShowContactForm,
     handleCloseContactForm,
   } = props
-  
+
 
   return (
     <ParallaxWrapper>
@@ -150,7 +165,7 @@ const IFrameLanding = props => {
                 />
                 }
               </Col>
-                {/* <Col xs={2} style={{ padding: "0", margin: "0", top: '27px' }}>
+              {/* <Col xs={2} style={{ padding: "0", margin: "0", top: '27px' }}>
                   <IframeSearchBtn onClick={e => handleOnClick(e)}>
                     Proceed
                   </IframeSearchBtn>
@@ -158,13 +173,13 @@ const IFrameLanding = props => {
             </Row>
           </div>
           <HeaderContainer>
-          <p style={{ margin: "-20px auto", maxWidth: "720px" }}>
-            Can’t find your property?{" "}
-            <u style={{ color: "#007bff", cursor: 'pointer' }} onClick={handleShowContactForm}>Contact us</u> for a custom
+            <p style={{ margin: "-20px auto", maxWidth: "720px" }}>
+              Can’t find your property?{" "}
+              <u style={{ color: "#007bff", cursor: 'pointer' }} onClick={handleShowContactForm}>Contact us</u> for a custom
             screening.
           </p>
-          <ContactUsForm show={showContactModal} handleClose={handleCloseContactForm} firebase={firebase} />
-        </HeaderContainer>
+            <ContactUsForm show={showContactModal} handleClose={handleCloseContactForm} firebase={firebase} />
+          </HeaderContainer>
         </ParallaxContainer>
       </div>
     </ParallaxWrapper>

@@ -2,13 +2,16 @@ import React from "react";
 import Spinner from "react-bootstrap/Spinner";
 import styled from "styled-components";
 
+/**
+ * Loader for going from screening form to recommendations.
+ */
 const Loader = props => {
   const { animation } = props
   return (
     <SpinnerWrapper>
       <SpinnerContainer>
-        <Spinner size="lg" animation={animation} role="status">
-          <SpinnerMsg className="sr-only">
+        <Spinner size="lg" animation={animation} role="status" style={{ color: "#fff" }}>
+          <SpinnerMsg className="sr-only" style={{ color: "#fff" }}>
             Loading...
           </SpinnerMsg>
         </Spinner>

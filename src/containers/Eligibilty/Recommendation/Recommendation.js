@@ -52,7 +52,16 @@ const Recommendation = props => {
 
   if (loading) {
     return (
-      <Loader animation="border" />
+      <Wrapper>
+        <Parallax
+          contentClassName="recommendation-parallax"
+          bgImage={BgImg}
+          strength={400}>
+          <Loader animation="border" />
+          <Container>
+          </Container>
+        </Parallax>
+      </Wrapper>
     )
   }
 

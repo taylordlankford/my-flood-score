@@ -69,8 +69,8 @@ const Screening = props => {
   const handleOnSubmit = async e => {
     const { phoneNumber, email, name } = e
 
-    let phone             = phoneNumber
-    let timestamp         = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
+    let phone = phoneNumber
+    let timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
     let screeningFormData = { name, email, phone, timestamp };
     console.log('phone: ', phone)
 
