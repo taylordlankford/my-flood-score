@@ -3,7 +3,6 @@ import { useFirebase } from "../../../hooks";
 import { useDomains } from "../eligibility-hooks";
 import Form from "react-formal"
 import * as Yup from "yup";
-import moment from "moment"
 import "react-phone-number-input/style.css";
 import "./screening-styles.css";
 import styled from "styled-components";
@@ -71,7 +70,7 @@ const Screening = props => {
     const { phoneNumber, email, name } = e
 
     let phone             = phoneNumber
-    let timestamp         = moment().format('MM/DD/YYYY, h:mm:ss A'); // May 17th 2020, 9:23:08 AM/PM
+    let timestamp         = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
     let screeningFormData = { name, email, phone, timestamp };
     console.log('phone: ', phone)
 
