@@ -75,7 +75,7 @@ const Screening = props => {
     console.log('phone: ', phone)
 
     const screeningFormMessageObj = {
-      to: 'kowitkarunas@gmail.com',
+      to: 'info@nofloodflorida.com',
       template: {
         name: 'screeningFormTemplate',
         data: {
