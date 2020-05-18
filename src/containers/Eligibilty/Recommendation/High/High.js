@@ -13,15 +13,13 @@ import BottomMenu from "../BottomMenu/BottomMenu";
 const High = props => {
   const {
     LOMARating,
-    LOMACategory,
-    femaZone,
     selectedAddress,
     propertyData,
     imgUrl
   } = props;
 
   const [modalShow, setModalShow] = useState(false);
-  const [basisOfDetermination, setBasisOfDetermination] = useState([
+  const [basisOfDetermination] = useState([
     {
       id: 1,
       info: "FEMA considers this property to be in a high risk flood zone."
