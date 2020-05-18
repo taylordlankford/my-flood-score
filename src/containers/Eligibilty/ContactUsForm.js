@@ -19,7 +19,7 @@ const ContactUsForm = (props) => {
 
     responses.timestamp = new Date().toLocaleString('en-US', {timeZone: 'America/New_York'})
     const contactFormMessageObj = {
-      to: 'kowitkarunas@gmail.com',
+      to: 'info@nofloodflorida.com',
       template: {
         name: 'contactFormTemplate',
         data: {

@@ -43,6 +43,23 @@ export const Container = styled.div`
   */
 `
 
+export const LoadingText = styled.h2`
+  color: white;
+  font-size: 27px;
+  align-self: center;
+  margin-top: 10px;
+`
+
+export const LoadingWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  min-height: 100vh;
+`
+
 /* FAQ */
 export const FaqTitle = styled.div`
   border: none;
