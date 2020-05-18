@@ -49,7 +49,7 @@ const NotApplicableLowRisk = ({ selectedAddress, propertyData }) => {
               <div>
                 <FaCheck />
                 <span style={{ fontWeight: "500", marginRight: "20px" }}>
-                  Flood insurance for this property would most likely NOT be required.
+                  Flood insurance for this property would most likely <b style={{ fontWeight: "600", color: "#fff" }}>NOT</b> be required.
                 </span>
               </div>
             </InfoBoxWrapper>

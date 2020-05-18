@@ -39,6 +39,7 @@ const Eligibility = () => {
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [showContactModal, setShowContactModal] = useState(false)
 
+
   useEffect(() => {
     let hideSurrounding = window.location.href === pubDomain || window.location.href === devDomain;
 
@@ -72,7 +73,7 @@ const Eligibility = () => {
   };
 
   /**
-   * Render the recommendations
+   * Render the recommendations 
    */
   if (showRecommendation) {
     return (
