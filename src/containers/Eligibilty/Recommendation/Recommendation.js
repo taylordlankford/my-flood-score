@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Parallax } from "react-parallax";
 import "./styles.css";
 import BgImg from "../../../assets/images/nff-bg-image.jpg";
-import { Wrapper, Container } from "./StyledComponents";
-import Loader from "./Loader"
+import { Wrapper, Container, LoadingText, LoadingWrapper } from "./StyledComponents";
+import Spinner from "react-bootstrap/Spinner";
 import LOMARecommendations from "./LOMARecommendations";
 import { hideSiteContainers } from "../helpers";
 import { useDomains, useGetPropertyData, useGetImg } from "../eligibility-hooks"
@@ -23,6 +23,8 @@ const Recommendation = props => {
   const [LOMARating, setLOMARating] = useState("");
   const [imgUrl, setImgUrl] = useState(null);
   const [femaZone, setFemaZone] = useState("");
+  const [fakeLoading1, setFakeLoading1] = useState(true)
+  const [fakeLoading2, setFakeLoading2] = useState(true)
 
   useEffect(() => {
     let hideSurrounding = window.location.href === pubDomain || window.location.href === devDomain
@@ -50,18 +52,27 @@ const Recommendation = props => {
     }
   }, [imgUrlData, imgLoading])
 
-  if (loading) {
+  if (loading || fakeLoading1) {
+    setTimeout(() => {
+      setFakeLoading1(false)
+    }, 1200)
     return (
-      <Wrapper>
-        <Parallax
-          contentClassName="recommendation-parallax"
-          bgImage={BgImg}
-          strength={400}>
-          <Loader animation="border" />
-          <Container>
-          </Container>
-        </Parallax>
-      </Wrapper>
+      <LoadingWrapper style={{ background: `linear-gradient(0deg,rgba(22, 22, 63, 0.90),rgba(22, 22, 63, 0.90)), url(${BgImg})` }}>
+        <Spinner size="lg" animation="border" role="status" style={{ color: "#fff", alignSelf: 'center' }} />
+        <LoadingText>Getting Property Data...</LoadingText>
+      </LoadingWrapper>
+    )
+  }
+
+  if (fakeLoading2) {
+    setTimeout(() => {
+      setFakeLoading2(false)
+    }, 2000)
+    return (
+      <LoadingWrapper style={{ background: `linear-gradient(0deg,rgba(22, 22, 63, 0.90),rgba(22, 22, 63, 0.90)), url(${BgImg})` }}>
+        <Spinner size="lg" animation="border" role="status" style={{ color: "#fff", alignSelf: 'center' }} />
+        <LoadingText>Anaylizing Data...</LoadingText>
+      </LoadingWrapper>
     )
   }
 
