@@ -7,16 +7,12 @@ import Spinner from "react-bootstrap/Spinner";
 import LOMARecommendations from "./LOMARecommendations";
 import { hideSiteContainers } from "../helpers";
 import { useDomains, useGetPropertyData, useGetImg } from "../eligibility-hooks"
-// import { useFirebase } from "../../../hooks";
 
 const Recommendation = props => {
   const { address, county } = props;
   const { pubDomain, devDomain } = useDomains();
   const { docData, loading } = useGetPropertyData(county, address);
   const { imgUrlData, imgLoading } = useGetImg(county, address);
-
-  // const { LOMA, id, FEMA_ZONE } = propertyData;
-  // const firebase = useFirebase();
 
   const [selectedAddress] = useState(address != null ? address : null);
   const [propertyData, setPropertyData] = useState(null);

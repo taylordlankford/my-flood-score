@@ -2,6 +2,7 @@ import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
+import SurveyIncentiveIcon from "../../../../assets/images/surveyincentive01.svg";
 
 const LearnMore = ({ title, disclaimer, img }) => {
   return (
@@ -48,7 +49,7 @@ const LearnMore = ({ title, disclaimer, img }) => {
       </Row>
       <Row sm={12} style={{ paddingTop: "20px" }}>
         <Col sm={8}>
-          <div>
+          <div style={{ paddingTop: "40px" }}>
             <h4 style={{ color: "#fff" }}>Elevation Certificate</h4>
             <div>
               <p style={{ fontWeight: "500" }}>
@@ -68,10 +69,9 @@ const LearnMore = ({ title, disclaimer, img }) => {
         </Col>
         <Col sm={4}>
           {/* Place holder div for future img */}
-          <div
-            style={{ textAlign: "center", height: "100px", width: "100px" }}
-          ></div>
+          {/* <div style={{ textAlign: "center", height: "100px", width: "100px" }}></div> */}
           <div style={{ textAlign: "center" }}>
+            <img src={SurveyIncentiveIcon} style={{ height: "200px", width: "200px" }}/>
             <a
               href="https://www.nofloodflorida.com/loma/"
               target="_blank"
