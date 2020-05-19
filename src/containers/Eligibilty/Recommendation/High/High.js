@@ -44,7 +44,7 @@ const High = props => {
             from a Letter of Map Amendment.
           </h3>
         </div>
-        <Row lg={12}>
+        <Row lg={12} style={{ paddingBottom: "40px" }}>
           <Col lg={6}>
             <hr
               style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}

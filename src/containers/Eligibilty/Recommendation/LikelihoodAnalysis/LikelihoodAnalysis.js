@@ -56,7 +56,7 @@ const LikelihoodResult = ({ LOMARating, propertyData }) => {
   } else if (lomaRating === 0 && baFldZoneS === 4) {
     return 'LOW'
   } else if (LOMARating === '2') {
-    return 'HIGH'
+    return 'MEDIUM'
   } else if (LOMARating === '3') {
     return 'HIGH'
   } else {
