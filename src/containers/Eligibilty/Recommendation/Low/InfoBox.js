@@ -11,7 +11,6 @@ const InfoBox = (props) => {
     selectedAddress,
     propertyData,
     suggestion,
-    basisOfDetermination
   } = props
 
   return (
@@ -41,15 +40,13 @@ const InfoBox = (props) => {
         <BasisContainer>
           <div>
             <FaCheck />
-            <span style={{ fontWeight: "500" }}>FEMA considers this property to be in a low risk flood zone.</span>
+            <span style={{ fontWeight: "500" }}>FEMA considers this property to be in a <B>high risk flood zone</B>.</span>
           </div>
           <div>
             <FaCheck />
-            <span style={{ fontWeight: "500" }}>The elevation of your property appears to be below the flood elevation.</span>
-          </div>
-          <div>
-            <FaCheck />
-            <span style={{ fontWeight: "500" }}>The elevation of your property appears to be <b style={{ color: "#fff" }}>slightly</b> below the flood elevation, <b style={{ color: "#fff" }}>an Elevation Certificate can confirm this.</b></span>
+            <span style={{ fontWeight: "500" }}>
+              The elevation of your property appears to be <B>very close</B> to the floodplain elevation, <B>an Elevation Certificate can confirm this</B>.
+            </span>
           </div>
         </BasisContainer>
       </div>
@@ -59,9 +56,13 @@ const InfoBox = (props) => {
 
 export default InfoBox;
 
+const B = styled.b`
+  font-weight: 600;
+  color: #fff;
+`
+
 const InfoBoxWrapper = styled.div`
-  padding-bottom: 20px;
-  padding-top: 20px;
+  padding: 20px 0 20px 40px;
   display: grid;
   grid-gap: 20px;
 `;

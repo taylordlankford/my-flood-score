@@ -50,7 +50,7 @@ const InfoBox = (props) => {
           Basis of this determination:
         </span>
       </div>
-      {/* }<BasisOfDetermination basisOfDetermination={basisOfDetermination} /> */}
+      {/* <BasisOfDetermination basisOfDetermination={basisOfDetermination} /> */}
       <StyledBasisOfDetermination>
         {basisOfDetermination.map((item, idx) => (
           <div key={idx}>

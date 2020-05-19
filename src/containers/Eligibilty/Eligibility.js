@@ -164,7 +164,6 @@ const IFrameLanding = props => {
                   handleProceedButton={e => handleOnClick(e)}
                   showStats
                 />
-                }
               </Col>
               {/* <Col xs={2} style={{ padding: "0", margin: "0", top: '27px' }}>
                   <IframeSearchBtn onClick={e => handleOnClick(e)}>

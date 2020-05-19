@@ -67,7 +67,7 @@ const Recommendation = props => {
     return (
       <LoadingWrapper style={{ background: `linear-gradient(0deg,rgba(22, 22, 63, 0.90),rgba(22, 22, 63, 0.90)), url(${BgImg})` }}>
         <Spinner size="lg" animation="border" role="status" style={{ color: "#fff", alignSelf: 'center' }} />
-        <LoadingText>Anaylizing Data...</LoadingText>
+        <LoadingText>Analyzing Data...</LoadingText>
       </LoadingWrapper>
     )
   }

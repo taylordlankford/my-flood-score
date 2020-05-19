@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import styled from "styled-components";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-// import Button from "react-bootstrap/Button";
-// import { FaCheck } from "react-icons/fa";
 import * as S from "../StyledComponents";
 import ExamineSvg from "../../../../assets/images/Examine.svg";
 import CategoryPills from "../CategoryPills";
-// import styled from "styled-components";
 import InfoBox from "./InfoBox";
 import LearnMore from "./LearnMore";
 import RecommendationFooter from "../RecommendationFooter";
-// import BasisOfDetermination from "../../BasisOfDetermination/BasisOfDetermination";
+import SearchAnotherPropertyBtn from "../BottomMenu/SearchAnotherPropertyBtn";
 
 const Low = props => {
   const { LOMARating, LOMACategory, selectedAddress, propertyData } = props;
@@ -28,7 +26,7 @@ const Low = props => {
           <hr
             style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
           />
-          <S.ResultsContainer>
+          <ResultsContainer>
             <CategoryPills LOMARating={LOMARating} />
             <InfoBox
               LOMARating={LOMARating}
@@ -36,12 +34,12 @@ const Low = props => {
               propertyData={propertyData}
               suggestion="Low" />
 
-          </S.ResultsContainer>
+          </ResultsContainer>
           <hr
             style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
           />
         </Col>
-        <Col sm={6} style={{ border: "1px solid #C7AE4A" }}>
+        <Col sm={6}>
           <LearnMore
             title="Flood Analysis Memo"
             text="Learn more about your detailed flood risk. Floodplain maps, building and structure impacts, and flood insurance premium estimates"
@@ -49,12 +47,19 @@ const Low = props => {
           />
         </Col>
       </Row>
+      <Row lg={12}>
+        <Col lg={6}></Col>
+        <Col lg={6}>
+          <SearchAnotherPropertyBtn />
+        </Col>
+      </Row>
       <RecommendationFooter />
     </div>
   );
 };
 
-
-
-
 export default Low;
+
+const ResultsContainer = styled.div`
+  padding: 30px 0 30px 0;
+`
