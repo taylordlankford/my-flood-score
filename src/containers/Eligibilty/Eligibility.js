@@ -96,7 +96,23 @@ const Eligibility = () => {
     const cacheExists = name !== null || email !== null || phone !== null
 
     if (cacheExists) {
+      // show the recommendation
       setShowRecommendation(true)
+      // Add to firebase
+      let timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
+      let screeningFormData = { name, email, phone, timestamp }
+      const screeningFormMessageObj = {
+        to: 'info@nofloodflorida.com',
+        // to: 'kylekaplan50@gmail.com',
+        template: {
+          name: 'screeningFormTemplate',
+          data: {
+            address: selectedAddress,
+            ...screeningFormData,
+          }
+        }
+      }
+      firebase.doFirestoreAdd('screeningForm', screeningFormMessageObj)
     } else {
       return (
         <Screening
