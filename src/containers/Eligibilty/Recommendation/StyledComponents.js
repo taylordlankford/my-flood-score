@@ -25,22 +25,11 @@ export const Wrapper = styled.div`
 
 export const Container = styled.div`
   min-height: 100vh !important;
-  /* height: max-content; */
   margin: 0 auto;
   max-width: 1440px;
-  /* min-height: inherit; */
   padding: 50px 50px 50px 50px;
   overflow: hidden;
-  /* overflow: scroll; */
   display: grid;
-  /* grid-template-columns: 3fr 4fr; */
-  /* grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); */
-  /* grid-gap: 2em; */
-  /*
-  @media(max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(768px, 1fr));
-  }
-  */
 `
 
 export const LoadingText = styled.h2`
