@@ -256,7 +256,7 @@ class AutoSuggest extends React.Component {
         }
         {(selectedCounty !== '' && !loadingCounty && showProceedButton) && (
           <div xs={2} style={{ position: 'relative', padding: "0", margin: "0", top: '-42px', float: 'right' }}>
-            <IframeSearchBtn onClick={e => handleProceedButton(e)}>
+            <IframeSearchBtn disabled={!this.validateValue()} onClick={() => handleProceedButton(value)}>
               Proceed
             </IframeSearchBtn>
           </div>

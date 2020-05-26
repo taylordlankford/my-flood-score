@@ -12,21 +12,17 @@ const RecommendationFooter = () => {
           href="https://www.nofloodflorida.com/loma/"
           target="_blank"
           rel="noopener noreferrer"
+          style={{ color: '#16163F' }}
         >
           LOMA
         </a>
       </u>{" "}
-      page or <PhoneNumber>call {phoneNumber}</PhoneNumber>
+      page or call {phoneNumber}
     </FooterWrapper>
   );
 };
 
 export default RecommendationFooter;
-
-const PhoneNumber = styled.span`
-  cursor: pointer;
-  color: #007BFF;
-`
 
 const FooterWrapper = styled.div`
   margin-top: 40px;

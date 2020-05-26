@@ -67,7 +67,8 @@ const Eligibility = () => {
     setSelectedCounty(county)
   }
 
-  const handleOnClick = () => {
+  const handleProceedButton = (address) => {
+    setSelectedAddress(address)
     setShowSearch(false);
     setShowScreening(true);
   };
@@ -95,7 +96,23 @@ const Eligibility = () => {
     const cacheExists = name !== null || email !== null || phone !== null
 
     if (cacheExists) {
+      // show the recommendation
       setShowRecommendation(true)
+      // Add to firebase
+      let timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
+      let screeningFormData = { name, email, phone, timestamp }
+      const screeningFormMessageObj = {
+        to: 'info@nofloodflorida.com',
+        // to: 'kylekaplan50@gmail.com',
+        template: {
+          name: 'screeningFormTemplate',
+          data: {
+            address: selectedAddress,
+            ...screeningFormData,
+          }
+        }
+      }
+      firebase.doFirestoreAdd('screeningForm', screeningFormMessageObj)
     } else {
       return (
         <Screening
@@ -113,7 +130,7 @@ const Eligibility = () => {
         onSuggestionSelected={onSuggestionSelected}
         updateParentCountyState={updateParentCountyState}
         firebase={firebase}
-        handleOnClick={handleOnClick}
+        handleProceedButton={handleProceedButton}
         selectedCounty={selectedCounty}
         showContactModal={showContactModal}
         handleShowContactForm={handleShowContactForm}
@@ -128,7 +145,7 @@ const IFrameLanding = props => {
     onSuggestionSelected,
     updateParentCountyState,
     firebase,
-    handleOnClick,
+    handleProceedButton,
     showContactModal,
     handleShowContactForm,
     handleCloseContactForm,
@@ -161,7 +178,7 @@ const IFrameLanding = props => {
                   inputProps={{ id: "eligibilityAddressSuggest" }}
                   firebase={firebase}
                   showProceedButton={true}
-                  handleProceedButton={e => handleOnClick(e)}
+                  handleProceedButton={handleProceedButton}
                   showStats
                 />
               </Col>
