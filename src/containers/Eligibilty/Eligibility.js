@@ -178,7 +178,7 @@ const IFrameLanding = props => {
               <u style={{ color: "#007bff", cursor: 'pointer' }} onClick={handleShowContactForm}>Contact us</u> for a custom
             screening.
           </p>
-            <ContactUsForm show={showContactModal} handleClose={handleCloseContactForm} firebase={firebase} />
+            <ContactUsForm show={showContactModal} handleClose={handleCloseContactForm} />
           </HeaderContainer>
         </ParallaxContainer>
       </div>

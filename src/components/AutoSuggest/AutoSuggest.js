@@ -184,13 +184,13 @@ class AutoSuggest extends React.Component {
     } = this.props
 
     let PropertiesCount = ''
-    let highMedLOMA = ''
+    let HighMedLOMA = ''
     try {
       // set these stats if we have values
-      ({ PropertiesCount, highMedLOMA } = statsMap[selectedCounty])
+      ({ PropertiesCount, HighMedLOMA } = statsMap[selectedCounty])
       // add commas
       PropertiesCount = PropertiesCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-      highMedLOMA = highMedLOMA.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+      HighMedLOMA = HighMedLOMA.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     } catch (err) {} // nothing to catch
 
     // Autosuggest will pass all these props to the input.
@@ -261,10 +261,10 @@ class AutoSuggest extends React.Component {
             </IframeSearchBtn>
           </div>
         )}
-        {showStats && selectedCounty && !loadingCounty && PropertiesCount && highMedLOMA &&
+        {showStats && selectedCounty && !loadingCounty && PropertiesCount && HighMedLOMA &&
           <StatisticsDiv>
             <p><span>{PropertiesCount}</span> Properties Analyzed</p>
-            <p><span>{highMedLOMA}</span> LOMA Opportunities!</p>
+            <p><span>{HighMedLOMA}</span> LOMA Opportunities!</p>
           </StatisticsDiv>
         }
       </>
