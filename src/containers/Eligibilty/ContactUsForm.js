@@ -4,10 +4,11 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 
-import { useStateValue } from '../../hooks'
+import { useStateValue, useFirebase } from '../../hooks'
 
 const ContactUsForm = (props) => {
-  const { show, handleClose, firebase } = props
+  const firebase = useFirebase()
+  const { show, handleClose } = props
   const [{ error }, dispatch] = useStateValue()
   const handleOnSubmit = () => {
     var form = document.getElementById('contact-us-form') // can I get this through a prop?
@@ -20,6 +21,7 @@ const ContactUsForm = (props) => {
     responses.timestamp = new Date().toLocaleString('en-US', {timeZone: 'America/New_York'})
     const contactFormMessageObj = {
       to: 'info@nofloodflorida.com',
+      // to: 'kylekaplan50@gmail.com',
       template: {
         name: 'contactFormTemplate',
         data: {
@@ -32,7 +34,6 @@ const ContactUsForm = (props) => {
     //   subject: 'New Contact Form Submission',
     //   html: 'hi',
     // }
-    console.log('contactFormMessageObj:', contactFormMessageObj)
     firebase.doFirestoreAdd('contactForm', contactFormMessageObj, handleSuccess)
   }
 

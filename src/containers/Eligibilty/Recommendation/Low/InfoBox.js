@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FaCheck } from "react-icons/fa";
+
+import ContactUsForm from '../../../Eligibilty/ContactUsForm'
 
 /**
  * InfoBox
@@ -12,6 +14,7 @@ const InfoBox = (props) => {
     propertyData,
     suggestion,
   } = props
+  const [showContactModal, setShowContactModal] = useState(false)
 
   return (
     <InfoBoxWrapper>
@@ -48,12 +51,13 @@ const InfoBox = (props) => {
               The elevation of your property appears to be <B>very close</B> to the
               floodplain elevation, <B>an Elevation Certificate will be required
               to determine if you are eligible for the LOMA. Already have an
-              Elevation Certificate, contact us and we will review it for
+              Elevation Certificate, <span style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setShowContactModal(true)}>Contact Us</span> and we will review it for
               free!</B>
             </span>
           </div>
         </BasisContainer>
       </div>
+      <ContactUsForm show={showContactModal} handleClose={() => setShowContactModal(false)} />
     </InfoBoxWrapper>
   );
 };
