@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 // import Button from "react-bootstrap/Button";
@@ -20,10 +20,8 @@ const NotApplicableLowRisk = ({ selectedAddress, propertyData }) => {
       </div>
       <Row lg={12} style={{ padding: "20px 20px 20px 20px" }}>
         <Col sm={6}>
-          <hr
-            style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
-          />
-          <S.ResultsContainer>
+          {/* <hr style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }} /> */}
+          <ResultsContainer>
             <div style={{ margin: "0 auto", textAlign: "center", fontSize: "18px", maxWidth: "100%" }}>
               <p>A Letter of Map Amendment is not applicable for this property.</p>
             </div>
@@ -53,8 +51,8 @@ const NotApplicableLowRisk = ({ selectedAddress, propertyData }) => {
                 </span>
               </div>
             </InfoBoxWrapper>
-          </S.ResultsContainer>
-          <hr style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }} />
+          </ResultsContainer>
+          {/* <hr style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }} /> */}
         </Col>
         <Col sm={6}>
           <LowRiskLearnMore
@@ -71,6 +69,12 @@ const NotApplicableLowRisk = ({ selectedAddress, propertyData }) => {
 }
 
 export default NotApplicableLowRisk;
+
+export const ResultsContainer = styled.div`
+  border-top: 6px solid #C7AE4A;
+  border-bottom: 6px solid #C7AE4A;
+  padding: 50px 0 50px 0;
+`
 
 const B = styled.b`
   font-weight: 600;

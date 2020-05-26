@@ -45,7 +45,11 @@ const InfoBox = (props) => {
           <div>
             <FaCheck />
             <span style={{ fontWeight: "500" }}>
-              The elevation of your property appears to be <B>very close</B> to the floodplain elevation, <B>an Elevation Certificate can confirm this</B>.
+              The elevation of your property appears to be <B>very close</B> to the
+              floodplain elevation, <B>an Elevation Certificate will be required
+              to determine if you are eligible for the LOMA. Already have an
+              Elevation Certificate, contact us and we will review it for
+              free!</B>
             </span>
           </div>
         </BasisContainer>
