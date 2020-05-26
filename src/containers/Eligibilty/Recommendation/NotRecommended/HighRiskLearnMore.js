@@ -26,34 +26,62 @@ const HighRiskLearnMore = ({ disclaimer, img }) => {
               </p>
             </div>
           </div>
+
+          {/*
           <Row sm={12}>
             <Col sm={6}>
-              <div style={{ textAlign: "center" }}>
+              <div style={{ textAlign: "center", margin: "0 10px 0 10px" }}>
                 <a
                   href="https://www.nofloodflorida.com/fam/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button style={{ backgroundColor: "#C7AE4A", width: "200px" }}>
+                  <Button style={{ backgroundColor: "#C7AE4A", width: "200", whiteSpace: "nowrap" }}>
                     <span style={{ color: "#fff" }}>Learn More</span>
                   </Button>
                 </a>
               </div>
             </Col>
             <Col sm={6}>
-              <div style={{ textAlign: "center" }}>
+              <div style={{ textAlign: "center", margin: "0 10px 0 10px" }}>
                 <a
                   href="https://www.nofloodflorida.com/wp-content/uploads/2020/02/709_Whitehall_St.-1.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button style={{ backgroundColor: "#C7AE4A", width: "200px" }}>
+                  <Button style={{ backgroundColor: "#C7AE4A", width: "200", whiteSpace: "nowrap" }}>
                     <span style={{ color: "#fff" }}>Sample</span>
                   </Button>
                 </a>
               </div>
             </Col>
           </Row>
+          */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridGap: "10px" }}>
+            <div style={{ textAlign: "center", margin: "0 10px 0 10px" }}>
+              <a
+                href="https://www.nofloodflorida.com/fam/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button style={{ backgroundColor: "#C7AE4A", width: "200px", whiteSpace: "nowrap" }}>
+                  <span style={{ color: "#fff" }}>Learn More</span>
+                </Button>
+              </a>
+            </div>
+            <div style={{ textAlign: "center", margin: "0 10px 0 10px" }}>
+              <a
+                href="https://www.nofloodflorida.com/wp-content/uploads/2020/02/709_Whitehall_St.-1.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button style={{ backgroundColor: "#C7AE4A", width: "200px", whiteSpace: "nowrap" }}>
+                  <span style={{ color: "#fff" }}>Sample</span>
+                </Button>
+              </a>
+            </div>
+          </div>
+
         </Col>
         <Col sm={4}>
           <div style={{ textAlign: "center" }}>
@@ -91,7 +119,7 @@ const HighRiskLearnMore = ({ disclaimer, img }) => {
               rel="noopener noreferrer"
             >
               <Button style={{ backgroundColor: "#C7AE4A" }}>
-                <span style={{ color: "#fff" }}>Learn More</span>
+                <span style={{ color: "#fff", whiteSpace: "nowrap" }}>Learn More</span>
               </Button>
             </a>
           </div>
