@@ -81,7 +81,7 @@ const InfoText = styled.span`
 const ResultsContainer = styled.div`
   border-top: 6px solid #C7AE4A;
   border-bottom: 6px solid #C7AE4A;
-  padding: 50px 0 50px 0;
+  padding: 50px 0 130px 0;
 `
 
 const B = styled.b`
