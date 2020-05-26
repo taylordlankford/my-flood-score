@@ -64,7 +64,7 @@ const HighRiskLearnMore = ({ disclaimer, img }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button style={{ backgroundColor: "#C7AE4A", width: "200px", whiteSpace: "nowrap" }}>
+                <Button style={{ backgroundColor: "#C7AE4A", width: "100%", whiteSpace: "nowrap" }}>
                   <span style={{ color: "#fff" }}>Learn More</span>
                 </Button>
               </a>
@@ -75,7 +75,7 @@ const HighRiskLearnMore = ({ disclaimer, img }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button style={{ backgroundColor: "#C7AE4A", width: "200px", whiteSpace: "nowrap" }}>
+                <Button style={{ backgroundColor: "#C7AE4A", width: "100%", whiteSpace: "nowrap" }}>
                   <span style={{ color: "#fff" }}>Sample</span>
                 </Button>
               </a>
