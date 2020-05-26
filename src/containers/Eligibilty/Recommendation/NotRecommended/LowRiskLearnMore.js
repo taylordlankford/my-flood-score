@@ -16,7 +16,7 @@ const LowRiskLearnMore = ({ title, disclaimer, img }) => {
               <p style={{ fontWeight: "500" }}>
                 Good News! This property is identified as being in the low-risk
                 flood zone according to FEMA data. Therefore, there is no need
-                to pursue a Letter of Map Amendment. FEMA data does not always
+                to pursue a Letter of Map Amendment. However, FEMA data does not always
                 show the full picture and properties in this low risk flood
                 zone have flooded in the past. In fact, more than 20 percent of
                 flood claims come from properties <B>outside the high-risk flood
