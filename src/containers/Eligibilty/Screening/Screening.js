@@ -20,7 +20,7 @@ import { hideSiteContainers } from "../helpers";
 const Screening = props => {
   const firebase = useFirebase();
   const { pubDomain, devDomain } = useDomains();
-  const { showRecommendation, setShowRecommendation } = props;
+  const { selected, setShowRecommendation } = props
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -76,9 +76,11 @@ const Screening = props => {
 
     const screeningFormMessageObj = {
       to: 'info@nofloodflorida.com',
+      // to: 'kylekaplan50@gmail.com',
       template: {
         name: 'screeningFormTemplate',
         data: {
+          address: selected,
           ...screeningFormData,
         }
       }
