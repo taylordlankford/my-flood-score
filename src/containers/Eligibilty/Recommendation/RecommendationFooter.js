@@ -16,18 +16,23 @@ const RecommendationFooter = () => {
           LOMA
         </a>
       </u>{" "}
-      page or <span style={{ color: "#000" }}>call {phoneNumber}</span>
+      page or <PhoneNumber>call {phoneNumber}</PhoneNumber>
     </FooterWrapper>
   );
 };
 
 export default RecommendationFooter;
 
+const PhoneNumber = styled.span`
+  cursor: pointer;
+  color: #007BFF;
+`
+
 const FooterWrapper = styled.div`
   margin-top: 40px;
   font-size: 20px;
   background-color: #C7AE4A;
-  color: #fff;
+  color: #16163F;
   padding: 4px 40px 4px 40px;
   text-align: center;
   height: max-content;

@@ -17,8 +17,7 @@ const Low = props => {
     <div>
       <div style={{ paddingBottom: "40px" }}>
         <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
-          This property has a “low” likelihood of benefiting from a Letter of
-          Map Amendment.
+          This property has a “low” likelihood of benefiting from a Letter of Map Amendment.
           </h3>
       </div>
       <Row sm={12}>

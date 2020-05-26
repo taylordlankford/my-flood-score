@@ -8,7 +8,7 @@ import SearchAnotherPropertyBtn from "../BottomMenu/SearchAnotherPropertyBtn";
 const LowRiskLearnMore = ({ title, disclaimer, img }) => {
   return (
     <>
-      <Row sm={12} style={{ padding: "20px 0 20px 0" }}>
+      <Row sm={12}>
         <Col sm={8}>
           <div>
             <h4 style={{ color: "#fff" }}>{title}</h4>
@@ -42,7 +42,7 @@ const LowRiskLearnMore = ({ title, disclaimer, img }) => {
               rel="noopener noreferrer"
             >
               <Button style={{ backgroundColor: "#C7AE4A", width: "200px" }}>
-                <span style={{ color: "#000" }}>Learn More</span>
+                <span style={{ color: "#fff" }}>Learn More</span>
               </Button>
             </a>
           </div>
@@ -53,12 +53,13 @@ const LowRiskLearnMore = ({ title, disclaimer, img }) => {
               rel="noopener noreferrer"
             >
               <Button style={{ backgroundColor: "#C7AE4A", width: "200px" }}>
-                <span style={{ color: "#000" }}>Sample</span>
+                <span style={{ color: "#fff" }}>Sample</span>
               </Button>
             </a>
           </div>
         </Col>
       </Row>
+      <br />
       <SearchAnotherPropertyBtn />
     </>
   );

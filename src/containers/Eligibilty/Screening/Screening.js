@@ -33,8 +33,8 @@ const Screening = props => {
    */
   const modelSchema = Yup.object({
     name: Yup.string().required('Required').min(2, 'Too short'),
-    email: Yup.string().required('Required').email('Wrong format'),
-    phoneNumber: Yup.string().required('Required').length(10, '10 digit phone number required')
+    email: Yup.string().required('Required').email('Wrong format, example: name@mail.com'),
+    phoneNumber: Yup.string().required('Required').length(10, '10-digit phone number required (no dashes) example: 8132130641')
   })
 
   /**
@@ -122,10 +122,12 @@ const Screening = props => {
               <br />
 
               <FormLabel style={{ fontWeight: "600" }}>Email *</FormLabel>
+
               <Form.Message
                 for={['email']}
                 className="validation-error"
                 style={{ fontSize: "12px", fontWeight: "500", color: "#FF0000" }} />
+
               <Form.Field
                 autocomplete="off"
                 name="email"

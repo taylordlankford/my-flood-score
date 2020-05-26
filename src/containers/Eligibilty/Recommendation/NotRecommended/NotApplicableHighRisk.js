@@ -10,7 +10,7 @@ import RecommendationFooter from "../RecommendationFooter";
 
 const NotApplicableHighRisk = ({ selectedAddress, propertyData }) => {
   return (
-    <div>
+    <div style={{ paddingTop: "20px" }}>
       <div style={{ paddingBottom: "20px" }}>
         <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
           It is not recommended to pursue a Letter of Map Amendmend for this property.
@@ -18,10 +18,11 @@ const NotApplicableHighRisk = ({ selectedAddress, propertyData }) => {
       </div>
       <Row lg={12} style={{ padding: "20px 20px 20px 20px" }}>
         <Col sm={6}>
+          {/*}
           <hr
             style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }}
-          />
-          <S.ResultsContainer>
+          /> */}
+          <ResultsContainer>
             <div style={{ margin: "0 auto", textAlign: "center", fontSize: "18px", maxWidth: "100%" }}>
               <p>A Letter of Map Amendment is not applicable for this property.</p>
             </div>
@@ -47,12 +48,12 @@ const NotApplicableHighRisk = ({ selectedAddress, propertyData }) => {
               <div>
                 <FaCheck />
                 <span style={{ fontWeight: "500", marginRight: "20px" }}>
-                  Flood insurance for this property <b style={{ color: "#fff" }}>WILL</b> most likely be required.
+                  Flood insurance for this property <B>WILL</B> most likely be required.
                 </span>
               </div>
             </InfoBoxWrapper>
-          </S.ResultsContainer>
-          <hr style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }} />
+          </ResultsContainer>
+          {/*}<hr style={{ border: "3px solid #C7AE4A", margin: "0", padding: "0" }} /> */}
         </Col>
         <Col sm={6}>
           <HighRiskLearnMore img={ExamineSvg} />
@@ -67,8 +68,19 @@ const NotApplicableHighRisk = ({ selectedAddress, propertyData }) => {
 
 export default NotApplicableHighRisk;
 
+export const ResultsContainer = styled.div`
+  border-top: 6px solid #C7AE4A;
+  border-bottom: 6px solid #C7AE4A;
+  padding: 50px 0 50px 0;
+`
+
+const B = styled.b`
+  font-weight: 600;
+  color: #FFF;
+`
+
 const InfoBoxWrapper = styled.div`
-  padding: 20px 0 20px 40px;
+  padding: 20px 0 20px 60px;
   display: grid;
   grid-gap: 20px;
 `;
