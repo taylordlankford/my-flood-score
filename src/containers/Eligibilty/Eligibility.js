@@ -67,7 +67,8 @@ const Eligibility = () => {
     setSelectedCounty(county)
   }
 
-  const handleOnClick = () => {
+  const handleProceedButton = (address) => {
+    setSelectedAddress(address)
     setShowSearch(false);
     setShowScreening(true);
   };
@@ -113,7 +114,7 @@ const Eligibility = () => {
         onSuggestionSelected={onSuggestionSelected}
         updateParentCountyState={updateParentCountyState}
         firebase={firebase}
-        handleOnClick={handleOnClick}
+        handleProceedButton={handleProceedButton}
         selectedCounty={selectedCounty}
         showContactModal={showContactModal}
         handleShowContactForm={handleShowContactForm}
@@ -128,7 +129,7 @@ const IFrameLanding = props => {
     onSuggestionSelected,
     updateParentCountyState,
     firebase,
-    handleOnClick,
+    handleProceedButton,
     showContactModal,
     handleShowContactForm,
     handleCloseContactForm,
@@ -161,7 +162,7 @@ const IFrameLanding = props => {
                   inputProps={{ id: "eligibilityAddressSuggest" }}
                   firebase={firebase}
                   showProceedButton={true}
-                  handleProceedButton={e => handleOnClick(e)}
+                  handleProceedButton={handleProceedButton}
                   showStats
                 />
               </Col>
