@@ -6,7 +6,8 @@ const ImgLightbox = props => {
   return (
     <Modal
       {...props}
-      size="xl"
+      // size="xl"
+      dialogClassName="modal-90w"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
@@ -15,7 +16,7 @@ const ImgLightbox = props => {
           <img
             src={imgUrl}
             style={{ height: "100%", width: "100%" }}
-            onClick={() => setModalShow(true)}
+            // onClick={() => setModalShow(true)}
           />
         </div>
       ) : (

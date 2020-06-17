@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 // import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
-
+import './contactUsForm.css'
 import { useStateValue, useFirebase } from '../../hooks'
 
 const ContactUsForm = (props) => {
@@ -20,8 +20,9 @@ const ContactUsForm = (props) => {
 
     responses.timestamp = new Date().toLocaleString('en-US', {timeZone: 'America/New_York'})
     const contactFormMessageObj = {
-      to: 'info@nofloodflorida.com',
-      // to: 'kylekaplan50@gmail.com',
+      // to: 'info@nofloodflorida.com',
+      to: 'kylekaplan50@gmail.com',
+      // to: 'Ahmed89hamed@gmail.com',
       template: {
         name: 'contactFormTemplate',
         data: {

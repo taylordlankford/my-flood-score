@@ -15,7 +15,7 @@ const NotApplicableLowRisk = ({ selectedAddress, propertyData }) => {
     <div>
       <div style={{ paddingBottom: "10px" }}>
         <h3 style={{ color: "#fff", fontFamily: "Helvetica" }}>
-          Good News! It is not recommended to pursue a Letter of Map Amendmend for this property.
+          Good News! It is not recommended to pursue a Letter of Map Amendment for this property.
         </h3>
       </div>
       <Row lg={12} style={{ padding: "20px 20px 20px 20px" }}>
@@ -56,7 +56,7 @@ const NotApplicableLowRisk = ({ selectedAddress, propertyData }) => {
         </Col>
         <Col sm={6}>
           <LowRiskLearnMore
-            title="Flood Analysis Memo"
+            title="Request Your Flood Analysis Memo"
             img={ExamineSvg}
           />
         </Col>

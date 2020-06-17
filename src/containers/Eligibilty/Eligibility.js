@@ -102,8 +102,9 @@ const Eligibility = () => {
       let timestamp = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
       let screeningFormData = { name, email, phone, timestamp }
       const screeningFormMessageObj = {
-        to: 'info@nofloodflorida.com',
-        // to: 'kylekaplan50@gmail.com',
+        // to: 'info@nofloodflorida.com',
+        // to: 'Ahmed89hamed@gmail.com',
+        to: 'kylekaplan50@gmail.com',
         template: {
           name: 'screeningFormTemplate',
           data: {
@@ -166,7 +167,7 @@ const IFrameLanding = props => {
               Find out for FREE if your property is eligible.
             </SubtitleEmphasis>
           </Subtitle>
-          <div style={{ paddingLeft: "10px", paddingRight: "10px", textAlign: 'center', marginTop: '-40px' }}>
+          <div style={{ paddingLeft: "10px", paddingRight: "10px", textAlign: 'center', marginTop: '-20px' }}>
             <Row xs={12} style={{ margin: "0 auto", maxWidth: "800px" }}>
               <Col xs={12} style={{ padding: "0", margin: "0", margin: '0 auto' }}>
                 <AutoSuggest
