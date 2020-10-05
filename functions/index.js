@@ -15,7 +15,7 @@ require('dotenv').config()
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 // const express = require('express');
-// const cors = require('cors')({origin: true});
+const cors = require('cors')({origin: true});
 // const app = express();
 
 // // TODO: Remember to set token using >> firebase functions:config:set stripe.token="SECRET_STRIPE_TOKEN_HERE"
@@ -551,6 +551,130 @@ const sendEmailNotification = async (nffUser) => {
 }
 */
 
+
+const getProperty = (req, res) => {
+  cors(req, res, async () => {
+    if (req.method !== 'GET') {
+      return res.status(500).json({
+        message: 'No Allowed'
+      })
+    }
+    const { state, county, zip, streetAddress, apiKey, fields } = req.query
+    if (!apiKey) {
+      res.status(400).json({
+        error: 'apiKey is required',
+      })
+    }
+    // Check if apiKey valid
+    apiUserRef = admin.firestore().collection('apiUsers')
+    const apiKeyQuerySnapshot = await apiUserRef.where("apiKey", "==", apiKey).get()
+    const results = []
+    apiKeyQuerySnapshot.forEach(function(doc) {
+      // doc.data() is never undefined for query doc snapshots
+      const data = doc.data()
+      data.doc = doc
+      results.push(data)
+    })
+    // If no apiUser found reject
+    if (results.length === 0) {
+      return res.status(401).json({
+        error: 'Unauthorized',
+      })
+    }
+    const apiUser = results[0]
+    const { monthLimit, monthCount } = apiUser
+    const dateObj = new Date()
+    if (monthCount && monthCount[dateObj.getFullYear()][dateObj.getMonth()+1] >= monthLimit) {
+      return res.status(403).json({
+        error: 'Monthly usage limit has been met',
+      })
+    }
+    if (!state) {
+      res.status(400).json({
+        error: 'state is required'
+      })
+    }
+    if (!county) {
+      res.status(400).json({
+        error: 'county is required',
+      })
+    }
+    if (!zip) {
+      res.status(400).json({
+        error: 'zip is required',
+      })
+    }
+    if (!streetAddress) {
+      res.status(400).json({
+        error: 'streetAddress is required',
+      })
+    }
+    try {
+      const propertiesRef = admin.firestore()
+        .collection("properties").doc(state)
+        .collection('counties').doc(county)
+        .collection('properties')
+      let querySnapshot
+      querySnapshot = await propertiesRef.where("PROP_ZIP", "==", zip).where("PROP_ADD", "==", streetAddress).get()
+      const properties = []
+      querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+          if (fields) {
+            const data = doc.data()
+            const fieldsArray = fields.split(',')
+            const newObj = {}
+            fieldsArray.forEach(field => {
+              newObj[field] = data[field]
+            })
+            properties.push(newObj)
+          } else {
+            properties.push(doc.data())
+          }
+      });
+      if (properties.length === 0) {
+        // check if county exists
+        const countiesQuerySnapshot = await admin.firestore().collection("properties").doc(state).collection('counties').get()
+        const countyNames = []
+        countiesQuerySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          // console.log(doc.id, " => ", doc.data());
+          countyNames.push(doc.id)
+        })
+        if (countyNames.includes(county)) {
+          res.status(400).json({
+            error: 'County found but could not find property with given zip code and address.',
+          })
+        } else {
+          res.status(400).json({
+            error: 'County not found. Available counties available in countyNames prop',
+            countyNames: countyNames,
+          })
+        }
+      } else {
+        res.status(200).json({
+          properties,
+        })
+      }
+      apiUser.doc.ref.update({
+        [`monthCount.${dateObj.getFullYear()}.${dateObj.getMonth()+1}`]: admin.firestore.FieldValue.increment(1)
+      })
+      apiUser.doc.ref.collection('requests').add({
+        endpoint: 'getProperty',
+        request: req.query,
+        date: new Date(),
+      })
+      return 'Done'
+    } catch (error) {
+      console.log('error getting document:', error)
+      return res.status(400).json({
+        error,
+      })
+    }
+  })
+}
+
+
 /**
  * Exports
  */
@@ -570,3 +694,4 @@ exports.deleteCustomer                     = functions.https.onCall(deleteCustom
 exports.updateCustomerDefaultPaymentMethod = functions.https.onCall(updateCustomerDefaultPaymentMethod)
 exports.paymentIntentSucceeded             = functions.https.onRequest(paymentIntentSucceeded)
 exports.invoicePaymentSucceeded            = functions.https.onRequest(invoicePaymentSucceeded)
+exports.getProperty                        = functions.https.onRequest(getProperty)
