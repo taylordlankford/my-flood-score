@@ -560,9 +560,11 @@ const getProperty = (req, res) => {
       })
     }
     const { state, county, zip, streetAddress, apiKey, fields } = req.query
+    delete req.query.apiKey
     if (!apiKey) {
       res.status(400).json({
         error: 'apiKey is required',
+        request: req.query,
       })
     }
     // Check if apiKey valid
@@ -579,34 +581,47 @@ const getProperty = (req, res) => {
     if (results.length === 0) {
       return res.status(401).json({
         error: 'Unauthorized',
+        errorCode: 'UNAUTHORIZED',
+        request: req.query,
       })
     }
     const apiUser = results[0]
     const { monthLimit, monthCount } = apiUser
     const dateObj = new Date()
+    // This is for the once a year case when the year object is not yet created.
+    if (!(dateObj.getFullYear() in monthCount)) {
+      monthCount[dateObj.getFullYear()] = { [dateObj.getMonth()+1]: 0 }
+    }
+    // Check monthly usage limit
     if (monthCount && monthCount[dateObj.getFullYear()][dateObj.getMonth()+1] >= monthLimit) {
       return res.status(403).json({
         error: 'Monthly usage limit has been met',
+        errorCode: 'USAGELIMIT',
+        request: req.query,
       })
     }
     if (!state) {
       res.status(400).json({
-        error: 'state is required'
+        error: 'state is required',
+        request: req.query,
       })
     }
     if (!county) {
       res.status(400).json({
         error: 'county is required',
+        request: req.query,
       })
     }
     if (!zip) {
       res.status(400).json({
         error: 'zip is required',
+        request: req.query,
       })
     }
     if (!streetAddress) {
       res.status(400).json({
         error: 'streetAddress is required',
+        request: req.query,
       })
     }
     try {
@@ -644,16 +659,21 @@ const getProperty = (req, res) => {
         if (countyNames.includes(county)) {
           res.status(400).json({
             error: 'County found but could not find property with given zip code and address.',
+            errorCode: 'NOADDR',
+            request: req.query,
           })
         } else {
           res.status(400).json({
-            error: 'County not found. Available counties available in countyNames prop',
+            error: 'County not found. Available counties available in countyNames prop.',
+            errorCode: 'NOCOUNTY',
             countyNames: countyNames,
+            request: req.query,
           })
         }
       } else {
         res.status(200).json({
           properties,
+          request: req.query,
         })
       }
       apiUser.doc.ref.update({
@@ -669,6 +689,7 @@ const getProperty = (req, res) => {
       console.log('error getting document:', error)
       return res.status(400).json({
         error,
+        request: req.query,
       })
     }
   })
