@@ -8683,10 +8683,10 @@ qs@6.7.0:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
-qs@^6.8.0:
-  version "6.9.0"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.0.tgz#d1297e2a049c53119cb49cca366adbbacc80b409"
-  integrity sha512-27RP4UotQORTpmNQDX8BHPukOnBP3p1uUJY5UnDhaJB+rMt9iMsok724XL+UHU23bEFOHRMQ2ZhI99qOWUMGFA==
+qs@^6.8.3:
+  version "6.8.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.8.3.tgz#c1909067d1f6c2f62f9bde1c44b44c72d2fc7a41"
+  integrity sha512-lvnoy9TgoYNQLYY6Ba4ptroTR9ptMkMQuXLxH4oppEQtglfAop+ZaC0dtAgY75rarH73CPu1eq3XrtzI/zZYmA==
 
 qs@~6.5.2:
   version "6.5.2"
